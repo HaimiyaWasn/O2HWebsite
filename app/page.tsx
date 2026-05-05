@@ -1,5 +1,5 @@
 import Navbar from "./components/Navbar";
-import LatestNews from "./components/LastestNews";
+import LastestNews from "./components/LastestNews";
 import CarouselAlbum from "./components/CarouselAlbum";
 import Hero from "./components/HeroPageUtama";
 import HomeStorePageCard from "./components/StoreHome";
@@ -12,7 +12,7 @@ export default function Home() {
       <title>O2H Website Center</title>
       <Navbar />
       <Hero />
-      <LatestNews />
+      <LastestNews />
       <CarouselAlbum />
       <HomeStorePageCard />
       <Footer variant="yellow" />

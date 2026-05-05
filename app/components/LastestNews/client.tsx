@@ -25,7 +25,7 @@ const playfairDisplayRegular = Playfair_Display({
 
 // Komponen LatestNewsClient untuk menampilkan daftar berita terbaru dengan efek animasi saat muncul di viewport
 export default function LatestNewsClient({
-  latestNews, // Prop yang berisi array berita terbaru yang akan ditampilkan
+  latestNews // Prop yang berisi array berita terbaru yang akan ditampilkan
 }: {
   latestNews: News[]; // Tipe data untuk prop latestNews yang merupakan array dari tipe News
 }) {
