@@ -92,8 +92,8 @@ export default function Hero() {
           <p
             className={`mb-5 md:text-xl transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
               showContentUtama // Tampilkan teks deskripsi dengan efek transisi setelah showContentUtama menjadi true, dengan perubahan opacity dan translate-y untuk efek muncul dari bawah
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-5"
+                ? "opacity-100 translate-y-0 pointer-events-auto"
+                : "opacity-0 translate-y-5 pointer-events-none"
             } ${playfairDisplayRegular.className}`}
           >
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima

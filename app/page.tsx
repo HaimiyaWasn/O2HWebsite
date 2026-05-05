@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar";
 import LatestNews from "./components/LastestNews";
-import AlbumsCarousel from "./components/Album";
+import CarouselAlbum from "./components/CarouselAlbum";
 import Hero from "./components/HeroPageUtama";
 import HomeStorePageCard from "./components/StoreHome";
 import Footer from "./components/Footer";
@@ -13,7 +13,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <LatestNews />
-      <AlbumsCarousel />
+      <CarouselAlbum />
       <HomeStorePageCard />
       <Footer variant="yellow" />
       <FloatingLogo />
