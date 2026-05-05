@@ -9,6 +9,11 @@ import O2HLogo from "../../public/img/logos/O2H_Logos_2.png"; // Import logo O2H
 export default function FloatingLogo() {
   const [rotation, setRotation] = useState(0); // State untuk menyimpan nilai rotasi
 
+  const handleHome = () => {
+    const section = document.getElementById("hero-page-utama");
+    section?.scrollIntoView({ behavior: "smooth" });
+  }
+
   useEffect(() => {
     const handleScroll = () => { // Fungsi untuk menangani scroll dan mengubah rotasi logo
       setRotation(window.scrollY * 0.3); // Mengubah rotasi berdasarkan scroll, dengan faktor 0.3 untuk efek yang lebih halus
@@ -29,7 +34,7 @@ export default function FloatingLogo() {
       }}
     >
       {/* Link ke halaman utama */}
-      <Link href="/"> 
+      <Link href="/" onClick={handleHome}> 
         {/* Gambar logo */}
         <Image
           src={O2HLogo} // Sumber gambar logo yang diimpor

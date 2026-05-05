@@ -64,7 +64,7 @@ export default function Hero() {
 
   return (
     // Container utama untuk hero section dengan gambar latar belakang, overlay, dan konten teks
-    <div className="hero min-h-screen relative overflow-hidden">
+    <div className="hero min-h-screen relative overflow-hidden" id="hero-page-utama">
       <Image
         src="/img/backgrounds/O2H_ImagesHero_2.jpg"
         alt="Hero background"
