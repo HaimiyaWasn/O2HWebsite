@@ -26,7 +26,6 @@ const playfairDisplayRegular = Playfair_Display({
 // Komponen HomeStorePageCard untuk menampilkan bagian toko di halaman utama, dengan judul "Store", tombol "View More" yang mengarah ke halaman toko, dan daftar produk yang diambil dari API dan ditampilkan menggunakan komponen HomeProductCard
 export default async function HomeStorePageCard() {
   const headersList = await headers(); // Mendapatkan header dari permintaan HTTP untuk menentukan host saat melakukan fetch data produk dari API
-
   const host = headersList.get("host"); // Mendapatkan nilai host dari header yang diperoleh, yang akan digunakan untuk membangun URL saat melakukan fetch data produk dari API
 
   // Melakukan fetch data produk dari API menggunakan URL yang dibangun dengan host yang diperoleh dari header, serta mengatur cache menjadi "no-store" untuk memastikan data yang diambil selalu terbaru
@@ -40,7 +39,6 @@ export default async function HomeStorePageCard() {
   }
 
   const productsData: Product[] = await res.json(); // Mengambil data produk dari respons API dalam format JSON dan menyimpannya dalam variabel productsData, yang akan digunakan untuk menampilkan daftar produk di bagian toko
-
   const limitedRandomProducts = [...productsData].sort(() => Math.random() - 0.5).slice(0, 18); // Mengambil 18 produk secara acak dari data produk yang diambil dari API dengan menggunakan metode sort untuk mengacak urutan produk dan slice untuk mengambil 18 produk pertama dari array yang sudah diacak, dan menyimpannya dalam variabel limitedRandomProducts yang akan digunakan untuk menampilkan daftar produk di bagian toko
 
   return (
