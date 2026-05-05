@@ -17,11 +17,8 @@ const playfairDisplayRegular = Playfair_Display({
 // Komponen utama Hero Section
 export default function Hero() {
   const [isMounted, setIsMounted] = useState(false); // State untuk mengontrol efek blur dan scale pada gambar latar belakang
-
   const [displayText, setDisplayText] = useState(""); // State untuk menyimpan teks yang akan ditampilkan dengan efek mengetik
-
   const fullText = "Together in Every Step"; // Teks lengkap yang akan ditampilkan dengan efek mengetik
-
   const [showContentUtama, setShowContentUtama] = useState(false); // State untuk mengontrol apakah teks konten sudah ditampilkan atau belum
 
   // Fungsi untuk menangani klik pada tombol "Let's Explore" yang akan menggulir ke bagian "Latest News" dengan efek scroll yang halus
@@ -33,20 +30,16 @@ export default function Hero() {
   // useEffect untuk memulai efek mengetik setelah komponen ter-mount
   useEffect(() => {
     setIsMounted(true); // Setelah komponen ter-mount, atur isMounted ke true untuk memicu efek transisi pada gambar latar belakang
-
     // Mulai efek mengetik setelah delay 1.5 detik
     const startTyping = setTimeout(() => {
       let index = 0; // Index untuk melacak posisi karakter yang sedang ditampilkan
-
       // Interval untuk menampilkan karakter satu per satu setiap 150ms
       const typingInterval = setInterval(() => {
         setDisplayText(fullText.slice(0, index + 1)); // Perbarui displayText dengan menambahkan karakter berikutnya dari fullText
         index++; // Tingkatkan index untuk menampilkan karakter berikutnya pada iterasi berikutnya
-
         // Jika semua karakter sudah ditampilkan, hentikan interval dan tampilkan konten utama setelah delay 300ms
         if (index === fullText.length) {
           clearInterval(typingInterval); // Hentikan interval ketika semua karakter sudah ditampilkan
-
           setTimeout(() => {
             setShowContentUtama(true); // Tampilkan konten utama setelah delay 300ms setelah efek mengetik selesai
           }, 300);

@@ -9,9 +9,10 @@ import O2HLogo from "../../public/img/logos/O2H_Logos_2.png"; // Import logo O2H
 export default function FloatingLogo() {
   const [rotation, setRotation] = useState(0); // State untuk menyimpan nilai rotasi
 
+  // Fungsi untuk menangani klik pada logo yang akan menggulir ke bagian "hero-page-utama" dengan efek scroll yang halus
   const handleHome = () => {
-    const section = document.getElementById("hero-page-utama");
-    section?.scrollIntoView({ behavior: "smooth" });
+    const section = document.getElementById("hero-page-utama"); // Mendapatkan elemen dengan ID "hero-page-utama" dan menggulir ke sana dengan efek scroll yang halus
+    section?.scrollIntoView({ behavior: "smooth" }); // Menggunakan optional chaining untuk memastikan bahwa section tidak null sebelum memanggil scrollIntoView
   }
 
   useEffect(() => {

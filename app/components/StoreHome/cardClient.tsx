@@ -10,15 +10,15 @@ const playfairDisplayBold = Playfair_Display({
   subsets: ["latin"],
 });
 
-// Komponen HomeProductCard untuk menampilkan informasi produk dalam bentuk kartu
+// Komponen HomeProductCard untuk menampilkan informasi produk dalam bentuk kartu dengan gambar, judul, harga, dan jumlah terjual
 export default function HomeProductCard({ product }: any) {
   return (
     // Container utama untuk kartu produk dengan latar belakang putih, bayangan, dan efek hover
     <div className="bg-white rounded-md shadow-white hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer flex flex-col h-full">
       {/* Gambar produk */}
       <Image
-        src={product.image}
-        alt={product.title}
+        src={product.image} // Sumber gambar produk yang diambil dari properti product.image
+        alt={product.title} // Teks alternatif untuk gambar produk yang diambil dari properti product.title
         width={300}
         height={300}
         className="w-full h-40 object-cover rounded"

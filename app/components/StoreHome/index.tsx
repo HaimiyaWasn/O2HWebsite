@@ -26,9 +26,9 @@ export default async function HomeStorePageCard() {
   }
 
   const productsData: Product[] = await res.json(); // Mengambil data produk dari respons API dalam format JSON dan menyimpannya dalam variabel productsData, yang akan digunakan untuk menampilkan daftar produk di bagian toko
-  const limitedRandomProducts = [...productsData]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 18);
+  const limitedRandomProducts = [...productsData] // Membuat salinan dari array productsData untuk diacak dan dibatasi jumlahnya
+    .sort(() => Math.random() - 0.5) // Mengacak urutan produk dengan menggunakan metode sort dan Math.random untuk menghasilkan urutan yang berbeda setiap kali halaman dimuat, sehingga produk yang ditampilkan di bagian toko akan bervariasi setiap kali pengguna mengunjungi halaman utama
+    .slice(0, 18); // Mengambil 18 produk pertama dari array yang sudah diacak dengan menggunakan metode slice untuk membatasi jumlah produk yang ditampilkan di bagian toko, sehingga hanya 18 produk yang akan ditampilkan di bagian toko untuk menjaga tampilan yang rapi dan tidak terlalu banyak produk yang ditampilkan sekaligus
 
   return <AnimationClient products={limitedRandomProducts} />;
 }

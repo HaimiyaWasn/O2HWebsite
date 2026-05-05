@@ -1,15 +1,17 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { FaTiktok, FaXTwitter, FaYoutube, FaInstagram } from "react-icons/fa6";
-import O2HLogo from "../../public/img/logos/O2H_Logos_1.png";
+import Link from "next/link"; // Import Link dari Next.js untuk navigasi antar halaman
+import Image from "next/image"; // Import Image dari Next.js untuk menampilkan gambar dengan optimasi otomatis
+import { FaTiktok, FaXTwitter, FaYoutube, FaInstagram } from "react-icons/fa6"; // Import ikon media sosial dari react-icons untuk digunakan dalam tampilan link media sosial di footer
+import O2HLogo from "../../public/img/logos/O2H_Logos_1.png"; // Import gambar logo O2H untuk digunakan dalam tampilan footer
 
+// Tipe data untuk props Footer, yang mencakup varian tema yang dapat dipilih (dark, yellow, light) untuk menentukan tampilan footer yang sesuai dengan tema yang diinginkan.
 type FooterProps = {
   variant?: "dark" | "yellow" | "light";
 };
 
 export default function Footer({ variant = "yellow" }: FooterProps) {
+  // Definisikan varian untuk tema footer, dengan kelas Tailwind CSS yang sesuai untuk latar belakang, teks, pembatas, subteks, dan hak cipta. Setiap varian memiliki kombinasi warna yang berbeda untuk menciptakan tampilan yang konsisten dengan tema yang dipilih.
   const variants = {
     dark: {
       bg: "bg-[#070b1a]",
@@ -34,7 +36,7 @@ export default function Footer({ variant = "yellow" }: FooterProps) {
     },
   };
 
-  const current = variants[variant];
+  const current = variants[variant]; // Pilih varian yang sesuai berdasarkan props yang diterima, default ke "yellow" jika tidak ada props yang diberikan
 
   return (
     <footer className={`${current.bg} ${current.text} px-6 md:px-10 py-12`}>
