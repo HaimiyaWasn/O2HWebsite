@@ -14,7 +14,7 @@ const playfairDisplayBold = Playfair_Display({
 export default function HomeProductCard({ product }: any) {
   return (
     // Container utama untuk kartu produk dengan latar belakang putih, bayangan, dan efek hover
-    <div className="bg-white rounded-md shadow-white hover:shadow-md transition p-2 cursor-pointer">
+    <div className="bg-white rounded-md shadow-white hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer flex flex-col h-full">
       {/* Gambar produk */}
       <Image
         src={product.image}
