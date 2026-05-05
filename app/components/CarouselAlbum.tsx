@@ -96,7 +96,7 @@ export default function CarouselAlbum() {
                     src={src}
                     alt={`Albums ${i + 1}`}
                     fill
-                    className="object-cover transition duration-300 group-hover:opacity-75"
+                    className="object-cover transition duration-300 group-hover:opacity-75 group-active:opacity-75"
                     priority
                   />
                 </SwiperSlide>
