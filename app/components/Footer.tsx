@@ -40,15 +40,15 @@ export default function Footer({ variant = "yellow" }: FooterProps) {
 
   return (
     <footer className={`${current.bg} ${current.text} px-6 md:px-10 py-12`}>
-      <div className="max-w-6xl mx-auto grid grid-cols-1  md:grid-cols-[0.8fr_1.6fr] gap-8 items-start">
-        <div className="flex flex-col gap-6">
+      <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10 md:gap-12 text-center md:text-left">
+        <div className="flex flex-col gap-5 text-sm items-center justify-center md:max-w-md w-full">
           <Link href="/">          
             <div className="w-28 md:w-36">
               <Image src={O2HLogo} alt="O2H Logo" className="w-full h-auto object-contain" priority />
             </div>
           </Link>
 
-          <div className="flex gap-4 text-lg">
+          <div className="flex gap-4 text-lg items-center justify-center md:justify-start">
             <Link href="#" target="_blank">
               <FaTiktok className="hover:text-gray-400 cursor-pointer" />
             </Link>
@@ -64,8 +64,8 @@ export default function Footer({ variant = "yellow" }: FooterProps) {
           </div>
         </div>
 
-        <div className="flex flex-col gap-5 text-sm">
-          <div className="flex flex-wrap gap-x-5 gap-y-2 leading-relaxed">
+        <div className="flex flex-col gap-5 text-sm items-center md:items-start">
+          <div className="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2 leading-relaxed">
             <Link href="#" className="opacity-50 hover:opacity-100 cursor-pointer"><p>About this site</p></Link>
             <Link href="#" className="opacity-50 hover:opacity-100 cursor-pointer"><p>About accounts</p></Link>
             <Link href="#" className="opacity-50 hover:opacity-100 cursor-pointer"><p>About payments</p></Link>
@@ -77,7 +77,7 @@ export default function Footer({ variant = "yellow" }: FooterProps) {
             <Link href="#" className="opacity-50 hover:opacity-100 cursor-pointer"><p>FAQ</p></Link>
           </div>
 
-          <hr className={`${current.divider} my-2`} />
+          <hr className={`w-full border-t ${current.divider} my-4`} />
 
           <p className={`${current.subText} leading-relaxed`}>
             Unauthorized reproduction of all published content (articles,
