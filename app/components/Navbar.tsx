@@ -6,8 +6,8 @@ import { useState } from "react"; // Import React Hooks dan Router untuk navigas
 import { FaShoppingCart } from "react-icons/fa"; // Import ikon keranjang belanja dari react-icons untuk digunakan dalam tampilan
 import { IoIosNotifications } from "react-icons/io"; // Import ikon notifikasi dari react-icons untuk digunakan dalam tampilan
 import { Playfair_Display, Yesteryear } from "next/font/google"; // Import font Playfair Display dari Google Fonts untuk digunakan dalam tampilan teks
-import AvatarSementara from "../../../public/img/backgrounds/O2H_ImagesHero_2.jpg"; // Import gambar avatar sementara untuk digunakan dalam dropdown profil
-import O2HLogo from "../../../public/img/logos/O2H_Logos_1.png"; // Import gambar logo O2H untuk digunakan dalam navbar
+import AvatarSementara from "../../public/img/backgrounds/O2H_ImagesHero_2.jpg"; // Import gambar avatar sementara untuk digunakan dalam dropdown profil
+import O2HLogo from "../../public/img/logos/O2H_Logos_1.png"; // Import gambar logo O2H untuk digunakan dalam navbar
 
 // Import font Playfair Display dengan varian regular dan bold untuk digunakan di navbar dan dropdown
 const playfairDisplayRegular = Playfair_Display({
