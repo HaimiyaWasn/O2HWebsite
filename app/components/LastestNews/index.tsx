@@ -25,6 +25,11 @@ export default async function LatestNews() {
   }
 
   const newsData: News[] = await res.json(); // Mengambil data berita dari respons API dalam format JSON dan menyimpannya dalam variabel newsData, yang akan digunakan untuk menampilkan daftar berita di bagian berita terbaru
+
+  const sortedNews = newsData.sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime(); // Mengurutkan berita berdasarkan tanggal terbaru dengan membandingkan tanggal berita a dan b, sehingga berita dengan tanggal terbaru akan muncul terlebih dahulu dalam daftar berita yang ditampilkan di bagian berita terbaru, memberikan pengalaman pengguna yang lebih baik dengan menampilkan informasi yang paling relevan dan terkini di bagian berita terbaru
+  })
+
   const latestNews = newsData.slice(0, 6); // Mengambil 6 berita terbaru dari data berita yang diambil dari API dengan menggunakan metode slice untuk mengambil 6 berita pertama dari array newsData, dan menyimpannya dalam variabel latestNews yang akan digunakan untuk menampilkan daftar berita di bagian berita terbaru
 
   return <LatestNewsClient latestNews={latestNews} />; // Mengembalikan komponen LatestNewsClient dengan prop latestNews yang berisi array berita terbaru yang akan ditampilkan, sehingga daftar berita terbaru akan ditampilkan di bagian berita terbaru dengan efek animasi saat muncul di viewport
