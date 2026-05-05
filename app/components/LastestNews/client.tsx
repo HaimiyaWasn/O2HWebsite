@@ -102,7 +102,7 @@ export default function LatestNewsClient({
               </span>
 
               <p
-                className={`flex-1 text-base md:text-lg leading-relaxed group-hover:opacity-50 ${playfairDisplayRegular.className}`}
+                className={`flex-1 text-base md:text-lg leading-relaxed group-hover:opacity-50 group-active:opacity-50 ${playfairDisplayRegular.className}`}
               >
                 {news.title}
               </p>
@@ -110,7 +110,7 @@ export default function LatestNewsClient({
               <div className="self-end md:self-auto mt-2 md:mt-0">
                 <FaArrowAltCircleRight
                   size={24}
-                  className="group-hover:opacity-50 transition"
+                  className="group-hover:opacity-50 group-active:opacity-50 transition"
                 />
               </div>
             </Link>
