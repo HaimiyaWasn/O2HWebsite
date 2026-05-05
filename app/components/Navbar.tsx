@@ -66,7 +66,7 @@ export default function Navbar() {
         {/* Tengah (Search Bar Desktop) */}
         <div className="navbar-center hidden lg:flex">
           <h1 className={`text-2xl ${yesteryear.className}`}>
-            O2H Website
+            O2H Web Center
           </h1>
         </div>
 
