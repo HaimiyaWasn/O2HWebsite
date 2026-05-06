@@ -7,7 +7,6 @@ export default function ScrollToTop() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // delay kecil biar transisi halaman lebih natural
     const timeout = setTimeout(() => {
       try {
         window.scrollTo({
@@ -15,7 +14,6 @@ export default function ScrollToTop() {
           behavior: "smooth",
         });
       } catch {
-        // fallback kalau smooth tidak didukung
         window.scrollTo(0, 0);
       }
     }, 50);
