@@ -32,15 +32,28 @@ export default function NewsClient({
   const sectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    
-  })
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowContent(true);
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -90px 0px" }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    };
+
+    return () => observer.disconnect();
+  });
 
   return (
     <>
       <title>News | O2H Website Center</title>
       <Navbar />
       <section>
-
+        
       </section>
       <Footer variant="yellow" />
       <FloatingLogo />
