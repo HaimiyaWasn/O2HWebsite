@@ -9,7 +9,7 @@ import FloatingLogo from "./components/FloatingLogo";
 export default function Home() {
   return (
     <>
-      <title>O2H Website Center</title>
+      <title>O2H Official Site</title>
       <Navbar />
       <Hero />
       <LastestNews />

@@ -63,7 +63,7 @@ export default async function SearchPage({
 
   return (
     <section>
-      <title>Search | O2H Website Center</title>
+      <title>Search | O2H Official Site</title>
       <Navbar />
 
       <div className="flex justify-center px-4 mt-20">

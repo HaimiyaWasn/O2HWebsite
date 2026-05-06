@@ -61,7 +61,7 @@ export default function LatestNewsClient({
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between mb-10">
           <h1
-            className={`text-3xl md:text-4xl text-center md:text-left transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            className={`text-3xl md:text-4xl transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
               showContent // Jika showContent true, maka judul akan muncul dengan opacity 100% dan posisi normal (translate-y-0), jika false maka judul akan tersembunyi dengan opacity 0 dan sedikit bergeser ke bawah (translate-y-5)
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-5"
@@ -92,17 +92,17 @@ export default function LatestNewsClient({
                 showContent // Jika showContent true, maka setiap berita akan muncul dengan opacity 100% dan posisi normal (translate-y-0), jika false maka berita akan tersembunyi dengan opacity 0 dan sedikit bergeser ke bawah (translate-y-5). Setiap berita juga memiliki delay transisi yang berbeda berdasarkan index untuk menciptakan efek staggered saat muncul
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-5"
-              }`}
+              } ${playfairDisplayRegular.className}`}
               style={{ transitionDelay: `${250 + index * 150}ms` }} // Memberikan delay transisi yang berbeda untuk setiap berita berdasarkan index (250ms + 150ms per index) untuk menciptakan efek staggered saat muncul
             >
               <span
-                className={`text-sm md:text-base md:w-28 md:shrink-0 group-hover:opacity-50 group-active:opacity-50 ${playfairDisplayRegular.className}`}
+                className={`text-sm md:text-base md:w-28 md:shrink-0 group-hover:opacity-50 group-active:opacity-50`}
               >
                 {news.date}
               </span>
 
               <p
-                className={`flex-1 text-base md:text-lg leading-relaxed group-hover:opacity-50 group-active:opacity-50 ${playfairDisplayRegular.className}`}
+                className={`flex-1 text-base md:text-lg leading-relaxed group-hover:opacity-50 group-active:opacity-50`}
               >
                 {news.title}
               </p>
