@@ -152,7 +152,7 @@ export default function NewsClient({
         </div>
 
         {/* Pagination */}
-        <div className="flex items-center justify-center gap-3 mt-10">
+        <div className="flex items-center justify-center gap-3 my-5">
           {visiblePages.map((page) => (
             <Link
               key={page}
