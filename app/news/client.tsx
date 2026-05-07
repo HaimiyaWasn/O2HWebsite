@@ -90,8 +90,8 @@ export default function NewsClient({
 
       <Navbar />
 
-      <section ref={sectionRef} className="py-10 scroll-mt-12 md:scroll-mt-20">
-        <div className="max-w-7xl mx-auto px-6 py-20">
+      <section ref={sectionRef} className="py-24 scroll-mt-12 md:scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-6 py-10">
           {/* Header */}
           <div className="flex items-center justify-between mb-10">
             <h1
@@ -152,7 +152,7 @@ export default function NewsClient({
         </div>
 
         {/* Pagination */}
-        <div className="flex items-center justify-center gap-3 my-5">
+        <div className="flex items-center justify-center gap-3 my-10">
           {visiblePages.map((page) => (
             <Link
               key={page}
