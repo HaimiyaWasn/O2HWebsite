@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect } from "react"; // React hook
+import { usePathname } from "next/navigation"; // Ambil path aktif
 
+// Scroll ke atas saat halaman berubah
 export default function ScrollToTop() {
+  // Ambil path saat ini
   const pathname = usePathname();
 
+  // Efek untuk scroll ke atas saat path berubah
   useEffect(() => {
     const timeout = setTimeout(() => {
       try {
@@ -21,5 +24,6 @@ export default function ScrollToTop() {
     return () => clearTimeout(timeout);
   }, [pathname]);
 
+  // Tidak merender apa pun, hanya efek scroll
   return null;
 }
