@@ -1,4 +1,4 @@
-import { headers } from "next/headers"; // Ambil header request
+import { headers } from "next/headers"; // Data fetching untuk berita
 
 // Tipe data berita
 export type News = {
@@ -6,19 +6,20 @@ export type News = {
   date: string;
   title: string;
   slug: string;
+  content: string;
 };
 
-// Ambil berita + pagination
-export async function getNews(page: number = 1) {
+// Ambil semua berita
+export default async function getAllNews() {
   // Ambil host
   const host = (await headers()).get("host");
 
-  // Fetch data berita
+  // Fetch API
   const res = await fetch(`http://${host}/api/news`, {
     cache: "no-store",
   });
 
-  // Error jika fetch gagal
+  // Error handling
   if (!res.ok) {
     throw new Error("Failed to fetch news");
   }
@@ -27,26 +28,40 @@ export async function getNews(page: number = 1) {
   const allNews: News[] = await res.json();
 
   // Urutkan berita terbaru
-  const sortedNews = allNews.sort(
+  return allNews.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
+}
+
+// Ambil berita dengan pagination
+export async function getNews(page: number = 1) {
+  // Ambil semua berita
+  const allNews = await getAllNews();
 
   // Jumlah berita per halaman
   const NEWS_PER_PAGE = 10;
 
-  // Tentukan index pagination
+  // Hitung indeks untuk pagination
   const startIndex = (page - 1) * NEWS_PER_PAGE;
   const endIndex = startIndex + NEWS_PER_PAGE;
 
-  // Data berita halaman sekarang
-  const paginatedNews = sortedNews.slice(startIndex, endIndex);
+  // Ambil berita untuk halaman ini
+  const paginatedNews = allNews.slice(startIndex, endIndex);
 
   // Hitung total halaman
-  const totalPages = Math.ceil(sortedNews.length / NEWS_PER_PAGE);
+  const totalPages = Math.ceil(allNews.length / NEWS_PER_PAGE);
 
   return {
-    news: paginatedNews, // Berita untuk halaman ini
-    totalPages, // Total halaman
-    currentPage: page, // Halaman saat ini
+    news: paginatedNews,
+    totalPages,
+    currentPage: page,
   };
+}
+
+export async function getNewsBySlug(slug: string) {
+  // Ambil semua berita
+  const allNews = await getAllNews();
+
+  // Cari berita dengan slug yang cocok
+  return allNews.find((news) => news.slug === slug);
 }
