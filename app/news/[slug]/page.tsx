@@ -1,6 +1,7 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation"; // Halaman 404
-import { getNewsBySlug } from "../data"; // Ambil berita berdasarkan slug
+import { getNewsBySlug } from "../data"; // Ambil berita
 import { Playfair_Display } from "next/font/google"; // Google Font
 
 import Navbar from "@/app/components/Navbar";
@@ -35,7 +36,7 @@ export default async function NewsDetailPage({ params }: Props) {
   // Cari berita
   const news = await getNewsBySlug(slug);
 
-  // Jika tidak ada berita
+  // Jika berita tidak ada
   if (!news) {
     notFound();
   }
@@ -78,4 +79,25 @@ export default async function NewsDetailPage({ params }: Props) {
       <FloatingLogo />
     </>
   );
+}
+
+// Metadata SEO dinamis
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // Ambil slug
+  const { slug } = await params;
+
+  // Cari berita
+  const news = await getNewsBySlug(slug);
+
+  // Jika tidak ditemukan
+  if (!news) {
+    return {
+      title: "News Not Found",
+    };
+  }
+
+  return {
+    title: `${news.title} | O2H Web Center`,
+    description: news.content.slice(0, 150),
+  };
 }
