@@ -1,4 +1,4 @@
-import NewsClient from "../../client"; // Komponen berita
+import NewsClient from "../../client";
 import { getNews } from "../../data"; // Ambil data berita
 import { notFound } from "next/navigation"; // Halaman 404
 

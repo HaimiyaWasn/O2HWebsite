@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react"; // React hooks
-import Link from "next/link"; // Navigasi Next.js
-import Image from "next/image"; // Komponen gambar
-import O2HLogo from "../../public/img/logos/O2H_Logos_2.png"; // Logo O2H
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+
+import O2HLogo from "@/public/img/logos/O2H_Logos_2.png";
 
 // Logo mengambang dengan efek rotasi saat scroll
 export default function FloatingLogo() {
@@ -34,8 +35,8 @@ export default function FloatingLogo() {
     <div
       className="fixed bottom-6 right-7 w-16 h-16 rounded-full overflow-hidden z-50 shadow-[0_0_15px_5px_rgba(0,0,0,0.5)]"
       style={{
-        transform: `rotate(${rotation}deg)`,
-        transition: "transform 0.1s linear",
+        transform: `rotate(${rotation}deg)`, // Rotasi berdasarkan scroll
+        transition: "transform 0.1s linear", // Transisi halus saat rotasi berubah
       }}
     >
       {/* Link ke halaman utama */}

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react"; // React hooks
-import Image from "next/image"; // Komponen gambar
-import { Bungee, Playfair_Display } from "next/font/google"; // Google Fonts
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { Bungee, Playfair_Display } from "next/font/google";
 
 // Konfigurasi font
 const bungee = Bungee({
@@ -17,11 +17,12 @@ const playfairDisplayRegular = Playfair_Display({
 
 // Hero section utama
 export default function Hero() {
-  // State animasi
+  // State untuk animasi
   const [isMounted, setIsMounted] = useState(false);
   const [displayText, setDisplayText] = useState("");
   const [showContentUtama, setShowContentUtama] = useState(false);
 
+  // Teks yang akan ditampilkan dengan efek mengetik
   const fullText = "Together in Every Step";
 
   // Scroll ke Latest News

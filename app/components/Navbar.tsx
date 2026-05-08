@@ -1,14 +1,14 @@
 "use client";
 
-import Image from "next/image"; // Komponen gambar
-import Link from "next/link"; // Navigasi Next.js
-import { useState } from "react"; // React state
+import Link from "next/link"; 
+import Image from "next/image";
+import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa"; // Icon cart
 import { IoIosNotifications } from "react-icons/io"; // Icon notifikasi
 import { Playfair_Display, Yesteryear } from "next/font/google"; // Google Fonts
 
-import AvatarSementara from "../../public/img/backgrounds/O2H_ImagesHero_2.jpg";
-import O2HLogo from "../../public/img/logos/O2H_Logos_1.png";
+import AvatarSementara from "@/public/img/backgrounds/O2H_ImagesHero_2.jpg";
+import O2HLogo from "@/public/img/logos/O2H_Logos_1.png";
 
 // Konfigurasi font
 const playfairDisplayRegular = Playfair_Display({

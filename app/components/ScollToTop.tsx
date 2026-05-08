@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react"; // React hook
-import { usePathname } from "next/navigation"; // Ambil path aktif
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 // Scroll ke atas saat halaman berubah
 export default function ScrollToTop() {

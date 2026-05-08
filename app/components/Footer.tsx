@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link"; // Navigasi Next.js
-import Image from "next/image"; // Komponen gambar
-import { FaTiktok, FaXTwitter, FaYoutube, FaInstagram } from "react-icons/fa6"; // Ikon media sosial
-import O2HLogo from "../../public/img/logos/O2H_Logos_1.png"; // Logo O2H
+import Link from "next/link";
+import Image from "next/image";
+import { FaTiktok, FaXTwitter, FaYoutube, FaInstagram } from "react-icons/fa6";
+
+import O2HLogo from "@/public/img/logos/O2H_Logos_1.png";
 
 // Props tema footer
 type FooterProps = {

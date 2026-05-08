@@ -1,5 +1,6 @@
-import { headers } from "next/headers"; // Mengambil header request
-import LatestNewsClient from "./client"; // Komponen tampilan berita terbaru
+import { headers } from "next/headers";
+
+import LatestNewsClient from "./client";
 
 // Tipe data berita
 type News = {
@@ -11,7 +12,10 @@ type News = {
 
 // Mengambil dan menampilkan berita terbaru
 export default async function LatestNews() {
+  // Ambil host dari header
   const headersList = await headers();
+
+  // Pastikan host tidak null
   const host = headersList.get("host");
 
   // Fetch data berita terbaru

@@ -1,4 +1,5 @@
 import { headers } from "next/headers"; // Mengambil header request
+
 import AnimationClient from "./animationClient";
 
 // Tipe data produk

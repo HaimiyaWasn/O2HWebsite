@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link"; // Navigasi antar halaman
-import { useEffect, useState, useRef } from "react"; // React hooks
+import Link from "next/link";
+import { useEffect, useState, useRef } from "react";
 import { FaArrowAltCircleRight } from "react-icons/fa"; // Ikon panah
 import { Playfair_Display } from "next/font/google"; // Font Playfair Display
+
 import HomeProductCard from "./cardClient"; // Card produk
 
 // Tipe data produk
@@ -27,7 +28,11 @@ const playfairDisplayRegular = Playfair_Display({
 });
 
 // Komponen daftar produk dengan animasi
-export default function AnimationClient({ products }: { products: Product[] }) {
+export default function AnimationClient({ 
+  products 
+}: { 
+  products: Product[] 
+}) {
   // State animasi saat section masuk viewport
   const [showContent, setShowContent] = useState(false);
 

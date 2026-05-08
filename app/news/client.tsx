@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link"; // Navigasi halaman
-import { useState, useRef, useEffect } from "react"; // React hooks
-
+import Link from "next/link";
+import { useState, useRef, useEffect } from "react";
 import { Playfair_Display } from "next/font/google"; // Font
 import { FaArrowAltCircleRight } from "react-icons/fa"; // Icon panah
 
@@ -16,6 +15,7 @@ type News = {
   date: string;
   title: string;
   slug: string;
+  content: string;
 };
 
 // Konfigurasi font
@@ -39,13 +39,13 @@ export default function NewsClient({
   totalPages: number;
   currentPage: number;
 }) {
-  // State animasi
+  // State untuk animasi saat section masuk viewport
   const [showContent, setShowContent] = useState(false);
 
-  // Ref section
+  // Ref section untuk Intersection Observer
   const sectionRef = useRef<HTMLElement | null>(null);
 
-  // Intersection Observer
+  // Observer untuk animasi saat masuk viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -69,10 +69,13 @@ export default function NewsClient({
   // Pagination
   const MAX_VISIBLE_PAGES = 5;
 
+  // Hitung halaman yang akan ditampilkan
   let startPage = Math.max(1, currentPage - Math.floor(MAX_VISIBLE_PAGES / 2));
 
+  // Pastikan halaman akhir tidak melebihi total halaman
   let endPage = startPage + MAX_VISIBLE_PAGES - 1;
 
+  // Jika halaman akhir melebihi total halaman, geser startPage ke kiri
   if (endPage > totalPages) {
     endPage = totalPages;
 
@@ -87,9 +90,7 @@ export default function NewsClient({
   return (
     <>
       <title>News | O2H Official Siter</title>
-
       <Navbar />
-
       <section ref={sectionRef} className="py-24 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 py-10">
           {/* Header */}
@@ -119,6 +120,7 @@ export default function NewsClient({
 
           {/* List berita */}
           <div className="divide-y divide-white/30">
+            {/* Menampilkan daftar berita */}
             {allNews.map((news, index) => (
               <Link
                 key={news.id}
@@ -153,6 +155,7 @@ export default function NewsClient({
 
         {/* Pagination */}
         <div className="flex items-center justify-center gap-3 my-3">
+          {/* Tombol Previous */}
           {visiblePages.map((page) => (
             <Link
               key={page}

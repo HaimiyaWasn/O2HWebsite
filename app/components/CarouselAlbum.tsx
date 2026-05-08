@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link"; // Navigasi antar halaman
-import Image from "next/image"; // Komponen gambar Next.js
-import { useState, useEffect, useRef } from "react"; // React hooks
+import Link from "next/link";
+import Image from "next/image"
+import { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react"; // Komponen Swiper
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules"; // Modul Swiper
 import { FaArrowAltCircleRight } from "react-icons/fa"; // Ikon panah
@@ -86,7 +86,7 @@ export default function CarouselAlbum() {
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-5"
           }`}
-          style={{ transitionDelay: showContent ? "300ms" : "0ms" }}
+          style={{ transitionDelay: showContent ? "300ms" : "0ms" }} // Delay untuk animasi carousel setelah header muncul
         >
           <div className="w-full flex flex-col items-center py-3">
             <Swiper

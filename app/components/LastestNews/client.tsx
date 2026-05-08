@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link"; // Navigasi antar halaman
-import { useEffect, useRef, useState } from "react"; // React hooks
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { FaArrowAltCircleRight } from "react-icons/fa"; // Ikon panah
 import { Playfair_Display } from "next/font/google"; // Font Playfair Display
 
