@@ -1,13 +1,15 @@
 import Link from "next/link";
-import { notFound } from "next/navigation"; // Fungsi untuk menampilkan halaman 404
-import { getNewsBySlug } from "../data"; // Fungsi untuk mengambil berita berdasarkan slug
-import { Playfair_Display } from "next/font/google"; // Font Playfair Display
-import Navbar from "@/app/components/Navbar"; // Komponen navbar
-import Footer from "@/app/components/Footer"; // Komponen footer dengan varian warna kuning
-import FloatingLogo from "@/app/components/FloatingLogo"; // Komponen logo mengambang
-import { FaArrowAltCircleRight } from "react-icons/fa"; // Icon panah kanan
+import { notFound } from "next/navigation"; // Halaman 404
+import { getNewsBySlug } from "../data"; // Ambil berita berdasarkan slug
+import { Playfair_Display } from "next/font/google"; // Google Font
 
-// Tipe props untuk halaman detail berita
+import Navbar from "@/app/components/Navbar";
+import Footer from "@/app/components/Footer";
+import FloatingLogo from "@/app/components/FloatingLogo";
+
+import { FaArrowAltCircleRight } from "react-icons/fa";
+
+// Tipe props
 type Props = {
   params: Promise<{
     slug: string;
@@ -27,13 +29,13 @@ const playfairDisplayRegular = Playfair_Display({
 
 // Halaman detail berita
 export default async function NewsDetailPage({ params }: Props) {
-  // Ambil slug dari params
+  // Ambil slug
   const { slug } = await params;
 
-  // Ambil berita berdasarkan slug
+  // Cari berita
   const news = await getNewsBySlug(slug);
 
-  //  Jika berita tidak ditemukan, tampilkan halaman 404
+  // Jika tidak ada berita
   if (!news) {
     notFound();
   }
@@ -41,6 +43,8 @@ export default async function NewsDetailPage({ params }: Props) {
   return (
     <>
       <Navbar />
+
+      {/* Konten berita */}
       <section className="max-w-4xl mx-auto px-6 py-24">
         <p
           className={`text-sm opacity-60 mb-4 ${playfairDisplayRegular.className}`}
@@ -59,6 +63,7 @@ export default async function NewsDetailPage({ params }: Props) {
         </article>
       </section>
 
+      {/* Tombol kembali */}
       <div className="max-w-4xl mx-auto px-6 pb-24 flex justify-end">
         <Link
           href="/news"
