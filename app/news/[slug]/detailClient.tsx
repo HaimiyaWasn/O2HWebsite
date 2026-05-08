@@ -62,47 +62,51 @@ export default function DetailClient({ news }: { news: News }) {
     <>
       <Navbar />
       {/* Konten berita */}
-      <section ref={sectionRef} className="max-w-4xl mx-auto px-6 py-24">
-        <p
-          className={`text-sm opacity-60 mb-4 transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            showContent ? "opacity-60 translate-y-0" : "opacity-0 translate-y-5"
-          } ${playfairDisplayRegular.className}`}
-          style={{
-            transitionDelay: "250ms",
-          }}
-        >
-          {news.date}
-        </p>
+      <section ref={sectionRef} className="py-12 pt-28 scroll-mt-12 md:scroll-mt-20">
+        <div className="max-w-5xl mx-auto px-6">
+          <p
+            className={`text-sm opacity-60 mb-4 transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              showContent
+                ? "opacity-60 translate-y-0"
+                : "opacity-0 translate-y-5"
+            } ${playfairDisplayRegular.className}`}
+            style={{
+              transitionDelay: "250ms",
+            }}
+          >
+            {news.date}
+          </p>
 
-        <h1
-          className={`text-4xl mb-10 transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            showContent
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-5"
-          } ${playfairDisplayBold.className}`}
-          style={{
-            transitionDelay: "350ms",
-          }}
-        >
-          {news.title}
-        </h1>
+          <h1
+            className={`text-4xl mb-10 transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              showContent
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-5"
+            } ${playfairDisplayBold.className}`}
+            style={{
+              transitionDelay: "350ms",
+            }}
+          >
+            {news.title}
+          </h1>
 
-        <article
-          className={`leading-relaxed text-lg transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            showContent
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-5"
-          } ${playfairDisplayRegular.className}`}
-          style={{
-            transitionDelay: "500ms",
-          }}
-        >
-          {news.content}
-        </article>
+          <article
+            className={`leading-relaxed text-lg transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              showContent
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-5"
+            } ${playfairDisplayRegular.className}`}
+            style={{
+              transitionDelay: "500ms",
+            }}
+          >
+            {news.content}
+          </article>
+        </div>
       </section>
 
       {/* Tombol kembali */}
-      <div className="max-w-4xl mx-auto px-6 pb-24 flex justify-end">
+      <div className="max-w-5xl mx-auto px-6 py-18 flex justify-end">
         <Link
           href="/news"
           className={`flex items-center gap-2 text-sm md:text-base leading-none transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
