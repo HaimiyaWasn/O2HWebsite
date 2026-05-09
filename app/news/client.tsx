@@ -82,6 +82,7 @@ export default function NewsClient({
     startPage = Math.max(1, endPage - MAX_VISIBLE_PAGES + 1);
   }
 
+  // Membuat array halaman yang akan ditampilkan
   const visiblePages = Array.from(
     { length: endPage - startPage + 1 },
     (_, i) => startPage + i
