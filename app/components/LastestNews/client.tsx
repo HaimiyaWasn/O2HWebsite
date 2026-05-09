@@ -93,7 +93,7 @@ export default function LatestNewsClient({
           {latestNews.map((news, index) => (
             <Link
               key={news.id}
-              href={news.slug}
+              href={`/news/${news.slug}`}
               className={`group flex flex-col md:flex-row md:items-center gap-2 md:gap-6 py-6 md:py-8 hover:no-underline transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                 showContent
                   ? "opacity-100 translate-y-0"
