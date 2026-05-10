@@ -1,17 +1,14 @@
-import Navbar from "../components/Navbar";
-import FloatingLogo from "../components/FloatingLogo";
-import SearchStore from "./search/searchClient";
+import StoresClient from "./client";
+import { getStores } from "./data";
 
-export default function Stores() {
+export default async function StoresPage() {
+  const { store, totalPages, currentPage } = await getStores(1);
+
   return (
-    <>
-      <title>Store | O2H Official Site</title>
-      <Navbar />
-      <div className="flex justify-center px-4 mt-20">
-        <SearchStore />
-      </div>
-
-      <FloatingLogo />
-    </>
-  );
+    <StoresClient
+      allStore={store}
+      totalPages={totalPages}
+      currentPage={currentPage}
+    />
+  )
 }
