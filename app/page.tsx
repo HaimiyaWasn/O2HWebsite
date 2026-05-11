@@ -4,7 +4,7 @@ import CarouselAlbum from "./components/CarouselAlbum";
 import Hero from "./components/HeroPageUtama";
 import HomeStorePageCard from "./components/StoreHome";
 import Footer from "./components/Footer";
-import FloatingLogo from "./components/FABLogo";
+import FloatingLogo from "./components/FloatingLogo";
 
 export default function Home() {
   return (

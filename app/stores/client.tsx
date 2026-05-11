@@ -7,7 +7,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 
 import Navbar from "../components/Navbar";
 import SearchStore from "./search/searchClient";
-import FloatingLogo from "../components/FABLogo";
+import FloatingLogo from "../components/FloatingLogo";
 
 type Stores = {
   id: number;

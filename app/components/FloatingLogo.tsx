@@ -63,7 +63,7 @@ export default function FloatingLogo() {
       </div>
 
       <div className={`${playfairDisplayBold.className}`}>
-        Home <Link href="/" className="btn w-14 h-14 btn-circle bg-yellow-400 text-black text-lg"><FaHome /></Link>
+        Home <Link href="/" onClick={handleHome} className="btn w-14 h-14 btn-circle bg-yellow-400 text-black text-lg"><FaHome /></Link>
       </div>
     </div>
   );

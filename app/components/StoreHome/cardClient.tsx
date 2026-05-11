@@ -12,7 +12,7 @@ const playfairDisplayBold = Playfair_Display({
 // Card produk
 export default function HomeProductCard({ product }: any) {
   return (
-    <div className="bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer flex flex-col h-full">
+    <div className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
       {/* Gambar produk */}
       <Image
         src={product.image}
