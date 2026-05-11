@@ -65,11 +65,12 @@ export default function StoresClient({
       <title>Store | O2H Official Site</title>
       <Navbar />
       <section className="py-20 scroll-mt-12 md:scroll-mt-20">
-        <div className="max-w-7xl mx-auto px-6 py-3">
-          <div className="flex justify-center items-center mb-10">
+        <div className="max-w-7xl mx-auto px-6 py-5">
+          <div className="flex justify-center items-center mb-5">
             <SearchStore />
-
-            
+          </div>
+          <div className={`text-lg md:text-2xl ${playfairDisplayBold.className}`}>
+            <h1>Filter</h1>
           </div>
         </div>
       </section>
