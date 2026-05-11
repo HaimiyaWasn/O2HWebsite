@@ -46,5 +46,7 @@ export async function getStores(page: number = 1) {
 }
 
 export async function getStoresBySlug(slug: string) {
+  const allNews = await getAllStores();
 
+  return allNews.find((store) => store.title === slug);
 }

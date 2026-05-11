@@ -90,7 +90,7 @@ export default function NewsClient({
 
   return (
     <>
-      <title>News | O2H Official Siter</title>
+      <title>News | O2H Official Site</title>
       <Navbar />
       <section ref={sectionRef} className="py-24 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 py-10">

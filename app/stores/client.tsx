@@ -61,11 +61,9 @@ export default function StoresClient({
   }, []);
 
   return (
-    <div>
+    <>
+      <title>Store | O2H Official Site</title>
       <Navbar />
-      <div className="flex justify-center px-4 mt-20">
-        <SearchStore />
-      </div>
-    </div>
+    </>
   )
 }
