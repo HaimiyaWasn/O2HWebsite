@@ -84,7 +84,7 @@ export default function StoresClient({
             <SearchStore />
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-6">
+          <div className="flex flex-col lg:flex-row">
             <div className="w-full lg:w-75 border border-yellow-400 rounded-xl h-fit">
               <div className="p-5 border-b border-yellow-400">
                 <h1 className={`text-2xl ${playfairDisplayBold.className}`}>
@@ -92,7 +92,7 @@ export default function StoresClient({
                 </h1>
               </div>
 
-              <div className="p-5">
+              <div className="px-5 py-3">
                 <div className="collapse collapse-arrow border-b border-yellow-400 rounded-none">
                   <input type="checkbox" defaultChecked />
                   <div
