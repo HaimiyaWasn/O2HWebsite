@@ -4,8 +4,19 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaHome } from "react-icons/fa";
+import { Playfair_Display } from "next/font/google";
 
 import O2HLogo from "@/public/img/logos/O2H_Logos_2.png";
+
+const playfairDisplayBold = Playfair_Display({
+  weight: "700",
+  subsets: ["latin"],
+});
+
+const playfairDisplayRegular = Playfair_Display({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 // Logo mengambang dengan efek rotasi saat scroll
 export default function FloatingLogo() {
@@ -47,11 +58,11 @@ export default function FloatingLogo() {
         />
       </div>
 
-      <div className="fab-close">
+      <div className={`fab-close ${playfairDisplayBold.className}`}>
         Close <span className="btn btn-circle w-14 h-14 btn-error bg-red-600 text-white text-lg">✕</span>
       </div>
 
-      <div>
+      <div className={`${playfairDisplayBold.className}`}>
         Home <Link href="/" className="btn w-14 h-14 btn-circle bg-yellow-400 text-black text-lg"><FaHome /></Link>
       </div>
     </div>
