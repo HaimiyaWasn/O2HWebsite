@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { FaHome } from "react-icons/fa";
 
 import O2HLogo from "@/public/img/logos/O2H_Logos_2.png";
 
@@ -32,17 +33,27 @@ export default function FloatingLogo() {
   }, []);
 
   return (
-    <div
-      className="fixed bottom-6 right-7 w-16 h-16 rounded-full overflow-hidden z-50 shadow-[0_0_15px_5px_rgba(0,0,0,0.5)]"
-      style={{
-        transform: `rotate(${rotation}deg)`, // Rotasi berdasarkan scroll
-        transition: "transform 0.1s linear", // Transisi halus saat rotasi berubah
-      }}
-    >
-      {/* Link ke halaman utama */}
-      <Link href="/" onClick={handleHome}>
-        <Image src={O2HLogo} alt="O2H Logo" fill className="object-cover" />
-      </Link>
+    <div className="fab">
+      <div
+        tabIndex={0}
+        role="button"
+        className="btn btn-circle w-14 h-14 bg-transparent border-none shadow-none p-0 overflow-hidden"
+      >
+        <Image
+          src={O2HLogo}
+          alt="O2H Logo"
+          className="w-full h-full object-cover"
+          style={{ transform: `rotate(${rotation}deg)` }}
+        />
+      </div>
+
+      <div className="fab-close">
+        Close <span className="btn btn-circle w-14 h-14 btn-error bg-red-600 text-white text-lg">✕</span>
+      </div>
+
+      <div>
+        Home <Link href="/" className="btn w-14 h-14 btn-circle bg-yellow-400 text-black text-lg"><FaHome /></Link>
+      </div>
     </div>
   );
 }

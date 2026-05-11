@@ -7,7 +7,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa"; // Ikon panah
 
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
-import FloatingLogo from "@/app/components/FloatingLogo";
+import FloatingLogo from "@/app/components/FABLogo";
 
 // Tipe data berita
 type News = {

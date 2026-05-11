@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import FloatingLogo from "../components/FloatingLogo";
+import FloatingLogo from "../components/FABLogo";
 
 export default function Photobooks() {
   return (

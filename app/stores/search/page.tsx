@@ -2,7 +2,7 @@ import { headers } from "next/headers"; // Import headers dari Next.js untuk men
 
 import SearchStore from "./searchClient"; // Import komponen SearchStore yang akan menampilkan form pencarian dan hasil pencarian produk berdasarkan keyword yang dimasukkan oleh pengguna, dengan properti defaultSearch untuk mengisi nilai default pada form pencarian dengan keyword yang diambil dari parameter pencarian di URL
 import Navbar from "@/app/components/Navbar"; // Import komponen NavbarClient yang akan menampilkan bagian navigasi atas halaman, dengan tautan ke halaman utama, toko, berita, dan kontak, serta logo O2H yang mengarah ke halaman utama saat diklik
-import FloatingLogo from "@/app/components/FloatingLogo"; // Import komponen FloatingLogo yang akan menampilkan logo O2H yang mengambang di sudut kanan bawah halaman, dengan efek rotasi saat pengguna menggulir halaman untuk memberikan tampilan yang dinamis dan menarik, serta tautan ke halaman utama saat logo diklik
+import FloatingLogo from "@/app/components/FABLogo"; // Import komponen FloatingLogo yang akan menampilkan logo O2H yang mengambang di sudut kanan bawah halaman, dengan efek rotasi saat pengguna menggulir halaman untuk memberikan tampilan yang dinamis dan menarik, serta tautan ke halaman utama saat logo diklik
 
 import Image from "next/image"; // Import Image dari Next.js untuk optimasi gambar produk yang ditampilkan di hasil pencarian
 import { Playfair_Display } from "next/font/google"; // Import font Playfair Display dengan varian bold dan regular untuk digunakan pada judul hasil pencarian, nama produk, harga, dan informasi penjualan di hasil pencarian

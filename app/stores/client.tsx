@@ -7,6 +7,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 
 import Navbar from "../components/Navbar";
 import SearchStore from "./search/searchClient";
+import FloatingLogo from "../components/FABLogo";
 
 type Stores = {
   id: number;
@@ -69,10 +70,16 @@ export default function StoresClient({
           <div className="flex justify-center items-center mb-5">
             <SearchStore />
           </div>
-          <div className={`text-lg md:text-2xl ${playfairDisplayBold.className}`}>
-            <h1>Filter</h1>
+          <div className="flex flex-col py-5">
+            <div className={`text-lg md:text-2xl ${playfairDisplayBold.className}`}>
+              <h1>Filter</h1>
+            </div>
+            <div>
+              
+            </div>
           </div>
         </div>
+        <FloatingLogo />
       </section>
     </>
   )
