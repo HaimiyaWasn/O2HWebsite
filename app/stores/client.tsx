@@ -105,7 +105,7 @@ export default function StoresClient({
                       <label className="flex items-center gap-3">
                         <input
                           type="checkbox"
-                          className="checkbox checkbox-sm checked:border-white checked:bg-white checked:text-black"
+                          className="checkbox checkbox-sm checked:bg-black checked:text-white dark:checked:border-white dark:checked:bg-white dark:checked:text-black"
                           checked={selectedCategory === "Tshirt"}
                           onChange={() => handleCategory("Tshirt")}
                         />
@@ -116,7 +116,7 @@ export default function StoresClient({
                       <label className="flex items-center gap-3">
                         <input
                           type="checkbox"
-                          className="checkbox checkbox-sm checked:border-white checked:bg-white checked:text-black"
+                          className="checkbox checkbox-sm checked:border-white checked:bg-black checked:text-white dark:checked:border-white dark:checked:bg-white dark:checked:text-black"
                           checked={selectedCategory === "Jacket"}
                           onChange={() => handleCategory("Jacket")}
                         />
@@ -127,7 +127,7 @@ export default function StoresClient({
                       <label className=" flex items-center gap-3">
                         <input
                           type="checkbox"
-                          className="checkbox checkbox-sm checked:border-white checked:bg-white checked:text-black"
+                          className="checkbox checkbox-sm checked:border-white checked:bg-black checked:text-white dark:checked:border-white dark:checked:bg-white dark:checked:text-black"
                           checked={selectedCategory === "Jersey"}
                           onChange={() => handleCategory("Jersey")}
                         />
@@ -138,7 +138,7 @@ export default function StoresClient({
                       <label className="flex items-center gap-3">
                         <input
                           type="checkbox"
-                          className="checkbox checkbox-sm checked:border-white checked:bg-white checked:text-black"
+                          className="checkbox checkbox-sm checked:border-black checked:bg-black checked:text-white dark:checked:border-white dark:checked:bg-white dark:checked:text-black"
                           checked={selectedCategory === "Hats"}
                           onChange={() => handleCategory("Hats")}
                         />
@@ -149,7 +149,7 @@ export default function StoresClient({
                       <label className="flex items-center gap-3">
                         <input
                           type="checkbox"
-                          className="checkbox checkbox-sm checked:border-white checked:bg-white checked:text-black"
+                          className="checkbox checkbox-sm checked:bg-black checked:text-white dark:checked:border-white dark:checked:bg-white dark:checked:text-black"
                           checked={selectedCategory === "Sale"}
                           onChange={() => handleCategory("Sale")}
                         />
@@ -160,7 +160,7 @@ export default function StoresClient({
                       <label className="flex items-center gap-3">
                         <input
                           type="checkbox"
-                          className="checkbox checkbox-sm checked:border-white checked:bg-white checked:text-black"
+                          className="checkbox checkbox-sm checked:bg-black checked:text-white dark:checked:border-white dark:checked:bg-white dark:checked:text-black"
                           checked={selectedCategory === "Accessories"}
                           onChange={() => handleCategory("Accessories")}
                         />
