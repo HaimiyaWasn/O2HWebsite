@@ -92,7 +92,7 @@ export default function StoresClient({
           <div className="flex gap-3 mb-5 lg:hidden">
             <button
               onClick={() => setOpenFilter(true)}
-              className={`btn flex-1 rounded-xl border border-yellow-400 shadow-none hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black`}
+              className={`btn flex-1 rounded-xl border border-yellow-400 shadow-none hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black ${playfairDisplayBold.className}`}
             >
               <LuSlidersHorizontal size={18} />
               Filter
