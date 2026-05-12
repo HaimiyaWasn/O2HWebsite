@@ -7,6 +7,7 @@ const productData = [
     price: "Rp. 550.000",
     image: "/img/products/O2H_Hostel_Navy_Half-Zip_Jacket.jpg",
     sold: "10RB+ Terjual",
+    slug: "o2h-hostle-navy-half-zip-jacket",
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ const productData = [
     price: "Rp. 550.000",
     image: "/img/products/O2H_Hostel_Navy_Half-Zip_Jacket.jpg",
     sold: "10RB+ Terjual",
+    slug: "o2h-hostle-navy-half-zip-jacket",
   },
   {
     id: 3,
@@ -21,6 +23,7 @@ const productData = [
     price: "Rp. 550.000",
     image: "/img/products/O2H_Hostel_Navy_Half-Zip_Jacket.jpg",
     sold: "10RB+ Terjual",
+    slug: "o2h-hostle-navy-half-zip-jacket",
   },
   {
     id: 4,
@@ -28,6 +31,7 @@ const productData = [
     price: "Rp. 550.000",
     image: "/img/products/O2H_Hostel_Navy_Half-Zip_Jacket.jpg",
     sold: "10RB+ Terjual",
+    slug: "o2h-hostle-navy-half-zip-jacket",
   },
   {
     id: 5,
@@ -35,6 +39,7 @@ const productData = [
     price: "Rp. 550.000",
     image: "/img/products/O2H_Hostel_Navy_Half-Zip_Jacket.jpg",
     sold: "10RB+ Terjual",
+    slug: "o2h-hostle-navy-half-zip-jacket",
   },
   {
     id: 6,
@@ -42,6 +47,7 @@ const productData = [
     price: "Rp. 550.000",
     image: "/img/products/O2H_Hostel_Navy_Half-Zip_Jacket.jpg",
     sold: "10RB+ Terjual",
+    slug: "o2h-hostle-navy-half-zip-jacket",
   },
   {
     id: 7,
@@ -49,6 +55,7 @@ const productData = [
     price: "Rp. 465.000",
     image: "/img/products/O2H_NFL_Black_Jersey.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-nfl-black-jersey",
   },
   {
     id: 8,
@@ -56,6 +63,7 @@ const productData = [
     price: "Rp. 465.000",
     image: "/img/products/O2H_NFL_Black_Jersey.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-nfl-black-jersey",
   },
   {
     id: 9,
@@ -63,6 +71,7 @@ const productData = [
     price: "Rp. 465.000",
     image: "/img/products/O2H_NFL_Black_Jersey.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-nfl-black-jersey",
   },
   {
     id: 10,
@@ -70,6 +79,7 @@ const productData = [
     price: "Rp. 465.000",
     image: "/img/products/O2H_NFL_Black_Jersey.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-nfl-black-jersey",
   },
   {
     id: 11,
@@ -77,6 +87,7 @@ const productData = [
     price: "Rp. 465.000",
     image: "/img/products/O2H_NFL_Black_Jersey.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-nfl-black-jersey",
   },
   {
     id: 12,
@@ -84,6 +95,7 @@ const productData = [
     price: "Rp. 465.000",
     image: "/img/products/O2H_NFL_Black_Jersey.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-nfl-black-jersey",
   },
   {
     id: 13,
@@ -91,6 +103,7 @@ const productData = [
     price: "Rp. 550.000",
     image: "/img/products/O2H_Hostel_Embroidery_Baseball_Jersey_Black.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-hostel-embroidery-baseball-jersey-black",
   },
   {
     id: 14,
@@ -98,6 +111,7 @@ const productData = [
     price: "Rp. 550.000",
     image: "/img/products/O2H_Hostel_Embroidery_Baseball_Jersey_Black.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-hostel-embroidery-baseball-jersey-black",
   },
   {
     id: 15,
@@ -105,6 +119,7 @@ const productData = [
     price: "Rp. 550.000",
     image: "/img/products/O2H_Hostel_Embroidery_Baseball_Jersey_Black.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-hostel-embroidery-baseball-jersey-black",
   },
   {
     id: 16,
@@ -112,6 +127,7 @@ const productData = [
     price: "Rp. 550.000",
     image: "/img/products/O2H_Hostel_Embroidery_Baseball_Jersey_Black.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-hostel-embroidery-baseball-jersey-black",
   },
   {
     id: 17,
@@ -119,6 +135,7 @@ const productData = [
     price: "Rp. 550.000",
     image: "/img/products/O2H_Hostel_Embroidery_Baseball_Jersey_Black.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-hostel-embroidery-baseball-jersey-black",
   },
   {
     id: 18,
@@ -126,6 +143,7 @@ const productData = [
     price: "Rp. 550.000",
     image: "/img/products/O2H_Hostel_Embroidery_Baseball_Jersey_Black.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-hostel-embroidery-baseball-jersey-black",
   },
   {
     id: 19,
@@ -133,6 +151,7 @@ const productData = [
     price: "Rp. 165.000",
     image: "/img/products/O2H_MILF_Bucket_Hat.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-milf-bucket-hat"
   },
   {
     id: 20,
@@ -140,6 +159,7 @@ const productData = [
     price: "Rp. 165.000",
     image: "/img/products/O2H_MILF_Bucket_Hat.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-milf-bucket-hat"
   },
   {
     id: 21,
@@ -147,6 +167,7 @@ const productData = [
     price: "Rp. 165.000",
     image: "/img/products/O2H_MILF_Bucket_Hat.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-milf-bucket-hat"
   },
   {
     id: 22,
@@ -154,6 +175,7 @@ const productData = [
     price: "Rp. 165.000",
     image: "/img/products/O2H_MILF_Bucket_Hat.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-milf-bucket-hat"
   },
   {
     id: 23,
@@ -161,6 +183,7 @@ const productData = [
     price: "Rp. 165.000",
     image: "/img/products/O2H_MILF_Bucket_Hat.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-milf-bucket-hat"
   },
   {
     id: 24,
@@ -168,6 +191,7 @@ const productData = [
     price: "Rp. 165.000",
     image: "/img/products/O2H_MILF_Bucket_Hat.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-milf-bucket-hat"
   },
   {
     id: 25,
@@ -175,6 +199,7 @@ const productData = [
     price: "Rp. 165.000",
     image: "/img/products/O2H_MILF_Vest.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-milf-vest"
   },
   {
     id: 26,
@@ -182,6 +207,7 @@ const productData = [
     price: "Rp. 165.000",
     image: "/img/products/O2H_MILF_Vest.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-milf-vest"
   },
   {
     id: 27,
@@ -189,6 +215,7 @@ const productData = [
     price: "Rp. 165.000",
     image: "/img/products/O2H_MILF_Vest.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-milf-vest"
   },
   {
     id: 28,
@@ -196,6 +223,7 @@ const productData = [
     price: "Rp. 165.000",
     image: "/img/products/O2H_MILF_Vest.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-milf-vest"
   },
   {
     id: 29,
@@ -203,6 +231,7 @@ const productData = [
     price: "Rp. 165.000",
     image: "/img/products/O2H_MILF_Vest.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-milf-vest"
   },
   {
     id: 30,
@@ -210,6 +239,7 @@ const productData = [
     price: "Rp. 165.000",
     image: "/img/products/O2H_MILF_Vest.png",
     sold: "10RB+ Terjual",
+    slug: "o2h-milf-vest"
   },
 ]
 

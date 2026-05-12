@@ -9,6 +9,7 @@ type Product = {
   price: string;
   image: string;
   sold: string;
+  slug: string;
 };
 
 // Mengambil dan menampilkan produk store

@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 
-export type Stores = {
+export type Products = {
   id: number;
   title: string;
   price: string;
@@ -8,7 +8,7 @@ export type Stores = {
   sold: string;
 }
 
-export default async function getAllStores() {
+export default async function getAllProducts() {
   const host = (await headers()).get("host");
 
   const res = await fetch(`http://${host}/api/products`, {
@@ -16,37 +16,37 @@ export default async function getAllStores() {
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch stores");
+    throw new Error("Failed to fetch products");
   }
 
-  const allStore: Stores[] = await res.json();
+  const allProducts: Products[] = await res.json();
 
-  return allStore.sort(
+  return allProducts.sort(
     (a, b) => new Date(b.title).getTime() - new Date(a.title).getTime()
   );
 }
 
-export async function getStores(page: number = 1) {
-  const allStore = await getAllStores();
+export async function getProducts(page: number = 1) {
+  const allProducts = await getAllProducts();
 
-  const STORES_PER_PAGE = 50;
+  const PRODUCTS_PER_PAGE = 50;
 
-  const startIndex = (page - 1) * STORES_PER_PAGE;
-  const endIndex = startIndex + STORES_PER_PAGE;
+  const startIndex = (page - 1) * PRODUCTS_PER_PAGE;
+  const endIndex = startIndex + PRODUCTS_PER_PAGE;
 
-  const paginatedStores = allStore.slice(startIndex, endIndex);
+  const paginatedProducts = allProducts.slice(startIndex, endIndex);
 
-  const totalPages = Math.ceil(allStore.length / STORES_PER_PAGE);
+  const totalPages = Math.ceil(allProducts.length / PRODUCTS_PER_PAGE);
 
   return {
-    store: paginatedStores,
+    products: paginatedProducts,
     totalPages,
     currentPage: page,
   };
 }
 
-export async function getStoresBySlug(slug: string) {
-  const allNews = await getAllStores();
+export async function getProductsBySlug(slug: string) {
+  const allProducts = await getAllProducts();
 
-  return allNews.find((store) => store.title === slug);
+  return allProducts.find((products) => products.title === slug);
 }

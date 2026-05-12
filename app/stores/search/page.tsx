@@ -79,14 +79,14 @@ export default async function SearchPage({
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {filtered.length > 0 ? (
-            filtered.map((p) => (
+            filtered.map((product) => (
               <div
-                key={p.id}
+                key={product.id}
                 className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full"
               >
                 <Image
-                  src={p.image}
-                  alt={p.title}
+                  src={product.image}
+                  alt={product.title}
                   width={300}
                   height={300}
                   className="w-full h-40 object-cover rounded"
@@ -95,12 +95,12 @@ export default async function SearchPage({
                   <p
                     className={`text-sm mt-2 line-clamp-2 text-black ${playfairDisplayBold.className}`}
                   >
-                    {p.title}
+                    {product.title}
                   </p>
                   <p className="text-yellow-500 mt-1 font-semibold">
-                    {p.price}
+                    {product.price}
                   </p>
-                  <p className="text-xs text-gray-500">{p.sold}</p>
+                  <p className="text-xs text-gray-500">{product.sold}</p>
                 </div>
               </div>
             ))

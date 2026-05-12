@@ -10,7 +10,7 @@ import SearchStore from "./search/searchClient";
 import StoreFilter from "./components/storesFilter";
 import FloatingLogo from "../components/floatingLogo";
 
-type Stores = {
+type Products = {
   id: number;
   title: string;
   price: string;
@@ -30,11 +30,11 @@ const playfairDisplayRegular = Playfair_Display({
 });
 
 export default function StoresClient({
-  allStore,
+  allProducts,
   totalPages,
   currentPage,
 }: {
-  allStore: any[];
+  allProducts: Products[];
   totalPages: number;
   currentPage: number;
 }) {
@@ -70,7 +70,17 @@ export default function StoresClient({
           <div className="flex justify-center items-center mb-7">
             <SearchStore />
           </div>
-          <StoreFilter />
+          <div className="flex flex-col md:flex-row">
+            <StoreFilter />
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              {allProducts.map((product, index) => (
+                <Link key={product.id} href={`#`}>
+                  <div></div>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
         <FloatingLogo />
       </section>

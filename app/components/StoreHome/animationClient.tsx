@@ -14,6 +14,7 @@ type Product = {
   price: string;
   image: string;
   sold: string;
+  slug: string;
 };
 
 // Konfigurasi font
@@ -102,7 +103,9 @@ export default function AnimationClient({
                 transitionDelay: `${300 + index * 80}ms`,
               }}
             >
-              <HomeProductCard product={product} />
+              <Link href={`/stores/${product.slug}`}>
+                <HomeProductCard product={product} />
+              </Link>
             </div>
           ))}
         </div>
