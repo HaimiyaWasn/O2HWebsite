@@ -7,7 +7,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 
 import Navbar from "../components/navbar";
 import SearchStore from "./search/searchClient";
-import StoreFilter from "./components/storeFilter";
+import StoreFilter from "./components/storesFilter";
 import FloatingLogo from "../components/floatingLogo";
 
 type Stores = {
