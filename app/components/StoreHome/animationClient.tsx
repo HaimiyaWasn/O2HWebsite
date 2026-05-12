@@ -65,15 +65,17 @@ export default function AnimationClient({
     <section ref={sectionRef} className="py-10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between mb-10">
-          <h1
-            className={`text-3xl md:text-4xl transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          <div
+            className={`inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-5 py-3 backdrop-blur-md transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
               showContent
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-5"
-            } ${playfairDisplayBold.className}`}
+            }`}
           >
-            Store
-          </h1>
+            <span className={`text-lg md:text-3xl tracking-[0.2em] uppercase ${playfairDisplayBold.className}`}>
+              Store
+            </span>
+          </div>
 
           <Link
             href="/stores"

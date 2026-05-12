@@ -57,15 +57,17 @@ export default function CarouselAlbum() {
     <section ref={sectionRef} className="py-10 bg-yellow-400">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between mb-10 text-black">
-          <h1
-            className={`text-3xl md:text-4xl transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          <div
+            className={`inline-flex items-center rounded-full shadow-sm shadow-white border-4 border-white/40 bg-white/10 px-5 py-3 backdrop-blur-md transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
               showContent
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-5"
             } ${playfairDisplayBold.className}`}
           >
-            Albums
-          </h1>
+            <span className={`text-lg md:text-3xl tracking-[0.2em] uppercase ${playfairDisplayBold.className}`}>
+              Albums
+            </span>
+          </div>
 
           <Link
             href="/photobooks"

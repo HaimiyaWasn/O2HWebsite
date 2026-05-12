@@ -70,16 +70,16 @@ export default function StoresClient({
           <div className="flex justify-center items-center mb-7">
             <SearchStore />
           </div>
-          <div className="flex flex-col md:flex-row">
-            <StoreFilter />
+          
+          <StoreFilter />
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-              {allProducts.map((product, index) => (
-                <Link key={product.id} href={`#`}>
-                  <div></div>
-                </Link>
-              ))}
-            </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <h1>All Product</h1>
+            {allProducts.map((product, index) => (
+              <Link key={product.id} href={`#`}>
+                <div></div>
+              </Link>
+            ))}
           </div>
         </div>
         <FloatingLogo />

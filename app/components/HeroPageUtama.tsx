@@ -73,17 +73,28 @@ export default function Hero() {
       />
 
       {/* Overlay */}
-      <div className="hero-overlay bg-opacity-60 z-0" />
+      <div className="hero-overlay bg-black/75 z-0" />
 
       {/* Konten utama */}
       <div className="hero-content text-neutral-content text-center z-10">
         <div className="max-w-3xl">
+          <div
+            className={`inline-flex items-center rounded-full border border-yellow-400/40 bg-yellow-400/10 px-4 py-2 mb-6 backdrop-blur-md transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              showContentUtama
+                ? "opacity-100 translate-y-0 pointer-events-auto"
+                : "opacity-0 translate-y-4 pointer-events-none"
+            } transition-all duration-700`}
+          >
+            <span className="text-yellow-300 text-sm tracking-[0.2em] uppercase">
+              Orang-orangan Halimawan
+            </span>
+          </div>
           {/* Judul */}
           <h1
             className={`mb-5 text-4xl md:text-5xl font-bold ${bungee.className}`}
           >
             {displayText}
-            <span className="animate-ping">|</span>
+            <span className="animate-ping text-yellow-400">|</span>
           </h1>
 
           {/* Deskripsi */}
@@ -105,7 +116,7 @@ export default function Hero() {
           <button
             onClick={handleScrollButton}
             disabled={!showContentUtama}
-            className={`btn bg-yellow-400 hover:bg-yellow-500 active:bg-yellow-600 text-black font-bold rounded-xl transform-gpu transition-all duration-700 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            className={`btn bg-yellow-400 hover:bg-yellow-500 active:bg-yellow-600 text-black text-lg rounded-2xl transform-gpu transition-all duration-700 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
               showContentUtama
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-5"
