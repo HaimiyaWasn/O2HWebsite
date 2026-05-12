@@ -58,7 +58,7 @@ export default function CarouselAlbum() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between mb-10 text-black">
           <div
-            className={`inline-flex items-center rounded-full shadow-sm shadow-white border-4 border-white/40 bg-white/10 px-5 py-3 backdrop-blur-md transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            className={`inline-flex items-center rounded-full shadow-sm shadow-black border-4 border-black/40 bg-black/10 px-5 py-3 backdrop-blur-md transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
               showContent
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-5"

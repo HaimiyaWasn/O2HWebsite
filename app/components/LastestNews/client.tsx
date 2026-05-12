@@ -72,7 +72,7 @@ export default function LatestNewsClient({
                 : "opacity-0 translate-y-5"
             } ${playfairDisplayBold.className}`}
           >
-            <span className={`text-lg md:text-3xl tracking-[0.2em] uppercase ${playfairDisplayBold.className}`}>
+            <span className={`text-lg md:text-3xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}>
               Latest News
             </span>
           </div>
