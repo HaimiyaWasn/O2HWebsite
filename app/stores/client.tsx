@@ -6,9 +6,9 @@ import { Playfair_Display } from "next/font/google";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { LuSlidersHorizontal, LuArrowUpDown } from "react-icons/lu";
 
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar";
 import SearchStore from "./search/searchClient";
-import FloatingLogo from "../components/FloatingLogo";
+import FloatingLogo from "../components/floatingLogo";
 import { BiCategory } from "react-icons/bi";
 
 type Stores = {

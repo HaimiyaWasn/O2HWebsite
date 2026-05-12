@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { Playfair_Display } from "next/font/google"; // Font Playfair Display
 import { FaArrowAltCircleRight } from "react-icons/fa"; // Ikon panah
 
-import Navbar from "@/app/components/Navbar";
-import Footer from "@/app/components/Footer";
-import FloatingLogo from "@/app/components/FloatingLogo";
+import Navbar from "@/app/components/navbar";
+import Footer from "@/app/components/footer";
+import FloatingLogo from "@/app/components/floatingLogo";
 
 // Tipe data berita
 type News = {

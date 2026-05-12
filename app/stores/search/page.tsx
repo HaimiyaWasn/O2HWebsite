@@ -1,8 +1,8 @@
 import { headers } from "next/headers"; // Import headers dari Next.js untuk mendapatkan informasi header dari permintaan HTTP, yang akan digunakan untuk menentukan host saat melakukan fetch data produk dari API
 
 import SearchStore from "./searchClient"; // Import komponen SearchStore yang akan menampilkan form pencarian dan hasil pencarian produk berdasarkan keyword yang dimasukkan oleh pengguna, dengan properti defaultSearch untuk mengisi nilai default pada form pencarian dengan keyword yang diambil dari parameter pencarian di URL
-import Navbar from "@/app/components/Navbar"; // Import komponen NavbarClient yang akan menampilkan bagian navigasi atas halaman, dengan tautan ke halaman utama, toko, berita, dan kontak, serta logo O2H yang mengarah ke halaman utama saat diklik
-import FloatingLogo from "@/app/components/FloatingLogo"; // Import komponen FloatingLogo yang akan menampilkan logo O2H yang mengambang di sudut kanan bawah halaman, dengan efek rotasi saat pengguna menggulir halaman untuk memberikan tampilan yang dinamis dan menarik, serta tautan ke halaman utama saat logo diklik
+import Navbar from "@/app/components/navbar"; // Import komponen NavbarClient yang akan menampilkan bagian navigasi atas halaman, dengan tautan ke halaman utama, toko, berita, dan kontak, serta logo O2H yang mengarah ke halaman utama saat diklik
+import FloatingLogo from "@/app/components/floatingLogo"; // Import komponen FloatingLogo yang akan menampilkan logo O2H yang mengambang di sudut kanan bawah halaman, dengan efek rotasi saat pengguna menggulir halaman untuk memberikan tampilan yang dinamis dan menarik, serta tautan ke halaman utama saat logo diklik
 
 import Image from "next/image"; // Import Image dari Next.js untuk optimasi gambar produk yang ditampilkan di hasil pencarian
 import { Playfair_Display } from "next/font/google"; // Import font Playfair Display dengan varian bold dan regular untuk digunakan pada judul hasil pencarian, nama produk, harga, dan informasi penjualan di hasil pencarian
@@ -72,17 +72,17 @@ export default async function SearchPage({
         </div>
       </div>
 
-      <div className="my-8 m-5 md:m-14">
+      <div className="max-w-7xl mx-auto px-8">
         <h1 className={`text-lg my-7 ${playfairDisplayRegular.className}`}>
           Hasil pencarian: "<a className={`${playfairDisplayBold.className}`}>{keyword}</a>"
         </h1>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {filtered.length > 0 ? (
             filtered.map((p) => (
               <div
                 key={p.id}
-                className="bg-white rounded-md shadow-white hover:shadow-lg transition p-2 cursor-pointer"
+                className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full"
               >
                 <Image
                   src={p.image}
