@@ -371,7 +371,7 @@ export default function StoresClient({
           />
 
           <div
-            className={`fixed bottom-0 left-0 right-0 z-50 bg-yellow-400 rounded-t-4xl transition-transform duration-300 lg:hidden ${
+            className={`fixed bottom-0 left-0 right-0 z-9999 bg-yellow-400 rounded-t-4xl transition-transform duration-300 lg:hidden ${
               openFilter ? "translate-y-0" : "translate-y-full"
             }`}
           >
@@ -666,7 +666,7 @@ export default function StoresClient({
             </div>
           </div>
         </div>
-        {/* <FloatingLogo /> */}
+        <FloatingLogo />
       </section>
     </>
   );
