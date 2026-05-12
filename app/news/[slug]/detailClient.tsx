@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Playfair_Display } from "next/font/google"; // Font Playfair Display
 import { FaArrowAltCircleRight } from "react-icons/fa"; // Ikon panah
 
-import Navbar from "@/app/components/navbar";
+import Navbar from "@/app/components/NavbarO2H";
 import Footer from "@/app/components/Footer";
 import FloatingLogo from "@/app/components/FloatingLogo";
 

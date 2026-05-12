@@ -1,4 +1,4 @@
-import Navbar from "../components/navbar";
+import Navbar from "../components/NavbarO2H";
 import FloatingLogo from "../components/FloatingLogo";
 
 export default function Photobooks() {

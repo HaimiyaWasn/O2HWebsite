@@ -1,4 +1,4 @@
-import Navbar from "./components/navbar";
+import Navbar from "./components/NavbarO2H";
 import LastestNews from "./components/LastestNews";
 import CarouselAlbum from "./components/CarouselAlbum";
 import Hero from "./components/HeroPageUtama";

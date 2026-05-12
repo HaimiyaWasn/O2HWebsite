@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { Playfair_Display } from "next/font/google";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 
-import Navbar from "../components/navbar";
+import Navbar from "../components/NavbarO2H";
 import SearchStore from "./search/searchClient";
 import StoreFilter from "./components/storesFilter";
 import FloatingLogo from "../components/FloatingLogo";
