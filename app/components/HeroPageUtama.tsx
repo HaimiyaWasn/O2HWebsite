@@ -79,14 +79,14 @@ export default function Hero() {
       <div className="hero-content text-neutral-content text-center z-10">
         <div className="max-w-3xl">
           <div
-            className={`inline-flex items-center rounded-full border border-yellow-400/40 bg-yellow-400/10 px-4 py-2 mb-6 backdrop-blur-md transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            className={`inline-flex items-center rounded-full border lg:hidden border-yellow-400/40 bg-yellow-400/10 px-4 py-2 mb-6 backdrop-blur-md transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
               showContentUtama
                 ? "opacity-100 translate-y-0 pointer-events-auto"
                 : "opacity-0 translate-y-4 pointer-events-none"
             } transition-all duration-700`}
           >
             <span className="text-yellow-300 text-sm tracking-[0.2em] uppercase">
-              Orang-orangan Halimawan
+              O2H Official Site
             </span>
           </div>
           {/* Judul */}

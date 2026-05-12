@@ -73,7 +73,7 @@ export default function Navbar() {
 
         {/* Tengah */}
         <div className="navbar-center hidden lg:flex">
-          <h1 className={`text-2xl ${yesteryear.className}`}>O2H Web Center</h1>
+          <h1 className={`text-2xl ${yesteryear.className}`}>O2H Official SIte</h1>
         </div>
 
         {/* Kanan */}

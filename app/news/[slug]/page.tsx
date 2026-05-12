@@ -30,7 +30,7 @@ export async function generateMetadata({
 
   // Kembalikan metadata berdasarkan data berita
   return {
-    title: `${news.title} | O2H Web Center`,
+    title: `${news.title} | O2H Official Site`,
     description: news.content.slice(0, 150),
   };
 }
