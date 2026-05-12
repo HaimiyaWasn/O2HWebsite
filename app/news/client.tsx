@@ -103,7 +103,7 @@ export default function NewsClient({
                   : "opacity-0 translate-y-5"
               } ${playfairDisplayBold.className}`}
             >
-              Semua News
+              All News
             </h1>
 
             <Link
