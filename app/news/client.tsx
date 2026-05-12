@@ -105,18 +105,6 @@ export default function NewsClient({
             >
               All News
             </h1>
-
-            <Link
-              href="/"
-              className={`flex items-center gap-2 text-sm md:text-base leading-none transform-gpu transition-all duration-700 ease-[cubic-bezier(0.15,1,0.3,1)] ${
-                showContent
-                  ? "opacity-50 hover:opacity-100 active:opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-5"
-              } ${playfairDisplayRegular.className}`}
-            >
-              Back to home
-              <FaArrowAltCircleRight size={20} className="translate-y-px" />
-            </Link>
           </div>
 
           {/* List berita */}
