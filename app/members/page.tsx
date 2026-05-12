@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar";
 import FloatingLogo from "../components/FloatingLogo";
 
 export default function Members() {
