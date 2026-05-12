@@ -73,7 +73,7 @@ export default function AnimationClient({
             }`}
           >
             <span className={`text-lg md:text-3xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}>
-              Store
+              Product
             </span>
           </div>
 
