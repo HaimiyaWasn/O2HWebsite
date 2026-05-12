@@ -5,6 +5,7 @@ import Hero from "./components/HeroPageUtama";
 import HomeStorePageCard from "./components/StoreHome";
 import Footer from "./components/Footer";
 import FloatingLogo from "./components/FloatingLogo";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <HomeStorePageCard />
       <Footer variant="yellow" />
       <FloatingLogo />
+      <SpeedInsights />
     </>
   );
 }
