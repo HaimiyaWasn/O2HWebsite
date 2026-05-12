@@ -8,7 +8,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 import Navbar from "../components/navbar";
 import SearchStore from "./search/searchClient";
 import StoreFilter from "./components/storesFilter";
-import FloatingLogo from "../components/floatingLogo";
+import FloatingLogo from "../components/FloatingLogo";
 
 type Products = {
   id: number;
@@ -70,7 +70,7 @@ export default function StoresClient({
           <div className="flex justify-center items-center mb-7">
             <SearchStore />
           </div>
-          
+
           <StoreFilter />
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">

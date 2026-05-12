@@ -1,10 +1,10 @@
 import Navbar from "./components/navbar";
 import LastestNews from "./components/LastestNews";
-import CarouselAlbum from "./components/carouselAlbum";
-import Hero from "./components/heroPageUtama";
+import CarouselAlbum from "./components/CarouselAlbum";
+import Hero from "./components/HeroPageUtama";
 import HomeStorePageCard from "./components/StoreHome";
-import Footer from "./components/footer";
-import FloatingLogo from "./components/floatingLogo";
+import Footer from "./components/Footer";
+import FloatingLogo from "./components/FloatingLogo";
 
 export default function Home() {
   return (

@@ -6,8 +6,8 @@ import { Playfair_Display } from "next/font/google"; // Font
 import { FaArrowAltCircleRight } from "react-icons/fa"; // Icon panah
 
 import Navbar from "../components/navbar";
-import FloatingLogo from "../components/floatingLogo";
-import Footer from "../components/footer";
+import FloatingLogo from "../components/FloatingLogo";
+import Footer from "../components/Footer";
 
 // Tipe data berita
 type News = {
