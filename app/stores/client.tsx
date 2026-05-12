@@ -89,20 +89,7 @@ export default function StoresClient({
             <SearchStore />
           </div>
 
-          <div className="flex gap-3 mb-5 lg:hidden">
-            <button
-              onClick={() => setOpenFilter(true)}
-              className={`btn flex-1 rounded-xl border border-yellow-400 shadow-none hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black ${playfairDisplayBold.className}`}
-            >
-              <LuSlidersHorizontal size={18} />
-              Filter
-            </button>
-            {/* <button onClick={() => setOpenFilter(true)} className={`btn flex-1 rounded-xl border border-yellow-400 shadow-none hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black`}>
-              <LuArrowUpDown size={18} />
-              Urutkan
-            </button> */}
-          </div>
-
+          {/* Dekstop */}
           <div className="flex flex-col lg:flex-row">
             <div className="hidden lg:block w-full lg:w-75 border border-yellow-400 rounded-xl h-fit">
               <div className="p-5 border-b border-yellow-400">
@@ -357,6 +344,21 @@ export default function StoresClient({
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Mobile */}
+          <div className="flex gap-3 mb-5 lg:hidden">
+            <button
+              onClick={() => setOpenFilter(true)}
+              className={`btn flex-1 rounded-xl border border-yellow-400 shadow-none hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black ${playfairDisplayBold.className}`}
+            >
+              <LuSlidersHorizontal size={18} />
+              Filter
+            </button>
+            {/* <button onClick={() => setOpenFilter(true)} className={`btn flex-1 rounded-xl border border-yellow-400 shadow-none hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black`}>
+              <LuArrowUpDown size={18} />
+              Urutkan
+            </button> */}
           </div>
 
           <div
