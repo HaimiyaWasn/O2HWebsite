@@ -8,6 +8,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa"; // Icon panah
 import Navbar from "../components/NavbarO2H";
 import FloatingLogo from "../components/FloatingLogo";
 import Footer from "../components/Footer";
+import RevealOnScroll from "../components/RevealOnScroll";
 
 // Tipe data berita
 type News = {
@@ -39,33 +40,6 @@ export default function NewsClient({
   totalPages: number;
   currentPage: number;
 }) {
-  // State untuk animasi saat section masuk viewport
-  const [showContent, setShowContent] = useState(false);
-
-  // Ref section untuk Intersection Observer
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  // Observer untuk animasi saat masuk viewport
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShowContent(true);
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -90px 0px",
-      }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  });
-
   // Pagination
   const MAX_VISIBLE_PAGES = 5;
 
@@ -92,52 +66,45 @@ export default function NewsClient({
     <>
       <title>News | O2H Official Site</title>
       <Navbar />
-      <section ref={sectionRef} className="py-20 scroll-mt-12 md:scroll-mt-20">
+      <section className="py-20 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 py-10">
           {/* Header */}
-          <div className="flex items-center justify-between mb-10">
-            <h1
-              className={`text-3xl md:text-4xl transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                showContent
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-5"
-              } ${playfairDisplayBold.className}`}
-            >
-              All News
-            </h1>
-          </div>
+          <RevealOnScroll>
+            <div className="flex items-center justify-between mb-10">
+              <h1
+                className={`text-3xl md:text-4xl ${playfairDisplayBold.className}`}
+              >
+                All News
+              </h1>
+            </div>
+          </RevealOnScroll>
 
           {/* List berita */}
           <div className="divide-y divide-white/30">
             {/* Menampilkan daftar berita */}
             {allNews.map((news, index) => (
-              <Link
-                key={news.id}
-                href={`/news/${news.slug}`}
-                className={`group flex flex-col md:flex-row md:items-center gap-2 md:gap-6 py-6 md:py-8 hover:no-underline transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                  showContent
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-5"
-                } ${playfairDisplayRegular.className}`}
-                style={{
-                  transitionDelay: `${250 + index * 150}ms`,
-                }}
-              >
-                <span className="text-sm md:text-base md:w-28 md:shrink-0 group-hover:opacity-50 group-active:opacity-50">
-                  {news.date}
-                </span>
+              <RevealOnScroll key={news.id} delay={300 + index * 75}>
+                <Link
+                  key={news.id}
+                  href={`/news/${news.slug}`}
+                  className={`group flex flex-col md:flex-row md:items-center gap-2 md:gap-6 py-6 md:py-8 hover:no-underline ${playfairDisplayRegular.className}`}
+                >
+                  <span className="text-sm md:text-base md:w-28 md:shrink-0 group-hover:opacity-50 group-active:opacity-50">
+                    {news.date}
+                  </span>
 
-                <p className="flex-1 text-base md:text-lg leading-relaxed group-hover:opacity-50 group-active:opacity-50">
-                  {news.title}
-                </p>
+                  <p className="flex-1 text-base md:text-lg leading-relaxed group-hover:opacity-50 group-active:opacity-50">
+                    {news.title}
+                  </p>
 
-                <div className="self-end md:self-auto mt-2 md:mt-8">
-                  <FaArrowAltCircleRight
-                    size={24}
-                    className="group-hover:opacity-50 group-active:opacity-50 transition"
-                  />
-                </div>
-              </Link>
+                  <div className="self-end md:self-auto mt-2 md:mt-8">
+                    <FaArrowAltCircleRight
+                      size={24}
+                      className="group-hover:opacity-50 group-active:opacity-50 transition"
+                    />
+                  </div>
+                </Link>
+              </RevealOnScroll>
             ))}
           </div>
         </div>
