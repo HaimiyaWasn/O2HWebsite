@@ -50,7 +50,7 @@ export default function LatestNewsClient({
           <RevealOnScroll delay={150}>
             <Link
               href="/news"
-              className={`flex items-center gap-2 text-sm md:text-base leading-none ${playfairDisplayRegular.className}`}
+              className={`flex items-center gap-2 text-sm md:text-base leading-none opacity-50 hover:opacity-100 active:opacity-100 ${playfairDisplayRegular.className}`}
             >
               View More
               <FaArrowAltCircleRight size={20} className="translate-y-px" />

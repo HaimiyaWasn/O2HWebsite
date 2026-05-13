@@ -21,9 +21,7 @@ export default async function getAllProducts() {
 
   const allProducts: Products[] = await res.json();
 
-  return allProducts.sort(
-    (a, b) => new Date(b.title).getTime() - new Date(a.title).getTime()
-  );
+  return allProducts;
 }
 
 export async function getProducts(page: number = 1) {

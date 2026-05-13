@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
 import { Playfair_Display } from "next/font/google";
-import { FaArrowAltCircleRight } from "react-icons/fa";
 
 import Navbar from "../components/NavbarO2H";
 import SearchStore from "./search/searchClient";
 import StoreFilter from "./components/storesFilter";
 import FloatingLogo from "../components/FloatingLogo";
+import RevealOnScroll from "../components/RevealOnScroll";
+import Footer from "../components/Footer";
 
 type Products = {
   id: number;
@@ -65,14 +65,14 @@ export default function StoresClient({
     <>
       <title>Store | O2H Official Site</title>
       <Navbar />
-      <section className="py-20 scroll-mt-12 md:scroll-mt-20">
+      <section className="pt-20 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 py-5">
           <div className="flex justify-center items-center mb-7">
             <SearchStore />
           </div>
 
           <div className="flex flex-col lg:flex-row gap-6">
-            <div className="w-full lg:w-50">
+            <div className="w-full lg:w-60">
               <StoreFilter />
             </div>
 
@@ -100,13 +100,10 @@ export default function StoresClient({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 pb-10">
                 {allProducts.map((product, index) => (
                   <Link key={product.id} href="#">
-                    <div
-                      key={product.id}
-                      className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full"
-                    >
+                    <div className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
                       <Image
                         src={product.image}
                         alt={product.title}
@@ -130,11 +127,12 @@ export default function StoresClient({
                 ))}
               </div>
               {/* Pagination */}
-              <div className="flex items-center justify-center gap-3 my-10">
+              <div className="flex items-center justify-center gap-3 my-3">
+                {/* Tombol Previous */}
                 {visiblePages.map((page) => (
                   <Link
                     key={page}
-                    href={page === 1 ? "/stores" : `/stores/page/${page}`}
+                    href={page === 1 ? "/stores" : `/stores/pages/${page}`}
                     className={`px-4 py-2 border transition ${
                       currentPage === page
                         ? "bg-white text-black"
@@ -149,6 +147,7 @@ export default function StoresClient({
           </div>
         </div>
         <FloatingLogo />
+        <Footer variant="yellow" />
       </section>
     </>
   );

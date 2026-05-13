@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
 import { Playfair_Display } from "next/font/google"; // Font
 import { FaArrowAltCircleRight } from "react-icons/fa"; // Icon panah
 
@@ -115,7 +114,7 @@ export default function NewsClient({
           {visiblePages.map((page) => (
             <Link
               key={page}
-              href={page === 1 ? "/news" : `/news/page/${page}`}
+              href={page === 1 ? "/news" : `/news/pages/${page}`}
               className={`px-4 py-2 border transition ${
                 currentPage === page
                   ? "bg-white text-black"
