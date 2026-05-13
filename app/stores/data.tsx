@@ -47,5 +47,5 @@ export async function getProducts(page: number = 1) {
 export async function getProductsBySlug(slug: string) {
   const allProducts = await getAllProducts();
 
-  return allProducts.find((products) => products.title === slug);
+  return allProducts.find((products) => products.slug === slug);
 }

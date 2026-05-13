@@ -48,7 +48,7 @@ const productData = Array.from({ length: 100 }, (_, index) => {
     price: product.price,
     image: product.image,
     sold: product.sold,
-    slug: `${product.slug}-${index + 1}`,
+    slug: `${product.slug}`,
   };
 });
 
