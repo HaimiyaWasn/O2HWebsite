@@ -79,7 +79,7 @@ export default function StoresClient({
 
             {/* Content */}
             <div className="flex-1">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                 <RevealOnScroll>
                   <div
                     className={`inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md ${playfairDisplayBold.className}`}
@@ -111,7 +111,7 @@ export default function StoresClient({
                 </RevealOnScroll>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 pb-10">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 {allProducts.map((product, index) => (
                   <RevealOnScroll key={product.id} delay={index * 35}>
                     <Link key={product.id} href={`/stores/${product.slug}`}>
@@ -143,7 +143,7 @@ export default function StoresClient({
               </div>
               {/* Pagination */}
               <RevealOnScroll delay={150}>
-                <div className="flex items-center justify-center gap-3 my-10">
+                <div className="flex items-center justify-center gap-3 my-14">
                   {/* Tombol Previous */}
                   {visiblePages.map((page) => (
                     <Link
