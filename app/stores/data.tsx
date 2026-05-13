@@ -6,6 +6,7 @@ export type Products = {
   price: string;
   image: string;
   sold: string;
+  slug: string;
 }
 
 export default async function getAllProducts() {

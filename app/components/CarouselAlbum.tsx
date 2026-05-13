@@ -54,7 +54,7 @@ export default function CarouselAlbum() {
           </RevealOnScroll>
         </div>
 
-        <RevealOnScroll delay={300}>
+        <RevealOnScroll delay={150}>
           <div className="w-full flex flex-col items-center py-3">
             <Swiper
               effect="coverflow"

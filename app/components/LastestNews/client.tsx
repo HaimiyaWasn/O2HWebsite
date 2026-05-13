@@ -62,7 +62,7 @@ export default function LatestNewsClient({
         <div className="divide-y divide-white/30">
           {/* Menampilkan daftar berita */}
           {latestNews.map((news, index) => (
-            <RevealOnScroll key={news.id} delay={300 + index * 75}>
+            <RevealOnScroll key={news.id} delay={index * 35}>
               <Link
                 key={news.id}
                 href={`/news/${news.slug}`}

@@ -69,12 +69,14 @@ export default function NewsClient({
         <div className="max-w-7xl mx-auto px-6 py-10">
           {/* Header */}
           <RevealOnScroll>
-            <div className="flex items-center justify-between mb-10">
-              <h1
-                className={`text-3xl md:text-4xl ${playfairDisplayBold.className}`}
+            <div
+              className={`inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md ${playfairDisplayBold.className}`}
+            >
+              <span
+                className={`text-md md:text-2xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
               >
                 All News
-              </h1>
+              </span>
             </div>
           </RevealOnScroll>
 
@@ -82,7 +84,7 @@ export default function NewsClient({
           <div className="divide-y divide-white/30">
             {/* Menampilkan daftar berita */}
             {allNews.map((news, index) => (
-              <RevealOnScroll key={news.id} delay={300 + index * 75}>
+              <RevealOnScroll key={news.id} delay={index * 35}>
                 <Link
                   key={news.id}
                   href={`/news/${news.slug}`}
@@ -108,23 +110,25 @@ export default function NewsClient({
           </div>
         </div>
 
-        {/* Pagination */}
-        <div className="flex items-center justify-center gap-3 my-3">
-          {/* Tombol Previous */}
-          {visiblePages.map((page) => (
-            <Link
-              key={page}
-              href={page === 1 ? "/news" : `/news/pages/${page}`}
-              className={`px-4 py-2 border transition ${
-                currentPage === page
-                  ? "bg-white text-black"
-                  : "bg-transparent text-white hover:bg-white hover:text-black"
-              }`}
-            >
-              {page}
-            </Link>
-          ))}
-        </div>
+        <RevealOnScroll delay={150}>
+          {/* Pagination */}
+          <div className="flex items-center justify-center gap-3 my-3">
+            {/* Tombol Previous */}
+            {visiblePages.map((page) => (
+              <Link
+                key={page}
+                href={page === 1 ? "/news" : `/news/pages/${page}`}
+                className={`px-4 py-2 border transition ${
+                  currentPage === page
+                    ? "bg-white text-black"
+                    : "bg-transparent text-white hover:bg-white hover:text-black"
+                }`}
+              >
+                {page}
+              </Link>
+            ))}
+          </div>
+        </RevealOnScroll>
       </section>
 
       <Footer variant="yellow" />

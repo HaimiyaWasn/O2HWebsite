@@ -17,6 +17,7 @@ type Products = {
   price: string;
   image: string;
   sold: string;
+  slug: string;
 };
 
 // Konfigurasi font
@@ -78,71 +79,87 @@ export default function StoresClient({
 
             {/* Content */}
             <div className="flex-1">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-                <span className={`text-2xl md:text-3xl font-bold`}>
-                  All Product
-                </span>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <RevealOnScroll>
+                  <div
+                    className={`inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md ${playfairDisplayBold.className}`}
+                  >
+                    <span
+                      className={`text-md md:text-2xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
+                    >
+                      All News
+                    </span>
+                  </div>
+                </RevealOnScroll>
 
-                <div className="flex items-center gap-3">
-                  <span className={`font-semibold whitespace-nowrap`}>
-                    Urutkan:
-                  </span>
-                  <select className="select border border-yellow-400 rounded-xl px-4 py-2 outline-none w-full md:w-60">
-                    <option>Terbaru</option>
-                    <option>Terlama</option>
-                    <option>Terpopuler</option>
-                    <option>Rating Tertinggi</option>
-                    <option>Harga Terendah</option>
-                    <option>Harga Tertinggi</option>
-                    <option>Nama Produk (A-Z)</option>
-                    <option>Nama Produk (Z-A)</option>
-                  </select>
-                </div>
+                <RevealOnScroll delay={150}>
+                  <div className="flex items-center gap-3">
+                    <span className={`font-semibold whitespace-nowrap`}>
+                      Urutkan:
+                    </span>
+                    <select className="select border border-yellow-400 rounded-xl px-4 py-2 outline-none w-full md:w-60">
+                      <option>Terbaru</option>
+                      <option>Terlama</option>
+                      <option>Terpopuler</option>
+                      <option>Rating Tertinggi</option>
+                      <option>Harga Terendah</option>
+                      <option>Harga Tertinggi</option>
+                      <option>Nama Produk (A-Z)</option>
+                      <option>Nama Produk (Z-A)</option>
+                    </select>
+                  </div>
+                </RevealOnScroll>
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4 pb-10">
                 {allProducts.map((product, index) => (
-                  <Link key={product.id} href="#">
-                    <div className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
-                      <Image
-                        src={product.image}
-                        alt={product.title}
-                        width={300}
-                        height={300}
-                        className="w-full h-40 object-cover rounded"
-                      />
-                      <div className="border-t border-yellow-400 my-3">
-                        <p
-                          className={`text-sm mt-2 line-clamp-2 text-black ${playfairDisplayBold.className}`}
-                        >
-                          {product.title}
-                        </p>
-                        <p className="text-yellow-500 mt-1 font-semibold">
-                          {product.price}
-                        </p>
-                        <p className="text-xs text-gray-500">{product.sold}</p>
+                  <RevealOnScroll key={product.id} delay={index * 35}>
+                    <Link key={product.id} href={`/stores/${product.slug}`}>
+                      <div className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
+                        <Image
+                          src={product.image}
+                          alt={product.title}
+                          width={300}
+                          height={300}
+                          className="w-full h-40 object-cover rounded"
+                        />
+                        <div className="border-t border-yellow-400 my-3">
+                          <p
+                            className={`text-sm mt-2 line-clamp-2 text-black ${playfairDisplayBold.className}`}
+                          >
+                            {product.title}
+                          </p>
+                          <p className="text-yellow-500 mt-1 font-semibold">
+                            {product.price}
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            {product.sold}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
+                  </RevealOnScroll>
                 ))}
               </div>
               {/* Pagination */}
-              <div className="flex items-center justify-center gap-3 my-3">
-                {/* Tombol Previous */}
-                {visiblePages.map((page) => (
-                  <Link
-                    key={page}
-                    href={page === 1 ? "/stores" : `/stores/pages/${page}`}
-                    className={`px-4 py-2 border transition ${
-                      currentPage === page
-                        ? "bg-white text-black"
-                        : "bg-transparent text-white hover:bg-white hover:text-black"
-                    }`}
-                  >
-                    {page}
-                  </Link>
-                ))}
-              </div>
+              <RevealOnScroll delay={150}>
+                <div className="flex items-center justify-center gap-3 my-10">
+                  {/* Tombol Previous */}
+                  {visiblePages.map((page) => (
+                    <Link
+                      key={page}
+                      href={page === 1 ? "/stores" : `/stores/pages/${page}`}
+                      className={`px-4 py-2 border transition ${
+                        currentPage === page
+                          ? "bg-white text-black"
+                          : "bg-transparent text-white hover:bg-white hover:text-black"
+                      }`}
+                    >
+                      {page}
+                    </Link>
+                  ))}
+                </div>
+              </RevealOnScroll>
             </div>
           </div>
         </div>

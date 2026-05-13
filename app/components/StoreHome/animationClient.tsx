@@ -69,7 +69,7 @@ export default function AnimationClient({
           {products.map((product, index) => (
             <RevealOnScroll
               key={product.id}
-              delay={300 + index * 75}
+              delay={index * 35}
             >
               <Link href={`/stores/${product.slug}`}>
                 <HomeProductCard product={product} />
