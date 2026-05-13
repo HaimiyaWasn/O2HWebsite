@@ -60,7 +60,7 @@ export default function StoresClient({
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, []); 
 
   return (
     <>
@@ -77,6 +77,7 @@ export default function StoresClient({
               <StoreFilter />
             </div>
 
+            {/* Content */}
             <div className="flex-1">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                 <span className={`text-2xl md:text-3xl font-bold`}>
@@ -100,7 +101,7 @@ export default function StoresClient({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {allProducts.map((product, index) => (
                   <Link key={product.id} href="#">
                     <div
