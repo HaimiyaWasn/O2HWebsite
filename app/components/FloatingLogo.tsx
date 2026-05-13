@@ -13,25 +13,19 @@ const playfairDisplayBold = Playfair_Display({
   subsets: ["latin"],
 });
 
-const playfairDisplayRegular = Playfair_Display({
-  weight: "400",
-  subsets: ["latin"],
-});
-
-// Logo mengambang dengan efek rotasi saat scroll
 export default function FloatingLogo() {
-  // State rotasi logo
   const [rotation, setRotation] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
-  // Scroll halus ke section hero
-  const handleHome = () => {
-    document
-      .getElementById("hero-page-utama")
-      ?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  // Mengubah rotasi saat scroll
+  // Pastikan render hanya di client
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Efek rotasi saat scroll
+  useEffect(() => {
+    if (!mounted) return;
+
     const handleScroll = () => {
       setRotation(window.scrollY * 0.3);
     };
@@ -41,7 +35,16 @@ export default function FloatingLogo() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [mounted]);
+
+  const handleHome = () => {
+    document
+      .getElementById("hero-page-utama")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Hindari hydration mismatch
+  if (!mounted) return null;
 
   return (
     <div className="fab">
@@ -54,16 +57,29 @@ export default function FloatingLogo() {
           src={O2HLogo}
           alt="O2H Logo"
           className="w-full h-full object-cover"
-          style={{ transform: `rotate(${rotation}deg)` }}
+          style={{
+            transform: `rotate(${rotation}deg)`,
+            transition: "transform 0.1s linear",
+          }}
         />
       </div>
 
       <div className={`fab-close ${playfairDisplayBold.className}`}>
-        Close <span className="btn btn-circle w-14 h-14 btn-error bg-red-600 text-white text-lg">✕</span>
+        Close
+        <span className="btn btn-circle w-14 h-14 btn-error bg-red-600 text-white text-lg">
+          ✕
+        </span>
       </div>
 
-      <div className={`${playfairDisplayBold.className}`}>
-        Home <Link href="/" onClick={handleHome} className="btn w-14 h-14 btn-circle bg-yellow-400 text-black text-lg"><FaHome /></Link>
+      <div className={playfairDisplayBold.className}>
+        Home{" "}
+        <Link
+          href="/"
+          onClick={handleHome}
+          className="btn w-14 h-14 btn-circle bg-yellow-400 text-black text-lg"
+        >
+          <FaHome />
+        </Link>
       </div>
     </div>
   );

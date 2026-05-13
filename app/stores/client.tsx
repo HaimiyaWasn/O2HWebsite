@@ -39,28 +39,27 @@ export default function StoresClient({
   totalPages: number;
   currentPage: number;
 }) {
-  const [showContent, setShowContent] = useState(false);
-  const sectionRef = useRef<HTMLElement | null>(null);
+  // Pagination
+  const MAX_VISIBLE_PAGES = 5;
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShowContent(true);
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -90px 0px",
-      }
-    );
+  // Hitung halaman yang akan ditampilkan
+  let startPage = Math.max(1, currentPage - Math.floor(MAX_VISIBLE_PAGES / 2));
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+  // Pastikan halaman akhir tidak melebihi total halaman
+  let endPage = startPage + MAX_VISIBLE_PAGES - 1;
 
-    return () => observer.disconnect();
-  }, []); 
+  // Jika halaman akhir melebihi total halaman, geser startPage ke kiri
+  if (endPage > totalPages) {
+    endPage = totalPages;
+
+    startPage = Math.max(1, endPage - MAX_VISIBLE_PAGES + 1);
+  }
+
+  // Membuat array halaman yang akan ditampilkan
+  const visiblePages = Array.from(
+    { length: endPage - startPage + 1 },
+    (_, i) => startPage + i
+  );
 
   return (
     <>
@@ -73,7 +72,7 @@ export default function StoresClient({
           </div>
 
           <div className="flex flex-col lg:flex-row gap-6">
-            <div className="w-full lg:w-70">
+            <div className="w-full lg:w-50">
               <StoreFilter />
             </div>
 
@@ -101,7 +100,7 @@ export default function StoresClient({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 {allProducts.map((product, index) => (
                   <Link key={product.id} href="#">
                     <div
@@ -127,6 +126,22 @@ export default function StoresClient({
                         <p className="text-xs text-gray-500">{product.sold}</p>
                       </div>
                     </div>
+                  </Link>
+                ))}
+              </div>
+              {/* Pagination */}
+              <div className="flex items-center justify-center gap-3 my-10">
+                {visiblePages.map((page) => (
+                  <Link
+                    key={page}
+                    href={page === 1 ? "/stores" : `/stores/page/${page}`}
+                    className={`px-4 py-2 border transition ${
+                      currentPage === page
+                        ? "bg-white text-black"
+                        : "bg-transparent text-white hover:bg-white hover:text-black"
+                    }`}
+                  >
+                    {page}
                   </Link>
                 ))}
               </div>
