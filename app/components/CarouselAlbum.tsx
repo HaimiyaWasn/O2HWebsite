@@ -43,7 +43,7 @@ export default function CarouselAlbum() {
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={150}>
+          <RevealOnScroll>
             <Link
               href="/photobooks"
               className={`flex items-center gap-2 text-sm md:text-base opacity-50 hover:opacity-100 ${playfairDisplayRegular.className}`}
@@ -54,7 +54,7 @@ export default function CarouselAlbum() {
           </RevealOnScroll>
         </div>
 
-        <RevealOnScroll delay={150}>
+        <RevealOnScroll>
           <div className="w-full flex flex-col items-center py-3">
             <Swiper
               effect="coverflow"

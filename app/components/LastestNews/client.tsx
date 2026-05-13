@@ -47,7 +47,7 @@ export default function LatestNewsClient({
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={150}>
+          <RevealOnScroll>
             <Link
               href="/news"
               className={`flex items-center gap-2 text-sm md:text-base leading-none opacity-50 hover:opacity-100 active:opacity-100 ${playfairDisplayRegular.className}`}
@@ -62,7 +62,7 @@ export default function LatestNewsClient({
         <div className="divide-y divide-white/30">
           {/* Menampilkan daftar berita */}
           {latestNews.map((news, index) => (
-            <RevealOnScroll key={news.id} delay={index * 35}>
+            <RevealOnScroll key={news.id} delay={index * 25}>
               <Link
                 key={news.id}
                 href={`/news/${news.slug}`}

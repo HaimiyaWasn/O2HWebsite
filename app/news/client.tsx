@@ -110,7 +110,7 @@ export default function NewsClient({
           </div>
         </div>
 
-        <RevealOnScroll delay={150}>
+        <RevealOnScroll>
           {/* Pagination */}
           <div className="flex items-center justify-center gap-3 my-3">
             {/* Tombol Previous */}

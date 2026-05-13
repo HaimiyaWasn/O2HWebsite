@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
 import { Playfair_Display } from "next/font/google"; // Font Playfair Display
 import { FaArrowAltCircleRight } from "react-icons/fa"; // Ikon panah
 
 import Navbar from "@/app/components/NavbarO2H";
 import Footer from "@/app/components/Footer";
 import FloatingLogo from "@/app/components/FloatingLogo";
+import RevealOnScroll from "@/app/components/RevealOnScroll";
 
 // Tipe data berita
 type News = {
@@ -31,96 +31,47 @@ const playfairDisplayRegular = Playfair_Display({
 
 // Client Component
 export default function DetailClient({ news }: { news: News }) {
-  // State animasi
-  const [showContent, setShowContent] = useState(false);
-
-  // Ref section
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  // Intersection Observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShowContent(true);
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -90px 0px",
-      }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <>
       <Navbar />
       {/* Konten berita */}
-      <section ref={sectionRef} className="py-12 pt-28 scroll-mt-12 md:scroll-mt-20">
+      <section className="py-12 pt-28 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-5xl mx-auto px-6">
-          <p
-            className={`text-sm opacity-60 mb-4 transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              showContent
-                ? "opacity-60 translate-y-0"
-                : "opacity-0 translate-y-5"
-            } ${playfairDisplayRegular.className}`}
-            style={{
-              transitionDelay: "250ms",
-            }}
-          >
-            {news.date}
-          </p>
+          <RevealOnScroll>
+            <p
+              className={`text-sm opacity-60 mb-4 ${playfairDisplayRegular.className}`}
+            >
+              {news.date}
+            </p>
+          </RevealOnScroll>
 
-          <h1
-            className={`text-4xl mb-10 transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              showContent
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-5"
-            } ${playfairDisplayBold.className}`}
-            style={{
-              transitionDelay: "350ms",
-            }}
-          >
-            {news.title}
-          </h1>
+          <RevealOnScroll>
+            <h1 className={`text-4xl mb-10 ${playfairDisplayBold.className}`}>
+              {news.title}
+            </h1>
+          </RevealOnScroll>
 
-          <article
-            className={`leading-relaxed text-lg transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              showContent
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-5"
-            } ${playfairDisplayRegular.className}`}
-            style={{
-              transitionDelay: "500ms",
-            }}
-          >
-            {news.content}
-          </article>
+          <RevealOnScroll>
+            <article
+              className={`leading-relaxed text-lg ${playfairDisplayRegular.className}`}
+            >
+              {news.content}
+            </article>
+          </RevealOnScroll>
         </div>
       </section>
 
       {/* Tombol kembali */}
       <div className="max-w-5xl mx-auto px-6 py-18 flex justify-end">
-        <Link
-          href="/news"
-          className={`flex items-center gap-2 text-sm md:text-base leading-none transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            showContent
-              ? "opacity-50 hover:opacity-100 active:opacity-100 translate-y-0"
-              : "opacity-0 translate-y-5"
-          } ${playfairDisplayRegular.className}`}
-          style={{
-            transitionDelay: "650ms",
-          }}
-        >
-          Back to news
-          <FaArrowAltCircleRight size={20} className="translate-y-px" />
-        </Link>
+        <RevealOnScroll>
+          <Link
+            href="/news"
+            className={`flex items-center gap-2 text-sm md:text-base leading-none ${playfairDisplayRegular.className}`}
+          >
+            Back to news
+            <FaArrowAltCircleRight size={20} className="translate-y-px" />
+          </Link>
+        </RevealOnScroll>
       </div>
 
       <Footer variant="yellow" />

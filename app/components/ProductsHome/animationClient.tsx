@@ -52,7 +52,7 @@ export default function AnimationCardClient({
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={150}>
+          <RevealOnScroll>
             <Link
               href="/products"
               className={`flex items-center gap-2 text-sm md:text-base opacity-50 hover:opacity-100 active:opacity-100 ${playfairDisplayRegular.className}`}
@@ -69,7 +69,7 @@ export default function AnimationCardClient({
           {products.map((product, index) => (
             <RevealOnScroll
               key={product.id}
-              delay={index * 35}
+              delay={index * 25}
             >
               <Link href={`/products/${product.slug}`}>
                 <HomeProductCard product={product} />

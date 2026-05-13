@@ -92,7 +92,7 @@ export default function ProductsClient({
                   </div>
                 </RevealOnScroll>
 
-                <RevealOnScroll delay={150}>
+                <RevealOnScroll>
                   <div className="flex items-center gap-3">
                     <span className={`font-semibold whitespace-nowrap`}>
                       Urutkan:
@@ -113,7 +113,7 @@ export default function ProductsClient({
 
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 {allProducts.map((product, index) => (
-                  <RevealOnScroll key={product.id} delay={index * 35}>
+                  <RevealOnScroll key={product.id} delay={index * 25}>
                     <Link key={product.id} href={`/products/${product.slug}`}>
                       <div className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
                         <Image
@@ -142,7 +142,7 @@ export default function ProductsClient({
                 ))}
               </div>
               {/* Pagination */}
-              <RevealOnScroll delay={150}>
+              <RevealOnScroll>
                 <div className="flex items-center justify-center gap-3 my-14">
                   {/* Tombol Previous */}
                   {visiblePages.map((page) => (
