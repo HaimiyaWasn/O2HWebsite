@@ -82,12 +82,12 @@ export default function StoresClient({
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                 <RevealOnScroll>
                   <div
-                    className={`inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md ${playfairDisplayBold.className}`}
+                    className={`flex w-full md:w-fit mb-3 md:mb-0 items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md ${playfairDisplayBold.className}`}
                   >
                     <span
                       className={`text-md md:text-2xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
                     >
-                      All News
+                      All Products
                     </span>
                   </div>
                 </RevealOnScroll>
