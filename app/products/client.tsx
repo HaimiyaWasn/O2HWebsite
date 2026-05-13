@@ -6,7 +6,7 @@ import { Playfair_Display } from "next/font/google";
 
 import Navbar from "../components/NavbarO2H";
 import SearchStore from "./search/searchClient";
-import StoreFilter from "./components/storesFilter";
+import StoreFilter from "./components/productsFilter";
 import FloatingLogo from "../components/FloatingLogo";
 import RevealOnScroll from "../components/RevealOnScroll";
 import Footer from "../components/Footer";
@@ -31,7 +31,7 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
-export default function StoresClient({
+export default function ProductsClient({
   allProducts,
   totalPages,
   currentPage,
@@ -114,7 +114,7 @@ export default function StoresClient({
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 {allProducts.map((product, index) => (
                   <RevealOnScroll key={product.id} delay={index * 35}>
-                    <Link key={product.id} href={`/stores/${product.slug}`}>
+                    <Link key={product.id} href={`/products/${product.slug}`}>
                       <div className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
                         <Image
                           src={product.image}
@@ -148,7 +148,7 @@ export default function StoresClient({
                   {visiblePages.map((page) => (
                     <Link
                       key={page}
-                      href={page === 1 ? "/stores" : `/stores/pages/${page}`}
+                      href={page === 1 ? "/products" : `/products/pages/${page}`}
                       className={`px-4 py-2 border transition ${
                         currentPage === page
                           ? "bg-white text-black"

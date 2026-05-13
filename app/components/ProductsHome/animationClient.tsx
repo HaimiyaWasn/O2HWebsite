@@ -28,7 +28,7 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
-export default function AnimationClient({
+export default function AnimationCardClient({
   products,
 }: {
   products: Product[];
@@ -54,7 +54,7 @@ export default function AnimationClient({
 
           <RevealOnScroll delay={150}>
             <Link
-              href="/stores"
+              href="/products"
               className={`flex items-center gap-2 text-sm md:text-base opacity-50 hover:opacity-100 active:opacity-100 ${playfairDisplayRegular.className}`}
             >
               View More
@@ -71,7 +71,7 @@ export default function AnimationClient({
               key={product.id}
               delay={index * 35}
             >
-              <Link href={`/stores/${product.slug}`}>
+              <Link href={`/products/${product.slug}`}>
                 <HomeProductCard product={product} />
               </Link>
             </RevealOnScroll>

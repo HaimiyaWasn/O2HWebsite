@@ -39,7 +39,7 @@ const baseProducts = [
 ];
 
 // Generate 100 products
-const productData = Array.from({ length: 100 }, (_, index) => {
+const productData = Array.from({ length: 150 }, (_, index) => {
   const product = baseProducts[index % baseProducts.length];
 
   return {

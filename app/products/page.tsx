@@ -1,11 +1,11 @@
-import StoresClient from "./client";
+import ProductsClient from "./client";
 import { getProducts } from "./data";
 
-export default async function StoresPage() {
+export default async function ProductsPage() {
   const { products, totalPages, currentPage } = await getProducts(1);
 
   return (
-    <StoresClient
+    <ProductsClient
       allProducts={products}
       totalPages={totalPages}
       currentPage={currentPage}

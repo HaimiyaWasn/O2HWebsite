@@ -15,7 +15,7 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
-export default function StoreFilter() {
+export default function ProductsFilter() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [productType, setProductType] = useState<string>("Semua Produk");
   const [stockStatus, setStockStatus] = useState<string>("Semua");

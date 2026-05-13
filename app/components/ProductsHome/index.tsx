@@ -13,7 +13,7 @@ type Product = {
 };
 
 // Mengambil dan menampilkan produk store
-export default async function HomeStorePageCard() {
+export default async function HomeProductsPageCard() {
   const headersList = await headers();
   const host = headersList.get("host");
 

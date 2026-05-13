@@ -14,7 +14,7 @@ export default function SearchStore({ defaultSearch = "" }: any) {
 
     if (!clean) return; // Jika input kosong setelah dibersihkan, jangan lakukan apa-apa
 
-    router.push(`/stores/search?keyword=${encodeURIComponent(clean)}`); // Redirect ke halaman search dengan query parameter keyword yang sudah di-encode untuk menghindari masalah karakter khusus
+    router.push(`/products/search?keyword=${encodeURIComponent(clean)}`); // Redirect ke halaman search dengan query parameter keyword yang sudah di-encode untuk menghindari masalah karakter khusus
   };
 
   // Fungsi untuk menangani event keydown pada input pencarian, jika tombol Enter ditekan maka akan memanggil fungsi handleSearch
