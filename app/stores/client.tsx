@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { Playfair_Display } from "next/font/google";
 import { FaArrowAltCircleRight } from "react-icons/fa";
@@ -71,15 +72,64 @@ export default function StoresClient({
             <SearchStore />
           </div>
 
-          <StoreFilter />
+          <div className="flex flex-col lg:flex-row gap-6">
+            <div className="w-full lg:w-70">
+              <StoreFilter />
+            </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            <h1>All Product</h1>
-            {allProducts.map((product, index) => (
-              <Link key={product.id} href={`#`}>
-                <div></div>
-              </Link>
-            ))}
+            <div className="flex-1">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                <span className={`text-2xl md:text-3xl font-bold`}>
+                  All Product
+                </span>
+
+                <div className="flex items-center gap-3">
+                  <span className={`font-semibold whitespace-nowrap`}>
+                    Urutkan:
+                  </span>
+                  <select className="select border border-yellow-400 rounded-xl px-4 py-2 outline-none w-full md:w-60">
+                    <option>Terbaru</option>
+                    <option>Terlama</option>
+                    <option>Terpopuler</option>
+                    <option>Rating Tertinggi</option>
+                    <option>Harga Terendah</option>
+                    <option>Harga Tertinggi</option>
+                    <option>Nama Produk (A-Z)</option>
+                    <option>Nama Produk (Z-A)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {allProducts.map((product, index) => (
+                  <Link key={product.id} href="#">
+                    <div
+                      key={product.id}
+                      className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full"
+                    >
+                      <Image
+                        src={product.image}
+                        alt={product.title}
+                        width={300}
+                        height={300}
+                        className="w-full h-40 object-cover rounded"
+                      />
+                      <div className="border-t border-yellow-400 my-3">
+                        <p
+                          className={`text-sm mt-2 line-clamp-2 text-black ${playfairDisplayBold.className}`}
+                        >
+                          {product.title}
+                        </p>
+                        <p className="text-yellow-500 mt-1 font-semibold">
+                          {product.price}
+                        </p>
+                        <p className="text-xs text-gray-500">{product.sold}</p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
         <FloatingLogo />

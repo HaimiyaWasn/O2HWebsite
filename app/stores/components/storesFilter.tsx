@@ -38,7 +38,8 @@ export default function StoreFilter() {
       {/* Dekstop */}
       <div className="flex flex-col lg:flex-row">
         <div className="hidden lg:block w-full lg:w-75 border border-yellow-400 rounded-xl h-fit">
-          <div className="p-5 border-b border-yellow-400">
+          <div className="p-5 border-b border-yellow-400 flex flex-1 items-center gap-2">
+            <LuSlidersHorizontal size={18} className="relative top-0.5" />
             <h1 className={`text-2xl ${playfairDisplayBold.className}`}>
               Filter
             </h1>
