@@ -36,7 +36,7 @@ export default function DetailClient({ news }: { news: News }) {
       <Navbar />
       {/* Konten berita */}
       <section className="py-12 pt-28 scroll-mt-12 md:scroll-mt-20">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <RevealOnScroll>
             <p
               className={`text-sm opacity-60 mb-4 ${playfairDisplayRegular.className}`}
