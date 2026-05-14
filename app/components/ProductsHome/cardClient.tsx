@@ -31,7 +31,11 @@ export default function HomeProductCard({ product }: any) {
           alt={product.title}
           fill
           className={`object-cover transition-opacity duration-500 ${
-            isHovered && hasSecondImage ? "opacity-0" : "opacity-100"
+            isHovered
+              ? hasSecondImage
+                ? "opacity-0 scale-105"
+                : "scale-105"
+              : "opacity-100 scale-100"
           }`}
         />
 
@@ -41,7 +45,7 @@ export default function HomeProductCard({ product }: any) {
             alt={product.title}
             fill
             className={`object-cover transition-opacity duration-500 ${
-              isHovered ? "opacity-100" : "opacity-0"
+              isHovered ? "opacity-100 scale-105" : "opacity-0 scale-105"
             }`}
           />
         )}
