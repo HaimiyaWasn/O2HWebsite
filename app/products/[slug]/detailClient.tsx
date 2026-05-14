@@ -5,8 +5,11 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { Playfair_Display } from "next/font/google";
 import { FaArrowAltCircleRight } from "react-icons/fa";
+
 import Navbar from "@/app/components/NavbarO2H";
+import Footer from "@/app/components/Footer";
 import FloatingLogo from "@/app/components/FloatingLogo";
+import RevealOnScroll from "@/app/components/RevealOnScroll";
 
 type Products = {
   id: number;

@@ -24,7 +24,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${products.title} | O2H Official Site`,
+    title: `${products.title}`,
     description: `Price: ${products.price}, Sold: ${products.sold}`,
   };
 }
