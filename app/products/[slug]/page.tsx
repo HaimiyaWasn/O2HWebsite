@@ -40,5 +40,5 @@ export default async function ProductsDetailPage({
     notFound();
   }
 
-  return <DetailClient products={products} />
+  return <DetailClient product={products} />
 }

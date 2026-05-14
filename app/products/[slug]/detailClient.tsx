@@ -27,7 +27,7 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
-export default function DetailClient({ products }: { products: Products }) {
+export default function DetailClient({ product }: { product: Products }) {
   return (
     <>
       <Navbar />
