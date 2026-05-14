@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { Playfair_Display } from "next/font/google"; // Font Playfair Display
 
 // Konfigurasi font
@@ -11,16 +12,40 @@ const playfairDisplayBold = Playfair_Display({
 
 // Card produk
 export default function HomeProductCard({ product }: any) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const images = Array.isArray(product.image) ? product.image : [product.image];
+
+  const hasSecondImage = images.length > 1;
+
   return (
-    <div className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
-      {/* Gambar produk */}
-      <Image
-        src={product.image}
-        alt={product.title}
-        width={300}
-        height={300}
-        className="w-full h-40 object-cover rounded"
-      />
+    <div
+      className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="relative w-full h-40 overflow-hidden rounded">
+        {/* Gambar produk */}
+        <Image
+          src={images[0]}
+          alt={product.title}
+          fill
+          className={`object-cover transition-opacity duration-500 ${
+            isHovered && hasSecondImage ? "opacity-0" : "opacity-100"
+          }`}
+        />
+
+        {hasSecondImage && (
+          <Image
+            src={images[1]}
+            alt={product.title}
+            fill
+            className={`object-cover transition-opacity duration-500 ${
+              isHovered ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        )}
+      </div>
 
       {/* Konten produk */}
       <div className="border-t border-yellow-400 my-3">

@@ -12,7 +12,7 @@ type Product = {
   id: number;
   title: string;
   price: string;
-  image: string;
+  image: string | string[];
   sold: string;
   slug: string;
 };

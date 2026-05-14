@@ -15,7 +15,7 @@ type Products = {
   id: number;
   title: string;
   price: string;
-  image: string;
+  image: string | string[];
   sold: string;
   slug: string;
 };
@@ -112,34 +112,56 @@ export default function ProductsClient({
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                {allProducts.map((product, index) => (
-                  <RevealOnScroll key={product.id} delay={index * 25}>
-                    <Link key={product.id} href={`/products/${product.slug}`}>
-                      <div className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
-                        <Image
-                          src={product.image}
-                          alt={product.title}
-                          width={300}
-                          height={300}
-                          className="w-full h-40 object-cover rounded"
-                        />
-                        <div className="border-t border-yellow-400 my-3">
-                          <p
-                            className={`text-sm mt-2 line-clamp-2 text-black ${playfairDisplayBold.className}`}
-                          >
-                            {product.title}
-                          </p>
-                          <p className="text-yellow-500 mt-1 font-semibold">
-                            {product.price}
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            {product.sold}
-                          </p>
+                {allProducts.map((product, index) => {
+                  const images = Array.isArray(product.image)
+                    ? product.image
+                    : [product.image];
+
+                  const hasSecondImage = images.length > 1;
+
+                  return (
+                    <RevealOnScroll key={product.id} delay={index * 25}>
+                      <Link key={product.id} href={`/products/${product.slug}`}>
+                        <div className="group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
+                          <div className="relative w-full h-40 overflow-hidden rounded">
+                            <Image
+                              src={images[0]}
+                              alt={product.title}
+                              fill
+                              className={`object-cover transition-all duration-500 ${
+                                hasSecondImage
+                                  ? "group-hover:opacity-0 group-hover:scale-105"
+                                  : "group-hover:scale-105"
+                              }`}
+                            />
+
+                            {hasSecondImage && (
+                              <Image
+                                src={images[1]}
+                                alt={product.title}
+                                fill
+                                className="object-cover opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                              />
+                            )}
+                          </div>
+                          <div className="border-t border-yellow-400 my-3">
+                            <p
+                              className={`text-sm mt-2 line-clamp-2 text-black ${playfairDisplayBold.className}`}
+                            >
+                              {product.title}
+                            </p>
+                            <p className="text-yellow-500 mt-1 font-semibold">
+                              {product.price}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              {product.sold}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </Link>
-                  </RevealOnScroll>
-                ))}
+                      </Link>
+                    </RevealOnScroll>
+                  );
+                })}
               </div>
               {/* Pagination */}
               <RevealOnScroll>
@@ -148,7 +170,9 @@ export default function ProductsClient({
                   {visiblePages.map((page) => (
                     <Link
                       key={page}
-                      href={page === 1 ? "/products" : `/products/pages/${page}`}
+                      href={
+                        page === 1 ? "/products" : `/products/pages/${page}`
+                      }
                       className={`px-4 py-2 border transition ${
                         currentPage === page
                           ? "bg-white text-black"
