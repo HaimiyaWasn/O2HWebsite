@@ -48,7 +48,7 @@ export default function DetailClient({ product }: { product: Products }) {
             </div>
             
             <div className="flex flex-col">
-              <span className={`text-lg md:text-3xl ${playfairDisplayBold.className}`}>{product.title}</span>
+              <span className={`text-lg md:text-2xl ${playfairDisplayBold.className}`}>{product.title}</span>
             </div>
           </div>
         </div>

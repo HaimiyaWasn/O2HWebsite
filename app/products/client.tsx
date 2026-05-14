@@ -5,8 +5,8 @@ import Image from "next/image";
 import { Playfair_Display } from "next/font/google";
 
 import Navbar from "../components/NavbarO2H";
-import SearchStore from "./search/searchClient";
-import StoreFilter from "./components/productsFilter";
+import SearchProducts from "./search/searchClient";
+import ProductsFilter from "./components/productsFilter";
 import FloatingLogo from "../components/FloatingLogo";
 import RevealOnScroll from "../components/RevealOnScroll";
 import Footer from "../components/Footer";
@@ -64,17 +64,17 @@ export default function ProductsClient({
 
   return (
     <>
-      <title>Store | O2H Official Site</title>
+      <title>Products | O2H Official Site</title>
       <Navbar />
       <section className="pt-20 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 py-5">
           <div className="flex justify-center items-center mb-7">
-            <SearchStore />
+            <SearchProducts />
           </div>
 
           <div className="flex flex-col lg:flex-row gap-6">
             <div className="w-full lg:w-60">
-              <StoreFilter />
+              <ProductsFilter />
             </div>
 
             {/* Content */}

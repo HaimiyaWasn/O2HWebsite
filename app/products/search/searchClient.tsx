@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa"; // Import ikon pencarian dari react-i
 import { useState, useEffect } from "react"; // Import React Hooks useState dan useEffect untuk mengelola state input pencarian dan efek samping saat defaultSearch berubah
 import { useRouter } from "next/navigation"; // Import useRouter dari Next.js untuk navigasi programatik ke halaman hasil pencarian setelah pengguna melakukan pencarian
 
-export default function SearchStore({ defaultSearch = "" }: any) {
+export default function SearchProducts({ defaultSearch = "" }: any) {
   const router = useRouter(); // Hook untuk navigasi programatik ke halaman lain
   const [inputValue, setinputValue] = useState(defaultSearch); // State untuk menyimpan nilai input pencarian, diinisialisasi dengan defaultSearch yang diterima sebagai prop, sehingga jika ada nilai default yang diberikan, input akan langsung terisi dengan nilai tersebut
 
