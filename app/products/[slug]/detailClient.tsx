@@ -45,9 +45,10 @@ export default function DetailClient({ product }: { product: Products }) {
                   priority
                 />
               </div>
-              <div className="space-y-6">
-                <div></div>
-              </div>
+            </div>
+            
+            <div className="flex flex-col">
+              <span className={`text-lg md:text-3xl ${playfairDisplayBold.className}`}>{product.title}</span>
             </div>
           </div>
         </div>
