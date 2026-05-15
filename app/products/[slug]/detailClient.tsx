@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Playfair_Display } from "next/font/google";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import Navbar from "@/app/components/NavbarO2H";
 import Footer from "@/app/components/Footer";
@@ -36,12 +35,36 @@ export default function DetailClient({ product }: { product: Products }) {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  const startX = useRef(0);
+  const isDragging = useRef(false);
+
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    startX.current = e.clientX;
+    isDragging.current = true;
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (!isDragging.current) return;
+
+    const diff = startX.current - e.clientX;
+
+    if (diff > 50) {
+      nextImage();
+    }
+
+    if (diff < -50) {
+      prevImage();
+    }
+
+    isDragging.current = false;
   };
 
   return (
@@ -51,30 +74,42 @@ export default function DetailClient({ product }: { product: Products }) {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="flex flex-col items-center">
-              <div className="relative w-full aspect-square rounded-xl overflow-hidden border-4 border-yellow-400">
-                <Image
-                  src={images[currentImageIndex]}
-                  alt={product.title}
-                  fill
-                  className="object-contain"
-                  priority
-                />
-                {images.length > 1 && (
-                  <>
-                    <button
-                      onClick={prevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full cursor-pointer"
+              <div
+                className="relative w-full aspect-square rounded-xl overflow-hidden border-4 border-yellow-400 cursor-grab active:cursor-grabbing select-none"
+                onPointerDown={handlePointerDown}
+                onPointerUp={handlePointerUp}
+                onPointerLeave={() => {
+                  isDragging.current = false;
+                }}
+              >
+                <div
+                  className="flex h-full transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                  style={{
+                    width: `${images.length * 100}%`,
+                    transform: `translateX(-${
+                      currentImageIndex * (100 / images.length)
+                    }%)`,
+                  }}
+                >
+                  {images.map((img, index) => (
+                    <div
+                      key={index}
+                      className="relative shrink-0 w-full aspect-square"
+                      style={{
+                        width: `${100 / images.length}%`,
+                      }}
                     >
-                      <FaChevronLeft />
-                    </button>
-                    <button
-                      onClick={nextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full cursor-pointer"
-                    >
-                      <FaChevronRight />
-                    </button>
-                  </>
-                )}
+                      <Image
+                        src={img}
+                        alt={`${product.title}-${index}`}
+                        fill
+                        draggable={false}
+                        className="object-contain pointer-events-none"
+                        priority={index === 0}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
               {images.length > 1 && (
                 <div className="flex gap-3 mt-5">
