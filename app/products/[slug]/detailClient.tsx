@@ -31,9 +31,7 @@ const playfairDisplayRegular = Playfair_Display({
 });
 
 export default function DetailClient({ product }: { product: Products }) {
-  const images = Array.isArray(product.image)
-    ? product.image
-    : [product.image];
+  const images = Array.isArray(product.image) ? product.image : [product.image];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -41,14 +39,12 @@ export default function DetailClient({ product }: { product: Products }) {
 
   const nextImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === images.length - 1 ? 0 : prev + 1
+      prev < images.length - 1 ? prev + 1 : prev
     );
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) =>
-      prev === 0 ? images.length - 1 : prev - 1
-    );
+    setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
   // MOBILE
