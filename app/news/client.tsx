@@ -68,7 +68,7 @@ export default function NewsClient({
       <section className="py-20 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 py-10">
           {/* Header */}
-          <RevealOnScroll>
+          <RevealOnScroll delay={300}>
             <div
               className={`inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md ${playfairDisplayBold.className}`}
             >
@@ -80,11 +80,11 @@ export default function NewsClient({
             </div>
           </RevealOnScroll>
 
-          {/* List berita */}
-          <div className="divide-y divide-white/30">
-            {/* Menampilkan daftar berita */}
-            {allNews.map((news, index) => (
-              <RevealOnScroll key={news.id} delay={index * 35}>
+          <RevealOnScroll delay={750}>
+            {/* List berita */}
+            <div className="divide-y divide-white/30">
+              {/* Menampilkan daftar berita */}
+              {allNews.map((news, index) => (
                 <Link
                   key={news.id}
                   href={`/news/${news.slug}`}
@@ -105,12 +105,12 @@ export default function NewsClient({
                     />
                   </div>
                 </Link>
-              </RevealOnScroll>
-            ))}
-          </div>
+              ))}
+            </div>
+          </RevealOnScroll>
         </div>
 
-        <RevealOnScroll>
+        <RevealOnScroll delay={300}>
           {/* Pagination */}
           <div className="flex items-center justify-center gap-3 my-3">
             {/* Tombol Previous */}

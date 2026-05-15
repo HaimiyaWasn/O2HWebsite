@@ -36,11 +36,9 @@ export default function AnimationCardClient({
   return (
     <section className="py-10">
       <div className="max-w-7xl mx-auto px-6">
-
         {/* Header */}
         <div className="flex items-center justify-between mb-10">
-
-          <RevealOnScroll>
+          <RevealOnScroll delay={300}>
             <div
               className={`inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md`}
             >
@@ -52,7 +50,7 @@ export default function AnimationCardClient({
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll>
+          <RevealOnScroll delay={500}>
             <Link
               href="/products"
               className={`flex items-center gap-2 text-sm md:text-base opacity-50 hover:opacity-100 active:opacity-100 ${playfairDisplayRegular.className}`}
@@ -61,23 +59,22 @@ export default function AnimationCardClient({
               <FaArrowAltCircleRight size={20} />
             </Link>
           </RevealOnScroll>
-
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {products.map((product, index) => (
-            <RevealOnScroll
-              key={product.id}
-              delay={index * 25}
-            >
-              <Link href={`/products/${product.slug}`}>
+        <RevealOnScroll delay={750}>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {products.map((product) => (
+              <Link
+                key={product.id}
+                href={`/products/${product.slug}`}
+                className="block h-f"
+              >
                 <HomeProductCard product={product} />
               </Link>
-            </RevealOnScroll>
-          ))}
-
-        </div>
+            ))}
+          </div>
+        </RevealOnScroll>
       </div>
     </section>
   );

@@ -62,7 +62,7 @@ export default function RevealOnScroll({
   return (
     <div
       ref={sectionRef}
-      className={`transform-gpu transition-all ease-[cubic-brezier(0.16,1,0.3,1)] ${
+      className={`transform-gpu transition-all ease-[cubic-bezier(0.16,1,0.3,1)] ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0"
       } ${classname}`}
       style={{

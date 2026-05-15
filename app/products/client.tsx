@@ -80,7 +80,7 @@ export default function ProductsClient({
             {/* Content */}
             <div className="flex-1">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-                <RevealOnScroll>
+                <RevealOnScroll delay={300}>
                   <div
                     className={`flex w-full md:w-fit mb-3 md:mb-0 items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md ${playfairDisplayBold.className}`}
                   >
@@ -92,7 +92,7 @@ export default function ProductsClient({
                   </div>
                 </RevealOnScroll>
 
-                <RevealOnScroll>
+                <RevealOnScroll delay={500}>
                   <div className="flex items-center gap-3">
                     <span className={`font-semibold whitespace-nowrap`}>
                       Urutkan:
@@ -111,16 +111,16 @@ export default function ProductsClient({
                 </RevealOnScroll>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                {allProducts.map((product, index) => {
-                  const images = Array.isArray(product.image)
-                    ? product.image
-                    : [product.image];
+              <RevealOnScroll delay={750}>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                  {allProducts.map((product) => {
+                    const images = Array.isArray(product.image)
+                      ? product.image
+                      : [product.image];
 
-                  const hasSecondImage = images.length > 1;
+                    const hasSecondImage = images.length > 1;
 
-                  return (
-                    <RevealOnScroll key={product.id} delay={index * 25}>
+                    return (
                       <Link key={product.id} href={`/products/${product.slug}`}>
                         <div className="group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
                           <div className="relative w-full h-40 overflow-hidden rounded">
@@ -159,12 +159,12 @@ export default function ProductsClient({
                           </div>
                         </div>
                       </Link>
-                    </RevealOnScroll>
-                  );
-                })}
-              </div>
+                    );
+                  })}
+                </div>
+              </RevealOnScroll>
               {/* Pagination */}
-              <RevealOnScroll>
+              <RevealOnScroll delay={300}>
                 <div className="flex items-center justify-center gap-3 my-14">
                   {/* Tombol Previous */}
                   {visiblePages.map((page) => (

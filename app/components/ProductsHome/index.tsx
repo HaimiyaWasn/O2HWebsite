@@ -1,4 +1,4 @@
-import { headers } from "next/headers"; // Mengambil header request
+import { headers } from "next/headers";
 
 import AnimationClient from "./animationClient";
 
@@ -19,7 +19,7 @@ export default async function HomeProductsPageCard() {
 
   // Fetch data produk
   const res = await fetch(`http://${host}/api/products`, {
-    cache: "no-store", // Selalu ambil data terbaru
+    cache: "no-store",
   });
 
   // Error jika fetch gagal
@@ -30,10 +30,20 @@ export default async function HomeProductsPageCard() {
   // Ambil data JSON
   const productsData: Product[] = await res.json();
 
-  // Acak dan ambil 18 produk
-  const limitedRandomProducts = [...productsData]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 18);
+  // Fisher-Yates Shuffle (lebih aman)
+  const shuffledProducts = [...productsData];
+
+  for (let i = shuffledProducts.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [shuffledProducts[i], shuffledProducts[j]] = [
+      shuffledProducts[j],
+      shuffledProducts[i],
+    ];
+  }
+
+  // Ambil 18 produk
+  const limitedRandomProducts = shuffledProducts.slice(0, 18);
 
   return <AnimationClient products={limitedRandomProducts} />;
 }

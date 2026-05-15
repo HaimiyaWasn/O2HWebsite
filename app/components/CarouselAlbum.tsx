@@ -31,7 +31,7 @@ export default function CarouselAlbum() {
     <section className="py-10 bg-yellow-400">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between mb-10 text-black">
-          <RevealOnScroll>
+          <RevealOnScroll delay={300}>
             <div
               className={`inline-flex items-center rounded-full shadow-sm shadow-black border-4 border-black/40 bg-black/10 px-4 py-2 backdrop-blur-md ${playfairDisplayBold.className}`}
             >
@@ -43,7 +43,7 @@ export default function CarouselAlbum() {
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll>
+          <RevealOnScroll delay={500}>
             <Link
               href="/photobooks"
               className={`flex items-center gap-2 text-sm md:text-base opacity-50 hover:opacity-100 ${playfairDisplayRegular.className}`}
@@ -54,7 +54,7 @@ export default function CarouselAlbum() {
           </RevealOnScroll>
         </div>
 
-        <RevealOnScroll>
+        <RevealOnScroll delay={750}>
           <div className="w-full flex flex-col items-center py-3">
             <Swiper
               effect="coverflow"

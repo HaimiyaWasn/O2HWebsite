@@ -35,7 +35,7 @@ export default function LatestNewsClient({
     <section className="py-10 scroll-mt-12 md:scroll-mt-16" id="latest-news">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between mb-10">
-          <RevealOnScroll>
+          <RevealOnScroll delay={300}>
             <div
               className={`inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md ${playfairDisplayBold.className}`}
             >
@@ -47,7 +47,7 @@ export default function LatestNewsClient({
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll>
+          <RevealOnScroll delay={500}>
             <Link
               href="/news"
               className={`flex items-center gap-2 text-sm md:text-base leading-none opacity-50 hover:opacity-100 active:opacity-100 ${playfairDisplayRegular.className}`}
@@ -58,11 +58,10 @@ export default function LatestNewsClient({
           </RevealOnScroll>
         </div>
 
-        
-        <div className="divide-y divide-white/30">
-          {/* Menampilkan daftar berita */}
-          {latestNews.map((news, index) => (
-            <RevealOnScroll key={news.id} delay={index * 25}>
+        <RevealOnScroll delay={750}>
+          <div className="divide-y divide-white/30">
+            {/* Menampilkan daftar berita */}
+            {latestNews.map((news) => (
               <Link
                 key={news.id}
                 href={`/news/${news.slug}`}
@@ -83,9 +82,9 @@ export default function LatestNewsClient({
                   />
                 </div>
               </Link>
-            </RevealOnScroll>
-          ))}
-        </div>
+            ))}
+          </div>
+        </RevealOnScroll>
       </div>
     </section>
   );

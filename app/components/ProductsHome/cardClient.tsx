@@ -20,7 +20,7 @@ export default function HomeProductCard({ product }: any) {
 
   return (
     <div
-      className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full"
+      className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md transition-all duration-300 p-2 cursor-pointer h-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -30,7 +30,7 @@ export default function HomeProductCard({ product }: any) {
           src={images[0]}
           alt={product.title}
           fill
-          className={`object-cover transition-opacity duration-500 ${
+          className={`pointer-events-none object-cover transition-opacity duration-500 ${
             isHovered
               ? hasSecondImage
                 ? "opacity-0 scale-105"
@@ -44,7 +44,7 @@ export default function HomeProductCard({ product }: any) {
             src={images[1]}
             alt={product.title}
             fill
-            className={`object-cover transition-opacity duration-500 ${
+            className={`pointer-events-none object-cover transition-opacity duration-500 ${
               isHovered ? "opacity-100 scale-105" : "opacity-0 scale-105"
             }`}
           />
