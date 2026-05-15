@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef } from "react";
 import { Playfair_Display } from "next/font/google";
+import { FaRegHeart } from "react-icons/fa";
 
 import Navbar from "@/app/components/NavbarO2H";
 import Footer from "@/app/components/Footer";
@@ -159,14 +160,15 @@ export default function DetailClient({ product }: { product: Products }) {
                 {product.title}
               </span>
 
-              <div className="flex flex-row gap-3 items-center">
-                <span>Favorite</span>
-
+              <div className="flex flex-row gap-3 mt-3 items-center justify-between">
                 <span
-                  className={`text-base md:text-lg ${playfairDisplayRegular.className}`}
+                  className={`text-base md:text-xl text-yellow-400 ${playfairDisplayBold.className}`}
                 >
                   {product.price}
                 </span>
+                <button className="btn btn-sm rounded-xl hover:bg-yellow-400 hover:text-black text-yellow-400 transition-all duration-300">
+                  <FaRegHeart size={16} />
+                </button>
               </div>
             </div>
           </div>
@@ -174,6 +176,7 @@ export default function DetailClient({ product }: { product: Products }) {
       </section>
 
       <FloatingLogo />
+      <Footer />
     </>
   );
 }
