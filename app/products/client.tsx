@@ -68,16 +68,18 @@ export default function ProductsClient({
       <Navbar />
       <section className="pt-20 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 py-5">
-          <RevealOnScroll delay={150}>
+          <RevealOnScroll delay={100}>
             <div className="flex justify-center items-center mb-7">
               <SearchProducts />
             </div>
           </RevealOnScroll>
 
           <div className="flex flex-col lg:flex-row gap-6">
-            <div className="w-full lg:w-60">
-              <ProductsFilter />
-            </div>
+            <RevealOnScroll delay={200}>
+              <div className="w-full lg:w-60">
+                <ProductsFilter />
+              </div>
+            </RevealOnScroll>
 
             {/* Content */}
             <div className="flex-1">
