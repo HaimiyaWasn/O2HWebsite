@@ -160,9 +160,9 @@ export default function DetailClient({ product }: { product: Products }) {
                 {product.title}
               </span>
 
-              <div className="flex flex-row gap-3 mt-3 items-center justify-between">
+              <div className="flex flex-row gap-3 items-center justify-between">
                 <span
-                  className={`text-base md:text-xl text-yellow-400 ${playfairDisplayBold.className}`}
+                  className={`text-lg md:text-xl text-yellow-400 ${playfairDisplayBold.className}`}
                 >
                   {product.price}
                 </span>
