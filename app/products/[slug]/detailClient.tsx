@@ -63,13 +63,13 @@ export default function DetailClient({ product }: { product: Products }) {
                   <>
                     <button
                       onClick={prevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full cursor-pointer"
                     >
                       <FaChevronLeft />
                     </button>
                     <button
                       onClick={nextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full cursor-pointer"
                     >
                       <FaChevronRight />
                     </button>
@@ -82,7 +82,7 @@ export default function DetailClient({ product }: { product: Products }) {
                     <button
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
-                      className={`relative w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                      className={`relative w-20 h-20 rounded-lg overflow-hidden border-4 transition-all cursor-pointer ${
                         currentImageIndex === index
                           ? "border-yellow-400 scale-105"
                           : "border-gray-300"
