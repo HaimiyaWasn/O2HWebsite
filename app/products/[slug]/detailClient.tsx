@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { Playfair_Display } from "next/font/google";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -49,7 +49,7 @@ export default function DetailClient({ product }: { product: Products }) {
       <Navbar />
       <section className="min-h-screen py-12 pt-28 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="flex flex-col items-center">
               <div className="relative w-full aspect-square rounded-xl overflow-hidden border-4 border-yellow-400">
                 <Image
@@ -100,9 +100,9 @@ export default function DetailClient({ product }: { product: Products }) {
               )}
             </div>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col justify-start">
               <span
-                className={`text-lg md:text-2xl ${playfairDisplayBold.className}`}
+                className={`text-xl md:text-3xl mb-3 ${playfairDisplayBold.className}`}
               >
                 {product.title}
               </span>
