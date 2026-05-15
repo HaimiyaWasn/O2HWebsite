@@ -53,7 +53,7 @@ const baseProducts = [
       "/img/products/O2H_NFL_Jersey_Vol.2_Black/2.png",
     ],
     sold: "10RB+ Terjual",
-    slug: "o2h-milf-vest",
+    slug: "o2h-nfl-jersey-vol2-black",
   },
 ];
 
