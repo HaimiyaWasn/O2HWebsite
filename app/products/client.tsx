@@ -75,11 +75,9 @@ export default function ProductsClient({
           </RevealOnScroll>
 
           <div className="flex flex-col lg:flex-row gap-6">
-            <RevealOnScroll delay={200}>
-              <div className="w-full lg:w-60">
-                <ProductsFilter />
-              </div>
-            </RevealOnScroll>
+            <div className="w-full lg:w-60">
+              <ProductsFilter />
+            </div>
 
             {/* Content */}
             <div className="flex-1">
