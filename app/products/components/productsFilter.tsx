@@ -319,7 +319,7 @@ export default function ProductsFilter() {
 
       <div
         className={`fixed bottom-0 left-0 right-0 z-9999 bg-yellow-400 rounded-t-4xl transition-transform duration-300 lg:hidden ${
-          openFilter ? "translate-y-0" : "translate-y-full"
+          openFilter ? "translate-y-0 pointer-events-auto" : "translate-y-full pointer-events-none"
         }`}
       >
         <div className="flex items-center justify-between p-5 border-b border-black">

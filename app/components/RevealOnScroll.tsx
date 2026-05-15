@@ -22,8 +22,8 @@ export default function RevealOnScroll({
   y = 20,
   duration = 700,
   delay = 0,
-  threshold = 0.1,
-  rootMargin = "0px 0px -90px 0px",
+  threshold = 0,
+  rootMargin = "0px",
   once = true,
 }: RevealOnScrollProps) {
   const [isVisible, setIsVisible] = useState(false);
@@ -63,12 +63,11 @@ export default function RevealOnScroll({
     <div
       ref={sectionRef}
       className={`transform-gpu transition-all ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0"
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
       } ${classname}`}
       style={{
         transitionDuration: `${duration}ms`,
         transitionDelay: `${delay}ms`,
-        transform: isVisible ? "translateY(0px)" : `translateY(${y}px)`,
       }}
     >
       {children}
