@@ -19,7 +19,6 @@ type Products = {
   slug: string;
 };
 
-// Konfigurasi font Playfair Display untuk judul dan konten
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
@@ -47,7 +46,6 @@ export default function DetailClient({ product }: { product: Products }) {
     setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
-  // MOBILE
   const handleTouchStart = (e: React.TouchEvent) => {
     startX.current = e.touches[0].clientX;
   };
@@ -65,7 +63,6 @@ export default function DetailClient({ product }: { product: Products }) {
     }
   };
 
-  // DESKTOP
   const handleMouseDown = (e: React.MouseEvent) => {
     startX.current = e.clientX;
   };
