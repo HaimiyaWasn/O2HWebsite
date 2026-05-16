@@ -3,7 +3,7 @@
 import Link from "next/link"; 
 import Image from "next/image";
 import { useState } from "react";
-import { FaShoppingCart } from "react-icons/fa"; // Icon cart
+import { FaHeart } from "react-icons/fa"; // Icon cart
 import { IoIosNotifications } from "react-icons/io"; // Icon notifikasi
 import { Playfair_Display, Yesteryear } from "next/font/google"; // Google Fonts
 
@@ -80,7 +80,7 @@ export default function Navbar() {
         <div className="navbar-end gap-0.5">
           {/* Cart */}
           <button className="p-2 rounded-full hover:bg-yellow-300 active:bg-yellow-500 focus:outline-none transition">
-            <FaShoppingCart size={24} />
+            <FaHeart size={24} />
           </button>
 
           {/* Notifikasi */}
