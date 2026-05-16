@@ -22,8 +22,10 @@ interface Product {
   id: number;
   title: string;
   price: string;
+  label: string;
   image: string;
   sold: string;
+  slug: string;
 }
 
 async function getProducts(): Promise<Product[]> {
