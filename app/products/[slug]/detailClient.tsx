@@ -15,8 +15,9 @@ type Products = {
   id: number;
   title: string;
   price: string;
-  label: string;
+  label: string[];
   image: string | string[];
+  deskripsi: string;
   sold: string;
   slug: string;
 };
@@ -154,14 +155,14 @@ export default function DetailClient({ product }: { product: Products }) {
             </div>
 
             {/* PRODUCT INFO */}
-            <div className="flex flex-col justify-start">
+            <div className="flex flex-col">
               <span
                 className={`text-xl md:text-3xl mb-3 ${playfairDisplayBold.className}`}
               >
                 {product.title}
               </span>
 
-              <div className="flex flex-row gap-3 items-center justify-between">
+              <div className="flex flex-row gap-3 items-center justify-between mb-2">
                 <span
                   className={`text-lg md:text-xl text-yellow-400 ${playfairDisplayBold.className}`}
                 >
@@ -170,6 +171,15 @@ export default function DetailClient({ product }: { product: Products }) {
                 <button className="btn btn-sm rounded-xl hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black text-yellow-400 transition-all duration-300">
                   <FaRegHeart size={16} />
                 </button>
+              </div>
+
+              <span className="text-sm opacity-65 mb-7">
+                {product.sold}
+              </span>
+
+              <div className="bg-base-200 rounded-2xl p-5 border border-yellow-300">
+                <span className={`text-lg mb-4 ${playfairDisplayBold.className}`}>Product Description</span>
+                <p className={`whitespace-pre-line leading-8 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}>{product.deskripsi}</p>
               </div>
             </div>
           </div>

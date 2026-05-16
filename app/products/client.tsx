@@ -17,6 +17,7 @@ type Products = {
   price: string;
   label: string;
   image: string | string[];
+  deskripsi: string;
   sold: string;
   slug: string;
 };
