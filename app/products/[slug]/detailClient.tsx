@@ -257,7 +257,7 @@ export default function DetailClient({ product }: { product: Products }) {
               </h2>
               <button
                 onClick={() => setShowFullDescription(false)}
-                className="btn btn-sm btn-circle"
+                className="btn btn-sm btn-circle text-red-500 text-lg opacity-75 hover:opacity-100 active:opacity-100"
               > 
                 ✕
               </button>
