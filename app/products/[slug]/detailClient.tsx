@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Playfair_Display } from "next/font/google";
 import { FaRegHeart } from "react-icons/fa";
 
@@ -33,6 +33,8 @@ const playfairDisplayRegular = Playfair_Display({
 });
 
 export default function DetailClient({ product }: { product: Products }) {
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
   const images = Array.isArray(product.image) ? product.image : [product.image];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -82,6 +84,23 @@ export default function DetailClient({ product }: { product: Products }) {
       prevImage();
     }
   };
+
+  const shortDescription =
+    product.deskripsi.length > 275
+      ? product.deskripsi.slice(0, 275) + "..."
+      : product.deskripsi;
+
+  useEffect(() => {
+    if(showFullDescription) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return() => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showFullDescription]);
 
   return (
     <>
@@ -203,21 +222,57 @@ export default function DetailClient({ product }: { product: Products }) {
 
               <div className="bg-base-200 rounded-2xl p-5 border border-yellow-300">
                 <span
-                  className={`text-lg mb-4 ${playfairDisplayBold.className}`}
+                  className={`block text-lg mb-4 text-yellow-400 ${playfairDisplayBold.className}`}
                 >
                   Product Description
                 </span>
                 <p
-                  className={`whitespace-pre-line leading-8 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
+                  className={`whitespace-pre-line leading-7 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
                 >
-                  {product.deskripsi}
+                  {shortDescription}
                 </p>
+
+                {product.deskripsi.length > 275 && (
+                  <button
+                    onClick={() => setShowFullDescription(true)}
+                    className="mt-4 text-yellow-400 hover:text-yellow-300 transition-all duration-300 text-sm font-semibold"
+                  >
+                    Baca Selengkapnya
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {showFullDescription && (
+        <div onClick={() => setShowFullDescription(false)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+          <div onClick={(e) => e.stopPropagation()} className="bg-base-200 border border-yellow-400 rounded-2xl w-full max-w-3xl max-h-[85vh] overflow-hidden">
+            <div className="flex items-center justify-between p-5 border-b border-yellow-400">
+              <h2
+                className={`text-xl text-yellow-400 ${playfairDisplayBold.className}`}
+              >
+                Product Description
+              </h2>
+              <button
+                onClick={() => setShowFullDescription(false)}
+                className="btn btn-sm btn-circle"
+              > 
+                ✕
+              </button>
+            </div>
+
+            <div className="overflow-y-auto max-h-[70vh] p-5">
+              <p
+                className={`whitespace-pre-line leading-6 md:leading-7 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
+              >
+                {product.deskripsi}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
       <FloatingLogo />
       <Footer />
     </>
