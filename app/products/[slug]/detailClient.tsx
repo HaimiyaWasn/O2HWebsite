@@ -131,7 +131,7 @@ export default function DetailClient({ product }: { product: Products }) {
 
               {/* THUMBNAIL */}
               {images.length > 1 && (
-                <div className="flex gap-3 mt-5 flex-wrap justify-center">
+                <div className="hidden md:flex gap-3 mt-5 flex-wrap justify-center">
                   {images.map((img, index) => (
                     <button
                       key={index}
@@ -154,8 +154,34 @@ export default function DetailClient({ product }: { product: Products }) {
               )}
             </div>
 
+            {images.length > 1 && (
+              <div className="flex md:hidden items-center justify-center gap-2">
+                {images.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`transition-all duration-300 rounded-full ${
+                      currentImageIndex === index
+                        ? "w-6 h-2 bg-yellow-400"
+                        : "w-2 h-2 bg-gray-400"
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
+
             {/* PRODUCT INFO */}
             <div className="flex flex-col">
+              <div className="flex flex-wrap gap-2 mb-4">
+                {product.label.map((item, index) => (
+                  <span
+                    key={index}
+                    className={`px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-400 text-black border border-white ${playfairDisplayBold.className}`}
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
               <span
                 className={`text-xl md:text-3xl mb-3 ${playfairDisplayBold.className}`}
               >
@@ -173,13 +199,19 @@ export default function DetailClient({ product }: { product: Products }) {
                 </button>
               </div>
 
-              <span className="text-sm opacity-65 mb-7">
-                {product.sold}
-              </span>
+              <span className="text-sm opacity-65 mb-7">{product.sold}</span>
 
               <div className="bg-base-200 rounded-2xl p-5 border border-yellow-300">
-                <span className={`text-lg mb-4 ${playfairDisplayBold.className}`}>Product Description</span>
-                <p className={`whitespace-pre-line leading-8 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}>{product.deskripsi}</p>
+                <span
+                  className={`text-lg mb-4 ${playfairDisplayBold.className}`}
+                >
+                  Product Description
+                </span>
+                <p
+                  className={`whitespace-pre-line leading-8 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
+                >
+                  {product.deskripsi}
+                </p>
               </div>
             </div>
           </div>
