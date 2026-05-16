@@ -32,7 +32,7 @@ export default function LatestNewsClient({
   latestNews: News[];
 }) {
   return (
-    <section className="py-10 scroll-mt-12 md:scroll-mt-16" id="latest-news">
+    <section className="py-10" id="latest-news">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between mb-10">
           <RevealOnScroll delay={300}>

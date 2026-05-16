@@ -34,7 +34,7 @@ export default function AnimationCardClient({
   products: Product[];
 }) {
   return (
-    <section className="py-10">
+    <section className="py-10 scroll-mt-12 md:scroll-mt-16" id="card-products">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-10">

@@ -12,9 +12,9 @@ export default function Home() {
       <title>O2H Official Site</title>
       <Navbar />
       <Hero />
-      <LastestNews />
-      <CarouselAlbum />
       <HomeProductsPageCard />
+      <CarouselAlbum />
+      <LastestNews />
       <Footer variant="yellow" />
       <FloatingLogo />
     </>

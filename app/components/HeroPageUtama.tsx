@@ -28,7 +28,7 @@ export default function Hero() {
   // Scroll ke Latest News
   const handleScrollButton = () => {
     document
-      .getElementById("latest-news")
+      .getElementById("card-products")
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
