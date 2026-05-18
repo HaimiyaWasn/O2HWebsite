@@ -34,6 +34,7 @@ const playfairDisplayRegular = Playfair_Display({
 
 export default function DetailClient({ product }: { product: Products }) {
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const descriptionRef = useRef<HTMLDivElement>(null);
 
   const images = Array.isArray(product.image) ? product.image : [product.image];
 
@@ -101,6 +102,14 @@ export default function DetailClient({ product }: { product: Products }) {
       document.body.style.overflow = "auto";
     };
   }, [showFullDescription]);
+
+  const closeDescription = () => {
+    setShowFullDescription(false);
+
+    if (descriptionRef.current) {
+      descriptionRef.current.scrollTop = 0;
+    }
+  }
 
   return (
     <>
@@ -247,7 +256,7 @@ export default function DetailClient({ product }: { product: Products }) {
       </section>
 
       <div
-        onClick={() => setShowFullDescription(false)}
+        onClick={() => closeDescription()}
         className={`fixed inset-0 z-9999 flex items-center justify-center transition-all duration-300 ${
           showFullDescription
             ? "bg-black/70 opacity-100 visible"
@@ -269,13 +278,13 @@ export default function DetailClient({ product }: { product: Products }) {
               Product Description
             </h2>
             <button
-              onClick={() => setShowFullDescription(false)}
+              onClick={() => closeDescription()}
               className="btn btn-sm btn-circle text-red-500 text-lg opacity-50 hover:opacity-100 active:opacity-100"
             >
               ✕
             </button>
           </div>
-          <div className="overflow-y-auto max-h-[70vh] p-5">
+          <div ref={descriptionRef} className="overflow-y-auto max-h-[70vh] p-5">
             <p
               className={`whitespace-pre-line leading-6 md:leading-7 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
             >
