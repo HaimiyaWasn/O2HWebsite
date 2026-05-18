@@ -79,8 +79,8 @@ export default function Navbar() {
         {/* Kanan */}
         <div className="navbar-end gap-0.5">
           {/* Cart */}
-          <button className="p-2 rounded-full hover:bg-yellow-300 active:bg-yellow-500 focus:outline-none transition">
-            <FaHeart size={24} />
+          <button className="p-3 rounded-full hover:bg-yellow-300 active:bg-yellow-500 focus:outline-none transition">
+            <FaHeart size={20} />
           </button>
 
           {/* Notifikasi */}

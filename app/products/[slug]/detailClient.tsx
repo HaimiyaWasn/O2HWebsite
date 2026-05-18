@@ -91,13 +91,13 @@ export default function DetailClient({ product }: { product: Products }) {
       : product.deskripsi;
 
   useEffect(() => {
-    if(showFullDescription) {
+    if (showFullDescription) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
 
-    return() => {
+    return () => {
       document.body.style.overflow = "auto";
     };
   }, [showFullDescription]);
@@ -246,33 +246,44 @@ export default function DetailClient({ product }: { product: Products }) {
         </div>
       </section>
 
-      {showFullDescription && (
-        <div onClick={() => setShowFullDescription(false)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-          <div onClick={(e) => e.stopPropagation()} className="bg-base-200 border border-yellow-400 rounded-2xl w-full max-w-3xl max-h-[85vh] overflow-hidden">
-            <div className="flex items-center justify-between p-5 border-b border-yellow-400">
-              <h2
-                className={`text-xl text-yellow-400 ${playfairDisplayBold.className}`}
-              >
-                Product Description
-              </h2>
-              <button
-                onClick={() => setShowFullDescription(false)}
-                className="btn btn-sm btn-circle text-red-500 text-lg opacity-75 hover:opacity-100 active:opacity-100"
-              > 
-                ✕
-              </button>
-            </div>
-
-            <div className="overflow-y-auto max-h-[70vh] p-5">
-              <p
-                className={`whitespace-pre-line leading-6 md:leading-7 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
-              >
-                {product.deskripsi}
-              </p>
-            </div>
+      <div
+        onClick={() => setShowFullDescription(false)}
+        className={`fixed inset-0 z-9999 flex items-center justify-center transition-all duration-300 ${
+          showFullDescription
+            ? "bg-black/70 opacity-100 visible"
+            : "bg-black/0 opacity-0 invisible"
+        }`}
+      >
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className={`bg-base-200 border border-yellow-400 rounded-2xl w-full max-w-3xl max-h-[85vh] overflow-hidden transform transition-all duration-300 ${
+            showFullDescription
+              ? "scale-100 opacity-100 translate-y-0"
+              : "scale-95 opacity-0 translate-y-5"
+          }`}
+        >
+          <div className="flex items-center justify-between p-5 border-b border-yellow-400">
+            <h2
+              className={`text-xl text-yellow-400 ${playfairDisplayBold.className}`}
+            >
+              Product Description
+            </h2>
+            <button
+              onClick={() => setShowFullDescription(false)}
+              className="btn btn-sm btn-circle text-red-500 text-lg opacity-50 hover:opacity-100 active:opacity-100"
+            >
+              ✕
+            </button>
+          </div>
+          <div className="overflow-y-auto max-h-[70vh] p-5">
+            <p
+              className={`whitespace-pre-line leading-6 md:leading-7 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
+            >
+              {product.deskripsi}
+            </p>
           </div>
         </div>
-      )}
+      </div>
       <FloatingLogo />
       <Footer />
     </>
