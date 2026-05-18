@@ -109,7 +109,7 @@ export default function DetailClient({ product }: { product: Products }) {
     if (descriptionRef.current) {
       descriptionRef.current.scrollTop = 0;
     }
-  }
+  };
 
   return (
     <>
@@ -118,139 +118,140 @@ export default function DetailClient({ product }: { product: Products }) {
       <section className="min-h-screen py-12 pt-28 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {/* IMAGE SLIDER */}
-            <div className="flex flex-col items-center">
-              <div
-                className="relative w-full aspect-square rounded-xl overflow-hidden border-4 border-yellow-400 select-none cursor-grab active:cursor-grabbing touch-pan-y"
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-              >
+            <RevealOnScroll delay={300}>
+              <div className="flex flex-col items-center">
                 <div
-                  className="flex h-full transition-transform duration-500 ease-out"
-                  style={{
-                    width: `${images.length * 100}%`,
-                    transform: `translateX(-${
-                      currentImageIndex * (100 / images.length)
-                    }%)`,
-                  }}
+                  className="relative w-full aspect-square rounded-xl overflow-hidden border-4 border-yellow-400 select-none cursor-grab active:cursor-grabbing touch-pan-y"
+                  onTouchStart={handleTouchStart}
+                  onTouchEnd={handleTouchEnd}
+                  onMouseDown={handleMouseDown}
+                  onMouseUp={handleMouseUp}
                 >
-                  {images.map((img, index) => (
-                    <div
-                      key={index}
-                      className="relative shrink-0 aspect-square"
-                      style={{
-                        width: `${100 / images.length}%`,
-                      }}
-                    >
-                      <Image
-                        src={img}
-                        alt={`${product.title}-${index}`}
-                        fill
-                        draggable={false}
-                        className="object-contain pointer-events-none select-none"
-                        priority={index === 0}
-                      />
-                    </div>
-                  ))}
+                  <div
+                    className="flex h-full transition-transform duration-500 ease-out"
+                    style={{
+                      width: `${images.length * 100}%`,
+                      transform: `translateX(-${
+                        currentImageIndex * (100 / images.length)
+                      }%)`,
+                    }}
+                  >
+                    {images.map((img, index) => (
+                      <div
+                        key={index}
+                        className="relative shrink-0 aspect-square"
+                        style={{
+                          width: `${100 / images.length}%`,
+                        }}
+                      >
+                        <Image
+                          src={img}
+                          alt={`${product.title}-${index}`}
+                          fill
+                          draggable={false}
+                          className="object-contain pointer-events-none select-none"
+                          priority={index === 0}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
+
+                {images.length > 1 && (
+                  <div className="hidden md:flex gap-3 mt-5 flex-wrap justify-center">
+                    {images.map((img, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`relative w-20 h-20 rounded-lg overflow-hidden border-4 transition-all duration-300 cursor-pointer ${
+                          currentImageIndex === index
+                            ? "border-yellow-400 scale-105"
+                            : "border-gray-300"
+                        }`}
+                      >
+                        <Image
+                          src={img}
+                          alt={`Thumbnail ${index}`}
+                          fill
+                          className="object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
-              {/* THUMBNAIL */}
               {images.length > 1 && (
-                <div className="hidden md:flex gap-3 mt-5 flex-wrap justify-center">
-                  {images.map((img, index) => (
+                <div className="flex md:hidden items-center justify-center gap-2 mt-7">
+                  {images.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
-                      className={`relative w-20 h-20 rounded-lg overflow-hidden border-4 transition-all duration-300 cursor-pointer ${
+                      className={`transition-all duration-300 rounded-full ${
                         currentImageIndex === index
-                          ? "border-yellow-400 scale-105"
-                          : "border-gray-300"
+                          ? "w-6 h-2 bg-yellow-400"
+                          : "w-2 h-2 bg-gray-400"
                       }`}
-                    >
-                      <Image
-                        src={img}
-                        alt={`Thumbnail ${index}`}
-                        fill
-                        className="object-cover"
-                      />
-                    </button>
+                    />
                   ))}
                 </div>
               )}
-            </div>
+            </RevealOnScroll>
 
-            {images.length > 1 && (
-              <div className="flex md:hidden items-center justify-center gap-2">
-                {images.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentImageIndex(index)}
-                    className={`transition-all duration-300 rounded-full ${
-                      currentImageIndex === index
-                        ? "w-6 h-2 bg-yellow-400"
-                        : "w-2 h-2 bg-gray-400"
-                    }`}
-                  />
-                ))}
-              </div>
-            )}
+            <RevealOnScroll delay={500}>
+              <div className="flex flex-col">
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {product.label.map((item, index) => (
+                    <span
+                      key={index}
+                      className={`px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-400 text-black border border-white ${playfairDisplayBold.className}`}
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <span
+                  className={`text-xl md:text-3xl mb-3 ${playfairDisplayBold.className}`}
+                >
+                  {product.title}
+                </span>
 
-            {/* PRODUCT INFO */}
-            <div className="flex flex-col">
-              <div className="flex flex-wrap gap-2 mb-4">
-                {product.label.map((item, index) => (
+                <div className="flex flex-row gap-3 items-center justify-between mb-2">
                   <span
-                    key={index}
-                    className={`px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-400 text-black border border-white ${playfairDisplayBold.className}`}
+                    className={`text-lg md:text-xl text-yellow-400 ${playfairDisplayBold.className}`}
                   >
-                    {item}
+                    {product.price}
                   </span>
-                ))}
-              </div>
-              <span
-                className={`text-xl md:text-3xl mb-3 ${playfairDisplayBold.className}`}
-              >
-                {product.title}
-              </span>
-
-              <div className="flex flex-row gap-3 items-center justify-between mb-2">
-                <span
-                  className={`text-lg md:text-xl text-yellow-400 ${playfairDisplayBold.className}`}
-                >
-                  {product.price}
-                </span>
-                <button className="btn btn-sm rounded-xl hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black text-yellow-400 transition-all duration-300">
-                  <FaRegHeart size={16} />
-                </button>
-              </div>
-
-              <span className="text-sm opacity-65 mb-7">{product.sold}</span>
-
-              <div className="bg-base-200 rounded-2xl p-5 border border-yellow-300">
-                <span
-                  className={`block text-lg mb-4 text-yellow-400 ${playfairDisplayBold.className}`}
-                >
-                  Product Description
-                </span>
-                <p
-                  className={`whitespace-pre-line leading-7 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
-                >
-                  {shortDescription}
-                </p>
-
-                {product.deskripsi.length > 275 && (
-                  <button
-                    onClick={() => setShowFullDescription(true)}
-                    className="mt-4 text-yellow-400 hover:text-yellow-300 transition-all duration-300 text-sm font-semibold"
-                  >
-                    Baca Selengkapnya
+                  <button className="btn btn-sm rounded-xl hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black text-yellow-400 transition-all duration-300">
+                    <FaRegHeart size={16} />
                   </button>
-                )}
+                </div>
+
+                <span className="text-sm opacity-65 mb-7">{product.sold}</span>
+
+                <div className="bg-base-200 rounded-2xl p-5 border border-yellow-300">
+                  <span
+                    className={`block text-lg mb-4 text-yellow-400 ${playfairDisplayBold.className}`}
+                  >
+                    Product Description
+                  </span>
+                  <p
+                    className={`whitespace-pre-line leading-7 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
+                  >
+                    {shortDescription}
+                  </p>
+
+                  {product.deskripsi.length > 275 && (
+                    <button
+                      onClick={() => setShowFullDescription(true)}
+                      className="mt-4 text-yellow-400 hover:text-yellow-300 transition-all duration-300 text-sm font-semibold"
+                    >
+                      Baca Selengkapnya
+                    </button>
+                  )}
+                </div>
               </div>
-            </div>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
@@ -284,7 +285,10 @@ export default function DetailClient({ product }: { product: Products }) {
               ✕
             </button>
           </div>
-          <div ref={descriptionRef} className="overflow-y-auto max-h-[70vh] p-5">
+          <div
+            ref={descriptionRef}
+            className="overflow-y-auto max-h-[70vh] p-5"
+          >
             <p
               className={`whitespace-pre-line leading-6 md:leading-7 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
             >
