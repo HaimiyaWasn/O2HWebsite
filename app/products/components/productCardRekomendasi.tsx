@@ -71,7 +71,7 @@ function CardItem({ product }: { product: Products }) {
   const hasSecondImage = images.length > 1;
 
   return (
-    <Link href={`/store/${product.slug}`}>
+    <Link href={`/products/${product.slug}`}>
       <div
         className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md transition-all duration-300 p-2 cursor-pointer h-full"
         onMouseEnter={() => setIsHovered(true)}
