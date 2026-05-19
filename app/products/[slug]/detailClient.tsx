@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Playfair_Display } from "next/font/google";
 import { FaRegHeart } from "react-icons/fa";
 
@@ -10,6 +9,7 @@ import Navbar from "@/app/components/NavbarO2H";
 import Footer from "@/app/components/Footer";
 import FloatingLogo from "@/app/components/FloatingLogo";
 import RevealOnScroll from "@/app/components/RevealOnScroll";
+import ProductDescriptionModal from "../components/productDescriptionModal";
 
 type Products = {
   id: number;
@@ -34,7 +34,6 @@ const playfairDisplayRegular = Playfair_Display({
 
 export default function DetailClient({ product }: { product: Products }) {
   const [showFullDescription, setShowFullDescription] = useState(false);
-  const descriptionRef = useRef<HTMLDivElement>(null);
 
   const images = Array.isArray(product.image) ? product.image : [product.image];
 
@@ -90,26 +89,6 @@ export default function DetailClient({ product }: { product: Products }) {
     product.deskripsi.length > 275
       ? product.deskripsi.slice(0, 275) + "..."
       : product.deskripsi;
-
-  useEffect(() => {
-    if (showFullDescription) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [showFullDescription]);
-
-  const closeDescription = () => {
-    setShowFullDescription(false);
-
-    if (descriptionRef.current) {
-      descriptionRef.current.scrollTop = 0;
-    }
-  };
 
   return (
     <>
@@ -199,7 +178,7 @@ export default function DetailClient({ product }: { product: Products }) {
             </RevealOnScroll>
 
             <RevealOnScroll delay={500}>
-              <div className="flex flex-col">
+              <div className="flex flex-col mb-5 md:mb-7">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {product.label.map((item, index) => (
                     <span
@@ -261,50 +240,25 @@ export default function DetailClient({ product }: { product: Products }) {
               </div>
             </RevealOnScroll>
           </div>
+
+          <RevealOnScroll delay={300}>
+            <div className="flex flex-col w-full">
+              <span
+                className={`text-lg md:text-2xl border-b border-white/50 p-3 ${playfairDisplayBold.className}`}
+              >
+                Rekomendasi
+              </span>
+              <div></div>
+            </div>
+          </RevealOnScroll>
         </div>
       </section>
 
-      <div
-        onClick={() => closeDescription()}
-        className={`fixed inset-0 z-9999 flex items-center justify-center transition-all duration-300 ${
-          showFullDescription
-            ? "bg-black/70 opacity-100 visible"
-            : "bg-black/0 opacity-0 invisible"
-        }`}
-      >
-        <div
-          onClick={(e) => e.stopPropagation()}
-          className={`bg-base-200 border border-yellow-400 rounded-2xl w-full max-w-3xl max-h-[85vh] overflow-hidden transform transition-all duration-300 ${
-            showFullDescription
-              ? "scale-100 opacity-100 translate-y-0"
-              : "scale-95 opacity-0 translate-y-5"
-          }`}
-        >
-          <div className="flex items-center justify-between p-5 border-b border-yellow-400">
-            <h2
-              className={`text-xl text-yellow-400 ${playfairDisplayBold.className}`}
-            >
-              Product Description
-            </h2>
-            <button
-              onClick={() => closeDescription()}
-              className="btn btn-sm btn-circle text-red-500 text-lg opacity-50 hover:opacity-100 active:opacity-100"
-            >
-              ✕
-            </button>
-          </div>
-          <div
-            ref={descriptionRef}
-            className="overflow-y-auto max-h-[70vh] p-5"
-          >
-            <p
-              className={`whitespace-pre-line leading-6 md:leading-7 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
-            >
-              {product.deskripsi}
-            </p>
-          </div>
-        </div>
-      </div>
+      <ProductDescriptionModal
+        openDescription={showFullDescription}
+        closeDescription={() => setShowFullDescription(false)}
+        description={product.deskripsi}
+      />
       <FloatingLogo />
       <Footer />
     </>
