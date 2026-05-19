@@ -230,7 +230,11 @@ export default function DetailClient({ product }: { product: Products }) {
                 <span className="text-sm opacity-65 mb-7">{product.sold}</span>
 
                 <div className="mb-7">
-                  <button className="btn btn-lg w-full bg-yellow-400 text-black rounded-xl border border-white hover:bg-yellow-500 active:bg-yellow-500">Tambah ke Keranjang</button>
+                  <button
+                    className={`btn btn-lg w-full bg-yellow-400 text-black rounded-xl border border-white hover:bg-yellow-500 active:bg-yellow-500 ${playfairDisplayBold.className}`}
+                  >
+                    Tambah ke Keranjang
+                  </button>
                 </div>
 
                 <div className="bg-base-200 rounded-2xl p-5 border border-yellow-300">
