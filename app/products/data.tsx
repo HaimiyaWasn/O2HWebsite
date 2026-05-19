@@ -51,3 +51,7 @@ export async function getProductsBySlug(slug: string) {
 
   return allProducts.find((products) => products.slug === slug);
 }
+
+export async function getAllProduct() {
+  
+}

@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Playfair_Display } from "next/font/google";
 import { FaRegHeart } from "react-icons/fa";
 
@@ -11,6 +10,7 @@ import FloatingLogo from "@/app/components/FloatingLogo";
 import RevealOnScroll from "@/app/components/RevealOnScroll";
 import ProductDescriptionModal from "../components/productDescriptionModal";
 import ProductImageSlider from "../components/productImageSlider";
+import ProductCardRekomendasi from "../components/productCardRekomendasi";
 
 type Products = {
   id: number;
@@ -33,7 +33,15 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
-export default function DetailClient({ product }: { product: Products }) {
+type DetailClientProps = {
+  product: Products;
+  products: Products[];
+}
+
+export default function DetailClient({ 
+  product,
+  products,
+}: DetailClientProps) {
   const [showFullDescription, setShowFullDescription] = useState(false);
 
   const shortDescription =
@@ -122,14 +130,7 @@ export default function DetailClient({ product }: { product: Products }) {
           </div>
 
           <RevealOnScroll delay={300}>
-            <div className="flex flex-col w-full">
-              <span
-                className={`text-lg md:text-2xl border-b border-white/50 p-3 ${playfairDisplayBold.className}`}
-              >
-                Rekomendasi
-              </span>
-              <div></div>
-            </div>
+            <ProductCardRekomendasi product={products} currentProductId={product.id} />
           </RevealOnScroll>
         </div>
       </section>

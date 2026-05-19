@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getProductsBySlug } from "../data";
+import getAllProducts, { getProductsBySlug } from "../data";
 
 import DetailClient from "./detailClient";
 
@@ -10,9 +10,7 @@ type Props = {
   }>;
 };
 
-export async function generateMetadata({
-  params,
-}: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
   const products = await getProductsBySlug(slug);
@@ -29,16 +27,16 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProductsDetailPage({
-  params,
-}: Props) {
+export default async function ProductsDetailPage({ params }: Props) {
   const { slug } = await params;
 
-  const products = await getProductsBySlug(slug);
+  const product = await getProductsBySlug(slug);
 
-  if (!products) {
+  const products = await getAllProducts();
+
+  if (!product) {
     notFound();
   }
 
-  return <DetailClient product={products} />
+  return <DetailClient product={product} products={products} />;
 }
