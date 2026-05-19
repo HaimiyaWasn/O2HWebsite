@@ -7,7 +7,7 @@ import { FaHeart } from "react-icons/fa"; // Icon cart
 import { IoIosNotifications } from "react-icons/io"; // Icon notifikasi
 import { Playfair_Display, Yesteryear } from "next/font/google"; // Google Fonts
 
-import AvatarSementara from "@/public/img/backgrounds/O2H_ImagesHero_2.jpg";
+import ProfileIconDefault from "@/public/img/profileIconDefault.jpg";
 import O2HLogo from "@/public/img/logos/O2H_Logos_1.png";
 
 // Konfigurasi font
@@ -95,7 +95,7 @@ export default function Navbar() {
               className="p-2 rounded-full hover:bg-yellow-300 active:bg-yellow-500 focus:outline-none avatar transition"
             >
               <div className="w-8 rounded-full">
-                <Image alt="Avatar Player" src={AvatarSementara} />
+                <Image alt="Avatar Player" src={ProfileIconDefault} />
               </div>
             </label>
 
