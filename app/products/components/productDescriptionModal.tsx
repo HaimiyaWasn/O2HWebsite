@@ -57,7 +57,7 @@ export default function ProductDescriptionModal({
   >
     <div
       onClick={(e) => e.stopPropagation()}
-      className={`bg-base-200 border border-yellow-400 rounded-2xl w-full max-w-3xl max-h-[85vh] overflow-hidden transform transition-all duration-300 ${
+      className={`bg-base-200 border border-yellow-400 rounded-2xl mx-5 w-full max-w-4xl max-h-[85vh] overflow-hidden transform transition-all duration-300 ${
         openDescription
           ? "scale-100 opacity-100 translate-y-0"
           : "scale-95 opacity-0 translate-y-5"
