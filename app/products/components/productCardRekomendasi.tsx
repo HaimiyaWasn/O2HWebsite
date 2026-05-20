@@ -46,7 +46,7 @@ export default function ProductCardRekomendasi({
     <>
       <div className="flex flex-col w-full py-5">
         <span
-          className={`text-lg md:text-2xl border-b border-white/50 p-3 ${playfairDisplayBold.className}`}
+          className={`text-lg md:text-2xl border-b border-yellow-400 p-3 ${playfairDisplayBold.className}`}
         >
           Rekomendasi
         </span>

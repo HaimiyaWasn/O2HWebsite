@@ -102,8 +102,6 @@ export default function ProductsClient({
                     <select className="select border border-yellow-400 rounded-xl px-4 py-2 outline-none w-full md:w-60">
                       <option>Terbaru</option>
                       <option>Terlama</option>
-                      <option>Terpopuler</option>
-                      <option>Rating Tertinggi</option>
                       <option>Harga Terendah</option>
                       <option>Harga Tertinggi</option>
                       <option>Nama Produk (A-Z)</option>

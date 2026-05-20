@@ -89,8 +89,8 @@ export default function DetailClient({
                   >
                     {product.price}
                   </span>
-                  <button className="btn btn-sm rounded-xl hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black text-yellow-400 transition-all duration-300">
-                    <FaRegHeart size={16} />
+                  <button className="btn btn-sm rounded-xl bg-transparent border-none hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black text-yellow-400 transition-all duration-300">
+                    <FaRegHeart size={20} />
                   </button>
                 </div>
 
