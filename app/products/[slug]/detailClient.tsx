@@ -20,6 +20,7 @@ type Products = {
   image: string | string[];
   deskripsi: string;
   sold: string;
+  diskon: boolean;
   slug: string;
 };
 
