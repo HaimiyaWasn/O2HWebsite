@@ -8,6 +8,7 @@ import { Playfair_Display } from "next/font/google";
 type Products = {
   id: number;
   title: string;
+  createdDate: string;
   price: string;
   label: string[];
   image: string | string[];

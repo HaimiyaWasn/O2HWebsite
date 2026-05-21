@@ -11,6 +11,7 @@ import RevealOnScroll from "../RevealOnScroll";
 type Product = {
   id: number;
   title: string;
+  createdDate: string;
   price: string;
   image: string | string[];
   sold: string;

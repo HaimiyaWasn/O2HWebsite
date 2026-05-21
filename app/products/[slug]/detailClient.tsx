@@ -15,6 +15,7 @@ import ProductCardRekomendasi from "../components/productCardRekomendasi";
 type Products = {
   id: number;
   title: string;
+  createdDate: string;
   price: string;
   label: string[];
   image: string | string[];

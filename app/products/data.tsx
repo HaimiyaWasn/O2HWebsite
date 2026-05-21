@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 export type Products = {
   id: number;
   title: string;
+  createdDate: string;
   price: string;
   label: string[];
   image: string | string[];

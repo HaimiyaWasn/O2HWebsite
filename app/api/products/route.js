@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 const baseProducts = [
   {
     title: "O2H Hostle Navy Half-Zip Jacket",
+    createdDate: "2025.02.13",
     price: "Rp. 550.000",
     label: ["Sale", "Jacket"],
     image: "/img/products/O2H_Hostel_Navy_Half-Zip_Jacket/1.png",
@@ -56,6 +57,7 @@ Salah kirim produk (termasuk salah size)bisa ditanyakan terlebih dahulu via pers
   },
   {
     title: "O2H NFL Black Jersey",
+    createdDate: "2025.04.17",
     price: "Rp. 465.000",
     label: ["Sale", "Jersey"],
     image: [
@@ -117,6 +119,7 @@ Salah kirim produk (termasuk salah size)
   },
   {
     title: "O2H Hostel Embroidery Baseball Jersey Black",
+    createdDate: "2025.09.12",
     price: "Rp. 550.000",
     label: ["Sale", "Jersey"],
     image: [
@@ -178,6 +181,7 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
   },
   {
     title: "O2H MILF Bucket Hat",
+    createdDate: "2025.06.16",
     price: "Rp. 165.000",
     label: ["Sale", "Hats"],
     image: "/img/products/O2H_MILF_Bucket_Hat/1.png",
@@ -230,6 +234,7 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
   },
   {
     title: "O2H MILF Vest",
+    createdDate: "2025.05.04",
     price: "Rp. 165.000",
     label: ["Ada Stok", "Sale", "Jacket"],
     image: [
@@ -289,6 +294,7 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
   },
   {
     title: "O2H NFL Jersey Vol.2 Black",
+    createdDate: "2025.04.11",
     price: "Rp. 450.000",
     label: ["Ada Stok", "Jersey"],
     image: [
@@ -367,14 +373,15 @@ const productData = Array.from({ length: 150 }, (_, index) => {
 
   return {
     id: index + 1,
-    title: `${product.title}`,
+    title: `${product.title} ${index + 1}`,
+    createdDate: product.createdDate,
     price: product.price,
     label: product.label,
     image: product.image,
     deskripsi: product.deskripsi || "",
     sold: product.sold,
     diskon: product.diskon,
-    slug: `${product.slug}`,
+    slug: `${product.slug}-${index + 1}`,
   };
 });
 

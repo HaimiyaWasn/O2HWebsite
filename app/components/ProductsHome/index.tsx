@@ -6,6 +6,7 @@ import AnimationClient from "./animationClient";
 type Product = {
   id: number;
   title: string;
+  createdDate: string;
   price: string;
   image: string | string[];
   sold: string;
