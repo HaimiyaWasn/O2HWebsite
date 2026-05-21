@@ -6,6 +6,10 @@ import FloatingLogo from "@/app/components/FloatingLogo"; // Import komponen Flo
 
 import Image from "next/image"; // Import Image dari Next.js untuk optimasi gambar produk yang ditampilkan di hasil pencarian
 import { Playfair_Display } from "next/font/google"; // Import font Playfair Display dengan varian bold dan regular untuk digunakan pada judul hasil pencarian, nama produk, harga, dan informasi penjualan di hasil pencarian
+import RevealOnScroll from "@/app/components/RevealOnScroll";
+import ProductsFilter from "../components/productsFilter";
+import Link from "next/link";
+import Footer from "@/app/components/Footer";
 
 // Import font Playfair Display dengan varian bold dan regular untuk digunakan pada judul hasil pencarian, nama produk, harga, dan informasi penjualan di hasil pencarian
 const playfairDisplayBold = Playfair_Display({
@@ -59,63 +63,123 @@ export default async function SearchPage({
   const products = await getProducts(); // Menunggu fungsi getProducts untuk diselesaikan dan menyimpan hasilnya dalam variabel products, yang akan digunakan untuk menampilkan daftar produk di hasil pencarian berdasarkan keyword yang dimasukkan oleh pengguna
 
   // Memfilter produk berdasarkan keyword yang dimasukkan oleh pengguna dengan menggunakan metode filter untuk memeriksa apakah judul produk (p.title) mengandung keyword yang sudah diubah menjadi huruf kecil, sehingga hanya produk yang relevan dengan keyword yang akan ditampilkan di hasil pencarian
-  const filtered = products.filter((p) =>
-    p.title.toLowerCase().includes(keyword) //  Memeriksa apakah judul produk (p.title) yang sudah diubah menjadi huruf kecil mengandung keyword yang juga sudah diubah menjadi huruf kecil, sehingga pencarian tidak sensitif terhadap huruf kapital dan hanya produk yang relevan dengan keyword yang akan ditampilkan di hasil pencarian
+  const filtered = products.filter(
+    (p) => p.title.toLowerCase().includes(keyword) //  Memeriksa apakah judul produk (p.title) yang sudah diubah menjadi huruf kecil mengandung keyword yang juga sudah diubah menjadi huruf kecil, sehingga pencarian tidak sensitif terhadap huruf kapital dan hanya produk yang relevan dengan keyword yang akan ditampilkan di hasil pencarian
   );
 
   return (
-    <section>
+    <>
       <title>Search | O2H Official Site</title>
       <Navbar />
+      <section className="pt-20 scroll-mt-12 md:scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-6 py-5">
+          <div className="flex justify-center items-center mb-7">
+            <SearchProducts defaultSearch={keyword} />
+          </div>
+          <div className="flex flex-col lg:flex-row gap-0 md:gap-6">
+            <div className="w-full lg:w-60">
+              <ProductsFilter />
+            </div>
 
-      <div className="flex justify-center px-4 mt-20">
-        <div className="flex w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl">
-          <SearchProducts defaultSearch={keyword} />
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-8">
-        <h1 className={`text-lg my-7 ${playfairDisplayRegular.className}`}>
-          Hasil pencarian: "<a className={`${playfairDisplayBold.className}`}>{keyword}</a>"
-        </h1>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {filtered.length > 0 ? (
-            filtered.map((product) => (
-              <div
-                key={product.id}
-                className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full"
-              >
-                <Image
-                  src={product.image}
-                  alt={product.title}
-                  width={300}
-                  height={300}
-                  className="w-full h-40 object-cover rounded"
-                />
-                <div className="border-t border-yellow-400 my-3">
-                  <p
-                    className={`text-sm mt-2 line-clamp-2 text-black ${playfairDisplayBold.className}`}
+            <div className="flex-1">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                <RevealOnScroll delay={300}>
+                  <div
+                    className={`flex w-full md:w-fit items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md`}
                   >
-                    {product.title}
+                    <span
+                      className={`text-md md:text-2xl tracking-[0.2rem] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
+                    >
+                      Search Product
+                    </span>
+                  </div>
+                </RevealOnScroll>
+
+                <RevealOnScroll delay={300}>
+                  <p
+                    className={`text-sm md:text-base text-gray-300 ${playfairDisplayRegular.className}`}
+                  >
+                    Hasil pencarian untuk anda:
+                    <span
+                      className={`text-yellow-400 ml-2 ${playfairDisplayBold.className}`}
+                    >
+                      "{keyword}"
+                    </span>
                   </p>
-                  <p className="text-yellow-500 mt-1 font-semibold">
-                    {product.price}
-                  </p>
-                  <p className="text-xs text-gray-500">{product.sold}</p>
-                </div>
+                </RevealOnScroll>
               </div>
-            ))
-          ) : (
-            <p
-              className={`col-span-full flex justify-center items-center min-h-[60vh] text-2xl ${playfairDisplayBold.className}`}
-            >
-              Produk tidak ditemukan
-            </p>
-          )}
+
+              <RevealOnScroll delay={700}>
+                {filtered.length > 0 ? (
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    {filtered.map((product) => {
+                      const images = Array.isArray(product.image)
+                        ? product.image
+                        : [product.image];
+
+                      const hasSecondImage = images.length > 1;
+
+                      return (
+                        <Link
+                          key={product.id}
+                          href={`/products/${product.slug}`}
+                        >
+                          <div className="group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
+                            <div className="relative w-full h-40 overflow-hidden rounded">
+                              <Image
+                                src={images[0]}
+                                alt={product.title}
+                                fill
+                                className={`object-cover transition-all duration-500 ${
+                                  hasSecondImage
+                                    ? "group-hover:opacity-0 group-hover:scale-105"
+                                    : "group-hover:scale-105"
+                                }`}
+                              />
+                              {hasSecondImage && (
+                                <Image
+                                  src={images[1]}
+                                  alt={product.title}
+                                  fill
+                                  className="object-cover opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                                />
+                              )}
+                            </div>
+
+                            <div className="border-t border-yellow-400 my-3">
+                              <p
+                                className={`text-sm mt-2 line-clamp-2 text-black ${playfairDisplayBold.className}`}
+                              >
+                                {product.title}
+                              </p>
+                              <p className="text-yellow-500 mt-1 font-semibold">
+                                {product.price}
+                              </p>
+                              <p className="text-xs text-gray-500">
+                                {product.sold}
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center min-h-75 border border-dashed border-yellow-400 rounded-xl">
+                    <p
+                      className={`text-xl text-yellow-400 text-center ${playfairDisplayBold.className}`}
+                    >
+                      Produk tidak ditemukan
+                    </p>
+                  </div>
+                )}
+              </RevealOnScroll>
+            </div>
+          </div>
         </div>
-      </div>
-      <FloatingLogo />
-    </section>
+        <FloatingLogo />
+        <Footer variant="yellow" />
+      </section>
+    </>
   );
 }
