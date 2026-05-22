@@ -15,12 +15,30 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
-export default function ProductsFilter() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [productType, setProductType] = useState<string>("Semua Produk");
-  const [stockStatus, setStockStatus] = useState<string>("Semua");
-  const [priceRange, setPriceRange] = useState<string | null>(null);
+type ProductsFilterProps = {
+  selectedCategory: string | null;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string | null>>;
 
+  productType: string;
+  setProductType: React.Dispatch<React.SetStateAction<string>>;
+
+  stockStatus: string;
+  setStockStatus: React.Dispatch<React.SetStateAction<string>>;
+
+  priceRange: string | null;
+  setPriceRange: React.Dispatch<React.SetStateAction<string | null>>;
+};
+
+export default function ProductsFilter({
+  selectedCategory,
+  setSelectedCategory,
+  productType,
+  setProductType,
+  stockStatus,
+  setStockStatus,
+  priceRange,
+  setPriceRange,
+}: ProductsFilterProps) {
   const [openFilter, setOpenFilter] = useState(false);
 
   const handleCategory = (category: string) => {
@@ -319,7 +337,9 @@ export default function ProductsFilter() {
 
       <div
         className={`fixed bottom-0 left-0 right-0 z-9999 bg-yellow-400 rounded-t-4xl transition-transform duration-300 lg:hidden ${
-          openFilter ? "translate-y-0 pointer-events-auto" : "translate-y-full pointer-events-none"
+          openFilter
+            ? "translate-y-0 pointer-events-auto"
+            : "translate-y-full pointer-events-none"
         }`}
       >
         <div className="flex items-center justify-between p-5 border-b border-black">

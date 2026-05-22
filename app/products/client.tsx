@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useMemo, useState } from "react";
 import { Playfair_Display } from "next/font/google";
 
 import Navbar from "../components/NavbarO2H";
@@ -44,6 +45,11 @@ export default function ProductsClient({
   totalPages: number;
   currentPage: number;
 }) {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [productType, setProductType] = useState<string>("Semua Produk");
+  const [stockStatus, setStockStatus] = useState<string>("Semua");
+  const [priceRange, setPriceRange] = useState<string | null>(null);
+
   // Pagination
   const MAX_VISIBLE_PAGES = 5;
 
@@ -66,6 +72,46 @@ export default function ProductsClient({
     (_, i) => startPage + i
   );
 
+  const parsePrice = (price: string) => {
+    return Number(price.replace(/[^0-9.-]+/g, ""));
+  };
+
+  const filteredProducts = useMemo(() => {
+    return allProducts.filter((product) => {
+      if (selectedCategory && !product.label.includes(selectedCategory)) {
+        return false;
+      }
+
+      if (productType === "Diskon" && !product.diskon) {
+        return false;
+      }
+
+      if (stockStatus === "Ada stok" && product.sold !== "Ada stok") {
+        return false;
+      }
+
+      const price = parsePrice(product.price);
+
+      if (priceRange === "under260" && price >= 260000) {
+        return false;
+      }
+
+      if (priceRange === "260-350" && (price < 260000 || price > 350000)) {
+        return false;
+      }
+
+      if (priceRange === "350-450" && (price < 350000 || price > 450000)) {
+        return false;
+      }
+
+      if (priceRange === "450plus" && price < 450000) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [allProducts, selectedCategory, productType, stockStatus, priceRange]);
+
   return (
     <>
       <title>Products | O2H Official Site</title>
@@ -78,19 +124,33 @@ export default function ProductsClient({
 
           <div className="flex flex-col lg:flex-row gap-6">
             <div className="w-full lg:w-60">
-              <ProductsFilter />
+              <ProductsFilter
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+                productType={productType}
+                setProductType={setProductType}
+                stockStatus={stockStatus}
+                setStockStatus={setStockStatus}
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+              />
             </div>
 
             {/* Content */}
             <div className="flex-1">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                 <RevealOnScroll delay={300}>
-                  <div className="flex w-full md:w-fit mb-3 md:mb-0 items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md">
-                    <span
-                      className={`text-md md:text-2xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
-                    >
-                      All Products
-                    </span>
+                  <div className="flex flex-col  gap-4">
+                    <div className="flex w-full md:w-fit mb-3 md:mb-0 items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md">
+                      <span
+                        className={`text-md md:text-2xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
+                      >
+                        All Products
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-400">
+                      {filteredProducts.length} produk ditemukan
+                    </p>
                   </div>
                 </RevealOnScroll>
 
@@ -113,7 +173,7 @@ export default function ProductsClient({
 
               <RevealOnScroll delay={750}>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                  {allProducts.map((product) => {
+                  {filteredProducts.map((product) => {
                     const images = Array.isArray(product.image)
                       ? product.image
                       : [product.image];
