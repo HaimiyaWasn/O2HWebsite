@@ -52,6 +52,7 @@ Produk tidak sesuai deskripsi
 Salah kirim produk (termasuk salah size)bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti video unboxing dan foto saat barang diterima dari kurir. Jikalau 2 syarat ini tidak terpenuhi kita ga bisa proses apapun yang terjadi. Jadi di mohon dengan sangat untuk di simak yah!!.
     `.trim(),
     sold: "10RB+ Terjual",
+    size: ["M", "L"],
     diskon: true,
     slug: "o2h-hostle-navy-half-zip-jacket",
   },
@@ -114,6 +115,7 @@ Produk tidak sesuai deskripsi
 Salah kirim produk (termasuk salah size)
     `.trim(),
     sold: "10RB+ Terjual",
+    size: ["M", "L", "XL"],
     diskon: true,
     slug: "o2h-nfl-black-jersey",
   },
@@ -176,6 +178,7 @@ Salah kirim produk (termasuk salah size)
 Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti video unboxing dan foto saat barang diterima dari kurir. Jikalau 2 syarat ini tidak terpenuhi kita ga bisa proses apapun yang terjadi. Jadi di mohon dengan sangat untuk di simak yah!!.
     `.trim(),
     sold: "10RB+ Terjual",
+    size: ["L", "XL", "XXL"],
     diskon: false,
     slug: "o2h-hostel-embroidery-baseball-jersey-black",
   },
@@ -229,6 +232,7 @@ Salah kirim produk (termasuk salah size)
 Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti video unboxing dan foto saat barang diterima dari kurir. Jikalau 2 syarat ini tidak terpenuhi kita ga bisa proses apapun yang terjadi. Jadi di mohon dengan sangat untuk di simak yah!!.    
     `.trim(),
     sold: "10RB+ Terjual",
+    size: ["M"],
     diskon: true,
     slug: "o2h-milf-bucket-hat",
   },
@@ -289,6 +293,7 @@ Salah kirim produk (termasuk salah size)
 Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti video unboxing dan foto saat barang diterima dari kurir. Jikalau 2 syarat ini tidak terpenuhi kita ga bisa proses apapun yang terjadi. Jadi di mohon dengan sangat untuk di simak yah!!.
     `.trim(),
     sold: "10RB+ Terjual",
+    size: ["M", "L", "XL"],
     diskon: false,
     slug: "o2h-milf-vest",
   },
@@ -362,6 +367,7 @@ Jika terjadi kendala seperti:
 Silakan hubungi via chat dengan melampirkan video unboxing dan foto saat barang diterima. Tanpa kedua bukti tersebut, komplain tidak dapat diproses.
     `.trim(),
     sold: "10RB+ Terjual",
+    size: ["M", "L", "XL", "XXL"],
     diskon: true,
     slug: "o2h-nfl-jersey-vol2-black",
   },
