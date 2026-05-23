@@ -15,6 +15,7 @@ type Product = {
   price: string;
   image: string | string[];
   sold: string;
+  size: string[];
   diskon: boolean;
   slug: string;
 };

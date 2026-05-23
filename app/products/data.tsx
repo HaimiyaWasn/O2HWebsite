@@ -9,6 +9,7 @@ export type Products = {
   image: string | string[];
   deskripsi: string;
   sold: string;
+  size: string[];
   diskon: boolean;
   slug: string;
 }
