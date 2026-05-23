@@ -386,6 +386,7 @@ const productData = Array.from({ length: 150 }, (_, index) => {
     image: product.image,
     deskripsi: product.deskripsi || "",
     sold: product.sold,
+    size: product.size,
     diskon: product.diskon,
     slug: `${product.slug}-${index + 1}`,
   };

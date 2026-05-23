@@ -50,6 +50,7 @@ export default function ProductsClient({
   const [productType, setProductType] = useState<string>("Semua Produk");
   const [stockStatus, setStockStatus] = useState<string>("Semua");
   const [priceRange, setPriceRange] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   // Pagination
   const MAX_VISIBLE_PAGES = 5;
@@ -74,23 +75,27 @@ export default function ProductsClient({
   );
 
   const parsePrice = (price: string) => {
-    return Number(price.replace(/[^0-9.-]+/g, ""));
+    return Number(price.replace(/[^0-9]/g, ""));
   };
 
   const filteredProducts = useMemo(() => {
     return allProducts.filter((product) => {
+      // kategori
       if (selectedCategory && !product.label.includes(selectedCategory)) {
         return false;
       }
 
+      // diskon
       if (productType === "Diskon" && !product.diskon) {
         return false;
       }
 
-      if (stockStatus === "Ada stok" && product.sold !== "Ada stok") {
+      // stok
+      if (stockStatus === "Ada Stok" && !product.label.includes("Ada Stok")) {
         return false;
       }
 
+      // harga
       const price = parsePrice(product.price);
 
       if (priceRange === "under260" && price >= 260000) {
@@ -109,9 +114,20 @@ export default function ProductsClient({
         return false;
       }
 
+      if (selectedSize && !product.size.includes(selectedSize)) {
+        return false;
+      }
+
       return true;
     });
-  }, [allProducts, selectedCategory, productType, stockStatus, priceRange]);
+  }, [
+    allProducts,
+    selectedCategory,
+    productType,
+    stockStatus,
+    priceRange,
+    selectedSize,
+  ]);
 
   return (
     <>
@@ -134,6 +150,8 @@ export default function ProductsClient({
                 setStockStatus={setStockStatus}
                 priceRange={priceRange}
                 setPriceRange={setPriceRange}
+                selectedSize={selectedSize}
+                setSelectedSize={setSelectedSize}
               />
             </div>
 
