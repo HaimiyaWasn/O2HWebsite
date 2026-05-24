@@ -14,4 +14,3 @@ export default async function PaginationPage({ params }: Props) {
 
   return <ProductsClient allProducts={allProducts} />;
 }
-adwdaw
