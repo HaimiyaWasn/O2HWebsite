@@ -10,6 +10,7 @@ import RevealOnScroll from "@/app/components/RevealOnScroll";
 import ProductsFilter from "../components/productsFilter";
 import Link from "next/link";
 import Footer from "@/app/components/Footer";
+import SearchFilterWrapper from "./client";
 
 // Import font Playfair Display dengan varian bold dan regular untuk digunakan pada judul hasil pencarian, nama produk, harga, dan informasi penjualan di hasil pencarian
 const playfairDisplayBold = Playfair_Display({
@@ -78,7 +79,7 @@ export default async function SearchPage({
           </div>
           <div className="flex flex-col lg:flex-row gap-0 md:gap-6">
             <div className="w-full lg:w-60">
-              <ProductsFilter />
+              <SearchFilterWrapper  />
             </div>
 
             <div className="flex-1">
