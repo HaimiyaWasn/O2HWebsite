@@ -264,6 +264,17 @@ export default function ProductsFilter({
                       Rp 350,000 - Rp 450,000
                     </span>
                   </label>
+                  <label className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      className="radio radio-sm"
+                      checked={priceRange === "450plus"}
+                      onChange={() => handlePrice("450plus")}
+                    />
+                    <span className={`${playfairDisplayRegular.className}`}>
+                      Rp 450,000 +
+                    </span>
+                  </label>
                 </div>
               </div>
             </div>
