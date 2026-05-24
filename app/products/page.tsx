@@ -1,14 +1,8 @@
 import ProductsClient from "./client";
-import { getProducts } from "./data";
+import getAllProducts from "./data";
 
 export default async function ProductsPage() {
-  const { products, totalPages, currentPage } = await getProducts(1);
+  const allProducts = await getAllProducts();
 
-  return (
-    <ProductsClient
-      allProducts={products}
-      totalPages={totalPages}
-      currentPage={currentPage}
-    />
-  )
+  return <ProductsClient allProducts={allProducts} />;
 }
