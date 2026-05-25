@@ -40,15 +40,10 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedCategory = searchParams.get("category");
-
   const productType = searchParams.get("type") || "Semua Produk";
-
   const stockStatus = searchParams.get("stock") || "Semua";
-
   const priceRange = searchParams.get("priceRange");
-
   const selectedSize = searchParams.get("size")?.split(",") ?? [];
-
   const currentPage = Number(searchParams.get("page")) || 1;
 
   const PRODUCTS_PER_PAGE = 20;
@@ -59,7 +54,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
   };
 
   const updateFilter = (key: string, value: string | string[] | null) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
 
     // HANDLE ARRAY
     if (Array.isArray(value)) {

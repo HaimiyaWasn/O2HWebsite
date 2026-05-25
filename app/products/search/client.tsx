@@ -1,27 +1,50 @@
 "use client"
 
-import { useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation";
 import ProductsFilter from "../components/productsFilter"
 
 export default function SearchFilterWrapper() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [productType, setProductType] = useState<string>("Semua Produk");
-  const [stockStatus, setStockStatus] = useState<string>("Semua");
-  const [priceRange, setPriceRange] = useState<string | null>(null);
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const selectedCategory = searchParams.get("category");
+  const productType = searchParams.get("type") || "Semua Produk";
+  const stockStatus = searchParams.get("stock") || "Semua";
+  const priceRange = searchParams.get("priceRange");
+  const selectedSize = searchParams.get("size")?.split(",") ?? [];
+  const currentPage = Number(searchParams.get("page")) || 1;
+
+  const updateFilter = (key: string, value: string | string[] | null) => {
+    const params = new URLSearchParams();
+
+    if (Array.isArray(value)) {
+      if (value.length > 0) {
+        params.set(key, value.join(","));
+      } else {
+        params.delete(key);
+      }
+    }
+
+    else {
+      if (value) {
+        params.set(key, value);
+      } else {
+        params.delete(key);
+      }
+    }
+
+    params.set("page", "1");
+
+    router.push(`/products?${params.toString()}`);
+  };
 
   return (
     <ProductsFilter
-      selectedCategory={selectedCategory}
-      setSelectedCategory={setSelectedCategory}
-      productType={productType}
-      setProductType={setProductType}
-      stockStatus={stockStatus}
-      setStockStatus={setStockStatus}
-      priceRange={priceRange}
-      setPriceRange={setPriceRange}
-      selectedSize={selectedSize}
-      setSelectedSize={setSelectedSize}
+    selectedCategory={selectedCategory}
+    productType={productType}
+    stockStatus={stockStatus}
+    priceRange={priceRange}
+    selectedSize={selectedSize}
+    updateFilter={updateFilter}
     />
   )
 }
