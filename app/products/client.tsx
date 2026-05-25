@@ -190,7 +190,7 @@ export default function ProductsClient({
                 updateFilter={updateFilter}
               />
             </div>
-
+adawdawd
             <div className="flex-1">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <RevealOnScroll delay={300}>
