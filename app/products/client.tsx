@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useMemo } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useMemo, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { Playfair_Display } from "next/font/google";
 
 import Navbar from "../components/NavbarO2H";
@@ -13,7 +13,7 @@ import FloatingLogo from "../components/FloatingLogo";
 import RevealOnScroll from "../components/RevealOnScroll";
 import Footer from "../components/Footer";
 
-type Product = {
+type Products = {
   id: number;
   title: string;
   createdDate: string;
@@ -27,31 +27,29 @@ type Product = {
   slug: string;
 };
 
-type ProductsClientProps = {
-  allProducts: Product[];
-};
-
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
 });
 
-export default function ProductsClient({ allProducts }: ProductsClientProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const selectedCategory = searchParams.get("category");
+export default function ProductsClient({
+  allProducts,
+}: {
+  allProducts: Products[];
+}) {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [productType, setProductType] = useState<string>("Semua Produk");
+  const [stockStatus, setStockStatus] = useState<string>("Semua");
+  const [priceRange, setPriceRange] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
-  const productType = searchParams.get("type") || "Semua Produk";
+  const pathname = usePathname();
 
-  const stockStatus = searchParams.get("stock") || "Semua";
+  const currentPage = useMemo(() => {
+    const match = pathname.match(/\/products\/pages\/(\d+)/);
 
-  const priceRange = searchParams.get("priceRange");
-
-  const selectedSize: string[] = searchParams.get("size")
-    ? searchParams.get("size")!.split(",")
-    : [];
-
-  const currentPage = Number(searchParams.get("page")) || 1;
+    return match ? Number(match[1]) : 1;
+  }, [pathname]);
 
   const PRODUCTS_PER_PAGE = 20;
   const MAX_VISIBLE_PAGES = 5;
@@ -60,52 +58,25 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
     return Number(price.replace(/[^0-9]/g, ""));
   };
 
-  const updateFilter = (key: string, value: string | string[] | null) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    // HANDLE ARRAY
-    if (Array.isArray(value)) {
-      if (value.length > 0) {
-        params.set(key, value.join(","));
-      } else {
-        params.delete(key);
-      }
-    }
-
-    // HANDLE STRING
-    else {
-      if (value) {
-        params.set(key, value);
-      } else {
-        params.delete(key);
-      }
-    }
-
-    // reset pagination
-    params.set("page", "1");
-
-    router.push(`/products?${params.toString()}`);
-  };
-
   // FILTER
   const filteredProducts = useMemo(() => {
     return allProducts.filter((product) => {
-      // CATEGORY
+      // kategori
       if (selectedCategory && !product.label.includes(selectedCategory)) {
         return false;
       }
 
-      // DISKON
+      // diskon
       if (productType === "Diskon" && !product.diskon) {
         return false;
       }
 
-      // STOCK
+      // stok
       if (stockStatus === "Ada Stok" && !product.label.includes("Ada Stok")) {
         return false;
       }
 
-      // PRICE
+      // harga
       const price = parsePrice(product.price);
 
       if (priceRange === "under260" && price >= 260000) {
@@ -124,11 +95,8 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
         return false;
       }
 
-      // SIZE MULTIPLE
-      if (
-        selectedSize.length > 0 &&
-        !selectedSize.some((size) => product.size.includes(size))
-      ) {
+      // size
+      if (selectedSize && !product.size.includes(selectedSize)) {
         return false;
       }
 
@@ -186,11 +154,15 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
             <div className="w-full lg:w-60">
               <ProductsFilter
                 selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
                 productType={productType}
+                setProductType={setProductType}
                 stockStatus={stockStatus}
+                setStockStatus={setStockStatus}
                 priceRange={priceRange}
+                setPriceRange={setPriceRange}
                 selectedSize={selectedSize}
-                updateFilter={updateFilter}
+                setSelectedSize={setSelectedSize}
               />
             </div>
 

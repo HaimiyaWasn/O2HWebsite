@@ -17,42 +17,48 @@ const playfairDisplayRegular = Playfair_Display({
 
 type ProductsFilterProps = {
   selectedCategory: string | null;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string | null>>;
+
   productType: string;
+  setProductType: React.Dispatch<React.SetStateAction<string>>;
+
   stockStatus: string;
+  setStockStatus: React.Dispatch<React.SetStateAction<string>>;
+
   priceRange: string | null;
-  selectedSize: string[];
-  updateFilter: (key: string, value: string | string[] | null) => void;
+  setPriceRange: React.Dispatch<React.SetStateAction<string | null>>;
+
+  selectedSize: string | null;
+  setSelectedSize: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 export default function ProductsFilter({
   selectedCategory,
+  setSelectedCategory,
   productType,
+  setProductType,
   stockStatus,
+  setStockStatus,
   priceRange,
+  setPriceRange,
   selectedSize,
-  updateFilter,
+  setSelectedSize
 }: ProductsFilterProps) {
   const [openFilter, setOpenFilter] = useState(false);
 
   const handleCategory = (category: string) => {
-    updateFilter("category", selectedCategory === category ? null : category);
+    setSelectedCategory((prevCategory) =>
+      prevCategory === category ? null : category
+    );
   };
 
   const handlePrice = (range: string) => {
-    updateFilter("priceRange", priceRange === range ? null : range);
+    setPriceRange((prevRange) => (prevRange === range ? null : range));
   };
 
   const handleSize = (size: string) => {
-    let updatedSizes: string[];
-  
-    if (selectedSize.includes(size)) {
-      updatedSizes = selectedSize.filter((s) => s !== size);
-    } else {
-      updatedSizes = [...selectedSize, size];
-    }
-  
-    updateFilter("size", updatedSizes);
-  };
+    setSelectedSize((prevSize) => (prevSize === size ? null : size));
+  }
 
   return (
     <section>
@@ -160,7 +166,7 @@ export default function ProductsFilter({
                       type="radio"
                       className="radio radio-sm"
                       checked={productType === "Semua Produk"}
-                      onChange={() => updateFilter("type", "Semua Produk")}
+                      onChange={() => setProductType("Semua Produk")}
                     />
                     <span className={`${playfairDisplayRegular.className}`}>
                       Semua Produk
@@ -171,7 +177,7 @@ export default function ProductsFilter({
                       type="radio"
                       className="radio radio-sm"
                       checked={productType === "Diskon"}
-                      onChange={() => updateFilter("type", "Diskon")}
+                      onChange={() => setProductType("Diskon")}
                     />
                     <span className={`${playfairDisplayRegular.className}`}>
                       Diskon
@@ -195,7 +201,7 @@ export default function ProductsFilter({
                       type="radio"
                       className="radio radio-sm"
                       checked={stockStatus === "Semua"}
-                      onChange={() => updateFilter("stock", "Semua")}
+                      onChange={() => setStockStatus("Semua")}
                     />
                     <span className={`${playfairDisplayRegular.className}`}>
                       Semua
@@ -206,7 +212,7 @@ export default function ProductsFilter({
                       type="radio"
                       className="radio radio-sm"
                       checked={stockStatus === "Ada Stok"}
-                      onChange={() => updateFilter("stock", "Ada Stok")}
+                      onChange={() => setStockStatus("Ada Stok")}
                     />
                     <span className={`${playfairDisplayRegular.className}`}>
                       Ada stok
@@ -286,28 +292,28 @@ export default function ProductsFilter({
                     className={`btn btn-sm border border-yellow-400 checked:bg-yellow-400 checked:text-black ${playfairDisplayRegular.className}`}
                     type="checkbox"
                     aria-label="M"
-                    checked={selectedSize.includes("M")}
+                    checked={selectedSize === "M"}
                     onChange={() => handleSize("M")}
                   />
                   <input
                     className={`btn btn-sm border border-yellow-400 checked:bg-yellow-400 checked:text-black ${playfairDisplayRegular.className}`}
                     type="checkbox"
                     aria-label="L"
-                    checked={selectedSize.includes("L")}
+                    checked={selectedSize === "L"}
                     onChange={() => handleSize("L")}
                   />
                   <input
                     className={`btn btn-sm border border-yellow-400 checked:bg-yellow-400 checked:text-black ${playfairDisplayRegular.className}`}
                     type="checkbox"
                     aria-label="XL"
-                    checked={selectedSize.includes("XL")}
+                    checked={selectedSize === "XL"}
                     onChange={() => handleSize("XL")}
                   />
                   <input
                     className={`btn btn-sm border border-yellow-400 checked:bg-yellow-400 checked:text-black ${playfairDisplayRegular.className}`}
                     type="checkbox"
                     aria-label="XXL"
-                    checked={selectedSize.includes("XXL")}
+                    checked={selectedSize === "XXL"}
                     onChange={() => handleSize("XXL")}
                   />
                   <input
@@ -473,7 +479,7 @@ export default function ProductsFilter({
                     type="radio"
                     className="radio radio-sm border-black"
                     checked={productType === "Semua Produk"}
-                    onChange={() => updateFilter("type", "Semua Produk")}
+                    onChange={() => setProductType("Semua Produk")}
                   />
                   <span
                     className={`text-black ${playfairDisplayRegular.className}`}
@@ -486,7 +492,7 @@ export default function ProductsFilter({
                     type="radio"
                     className="radio radio-sm border-black"
                     checked={productType === "Diskon"}
-                    onChange={() => updateFilter("type", "Diskon")}
+                    onChange={() => setProductType("Diskon")}
                   />
                   <span
                     className={`text-black ${playfairDisplayRegular.className}`}
@@ -512,7 +518,7 @@ export default function ProductsFilter({
                     type="radio"
                     className="radio radio-sm border-black"
                     checked={stockStatus === "Semua"}
-                    onChange={() => updateFilter("stock", "Semua")}
+                    onChange={() => setStockStatus("Semua")}
                   />
                   <span
                     className={`text-black ${playfairDisplayRegular.className}`}
@@ -525,7 +531,7 @@ export default function ProductsFilter({
                     type="radio"
                     className="radio radio-sm border-black"
                     checked={stockStatus === "Ada Stok"}
-                    onChange={() => updateFilter("stock", "Ada Stok")}
+                    onChange={() => setStockStatus("Ada Stok")}
                   />
                   <span
                     className={`text-black ${playfairDisplayRegular.className}`}
@@ -616,28 +622,28 @@ export default function ProductsFilter({
                     className={`btn btn-sm border border-yellow-400 checked:bg-white checked:text-black ${playfairDisplayRegular.className}`}
                     type="checkbox"
                     aria-label="M"
-                    checked={selectedSize.includes("M")}
+                    checked={selectedSize === "M"}
                     onChange={() => handleSize("M")}
                   />
                   <input
                     className={`btn btn-sm border border-yellow-400 checked:bg-white checked:text-black ${playfairDisplayRegular.className}`}
                     type="checkbox"
                     aria-label="L"
-                    checked={selectedSize.includes("L")}
+                    checked={selectedSize === "L"}
                     onChange={() => handleSize("L")}
                   />
                   <input
                     className={`btn btn-sm border border-yellow-400 checked:bg-white checked:text-black ${playfairDisplayRegular.className}`}
                     type="checkbox"
                     aria-label="XL"
-                    checked={selectedSize.includes("XL")}
+                    checked={selectedSize === "XL"}
                     onChange={() => handleSize("XL")}
                   />
                   <input
                     className={`btn btn-sm border border-yellow-400 checked:bg-white checked:text-black ${playfairDisplayRegular.className}`}
                     type="checkbox"
                     aria-label="XXL"
-                    checked={selectedSize.includes("XXL")}
+                    checked={selectedSize === "XXL"}
                     onChange={() => handleSize("XXL")}
                   />
                   <input
