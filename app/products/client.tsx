@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useMemo, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useMemo } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Playfair_Display } from "next/font/google";
 
 import Navbar from "../components/NavbarO2H";
@@ -37,25 +37,48 @@ export default function ProductsClient({
 }: {
   allProducts: Products[];
 }) {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [productType, setProductType] = useState<string>("Semua Produk");
-  const [stockStatus, setStockStatus] = useState<string>("Semua");
-  const [priceRange, setPriceRange] = useState<string | null>(null);
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const pathname = usePathname();
+  // FILTER DARI URL
+  const selectedCategory = searchParams.get("category");
+  const productType = searchParams.get("type") || "Semua Produk";
+  const stockStatus = searchParams.get("stock") || "Semua";
+  const priceRange = searchParams.get("priceRange");
+  const selectedSize = searchParams.get("size")
+    ? searchParams.get("size")!.split(",")
+    : [];
 
-  const currentPage = useMemo(() => {
-    const match = pathname.match(/\/products\/pages\/(\d+)/);
-
-    return match ? Number(match[1]) : 1;
-  }, [pathname]);
+  const currentPage = Number(searchParams.get("page")) || 1;
 
   const PRODUCTS_PER_PAGE = 20;
   const MAX_VISIBLE_PAGES = 5;
 
   const parsePrice = (price: string) => {
     return Number(price.replace(/[^0-9]/g, ""));
+  };
+
+  // UPDATE FILTER URL
+  const updateFilter = (key: string, value: string | string[] | null) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (Array.isArray(value)) {
+      if (value.length > 0) {
+        params.set(key, value.join(","));
+      } else {
+        params.delete(key);
+      }
+    } else {
+      if (value) {
+        params.set(key, value);
+      } else {
+        params.delete(key);
+      }
+    }
+
+    params.set("page", "1");
+
+    router.push(`/products?${params.toString()}`);
   };
 
   // FILTER
@@ -96,7 +119,10 @@ export default function ProductsClient({
       }
 
       // size
-      if (selectedSize && !product.size.includes(selectedSize)) {
+      if (
+        selectedSize.length > 0 &&
+        !selectedSize.some((size) => product.size.includes(size))
+      ) {
         return false;
       }
 
@@ -111,12 +137,13 @@ export default function ProductsClient({
     selectedSize,
   ]);
 
-  // TOTAL PAGE DARI FILTER
+  // TOTAL PAGE
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
 
-  // PAGINATION PRODUK
+  // PAGINATION
   const paginatedProducts = useMemo(() => {
     const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+
     const endIndex = startIndex + PRODUCTS_PER_PAGE;
 
     return filteredProducts.slice(startIndex, endIndex);
@@ -134,7 +161,9 @@ export default function ProductsClient({
   }
 
   const visiblePages = Array.from(
-    { length: Math.max(0, endPage - startPage + 1) },
+    {
+      length: Math.max(0, endPage - startPage + 1),
+    },
     (_, i) => startPage + i
   );
 
@@ -151,18 +180,14 @@ export default function ProductsClient({
           </div>
 
           <div className="flex flex-col lg:flex-row gap-6">
-            <div className="w-full lg:w-60">
+            <div className="w-full lg:w-60 mb-18">
               <ProductsFilter
                 selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
                 productType={productType}
-                setProductType={setProductType}
                 stockStatus={stockStatus}
-                setStockStatus={setStockStatus}
                 priceRange={priceRange}
-                setPriceRange={setPriceRange}
                 selectedSize={selectedSize}
-                setSelectedSize={setSelectedSize}
+                updateFilter={updateFilter}
               />
             </div>
 
@@ -186,9 +211,10 @@ export default function ProductsClient({
 
                 <RevealOnScroll delay={500}>
                   <div className="flex items-center gap-3">
-                    <span className={`font-semibold whitespace-nowrap`}>
+                    <span className="font-semibold whitespace-nowrap">
                       Urutkan:
                     </span>
+
                     <select className="select border border-yellow-400 rounded-xl px-4 py-2 outline-none w-full md:w-60">
                       <option>Terbaru</option>
                       <option>Terlama</option>
@@ -201,7 +227,7 @@ export default function ProductsClient({
                 </RevealOnScroll>
               </div>
 
-              {/* JIKA PRODUK KOSONG */}
+              {/* EMPTY */}
               {filteredProducts.length === 0 ? (
                 <div className="flex items-center justify-center py-40">
                   <h1 className="text-2xl text-gray-400 font-semibold">
@@ -274,23 +300,27 @@ export default function ProductsClient({
                   {totalPages > 1 && (
                     <RevealOnScroll delay={300}>
                       <div className="flex items-center justify-center gap-3 my-14 flex-wrap">
-                        {visiblePages.map((page) => (
-                          <Link
-                            key={page}
-                            href={
-                              page === 1
-                                ? "/products"
-                                : `/products/pages/${page}`
-                            }
-                            className={`px-4 py-2 border transition cursor-pointer ${
-                              currentPage === page
-                                ? "bg-white text-black"
-                                : "bg-transparent text-white hover:bg-white hover:text-black"
-                            }`}
-                          >
-                            {page}
-                          </Link>
-                        ))}
+                        {visiblePages.map((page) => {
+                          const params = new URLSearchParams(
+                            searchParams.toString()
+                          );
+
+                          params.set("page", String(page));
+
+                          return (
+                            <Link
+                              key={page}
+                              href={`/products?${params.toString()}`}
+                              className={`px-4 py-2 border transition cursor-pointer ${
+                                currentPage === page
+                                  ? "bg-white text-black"
+                                  : "bg-transparent text-white hover:bg-white hover:text-black"
+                              }`}
+                            >
+                              {page}
+                            </Link>
+                          );
+                        })}
                       </div>
                     </RevealOnScroll>
                   )}
