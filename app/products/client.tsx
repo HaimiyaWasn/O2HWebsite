@@ -47,9 +47,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
 
   const priceRange = searchParams.get("priceRange");
 
-  const selectedSize: string[] = searchParams.get("size")
-    ? searchParams.get("size")!.split(",")
-    : [];
+  const selectedSize = searchParams.get("size")?.split(",") ?? [];
 
   const currentPage = Number(searchParams.get("page")) || 1;
 

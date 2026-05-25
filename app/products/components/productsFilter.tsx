@@ -313,6 +313,7 @@ export default function ProductsFilter({
                   <input
                     className={`btn btn-sm border border-yellow-400 hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black ${playfairDisplayRegular.className}`}
                     type="reset"
+                    onClick={() => updateFilter("size", [])}
                     value="Delete"
                   />
                 </form>
@@ -347,7 +348,7 @@ export default function ProductsFilter({
       />
 
       <div
-        className={`fixed bottom-0 left-0 right-0 z-[9999] bg-yellow-400 rounded-t-4xl transition-transform duration-300 lg:hidden ${
+        className={`fixed bottom-0 left-0 right-0 z-9999 bg-yellow-400 rounded-t-4xl transition-transform duration-300 lg:hidden ${
           openFilter
             ? "translate-y-0 pointer-events-auto"
             : "translate-y-full pointer-events-none"
@@ -643,6 +644,7 @@ export default function ProductsFilter({
                   <input
                     className={`btn btn-sm border border-yellow-400 hover:bg-white active:bg-white hover:text-black active:text-black ${playfairDisplayRegular.className}`}
                     type="reset"
+                    onClick={() => updateFilter("size", [])}
                     value="Delete"
                   />
                 </form>
