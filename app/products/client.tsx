@@ -167,21 +167,39 @@ export default function ProductsClient({
             </div>
 
             <div className="flex-1">
-              <RevealOnScroll delay={300}>
-                <div className="flex flex-col gap-4 mb-6">
-                  <div className="flex w-full md:w-fit items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md">
-                    <span
-                      className={`text-md md:text-2xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
-                    >
-                      All Products
-                    </span>
-                  </div>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <RevealOnScroll delay={300}>
+                  <div className="flex flex-col gap-4 mb-6">
+                    <div className="flex w-full md:w-fit items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md">
+                      <span
+                        className={`text-md md:text-2xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
+                      >
+                        All Products
+                      </span>
+                    </div>
 
-                  <p className="text-sm text-gray-400">
-                    {filteredProducts.length} produk ditemukan
-                  </p>
-                </div>
-              </RevealOnScroll>
+                    <p className="text-sm text-gray-400">
+                      {filteredProducts.length} produk ditemukan
+                    </p>
+                  </div>
+                </RevealOnScroll>
+
+                <RevealOnScroll delay={500}>
+                  <div className="flex items-center gap-3">
+                    <span className={`font-semibold whitespace-nowrap`}>
+                      Urutkan:
+                    </span>
+                    <select className="select border border-yellow-400 rounded-xl px-4 py-2 outline-none w-full md:w-60">
+                      <option>Terbaru</option>
+                      <option>Terlama</option>
+                      <option>Harga Terendah</option>
+                      <option>Harga Tertinggi</option>
+                      <option>Nama Produk (A-Z)</option>
+                      <option>Nama Produk (Z-A)</option>
+                    </select>
+                  </div>
+                </RevealOnScroll>
+              </div>
 
               {/* JIKA PRODUK KOSONG */}
               {filteredProducts.length === 0 ? (
