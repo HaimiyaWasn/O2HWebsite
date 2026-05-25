@@ -36,23 +36,14 @@ const playfairDisplayBold = Playfair_Display({
   subsets: ["latin"],
 });
 
-export default function ProductsClient({
-  allProducts,
-}: ProductsClientProps) {
+export default function ProductsClient({ allProducts }: ProductsClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  // =========================
-  // FILTER DARI URL
-  // =========================
-
   const selectedCategory = searchParams.get("category");
 
-  const productType =
-    searchParams.get("type") || "Semua Produk";
+  const productType = searchParams.get("type") || "Semua Produk";
 
-  const stockStatus =
-    searchParams.get("stock") || "Semua";
+  const stockStatus = searchParams.get("stock") || "Semua";
 
   const priceRange = searchParams.get("priceRange");
 
@@ -60,31 +51,17 @@ export default function ProductsClient({
     ? searchParams.get("size")!.split(",")
     : [];
 
-  const currentPage =
-    Number(searchParams.get("page")) || 1;
+  const currentPage = Number(searchParams.get("page")) || 1;
 
   const PRODUCTS_PER_PAGE = 20;
   const MAX_VISIBLE_PAGES = 5;
 
-  // =========================
-  // PARSE PRICE
-  // =========================
-
-  const parsePrice = (price: string): number => {
+  const parsePrice = (price: string) => {
     return Number(price.replace(/[^0-9]/g, ""));
   };
 
-  // =========================
-  // UPDATE FILTER
-  // =========================
-
-  const updateFilter = (
-    key: string,
-    value: string | string[] | null
-  ) => {
-    const params = new URLSearchParams(
-      searchParams.toString()
-    );
+  const updateFilter = (key: string, value: string | string[] | null) => {
+    const params = new URLSearchParams(searchParams.toString());
 
     // HANDLE ARRAY
     if (Array.isArray(value)) {
@@ -110,73 +87,47 @@ export default function ProductsClient({
     router.push(`/products?${params.toString()}`);
   };
 
-  // =========================
-  // FILTER PRODUCTS
-  // =========================
-
+  // FILTER
   const filteredProducts = useMemo(() => {
     return allProducts.filter((product) => {
       // CATEGORY
-      if (
-        selectedCategory &&
-        !product.label.includes(selectedCategory)
-      ) {
+      if (selectedCategory && !product.label.includes(selectedCategory)) {
         return false;
       }
 
       // DISKON
-      if (
-        productType === "Diskon" &&
-        !product.diskon
-      ) {
+      if (productType === "Diskon" && !product.diskon) {
         return false;
       }
 
       // STOCK
-      if (
-        stockStatus === "Ada Stok" &&
-        !product.label.includes("Ada Stok")
-      ) {
+      if (stockStatus === "Ada Stok" && !product.label.includes("Ada Stok")) {
         return false;
       }
 
       // PRICE
       const price = parsePrice(product.price);
 
-      if (
-        priceRange === "under260" &&
-        price >= 260000
-      ) {
+      if (priceRange === "under260" && price >= 260000) {
         return false;
       }
 
-      if (
-        priceRange === "260-350" &&
-        (price < 260000 || price > 350000)
-      ) {
+      if (priceRange === "260-350" && (price < 260000 || price > 350000)) {
         return false;
       }
 
-      if (
-        priceRange === "350-450" &&
-        (price < 350000 || price > 450000)
-      ) {
+      if (priceRange === "350-450" && (price < 350000 || price > 450000)) {
         return false;
       }
 
-      if (
-        priceRange === "450plus" &&
-        price < 450000
-      ) {
+      if (priceRange === "450plus" && price < 450000) {
         return false;
       }
 
       // SIZE MULTIPLE
       if (
         selectedSize.length > 0 &&
-        !selectedSize.some((size) =>
-          product.size.includes(size)
-        )
+        !selectedSize.some((size) => product.size.includes(size))
       ) {
         return false;
       }
@@ -192,60 +143,30 @@ export default function ProductsClient({
     selectedSize,
   ]);
 
-  // =========================
-  // TOTAL PAGE
-  // =========================
+  // TOTAL PAGE DARI FILTER
+  const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
 
-  const totalPages = Math.ceil(
-    filteredProducts.length / PRODUCTS_PER_PAGE
-  );
-
-  // =========================
-  // PAGINATION
-  // =========================
-
+  // PAGINATION PRODUK
   const paginatedProducts = useMemo(() => {
-    const startIndex =
-      (currentPage - 1) * PRODUCTS_PER_PAGE;
+    const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+    const endIndex = startIndex + PRODUCTS_PER_PAGE;
 
-    const endIndex =
-      startIndex + PRODUCTS_PER_PAGE;
-
-    return filteredProducts.slice(
-      startIndex,
-      endIndex
-    );
+    return filteredProducts.slice(startIndex, endIndex);
   }, [filteredProducts, currentPage]);
 
-  // =========================
   // PAGE NUMBER
-  // =========================
+  let startPage = Math.max(1, currentPage - Math.floor(MAX_VISIBLE_PAGES / 2));
 
-  let startPage = Math.max(
-    1,
-    currentPage -
-      Math.floor(MAX_VISIBLE_PAGES / 2)
-  );
-
-  let endPage =
-    startPage + MAX_VISIBLE_PAGES - 1;
+  let endPage = startPage + MAX_VISIBLE_PAGES - 1;
 
   if (endPage > totalPages) {
     endPage = totalPages;
 
-    startPage = Math.max(
-      1,
-      endPage - MAX_VISIBLE_PAGES + 1
-    );
+    startPage = Math.max(1, endPage - MAX_VISIBLE_PAGES + 1);
   }
 
   const visiblePages = Array.from(
-    {
-      length: Math.max(
-        0,
-        endPage - startPage + 1
-      ),
-    },
+    { length: Math.max(0, endPage - startPage + 1) },
     (_, i) => startPage + i
   );
 
@@ -257,14 +178,12 @@ export default function ProductsClient({
 
       <section className="pt-20 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 py-5">
-          {/* SEARCH */}
           <div className="flex justify-center items-center mb-7">
             <SearchProducts />
           </div>
 
           <div className="flex flex-col lg:flex-row gap-6">
-            {/* FILTER */}
-            <div className="w-full lg:w-60 mb-18">
+            <div className="w-full lg:w-60">
               <ProductsFilter
                 selectedCategory={selectedCategory}
                 productType={productType}
@@ -275,25 +194,42 @@ export default function ProductsClient({
               />
             </div>
 
-            {/* PRODUCTS */}
             <div className="flex-1">
-              <RevealOnScroll delay={300}>
-                <div className="flex flex-col gap-4 mb-6">
-                  <div className="flex w-full md:w-fit items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md">
-                    <span
-                      className={`text-md md:text-2xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
-                    >
-                      All Products
-                    </span>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <RevealOnScroll delay={300}>
+                  <div className="flex flex-col gap-4 mb-6">
+                    <div className="flex w-full md:w-fit items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md">
+                      <span
+                        className={`text-md md:text-2xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
+                      >
+                        All Products
+                      </span>
+                    </div>
+
+                    <p className="text-sm text-gray-400">
+                      {filteredProducts.length} produk ditemukan
+                    </p>
                   </div>
+                </RevealOnScroll>
 
-                  <p className="text-sm text-gray-400">
-                    {filteredProducts.length} produk ditemukan
-                  </p>
-                </div>
-              </RevealOnScroll>
+                <RevealOnScroll delay={500}>
+                  <div className="flex items-center gap-3">
+                    <span className={`font-semibold whitespace-nowrap`}>
+                      Urutkan:
+                    </span>
+                    <select className="select border border-yellow-400 rounded-xl px-4 py-2 outline-none w-full md:w-60">
+                      <option>Terbaru</option>
+                      <option>Terlama</option>
+                      <option>Harga Terendah</option>
+                      <option>Harga Tertinggi</option>
+                      <option>Nama Produk (A-Z)</option>
+                      <option>Nama Produk (Z-A)</option>
+                    </select>
+                  </div>
+                </RevealOnScroll>
+              </div>
 
-              {/* EMPTY */}
+              {/* JIKA PRODUK KOSONG */}
               {filteredProducts.length === 0 ? (
                 <div className="flex items-center justify-center py-40">
                   <h1 className="text-2xl text-gray-400 font-semibold">
@@ -306,14 +242,11 @@ export default function ProductsClient({
                   <RevealOnScroll delay={750}>
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                       {paginatedProducts.map((product) => {
-                        const images = Array.isArray(
-                          product.image
-                        )
+                        const images = Array.isArray(product.image)
                           ? product.image
                           : [product.image];
 
-                        const hasSecondImage =
-                          images.length > 1;
+                        const hasSecondImage = images.length > 1;
 
                         return (
                           <Link
@@ -369,31 +302,23 @@ export default function ProductsClient({
                   {totalPages > 1 && (
                     <RevealOnScroll delay={300}>
                       <div className="flex items-center justify-center gap-3 my-14 flex-wrap">
-                        {visiblePages.map((page) => {
-                          const params =
-                            new URLSearchParams(
-                              searchParams.toString()
-                            );
-
-                          params.set(
-                            "page",
-                            String(page)
-                          );
-
-                          return (
-                            <Link
-                              key={page}
-                              href={`/products?${params.toString()}`}
-                              className={`px-4 py-2 border transition cursor-pointer ${
-                                currentPage === page
-                                  ? "bg-white text-black"
-                                  : "bg-transparent text-white hover:bg-white hover:text-black"
-                              }`}
-                            >
-                              {page}
-                            </Link>
-                          );
-                        })}
+                        {visiblePages.map((page) => (
+                          <Link
+                            key={page}
+                            href={
+                              page === 1
+                                ? "/products"
+                                : `/products/pages/${page}`
+                            }
+                            className={`px-4 py-2 border transition cursor-pointer ${
+                              currentPage === page
+                                ? "bg-white text-black"
+                                : "bg-transparent text-white hover:bg-white hover:text-black"
+                            }`}
+                          >
+                            {page}
+                          </Link>
+                        ))}
                       </div>
                     </RevealOnScroll>
                   )}
