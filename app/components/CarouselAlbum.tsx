@@ -43,7 +43,7 @@ export default function CarouselAlbum() {
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={500}>
+          {/* <RevealOnScroll delay={500}>
             <Link
               href="/photobooks"
               className={`flex items-center gap-2 text-sm md:text-base opacity-50 hover:opacity-100 ${playfairDisplayRegular.className}`}
@@ -51,7 +51,7 @@ export default function CarouselAlbum() {
               View More
               <FaArrowAltCircleRight size={20} />
             </Link>
-          </RevealOnScroll>
+          </RevealOnScroll> */}
         </div>
 
         <RevealOnScroll delay={750}>

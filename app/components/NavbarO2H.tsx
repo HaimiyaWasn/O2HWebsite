@@ -155,8 +155,8 @@ export default function Navbar() {
             ["Home", "/"],
             ["News", "/news"],
             ["Products", "/products"],
-            ["Members", "/members"],
-            ["Photobooks", "/photobooks"],
+            // ["Members", "/members"],
+            // ["Photobooks", "/photobooks"],
           ].map(([label, href]) => (
             <li key={label}>
               <Link
