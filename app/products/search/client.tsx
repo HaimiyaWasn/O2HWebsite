@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import ProductsFilter from "../components/productsFilter"
+import ProductsFilter from "../components/productsFilter";
 
 export default function SearchFilterWrapper() {
   const router = useRouter();
@@ -11,7 +11,6 @@ export default function SearchFilterWrapper() {
   const stockStatus = searchParams.get("stock") || "Semua";
   const priceRange = searchParams.get("priceRange");
   const selectedSize = searchParams.get("size")?.split(",") ?? [];
-  const currentPage = Number(searchParams.get("page")) || 1;
 
   const updateFilter = (key: string, value: string | string[] | null) => {
     const params = new URLSearchParams();
@@ -22,9 +21,7 @@ export default function SearchFilterWrapper() {
       } else {
         params.delete(key);
       }
-    }
-
-    else {
+    } else {
       if (value) {
         params.set(key, value);
       } else {
@@ -39,12 +36,12 @@ export default function SearchFilterWrapper() {
 
   return (
     <ProductsFilter
-    selectedCategory={selectedCategory}
-    productType={productType}
-    stockStatus={stockStatus}
-    priceRange={priceRange}
-    selectedSize={selectedSize}
-    updateFilter={updateFilter}
+      selectedCategory={selectedCategory}
+      productType={productType}
+      stockStatus={stockStatus}
+      priceRange={priceRange}
+      selectedSize={selectedSize}
+      updateFilter={updateFilter}
     />
-  )
+  );
 }
