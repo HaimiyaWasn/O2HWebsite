@@ -54,7 +54,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
   };
 
   const updateFilter = (key: string, value: string | string[] | null) => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
 
     // HANDLE ARRAY
     if (Array.isArray(value)) {
@@ -295,23 +295,31 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                   {totalPages > 1 && (
                     <RevealOnScroll delay={300}>
                       <div className="flex items-center justify-center gap-3 my-14 flex-wrap">
-                        {visiblePages.map((page) => (
-                          <Link
-                            key={page}
-                            href={
-                              page === 1
-                                ? "/products"
-                                : `/products/pages/${page}`
-                            }
-                            className={`px-4 py-2 border transition cursor-pointer ${
-                              currentPage === page
-                                ? "bg-white text-black"
-                                : "bg-transparent text-white hover:bg-white hover:text-black"
-                            }`}
-                          >
-                            {page}
-                          </Link>
-                        ))}
+                        {visiblePages.map((page) => {
+                          const params = new URLSearchParams(
+                            searchParams.toString()
+                          );
+
+                          if (page === 1) {
+                            params.delete("page");
+                          } else {
+                            params.set("page", String(page));
+                          }
+
+                          return (
+                            <Link
+                              key={page}
+                              href={`/products?${params.toString()}`}
+                              className={`px-4 py-2 border transition cursor-pointer ${
+                                currentPage === page
+                                  ? "bg-white text-black"
+                                  : "bg-transparent text-white hover:bg-white hover:text-black"
+                              }`}
+                            >
+                              {page}
+                            </Link>
+                          );
+                        })}
                       </div>
                     </RevealOnScroll>
                   )}
