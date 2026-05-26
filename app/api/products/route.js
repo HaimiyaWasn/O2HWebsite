@@ -1,4 +1,3 @@
-import label from "daisyui/components/label";
 import { NextResponse } from "next/server";
 
 const baseProducts = [
