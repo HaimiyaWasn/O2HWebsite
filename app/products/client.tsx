@@ -171,11 +171,11 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
 
       <section className="pt-20 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 py-5">
-          <div className="flex justify-center items-center mb-7">
+          <div className="flex justify-center items-center mb-4">
             <SearchProducts />
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-6">
+          <div className="flex flex-col lg:flex-row gap-0 md:gap-6">
             <div className="w-full lg:w-60">
               <ProductsFilter
                 selectedCategory={selectedCategory}
@@ -188,9 +188,9 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
             </div>
 
             <div className="flex-1">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-4">
                 <RevealOnScroll delay={300}>
-                  <div className="flex flex-col gap-4 mb-6">
+                  <div className="flex flex-col gap-4">
                     <div className="flex w-full md:w-fit items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md">
                       <span
                         className={`text-md md:text-2xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
@@ -206,7 +206,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                 </RevealOnScroll>
 
                 <RevealOnScroll delay={500}>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 mb-3">
                     <span className={`font-semibold whitespace-nowrap`}>
                       Urutkan:
                     </span>
