@@ -200,7 +200,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                     </div>
 
                     <p className="text-sm text-gray-400">
-                      {filteredProducts.length} produk ditemukandadwawdawda
+                      {filteredProducts.length} produk ditemukan
                     </p>
                   </div>
                 </RevealOnScroll>
