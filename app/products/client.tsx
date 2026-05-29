@@ -16,14 +16,13 @@ import Footer from "../components/Footer";
 type Product = {
   id: number;
   title: string;
-  createdDate: string;
-  price: string;
+  price: number;
   label: string[];
-  image: string | string[];
-  deskripsi: string;
+  image: string[];
   sold: string;
   size: string[];
-  diskon: boolean;
+  discount: number;
+  createdAt: string;
   slug: string;
 };
 
@@ -48,10 +47,6 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
 
   const PRODUCTS_PER_PAGE = 20;
   const MAX_VISIBLE_PAGES = 5;
-
-  const parsePrice = (price: string) => {
-    return Number(price.replace(/[^0-9]/g, ""));
-  };
 
   const updateFilter = (key: string, value: string | string[] | null) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -89,35 +84,41 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
       }
 
       // DISKON
-      if (productType === "Diskon" && !product.diskon) {
+      if (productType === "Diskon" && product.discount <= 0) {
         return false;
       }
 
-      // STOCK
       if (stockStatus === "Ada Stok" && !product.label.includes("Ada Stok")) {
         return false;
       }
 
-      // PRICE
-      const price = parsePrice(product.price);
+      const finalPrice =
+        product.discount > 0
+          ? product.price - (product.price * product.discount) / 100
+          : product.price;
 
-      if (priceRange === "under260" && price >= 260000) {
+      if (priceRange === "under260" && finalPrice >= 260000) {
         return false;
       }
 
-      if (priceRange === "260-350" && (price < 260000 || price > 350000)) {
+      if (
+        priceRange === "260-350" &&
+        (finalPrice < 260000 || finalPrice > 350000)
+      ) {
         return false;
       }
 
-      if (priceRange === "350-450" && (price < 350000 || price > 450000)) {
+      if (
+        priceRange === "350-450" &&
+        (finalPrice < 350000 || finalPrice > 450000)
+      ) {
         return false;
       }
 
-      if (priceRange === "450plus" && price < 450000) {
+      if (priceRange === "450plus" && finalPrice < 450000) {
         return false;
       }
 
-      // SIZE MULTIPLE
       if (
         selectedSize.length > 0 &&
         !selectedSize.some((size) => product.size.includes(size))
@@ -136,10 +137,8 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
     selectedSize,
   ]);
 
-  // TOTAL PAGE DARI FILTER
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
 
-  // PAGINATION PRODUK
   const paginatedProducts = useMemo(() => {
     const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
     const endIndex = startIndex + PRODUCTS_PER_PAGE;
@@ -147,7 +146,6 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
     return filteredProducts.slice(startIndex, endIndex);
   }, [filteredProducts, currentPage]);
 
-  // PAGE NUMBER
   let startPage = Math.max(1, currentPage - Math.floor(MAX_VISIBLE_PAGES / 2));
 
   let endPage = startPage + MAX_VISIBLE_PAGES - 1;
@@ -169,8 +167,8 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
 
       <Navbar />
 
-      <section className="pt-20 scroll-mt-12 md:scroll-mt-20">
-        <div className="max-w-7xl mx-auto px-6 py-5">
+      <section className="pt-7 scroll-mt-12 md:scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="flex justify-center items-center mb-4">
             <SearchProducts />
           </div>
@@ -241,6 +239,16 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
 
                         const hasSecondImage = images.length > 1;
 
+                        const finalPrice =
+                          product.discount > 0
+                            ? product.price -
+                              (product.price * product.discount) / 100
+                            : product.price;
+
+                        const isNew =
+                          new Date(product.createdAt).getTime() >
+                          Date.now() - 30 * 24 * 60 * 60 * 1000;
+
                         return (
                           <Link
                             key={product.id}
@@ -248,6 +256,17 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                           >
                             <div className="group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
                               <div className="relative w-full h-40 overflow-hidden rounded">
+                                {isNew && (
+                                  <div className="absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-2 py-1 rounded">
+                                    NEW
+                                  </div>
+                                )}
+
+                                {product.discount > 0 && (
+                                  <div className="absolute top-1 right-1 z-20 bg-red-500 text-white text-[10px] px-2 py-1 rounded">
+                                    -{product.discount}%
+                                  </div>
+                                )}
                                 <Image
                                   src={images[0]}
                                   alt={product.title}
@@ -276,9 +295,34 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                                   {product.title}
                                 </p>
 
-                                <p className="text-yellow-500 mt-1 font-semibold">
-                                  {product.price}
-                                </p>
+                                <div className="mt-1 flex flex-col">
+                                  {product.discount > 0 ? (
+                                    <>
+                                      <p className="text-xs text-gray-400 line-through">
+                                        {new Intl.NumberFormat("id-ID", {
+                                          style: "currency",
+                                          currency: "IDR",
+                                          maximumFractionDigits: 0,
+                                        }).format(product.price)}
+                                      </p>
+                                      <p className="text-yellow-500 font-semibold">
+                                        {new Intl.NumberFormat("id-ID", {
+                                          style: "currency",
+                                          currency: "IDR",
+                                          maximumFractionDigits: 0,
+                                        }).format(finalPrice)}
+                                      </p>
+                                    </>
+                                  ) : (
+                                    <p className="text-yellow-500 font-semibold">
+                                      {new Intl.NumberFormat("id-ID", {
+                                        style: "currency",
+                                        currency: "IDR",
+                                        maximumFractionDigits: 0,
+                                      }).format(product.price)}
+                                    </p>
+                                  )}
+                                </div>
 
                                 <p className="text-xs text-gray-500">
                                   {product.sold}

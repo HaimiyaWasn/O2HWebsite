@@ -3,14 +3,13 @@ import { headers } from "next/headers";
 export type Products = {
   id: number;
   title: string;
-  createdDate: string;
-  price: string;
-  label: string[];
-  image: string | string[];
-  deskripsi: string;
+  price: number;
+  label: string[],
+  image: string[];
   sold: string;
   size: string[];
-  diskon: boolean;
+  discount: number;
+  createdAt: string;
   slug: string;
 }
 
