@@ -253,17 +253,18 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                           <Link
                             key={product.id}
                             href={`/products/${product.slug}`}
+                            className="h-full"
                           >
-                            <div className="group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
-                              <div className="relative h-40 overflow-hidden rounded">
+                            <div className="group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 overflow-hidden hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer">
+                              <div className="relative aspect-square overflow-hidden rounded">
                                 {isNew && (
-                                  <div className="absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-2 py-1 rounded">
+                                  <div className="absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-1.5 py-0.5 rounded">
                                     NEW
                                   </div>
                                 )}
 
                                 {product.discount > 0 && (
-                                  <div className="absolute top-1 right-1 z-20 bg-red-500 text-white text-[10px] px-2 py-1 rounded">
+                                  <div className="absolute top-1 right-1 z-20 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded">
                                     -{product.discount}%
                                   </div>
                                 )}
@@ -290,7 +291,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
 
                               <div className="border-t border-yellow-400 my-3 flex flex-col flex-1">
                                 <p
-                                  className={`text-sm mt-2 line-clamp-2 min-h-14 text-black ${playfairDisplayBold.className}`}
+                                  className={`text-sm mt-2 line-clamp-2 leading-snug min-h-14 text-black ${playfairDisplayBold.className}`}
                                 >
                                   {product.title}
                                 </p>
