@@ -4,14 +4,15 @@ export type Products = {
   id: number;
   title: string;
   price: number;
-  label: string[],
+  label: string[];
   image: string[];
+  deskripsi: string;
   sold: string;
   size: string[];
   discount: number;
   createdAt: string;
   slug: string;
-}
+};
 
 export default async function getAllProducts() {
   const host = (await headers()).get("host");

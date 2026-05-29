@@ -15,14 +15,14 @@ import ProductCardRekomendasi from "../components/productCardRekomendasi";
 type Products = {
   id: number;
   title: string;
-  createdDate: string;
-  price: string;
+  price: number;
   label: string[];
-  image: string | string[];
+  image: string[];
   deskripsi: string;
   sold: string;
   size: string[];
-  diskon: boolean;
+  discount: number;
+  createdAt: string;
   slug: string;
 };
 
