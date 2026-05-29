@@ -2,38 +2,32 @@ import { headers } from "next/headers";
 
 import AnimationClient from "./animationClient";
 
-// Tipe data produk
 type Product = {
   id: number;
   title: string;
-  createdDate: string;
-  price: string;
-  image: string | string[];
+  price: number;
+  image: string[];
   sold: string;
   size: string[];
-  diskon: boolean;
+  discount: number;
+  createdAt: string;
   slug: string;
 };
 
-// Mengambil dan menampilkan produk store
 export default async function HomeProductsPageCard() {
   const headersList = await headers();
   const host = headersList.get("host");
 
-  // Fetch data produk
   const res = await fetch(`http://${host}/api/products`, {
     cache: "no-store",
   });
 
-  // Error jika fetch gagal
   if (!res.ok) {
     throw new Error("Failed to fetch products");
   }
 
-  // Ambil data JSON
   const productsData: Product[] = await res.json();
 
-  // Fisher-Yates Shuffle (lebih aman)
   const shuffledProducts = [...productsData];
 
   for (let i = shuffledProducts.length - 1; i > 0; i--) {
@@ -45,8 +39,8 @@ export default async function HomeProductsPageCard() {
     ];
   }
 
-  // Ambil 18 produk
-  const limitedRandomProducts = shuffledProducts.slice(0, 18);
+  // Maksimal 18 produk
+  const randomProducts = shuffledProducts.slice(0, 18);
 
-  return <AnimationClient products={limitedRandomProducts} />;
+  return <AnimationClient products={randomProducts} />;
 }

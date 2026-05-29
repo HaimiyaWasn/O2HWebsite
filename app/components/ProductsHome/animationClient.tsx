@@ -7,16 +7,15 @@ import { Playfair_Display } from "next/font/google";
 import HomeProductCard from "./cardClient";
 import RevealOnScroll from "../RevealOnScroll";
 
-// Tipe data produk
 type Product = {
   id: number;
   title: string;
-  createdDate: string;
-  price: string;
-  image: string | string[];
+  price: number;
+  image: string[];
   sold: string;
   size: string[];
-  diskon: boolean;
+  discount: number;
+  createdAt: string;
   slug: string;
 };
 

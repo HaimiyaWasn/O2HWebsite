@@ -3,10 +3,11 @@ import { NextResponse } from "next/server";
 const baseProducts = [
   {
     title: "O2H Hostle Navy Half-Zip Jacket",
-    createdDate: "2025.02.13",
-    price: "Rp. 550.000",
+    price: 550000,
     label: ["Sale", "Jacket"],
-    image: "/img/products/O2H_Hostel_Navy_Half-Zip_Jacket/1.png",
+    image: [
+      "/img/products/O2H_Hostel_Navy_Half-Zip_Jacket/1.png"
+    ],
     deskripsi: `
 Long sleeve
 
@@ -52,13 +53,13 @@ Salah kirim produk (termasuk salah size)bisa ditanyakan terlebih dahulu via pers
     `.trim(),
     sold: "10RB+ Terjual",
     size: ["M", "L"],
-    diskon: true,
+    discount: 30,
+    createdAt: "2025-02-13",
     slug: "o2h-hostle-navy-half-zip-jacket",
   },
   {
     title: "O2H NFL Black Jersey",
-    createdDate: "2025.04.17",
-    price: "Rp. 465.000",
+    price: 465000,
     label: ["Sale", "Jersey"],
     image: [
       "/img/products/O2H_NFL_Black_Jersey/1.png",
@@ -115,13 +116,13 @@ Salah kirim produk (termasuk salah size)
     `.trim(),
     sold: "8RB+ Terjual",
     size: ["M", "L", "XL"],
-    diskon: true,
+    discount: 40,
+    createdAt: "2025-04-17",
     slug: "o2h-nfl-black-jersey",
   },
   {
     title: "O2H Hostel Embroidery Baseball Jersey Black",
-    createdDate: "2025.09.12",
-    price: "Rp. 550.000",
+    price: 550000,
     label: ["Sale", "Jersey"],
     image: [
       "/img/products/O2H_Hostel_Embroidery_Baseball_Jersey_Black/1.png",
@@ -178,15 +179,17 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
     `.trim(),
     sold: "4RB+ Terjual",
     size: ["L", "XL", "XXL"],
-    diskon: false,
+    discount: 35,
+    createdAt: "2025-09-12",
     slug: "o2h-hostel-embroidery-baseball-jersey-black",
   },
   {
     title: "O2H MILF Bucket Hat",
-    createdDate: "2025.06.16",
-    price: "Rp. 165.000",
+    price: 205000,
     label: ["Sale", "Hats"],
-    image: "/img/products/O2H_MILF_Bucket_Hat/1.png",
+    image: [
+      "/img/products/O2H_MILF_Bucket_Hat/1.png"
+    ],
     deskripsi: `
 Sizing Measurement:
 All size
@@ -232,13 +235,13 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
     `.trim(),
     sold: "7RB+ Terjual",
     size: ["M"],
-    diskon: true,
+    discount: 20,
+    createdAt: "2025-06-16",
     slug: "o2h-milf-bucket-hat",
   },
   {
     title: "O2H MILF Vest",
-    createdDate: "2025.05.04",
-    price: "Rp. 165.000",
+    price: 205000,
     label: ["Ada Stok", "Sale", "Jacket"],
     image: [
       "/img/products/O2H_MILF_Vest/1.png",
@@ -293,13 +296,13 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
     `.trim(),
     sold: "5RB+ Terjual",
     size: ["M", "L", "XL"],
-    diskon: false,
+    discount: 20,
+    createdAt: "2025-05-04",
     slug: "o2h-milf-vest",
   },
   {
     title: "O2H NFL Jersey Vol.2 Black",
-    createdDate: "2025.04.11",
-    price: "Rp. 450.000",
+    price: 450000,
     label: ["Ada Stok", "Jersey"],
     image: [
       "/img/products/O2H_NFL_Jersey_Vol.2_Black/1.png",
@@ -367,30 +370,17 @@ Silakan hubungi via chat dengan melampirkan video unboxing dan foto saat barang 
     `.trim(),
     sold: "2RB+ Terjual",
     size: ["M", "L", "XL", "XXL"],
-    diskon: true,
+    discount: 25,
+    createdAt: "2025-04-11",
     slug: "o2h-nfl-jersey-vol2-black",
   },
 ];
 
-// Generate 100 products
-const productData = Array.from({ length: 150 }, (_, index) => {
-  const product = baseProducts[index % baseProducts.length];
-
-  return {
-    id: index + 1,
-    title: `${product.title} ${index + 1}`,
-    createdDate: product.createdDate,
-    price: product.price,
-    label: product.label,
-    image: product.image,
-    deskripsi: product.deskripsi || "",
-    sold: product.sold,
-    size: product.size,
-    diskon: product.diskon,
-    slug: `${product.slug}-${index + 1}`,
-  };
-});
-
 export function GET() {
-  return NextResponse.json(productData);
+  const products = baseProducts.map((product, index) => ({
+    id: index + 1,
+    ...product,
+  }));
+
+  return NextResponse.json(products);
 }
