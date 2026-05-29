@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Playfair_Display } from "next/font/google"; // Font Playfair Display
+import { Playfair_Display } from "next/font/google";
 
-// Konfigurasi font
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],

@@ -39,7 +39,6 @@ export default async function HomeProductsPageCard() {
     ];
   }
 
-  // Maksimal 18 produk
   const randomProducts = shuffledProducts.slice(0, 18);
 
   return <AnimationClient products={randomProducts} />;

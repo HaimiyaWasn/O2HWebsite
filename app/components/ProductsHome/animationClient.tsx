@@ -19,7 +19,6 @@ type Product = {
   slug: string;
 };
 
-// Konfigurasi font
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
@@ -38,7 +37,6 @@ export default function AnimationCardClient({
   return (
     <section className="py-10 scroll-mt-12 md:scroll-mt-16" id="card-products">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
         <div className="flex items-center justify-between mb-10">
           <RevealOnScroll delay={300}>
             <div
@@ -63,7 +61,6 @@ export default function AnimationCardClient({
           </RevealOnScroll>
         </div>
 
-        {/* Product Grid */}
         <RevealOnScroll delay={750}>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {products.map((product) => (
