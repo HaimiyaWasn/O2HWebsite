@@ -44,9 +44,8 @@ export default function HomeProductCard({ product }: { product: Product }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative w-full h-40 overflow-hidden rounded">
-        {/* Gambar produk */}
         {isNew && (
-          <div className="absolute top-2 left-2 z-20 bg-black text-white text-[10px] px-2 py-1 rounded">
+          <div className="absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-2 py-1 rounded">
             NEW
           </div>
         )}
@@ -81,7 +80,6 @@ export default function HomeProductCard({ product }: { product: Product }) {
         )}
       </div>
 
-      {/* Konten produk */}
       <div className="border-t border-yellow-400 my-3 flex flex-col flex-1">
         <p
           className={`text-sm mt-2 line-clamp-2 min-h-14 text-black ${playfairDisplayBold.className}`}

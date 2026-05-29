@@ -23,10 +23,13 @@ const playfairDisplayRegular = Playfair_Display({
 interface Product {
   id: number;
   title: string;
-  price: string;
-  label: string;
-  image: string;
+  price: number;
+  label: string[];
+  image: string[];
   sold: string;
+  size: string[];
+  discount: number;
+  createdAt: string;
   slug: string;
 }
 
@@ -132,6 +135,16 @@ export default async function SearchPage({
                 {filtered.length > 0 ? (
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                     {paginatedProducts.map((product) => {
+                      const finalPrice =
+                        product.discount > 0
+                          ? product.price -
+                            (product.price * product.discount) / 100
+                          : product.price;
+
+                      const isNew =
+                        new Date(product.createdAt).getTime() >
+                        Date.now() - 30 * 24 * 60 * 60 * 1000;
+
                       const images = Array.isArray(product.image)
                         ? product.image
                         : [product.image];
@@ -144,7 +157,19 @@ export default async function SearchPage({
                           href={`/products/${product.slug}`}
                         >
                           <div className="group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
-                            <div className="relative w-full h-40 overflow-hidden rounded">
+                            <div className="relative aspect-square overflow-hidden rounded">
+                              {isNew && (
+                                <div className="absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-2 py-1 rounded">
+                                  NEW
+                                </div>
+                              )}
+
+                              {product.discount > 0 && (
+                                <div className="absolute top-1 right-1 z-20 bg-red-500 text-white text-[10px] px-2 py-1 rounded">
+                                  -{product.discount}%
+                                </div>
+                              )}
+
                               <Image
                                 src={images[0]}
                                 alt={product.title}
@@ -165,15 +190,49 @@ export default async function SearchPage({
                               )}
                             </div>
 
-                            <div className="border-t border-yellow-400 my-3">
+                            <div className="border-t border-yellow-400 my-3 flex flex-col flex-1">
                               <p
-                                className={`text-sm mt-2 line-clamp-2 text-black ${playfairDisplayBold.className}`}
+                                className={`text-sm mt-2 line-clamp-2 min-h-14 text-black ${playfairDisplayBold.className}`}
                               >
                                 {product.title}
                               </p>
-                              <p className="text-yellow-500 mt-1 font-semibold">
-                                {product.price}
-                              </p>
+                              <div className="mt-1 flex flex-col min-h-12">
+                                {product.discount > 0 ? (
+                                  <>
+                                    <p className="text-xs text-gray-400 line-through">
+                                      {new Intl.NumberFormat("id-ID", {
+                                        style: "currency",
+                                        currency: "IDR",
+                                        maximumFractionDigits: 0,
+                                      }).format(product.price)}
+                                    </p>
+                                    <p className="text-yellow-500 font-semibold">
+                                      {new Intl.NumberFormat("id-ID", {
+                                        style: "currency",
+                                        currency: "IDR",
+                                        maximumFractionDigits: 0,
+                                      }).format(finalPrice)}
+                                    </p>
+                                  </>
+                                ) : (
+                                  <>
+                                    <p className="text-xs invisible">
+                                      {new Intl.NumberFormat("id-ID", {
+                                        style: "currency",
+                                        currency: "IDR",
+                                        maximumFractionDigits: 0,
+                                      }).format(product.price)}
+                                    </p>
+                                    <p className="text-yellow-500 font-semibold">
+                                      {new Intl.NumberFormat("id-ID", {
+                                        style: "currency",
+                                        currency: "IDR",
+                                        maximumFractionDigits: 0,
+                                      }).format(product.price)}
+                                    </p>
+                                  </>
+                                )}
+                              </div>
                               <p className="text-xs text-gray-500">
                                 {product.sold}
                               </p>
