@@ -67,7 +67,7 @@ export default function AnimationCardClient({
               <Link
                 key={product.id}
                 href={`/products/${product.slug}`}
-                className="block h-f"
+                className="h-full"
               >
                 <HomeProductCard product={product} />
               </Link>
