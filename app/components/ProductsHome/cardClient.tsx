@@ -82,14 +82,14 @@ export default function HomeProductCard({ product }: { product: Product }) {
       </div>
 
       {/* Konten produk */}
-      <div className="border-t border-yellow-400 my-3">
+      <div className="border-t border-yellow-400 my-3 flex flex-col flex-1">
         <p
-          className={`text-sm mt-2 line-clamp-2 text-black ${playfairDisplayBold.className}`}
+          className={`text-sm mt-2 line-clamp-2 min-h-14 text-black ${playfairDisplayBold.className}`}
         >
           {product.title}
         </p>
 
-        <div className="mt-1 flex flex-col">
+        <div className="mt-1 flex flex-col min-h-12">
           {product.discount > 0 ? (
             <>
               <p className="text-xs text-gray-400 line-through">
@@ -108,13 +108,22 @@ export default function HomeProductCard({ product }: { product: Product }) {
               </p>
             </>
           ) : (
-            <p className="text-yellow-500 font-semibold">
-              {new Intl.NumberFormat("id-ID", {
-                style: "currency",
-                currency: "IDR",
-                maximumFractionDigits: 0,
-              }).format(product.price)}
-            </p>
+            <>
+              <p className="text-xs invisible">
+                {new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                  maximumFractionDigits: 0,
+                }).format(product.price)}
+              </p>
+              <p className="text-yellow-500 font-semibold">
+                {new Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                  maximumFractionDigits: 0,
+                }).format(product.price)}
+              </p>
+            </>
           )}
         </div>
 

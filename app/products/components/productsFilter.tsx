@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Playfair_Display } from "next/font/google";
 import { LuSlidersHorizontal } from "react-icons/lu";
 
-// Konfigurasi font
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
