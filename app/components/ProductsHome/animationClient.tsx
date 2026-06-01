@@ -13,6 +13,7 @@ type Product = {
   price: number;
   image: string[];
   sold: string;
+  isOutOfStock: boolean;
   size: string[];
   discount: number;
   createdAt: string;
