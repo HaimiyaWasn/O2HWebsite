@@ -20,6 +20,7 @@ type Products = {
   image: string[];
   deskripsi: string;
   sold: string;
+  isOutOfStock: boolean;
   size: string[];
   discount: number;
   createdAt: string;
@@ -41,7 +42,10 @@ type DetailProductsClientProps = {
   products: Products[];
 };
 
-export default function DetailClient({ product, products }: DetailProductsClientProps) {
+export default function DetailClient({
+  product,
+  products,
+}: DetailProductsClientProps) {
   const [showFullDescription, setShowFullDescription] = useState(false);
 
   const shortDescription =
@@ -80,6 +84,11 @@ export default function DetailClient({ product, products }: DetailProductsClient
                   {isNew && (
                     <div className="px-3 py-1 text-xs md:text-sm rounded-md bg-black text-white border border-white font-bold">
                       NEW
+                    </div>
+                  )}
+                  {product.isOutOfStock && (
+                    <div className="px-3 py-1 text-xs md:text-sm rounded-md bg-gray-500 text-white border border-white font-bold">
+                      Stock Habis
                     </div>
                   )}
                   {product.label.map((item, index) => (
@@ -142,9 +151,15 @@ export default function DetailClient({ product, products }: DetailProductsClient
 
                 <div className="mb-7">
                   <button
-                    className={`btn btn-lg w-full bg-yellow-400 text-black rounded-xl border border-white hover:bg-yellow-500 active:bg-yellow-500 ${playfairDisplayBold.className}`}
+                    disabled={product.isOutOfStock}
+                    className={`btn btn-lg w-full rounded-xl border border-white ${playfairDisplayBold.className}
+                    ${
+                      product.isOutOfStock
+                        ? "bg-gray-500 text-gray-300 cursor-not-allowed"
+                        : "bg-yellow-400 text-black hover:bg-yellow-300 active:bg-yellow-300 transition-all duration-300"
+                    }`}
                   >
-                    Tambah ke Keranjang
+                    {product.isOutOfStock ? "Stock Habis" : "Tambah ke Keranjang"}
                   </button>
                 </div>
 

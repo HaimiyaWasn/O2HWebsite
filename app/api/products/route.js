@@ -52,6 +52,7 @@ Produk tidak sesuai deskripsi
 Salah kirim produk (termasuk salah size)bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti video unboxing dan foto saat barang diterima dari kurir. Jikalau 2 syarat ini tidak terpenuhi kita ga bisa proses apapun yang terjadi. Jadi di mohon dengan sangat untuk di simak yah!!.
     `.trim(),
     sold: "10RB+ Terjual",
+    isOutOfStock: false,
     size: ["M", "L"],
     discount: 10,
     createdAt: "2025-02-13",
@@ -115,6 +116,7 @@ Produk tidak sesuai deskripsi
 Salah kirim produk (termasuk salah size)
     `.trim(),
     sold: "8RB+ Terjual",
+    isOutOfStock: false,
     size: ["M", "L", "XL"],
     discount: 10,
     createdAt: "2025-04-17",
@@ -178,6 +180,7 @@ Salah kirim produk (termasuk salah size)
 Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti video unboxing dan foto saat barang diterima dari kurir. Jikalau 2 syarat ini tidak terpenuhi kita ga bisa proses apapun yang terjadi. Jadi di mohon dengan sangat untuk di simak yah!!.
     `.trim(),
     sold: "4RB+ Terjual",
+    isOutOfStock: false,
     size: ["L", "XL", "XXL"],
     discount: 10,
     createdAt: "2025-09-12",
@@ -234,6 +237,7 @@ Salah kirim produk (termasuk salah size)
 Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti video unboxing dan foto saat barang diterima dari kurir. Jikalau 2 syarat ini tidak terpenuhi kita ga bisa proses apapun yang terjadi. Jadi di mohon dengan sangat untuk di simak yah!!.    
     `.trim(),
     sold: "7RB+ Terjual",
+    isOutOfStock: false,
     size: ["M"],
     discount: 10,
     createdAt: "2025-06-16",
@@ -295,6 +299,7 @@ Salah kirim produk (termasuk salah size)
 Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti video unboxing dan foto saat barang diterima dari kurir. Jikalau 2 syarat ini tidak terpenuhi kita ga bisa proses apapun yang terjadi. Jadi di mohon dengan sangat untuk di simak yah!!.
     `.trim(),
     sold: "5RB+ Terjual",
+    isOutOfStock: false,
     size: ["M", "L", "XL"],
     discount: 20,
     createdAt: "2025-05-04",
@@ -369,6 +374,7 @@ Jika terjadi kendala seperti:
 Silakan hubungi via chat dengan melampirkan video unboxing dan foto saat barang diterima. Tanpa kedua bukti tersebut, komplain tidak dapat diproses.
     `.trim(),
     sold: "2RB+ Terjual",
+    isOutOfStock: false,
     size: ["M", "L", "XL", "XXL"],
     discount: 10,
     createdAt: "2025-04-11",
@@ -429,6 +435,7 @@ Produk tidak sesuai deskripsi
 Salah kirim produk (termasuk salah size) bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti video unboxing dan foto saat barang diterima dari kurir. Jikalau 2 syarat ini tidak terpenuhi kita ga bisa proses apapun yang terjadi. Jadi di mohon dengan sangat untuk di simak yah!!.
     `.trim(),
     sold: "1RB+ Terjual",
+    isOutOfStock: false,
     size: ["XL", "XXL"],
     discount: 20,
     createdAt: "2026-05-13",
@@ -437,7 +444,7 @@ Salah kirim produk (termasuk salah size) bisa ditanyakan terlebih dahulu via per
   {
     title: "O2H Roblox Collection 'Climb Blox' Tshirt White",
     price: 250000,
-    label: ["Stok Habis", "Jacket", "Sale"],
+    label: ["Tshirt", "Sale"],
     image: [
       "/img/products/O2H_Roblox_Collection_Climb_Blox_Tshirt_White/1.jpg",
       "/img/products/O2H_Roblox_Collection_Climb_Blox_Tshirt_White/2.jpg",
@@ -490,6 +497,7 @@ Produk tidak sesuai deskripsi
 Salah kirim produk (termasuk salah size) bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti video unboxing dan foto saat barang diterima dari kurir. Jikalau 2 syarat ini tidak terpenuhi kita ga bisa proses apapun yang terjadi. Jadi di mohon dengan sangat untuk di simak yah!!.
     `.trim(),
     sold: "2RB+ Terjual",
+    isOutOfStock: true,
     size: ["XL", "XXL"],
     discount: 0,
     createdAt: "2025-04-12",

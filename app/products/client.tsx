@@ -20,6 +20,7 @@ type Product = {
   label: string[];
   image: string[];
   sold: string;
+  isOutOfStock: boolean;
   size: string[];
   discount: number;
   createdAt: string;

@@ -8,6 +8,7 @@ export type Products = {
   image: string[];
   deskripsi: string;
   sold: string;
+  isOutOfStock: boolean;
   size: string[];
   discount: number;
   createdAt: string;
