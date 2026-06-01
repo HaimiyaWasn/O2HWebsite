@@ -18,6 +18,12 @@ type News = {
   content: string;
 };
 
+type NewsClientProps = {
+  allNews: News[];
+  totalPages: number;
+  currentPage: number;
+};
+
 // Konfigurasi font
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
@@ -34,11 +40,7 @@ export default function NewsClient({
   allNews,
   totalPages,
   currentPage,
-}: {
-  allNews: News[];
-  totalPages: number;
-  currentPage: number;
-}) {
+}: NewsClientProps) {
   // Pagination
   const MAX_VISIBLE_PAGES = 5;
 
