@@ -75,6 +75,10 @@ function CardItem({ product }: { product: Products }) {
       ? product.price - (product.price * product.discount) / 100
       : product.price;
 
+  const isNew =
+    new Date(product.createdAt).getTime() >
+    Date.now() - 30 * 24 * 60 * 60 * 1000;
+
   return (
     <Link href={`/products/${product.slug}`}>
       <div
@@ -84,6 +88,17 @@ function CardItem({ product }: { product: Products }) {
       >
         {/* IMAGE */}
         <div className="relative w-full h-40 overflow-hidden rounded">
+          {isNew && (
+            <div className="absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-1.5 py-0.5 rounded">
+              NEW
+            </div>
+          )}
+
+          {product.discount > 0 && (
+            <div className="absolute top-1 right-1 z-20 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">
+              -{product.discount}%
+            </div>
+          )}
           <Image
             src={images[0]}
             alt={product.title}
