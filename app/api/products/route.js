@@ -53,7 +53,7 @@ Salah kirim produk (termasuk salah size)bisa ditanyakan terlebih dahulu via pers
     `.trim(),
     sold: "10RB+ Terjual",
     size: ["M", "L"],
-    discount: 30,
+    discount: 10,
     createdAt: "2025-02-13",
     slug: "o2h-hostle-navy-half-zip-jacket",
   },
@@ -116,7 +116,7 @@ Salah kirim produk (termasuk salah size)
     `.trim(),
     sold: "8RB+ Terjual",
     size: ["M", "L", "XL"],
-    discount: 40,
+    discount: 10,
     createdAt: "2025-04-17",
     slug: "o2h-nfl-black-jersey",
   },
@@ -179,7 +179,7 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
     `.trim(),
     sold: "4RB+ Terjual",
     size: ["L", "XL", "XXL"],
-    discount: 35,
+    discount: 10,
     createdAt: "2025-09-12",
     slug: "o2h-hostel-embroidery-baseball-jersey-black",
   },
@@ -235,13 +235,13 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
     `.trim(),
     sold: "7RB+ Terjual",
     size: ["M"],
-    discount: 0,
+    discount: 10,
     createdAt: "2025-06-16",
     slug: "o2h-milf-bucket-hat",
   },
   {
     title: "O2H MILF Vest",
-    price: 165000,
+    price: 465000,
     label: ["Ada Stok", "Sale", "Jacket"],
     image: [
       "/img/products/O2H_MILF_Vest/1.png",
@@ -296,13 +296,13 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
     `.trim(),
     sold: "5RB+ Terjual",
     size: ["M", "L", "XL"],
-    discount: 0,
+    discount: 20,
     createdAt: "2025-05-04",
     slug: "o2h-milf-vest",
   },
   {
     title: "O2H NFL Jersey Vol.2 Black",
-    price: 450000,
+    price: 499000,
     label: ["Ada Stok", "Jersey"],
     image: [
       "/img/products/O2H_NFL_Jersey_Vol.2_Black/1.png",
@@ -370,9 +370,69 @@ Silakan hubungi via chat dengan melampirkan video unboxing dan foto saat barang 
     `.trim(),
     sold: "2RB+ Terjual",
     size: ["M", "L", "XL", "XXL"],
-    discount: 25,
+    discount: 10,
     createdAt: "2025-04-11",
     slug: "o2h-nfl-jersey-vol2-black",
+  },
+  {
+    title: "O2H Climb Box Windbreaker",
+    price: 465000,
+    label: ["Ada Stok", "Jacket", "Sale"],
+    image: [
+      "/img/products/O2H_Climb_Box_Windbreaker/1.png",
+      "/img/products/O2H_Climb_Box_Windbreaker/2.png",
+    ],
+    deskripsi: `
+Sizing Measurement windbreaker
+
+Panjang x lebar
+Size 1: 66cm x 54cm
+Size 2: 68cm x 56xm
+Size 3: 70cm x 58cm
+
+Material:
+Mayer
+
+Wajib Dibaca! Membeli = Setuju.
+Wajib Melakukan Video Unboxing Barang Untuk Memastikan Apabila Produk Kami Cacat Atau Ada Kesalahan Pengiriman
+
+Cara Order Barang :
+- Barang Yang Kami Kirimkan Hanya Yang Kaka Order Sesuai Dari Sistem Bukan Melalui Notes Catatan Atau Chat.
+- Pastikan No Handphone Dan Alamat Sudah Sesuai, Agar Barang Bisa Sampai Ke Tempat Kaka Tanpa Ada Masalah.
+
+Pembatalan Barang :
+- Apabila Ada Pergantian Warna Atau Ukuran, Mohon Ajukan Batal Apabila Tidak Akan Tetap Dikirimkan Sesuai Pesanan Kaka
+Dan Tidak Berlaku Bila No Resi Proses Sudah Keluar.
+
+Ketersediaan Barang :
+- Selama size dan warna bisa dipilih berarti barang ready dan siap kirim.
+- Apabila barang ternyata kosong, akan kami infokan secepatnya
+
+Jadwal Pengiriman:
+- Senin s/d Jumat Maksimal transaksi pukul 15.00 WIB. Lebih dari itu masuk proses kirim besok
+- Sabtu & Minggu atau Tanggal merah: Off Service (Admin dan Pengiriman libur)
+- Estimasi tiba Pengiriman Barang Tergantung Ekspedisi Dan Tanggung Jawab Ekspedisi
+
+Keluhan Barang :
+- Bintang 1 Tidak Akan Menyelesaikan Masalah, Apabila Ada Produk Kami Yang Bermasalah, Salah Kirim Atau Cacat
+Mohon Diinfokan Kepada Kami Langsung Via Chat Dengan Bukti Yang Ada.
+
+Penukaran Barang :
+- Tidak menerima penukaran barang, terkecuali dari kita memang ada barang cacat atau kesalahan kirim
+Return / Komplain Produk
+
+Kalau ada produk atau orderan terjadi kendala seperti halnya:
+Produk cacat
+Produk kurang lengkap
+Produk tidak sesuai deskripsi
+
+Salah kirim produk (termasuk salah size) bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti video unboxing dan foto saat barang diterima dari kurir. Jikalau 2 syarat ini tidak terpenuhi kita ga bisa proses apapun yang terjadi. Jadi di mohon dengan sangat untuk di simak yah!!.
+    `.trim(),
+    sold: "1RB+ Terjual",
+    size: ["XL", "XXL"],
+    discount: 20,
+    createdAt: "2026-05-13",
+    slug: "02h-climb-box-windbreaker",
   },
 ];
 
