@@ -48,11 +48,13 @@ async function getProducts(): Promise<Product[]> {
   return res.json();
 }
 
+type SearchPageProps = {
+  searchParams: Promise<{ keyword?: string; page?: string }>;
+}
+
 export default async function SearchPage({
   searchParams,
-}: {
-  searchParams: Promise<{ keyword?: string; page?: string }>;
-}) {
+}: SearchPageProps) {
   const params = await searchParams;
   const keyword = params.keyword?.toLowerCase() || "";
   const currentPage = Number(params.page) || 1;

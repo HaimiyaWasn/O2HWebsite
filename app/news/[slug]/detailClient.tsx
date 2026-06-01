@@ -29,8 +29,12 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
+type DetailNewsClientProps = {
+  news: News;
+}
+
 // Client Component
-export default function DetailClient({ news }: { news: News }) {
+export default function DetailClient({ news }: DetailNewsClientProps) {
   return (
     <>
       <Navbar />

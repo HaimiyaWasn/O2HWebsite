@@ -36,12 +36,12 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
-type DetailClientProps = {
+type DetailProductsClientProps = {
   product: Products;
   products: Products[];
 };
 
-export default function DetailClient({ product, products }: DetailClientProps) {
+export default function DetailClient({ product, products }: DetailProductsClientProps) {
   const [showFullDescription, setShowFullDescription] = useState(false);
 
   const shortDescription =

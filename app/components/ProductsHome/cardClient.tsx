@@ -21,7 +21,11 @@ type Product = {
   slug: string;
 };
 
-export default function HomeProductCard({ product }: { product: Product }) {
+type ProductCardProps = {
+  product: Product;
+}
+
+export default function HomeProductCard({ product }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   const images = product.image;

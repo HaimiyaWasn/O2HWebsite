@@ -25,12 +25,14 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
+type NewsClientProps = {
+  latestNews: News[];
+}
+
 // Komponen untuk menampilkan berita terbaru
 export default function LatestNewsClient({
   latestNews,
-}: {
-  latestNews: News[];
-}) {
+}: NewsClientProps) {
   return (
     <section className="py-10" id="latest-news">
       <div className="max-w-7xl mx-auto px-6">

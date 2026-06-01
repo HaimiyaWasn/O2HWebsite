@@ -29,11 +29,13 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
+type AnimationCardClientProps = {
+  products: Product[];
+}
+
 export default function AnimationCardClient({
   products,
-}: {
-  products: Product[];
-}) {
+}: AnimationCardClientProps) {
   return (
     <section className="py-10 scroll-mt-12 md:scroll-mt-16" id="card-products">
       <div className="max-w-7xl mx-auto px-6">
