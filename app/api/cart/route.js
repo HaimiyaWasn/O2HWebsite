@@ -57,6 +57,7 @@ Salah kirim produk (termasuk salah size)
 Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti video unboxing dan foto saat barang diterima dari kurir. Jikalau 2 syarat ini tidak terpenuhi kita ga bisa proses apapun yang terjadi. Jadi di mohon dengan sangat untuk di simak yah!!.
     `.trim(),
     sold: "5RB+ Terjual",
+    totalCart: 1,
     size: ["M", "L", "XL"],
     discount: 0,
     createdAt: "2025-05-04",
@@ -120,6 +121,7 @@ Produk tidak sesuai deskripsi
 Salah kirim produk (termasuk salah size)
     `.trim(),
     sold: "8RB+ Terjual",
+    totalCart: 1,
     size: ["M", "L", "XL"],
     discount: 40,
     createdAt: "2025-04-17",
