@@ -51,7 +51,7 @@ export default function HomeProductCard({ product }: { product: Product }) {
         )}
 
         {product.discount > 0 && (
-          <div className="absolute top-1 right-1 z-20 bg-red-500 text-white text-[10px] px-2 py-1 rounded">
+          <div className="absolute top-1 right-1 z-20 bg-red-500 text-white text-[10px] px-2 py-1 rounded font-bold">
             -{product.discount}%
           </div>
         )}

@@ -185,7 +185,7 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
   },
   {
     title: "O2H MILF Bucket Hat",
-    price: 205000,
+    price: 165000,
     label: ["Sale", "Hats"],
     image: [
       "/img/products/O2H_MILF_Bucket_Hat/1.png"
@@ -241,7 +241,7 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
   },
   {
     title: "O2H MILF Vest",
-    price: 205000,
+    price: 165000,
     label: ["Ada Stok", "Sale", "Jacket"],
     image: [
       "/img/products/O2H_MILF_Vest/1.png",

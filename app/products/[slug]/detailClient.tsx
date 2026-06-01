@@ -39,18 +39,20 @@ const playfairDisplayRegular = Playfair_Display({
 type DetailClientProps = {
   product: Products;
   products: Products[];
-}
+};
 
-export default function DetailClient({ 
-  product,
-  products,
-}: DetailClientProps) {
+export default function DetailClient({ product, products }: DetailClientProps) {
   const [showFullDescription, setShowFullDescription] = useState(false);
 
   const shortDescription =
     product.deskripsi.length > 275
       ? product.deskripsi.slice(0, 275) + "..."
       : product.deskripsi;
+
+  const finalPrice =
+    product.discount > 0
+      ? product.price - (product.price * product.discount) / 100
+      : product.price;
 
   return (
     <>
@@ -79,6 +81,11 @@ export default function DetailClient({
                       {item}
                     </span>
                   ))}
+                  {product.discount > 0 && (
+                    <div className={`px-3 py-1 text-xs md:text-sm rounded-md bg-red-500 text-white border border-white font-bold`}>
+                      -{product.discount}%
+                    </div>
+                  )}
                 </div>
                 <span
                   className={`text-xl md:text-3xl mb-3 ${playfairDisplayBold.className}`}
@@ -87,11 +94,36 @@ export default function DetailClient({
                 </span>
 
                 <div className="flex flex-row gap-3 items-center justify-between mb-2">
-                  <span
-                    className={`text-lg md:text-xl text-yellow-400 ${playfairDisplayBold.className}`}
-                  >
-                    {product.price}
-                  </span>
+                  <div className="flex flex-col">
+                    {product.discount > 0 ? (
+                      <>
+                        <p className="text-xs text-gray-400 line-through">
+                          {new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                            maximumFractionDigits: 0,
+                          }).format(product.price)}
+                        </p>
+                        <p className="text-lg md:text-xl text-yellow-500 font-semibold">
+                          {new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                            maximumFractionDigits: 0,
+                          }).format(finalPrice)}
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-lg md:text-xl text-yellow-500 font-semibold">
+                          {new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                            maximumFractionDigits: 0,
+                          }).format(product.price)}
+                        </p>
+                      </>
+                    )}
+                  </div>
                   <button className="btn btn-sm rounded-xl bg-transparent border-none hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black text-yellow-400 transition-all duration-300">
                     <FaRegHeart size={20} />
                   </button>
@@ -133,7 +165,10 @@ export default function DetailClient({
           </div>
 
           <RevealOnScroll delay={300}>
-            <ProductCardRekomendasi product={products} currentProductId={product.id} />
+            <ProductCardRekomendasi
+              product={products}
+              currentProductId={product.id}
+            />
           </RevealOnScroll>
         </div>
       </section>
