@@ -66,11 +66,14 @@ export default function ProductCardRekomendasi({
 function CardItem({ product }: { product: Products }) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const images = Array.isArray(product.image)
-    ? product.image
-    : [product.image];
+  const images = Array.isArray(product.image) ? product.image : [product.image];
 
   const hasSecondImage = images.length > 1;
+
+  const finalPrice =
+    product.discount > 0
+      ? product.price - (product.price * product.discount) / 100
+      : product.price;
 
   return (
     <Link href={`/products/${product.slug}`}>
@@ -100,29 +103,59 @@ function CardItem({ product }: { product: Products }) {
               alt={product.title}
               fill
               className={`pointer-events-none object-cover transition-opacity duration-500 ${
-                isHovered
-                  ? "opacity-100 scale-105"
-                  : "opacity-0 scale-105"
+                isHovered ? "opacity-100 scale-105" : "opacity-0 scale-105"
               }`}
             />
           )}
         </div>
 
         {/* CONTENT */}
-        <div className="border-t border-yellow-400 my-3">
+        <div className="border-t border-yellow-400 my-3 flex flex-col flex-1">
           <p
-            className={`text-sm mt-2 line-clamp-2 text-black ${playfairDisplayBold.className}`}
+            className={`text-sm mt-2 line-clamp-2 min-h-14 text-black ${playfairDisplayBold.className}`}
           >
             {product.title}
           </p>
 
-          <p className="text-yellow-500 mt-1 font-semibold">
-            {product.price}
-          </p>
+          <div className="mt-1 flex flex-col min-h-12">
+            {product.discount > 0 ? (
+              <>
+                <p className="text-xs text-gray-400 line-through">
+                  {new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    maximumFractionDigits: 0,
+                  }).format(product.price)}
+                </p>
+                <p className="text-yellow-500 font-semibold">
+                  {new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    maximumFractionDigits: 0,
+                  }).format(finalPrice)}
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-xs invisible">
+                  {new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    maximumFractionDigits: 0,
+                  }).format(product.price)}
+                </p>
+                <p className="text-yellow-500 font-semibold">
+                  {new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    maximumFractionDigits: 0,
+                  }).format(finalPrice)}
+                </p>
+              </>
+            )}
+          </div>
 
-          <p className="text-xs text-gray-500">
-            {product.sold}
-          </p>
+          <p className="text-xs text-gray-500">{product.sold}</p>
         </div>
       </div>
     </Link>
