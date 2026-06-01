@@ -89,7 +89,7 @@ function CardItem({ product }: { product: Products }) {
         {/* IMAGE */}
         <div className="relative w-full h-40 overflow-hidden rounded">
           {isNew && (
-            <div className="absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-1.5 py-0.5 rounded">
+            <div className="absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-1.5 py-0.5 rounded font-bold">
               NEW
             </div>
           )}

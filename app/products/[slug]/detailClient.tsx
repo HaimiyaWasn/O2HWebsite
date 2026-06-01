@@ -54,6 +54,10 @@ export default function DetailClient({ product, products }: DetailClientProps) {
       ? product.price - (product.price * product.discount) / 100
       : product.price;
 
+  const isNew =
+    new Date(product.createdAt).getTime() >
+    Date.now() - 30 * 24 * 60 * 60 * 1000;
+
   return (
     <>
       <Navbar />
@@ -73,6 +77,11 @@ export default function DetailClient({ product, products }: DetailClientProps) {
             <RevealOnScroll delay={500}>
               <div className="flex flex-col mb-5 md:mb-7">
                 <div className="flex flex-wrap gap-2 mb-4">
+                  {isNew && (
+                    <div className="px-3 py-1 text-xs md:text-sm rounded-md bg-black text-white border border-white font-bold">
+                      NEW
+                    </div>
+                  )}
                   {product.label.map((item, index) => (
                     <span
                       key={index}
@@ -82,7 +91,7 @@ export default function DetailClient({ product, products }: DetailClientProps) {
                     </span>
                   ))}
                   {product.discount > 0 && (
-                    <div className={`px-3 py-1 text-xs md:text-sm rounded-md bg-red-500 text-white border border-white font-bold`}>
+                    <div className="px-3 py-1 text-xs md:text-sm rounded-md bg-red-500 text-white border border-white font-bold">
                       -{product.discount}%
                     </div>
                   )}
