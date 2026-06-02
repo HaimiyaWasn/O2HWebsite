@@ -28,7 +28,26 @@ export default async function getAllProducts() {
 
   const allProducts: Products[] = await res.json();
 
-  return allProducts;
+  const availableProducts = allProducts
+    .filter((product) => !product.isOutOfStock)
+    .sort(
+      (a, b) => 
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+    )
+
+  const outOfStockProducts = allProducts
+    .filter((product) => product.isOutOfStock)
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+    )
+
+  return [
+    ...availableProducts,
+    ...outOfStockProducts,
+  ];
 }
 
 export async function getProducts(page: number = 1) {
