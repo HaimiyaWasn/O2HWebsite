@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Playfair_Display } from "next/font/google";
 
 type Products = {
@@ -38,11 +38,15 @@ export default function ProductCardRekomendasi({
   product,
   currentProductId,
 }: ProductCardRekomendasiProps) {
-  const randomizedProducts = useMemo(() => {
-    return [...product]
+  const [randomizedProducts, setRandomizedProducts] = useState<Products[]>([]);
+
+  useEffect(() => {
+    const shuffled = [...product]
       .filter((item) => item.id !== currentProductId)
       .sort(() => Math.random() - 0.5)
       .slice(0, 12);
+
+    setRandomizedProducts(shuffled);
   }, [product, currentProductId]);
 
   return (
