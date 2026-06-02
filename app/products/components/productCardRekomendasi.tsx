@@ -83,12 +83,18 @@ function CardItem({ product }: { product: Products }) {
   return (
     <Link href={`/products/${product.slug}`}>
       <div
-        className="flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md transition-all duration-300 p-2 cursor-pointer h-full"
+        className={`flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md transition-all duration-300 p-2 cursor-pointer h-full ${
+          product.isOutOfStock ? "opacity-75" : ""
+        }`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* IMAGE */}
         <div className="relative w-full h-40 overflow-hidden rounded">
+          {product.isOutOfStock && (
+            <div className="absolute top-1 left-1 z-30 bg-black text-white text-[10px] px-1.5 py-0.5 rounded font-bold">
+              Stok Habis
+            </div>
+          )}
           {isNew && (
             <div className="absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-1.5 py-0.5 rounded font-bold">
               NEW
