@@ -45,17 +45,35 @@ async function getProducts(): Promise<Product[]> {
   if (!res.ok) {
     throw new Error("Failed to fetch products");
   }
+  const allProducts: Product[] = await res.json();
 
-  return res.json();
+  const availableProducts = allProducts
+    .filter((product) => !product.isOutOfStock)
+    .sort(
+      (a, b) => 
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+    )
+
+  const outOfStockProducts = allProducts
+    .filter((product) => product.isOutOfStock)
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+    )
+
+  return [
+    ...availableProducts,
+    ...outOfStockProducts,
+  ];
 }
 
 type SearchPageProps = {
   searchParams: Promise<{ keyword?: string; page?: string }>;
-}
+};
 
-export default async function SearchPage({
-  searchParams,
-}: SearchPageProps) {
+export default async function SearchPage({ searchParams }: SearchPageProps) {
   const params = await searchParams;
   const keyword = params.keyword?.toLowerCase() || "";
   const currentPage = Number(params.page) || 1;
@@ -159,16 +177,25 @@ export default async function SearchPage({
                           key={product.id}
                           href={`/products/${product.slug}`}
                         >
-                          <div className="group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full">
+                          <div
+                            className={`group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer h-full ${
+                              product.isOutOfStock ? "opacity-75" : ""
+                            }`}
+                          >
                             <div className="relative aspect-square overflow-hidden rounded">
+                              {product.isOutOfStock && (
+                                <div className="absolute top-1 left-1 z-30 bg-black text-white text-[10px] px-2 py-1 rounded font-bold">
+                                  Stok Habis
+                                </div>
+                              )}
                               {isNew && (
-                                <div className="absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-2 py-1 rounded">
+                                <div className={`absolute left-1 z-20 bg-black text-white text-[10px] px-2 py-1 rounded font-bold ${product.isOutOfStock ? "top-8" : "top-1"}`}>
                                   NEW
                                 </div>
                               )}
 
                               {product.discount > 0 && (
-                                <div className="absolute top-1 right-1 z-20 bg-red-500 text-white text-[10px] px-2 py-1 rounded">
+                                <div className="absolute top-1 right-1 z-20 bg-red-500 text-white text-[10px] px-2 py-1 rounded font-bold">
                                   -{product.discount}%
                                 </div>
                               )}
