@@ -52,17 +52,13 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
   const updateFilter = (key: string, value: string | string[] | null) => {
     const params = new URLSearchParams(searchParams.toString());
 
-    // HANDLE ARRAY
     if (Array.isArray(value)) {
       if (value.length > 0) {
         params.set(key, value.join(","));
       } else {
         params.delete(key);
       }
-    }
-
-    // HANDLE STRING
-    else {
+    } else {
       if (value) {
         params.set(key, value);
       } else {
@@ -70,21 +66,17 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
       }
     }
 
-    // reset pagination
     params.set("page", "1");
 
     router.push(`/products?${params.toString()}`);
   };
 
-  // FILTER
   const filteredProducts = useMemo(() => {
     return allProducts.filter((product) => {
-      // CATEGORY
       if (selectedCategory && !product.label.includes(selectedCategory)) {
         return false;
       }
 
-      // DISKON
       if (productType === "Diskon" && product.discount <= 0) {
         return false;
       }
@@ -221,7 +213,6 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                 </RevealOnScroll>
               </div>
 
-              {/* JIKA PRODUK KOSONG */}
               {filteredProducts.length === 0 ? (
                 <div className="flex items-center justify-center py-40">
                   <h1 className="text-2xl text-gray-400 font-semibold">
@@ -230,7 +221,6 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                 </div>
               ) : (
                 <>
-                  {/* GRID */}
                   <RevealOnScroll delay={750}>
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                       {paginatedProducts.map((product) => {
@@ -256,10 +246,23 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                             href={`/products/${product.slug}`}
                             className="h-full"
                           >
-                            <div className="group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 overflow-hidden hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer">
+                            <div
+                              className={`group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 overflow-hidden hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer ${
+                                product.isOutOfStock ? "opacity-75" : ""
+                              }`}
+                            >
                               <div className="relative aspect-square overflow-hidden rounded">
+                                {product.isOutOfStock && (
+                                  <div className="absolute top-1 left-1 z-30 bg-black text-white text-[10px] px-2 py-1 rounded font-bold">
+                                    Stok Habis
+                                  </div>
+                                )}
                                 {isNew && (
-                                  <div className="absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-1.5 py-0.5 rounded font-bold">
+                                  <div
+                                    className={`absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-1.5 py-0.5 rounded font-bold ${
+                                      product.isOutOfStock ? "top-8" : "top-1"
+                                    }`}
+                                  >
                                     NEW
                                   </div>
                                 )}
