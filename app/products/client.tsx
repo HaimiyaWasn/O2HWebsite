@@ -132,13 +132,56 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
     selectedSize,
   ]);
 
-  const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+  const sortedProducts = useMemo(() => {
+    const products = [...filteredProducts];
+
+    products.sort((a, b) => {
+      if (a.isOutOfStock !== b.isOutOfStock) {
+        return Number(a.isOutOfStock) - Number(b.isOutOfStock);
+      }
+
+      const aFinalPrice =
+        a.discount > 0 ? a.price - (a.price * a.discount) / 100 : a.price;
+
+      const bFinalPrice =
+        b.discount > 0 ? b.price - (b.price * b.discount) / 100 : b.price;
+
+      switch (sortBy) {
+        case "oldest":
+          return (
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+          );
+
+        case "price-low":
+          return aFinalPrice - bFinalPrice;
+
+        case "price-high":
+          return bFinalPrice - aFinalPrice;
+
+        case "name-asc":
+          return a.title.localeCompare(b.title);
+
+        case "name-desc":
+          return b.title.localeCompare(a.title);
+
+        case "newest":
+        default:
+          return (
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+      }
+    });
+
+    return products;
+  }, [filteredProducts, sortBy]);
+
+  const totalPages = Math.ceil(sortedProducts.length / PRODUCTS_PER_PAGE);
 
   const paginatedProducts = useMemo(() => {
     const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
     const endIndex = startIndex + PRODUCTS_PER_PAGE;
 
-    return filteredProducts.slice(startIndex, endIndex);
+    return sortedProducts.slice(startIndex, endIndex);
   }, [filteredProducts, currentPage]);
 
   let startPage = Math.max(1, currentPage - Math.floor(MAX_VISIBLE_PAGES / 2));
