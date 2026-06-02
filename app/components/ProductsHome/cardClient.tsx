@@ -102,7 +102,7 @@ export default function HomeProductCard({ product }: ProductCardProps) {
           {product.title}
         </p>
 
-        <div className="mt-1 flex flex-col min-h-12">
+        <div className="mt-1 flex flex-col pt-3">
           {product.discount > 0 ? (
             <>
               <p className="text-xs text-gray-400 line-through">
