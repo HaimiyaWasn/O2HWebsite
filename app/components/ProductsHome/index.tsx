@@ -40,7 +40,12 @@ export default async function HomeProductsPageCard() {
     ];
   }
 
-  const randomProducts = shuffledProducts.slice(0, 18);
+  const randomProducts = shuffledProducts
+    .sort((a, b) => {
+      if (a.isOutOfStock === b.isOutOfStock) return 0;
+
+      return a.isOutOfStock ? 1 : -1;
+    }).slice(0, 18);
 
   return <AnimationClient products={randomProducts} />;
 }
