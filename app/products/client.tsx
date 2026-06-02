@@ -9,6 +9,7 @@ import { Playfair_Display } from "next/font/google";
 import Navbar from "../components/NavbarO2H";
 import SearchProducts from "./search/searchClient";
 import ProductsFilter from "./components/productsFilter";
+import ProductUrutkan from "./components/productUrutkan";
 import FloatingLogo from "../components/FloatingLogo";
 import RevealOnScroll from "../components/RevealOnScroll";
 import Footer from "../components/Footer";
@@ -197,19 +198,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                 </RevealOnScroll>
 
                 <RevealOnScroll delay={500}>
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className={`font-semibold whitespace-nowrap`}>
-                      Urutkan:
-                    </span>
-                    <select className="select border border-yellow-400 rounded-xl px-4 py-2 outline-none w-full md:w-60">
-                      <option>Terbaru</option>
-                      <option>Terlama</option>
-                      <option>Harga Terendah</option>
-                      <option>Harga Tertinggi</option>
-                      <option>Nama Produk (A-Z)</option>
-                      <option>Nama Produk (Z-A)</option>
-                    </select>
-                  </div>
+                  <ProductUrutkan />
                 </RevealOnScroll>
               </div>
 
