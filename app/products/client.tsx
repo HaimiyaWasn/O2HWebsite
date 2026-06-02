@@ -160,7 +160,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
 
       <Navbar />
 
-      <section className="pt-7 scroll-mt-12 md:scroll-mt-20">
+      <section className="pt-5 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="flex justify-center items-center mb-4">
             <SearchProducts />
