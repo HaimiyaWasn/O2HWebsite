@@ -503,6 +503,66 @@ Salah kirim produk (termasuk salah size) bisa ditanyakan terlebih dahulu via per
     createdAt: "2025-04-12",
     slug: "o2h_roblox_collection_'climb_blox'_tshirt_white",
   },
+  {
+    title: "O2H Lockdown Protocol Collection 'Select Your Player' Tshirt True Whitev",
+    price: 250000,
+    label: ["Tshirt", "Sale"],
+    image: [
+      "/img/products/O2H_Lockdown_Protocol_Collection_Select_Your_Player_Tshirt_True_White/1.jpg",
+      "/img/products/O2H_Lockdown_Protocol_Collection_Select_Your_Player_Tshirt_True_White/2.jpg",
+    ],
+    deskripsi: `
+Sizing Measurement
+
+(Panjang x Lebar)
+Size I: 71cm x 54cm (M fit to L)
+Size II: 78cm x 62cm (XL fit to XXL)
+
+Material:
+Material Super Soft 20s
+Plastisol Sablon
+
+Wajib Dibaca! Membeli = Setuju.
+Wajib Melakukan Video Unboxing Barang Untuk Memastikan Apabila Produk Kami Cacat Atau Ada Kesalahan Pengiriman
+
+Cara Order Barang :
+- Barang Yang Kami Kirimkan Hanya Yang Kaka Order Sesuai Dari Sistem Bukan Melalui Notes Catatan Atau Chat.
+- Pastikan No Handphone Dan Alamat Sudah Sesuai, Agar Barang Bisa Sampai Ke Tempat Kaka Tanpa Ada Masalah.
+
+Pembatalan Barang :
+- Apabila Ada Pergantian Warna Atau Ukuran, Mohon Ajukan Batal Apabila Tidak Akan Tetap Dikirimkan Sesuai Pesanan Kaka
+Dan Tidak Berlaku Bila No Resi Proses Sudah Keluar.
+
+Ketersediaan Barang :
+- Selama size dan warna bisa dipilih berarti barang ready dan siap kirim.
+- Apabila barang ternyata kosong, akan kami infokan secepatnya
+
+Jadwal Pengiriman:
+- Senin s/d Jumat Maksimal transaksi pukul 15.00 WIB. Lebih dari itu masuk proses kirim besok
+- Sabtu & Minggu atau Tanggal merah: Off Service (Admin dan Pengiriman libur)
+- Estimasi tiba Pengiriman Barang Tergantung Ekspedisi Dan Tanggung Jawab Ekspedisi
+
+Keluhan Barang :
+- Bintang 1 Tidak Akan Menyelesaikan Masalah, Apabila Ada Produk Kami Yang Bermasalah, Salah Kirim Atau Cacat
+Mohon Diinfokan Kepada Kami Langsung Via Chat Dengan Bukti Yang Ada.
+
+Penukaran Barang :
+- Tidak menerima penukaran barang, terkecuali dari kita memang ada barang cacat atau kesalahan kirim
+Return / Komplain Produk
+
+Kalau ada produk atau orderan terjadi kendala seperti halnya:
+Produk cacat
+Produk kurang lengkap
+Produk tidak sesuai deskripsi
+Salah kirim produk (termasuk salah size) bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti video unboxing dan foto saat barang diterima dari kurir. Jikalau 2 syarat ini tidak terpenuhi kita ga bisa proses apapun yang terjadi. Jadi di mohon dengan sangat untuk di simak yah!!.
+    `.trim(),
+    sold: "3RB+ Terjual",
+    isOutOfStock: true,
+    size: ["L", "XL"],
+    discount: 0,
+    createdAt: "2026-01-10",
+    slug: "o2h_lockdown_protocol_collection_'select_your_player'_tshirt_true_white",
+  },
 ];
 
 export function GET() {

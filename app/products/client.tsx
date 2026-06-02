@@ -46,6 +46,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
   const priceRange = searchParams.get("priceRange");
   const selectedSize = searchParams.get("size")?.split(",") ?? [];
   const currentPage = Number(searchParams.get("page")) || 1;
+  const sortBy = searchParams.get("sort") || "newest";
 
   const PRODUCTS_PER_PAGE = 20;
   const MAX_VISIBLE_PAGES = 5;
@@ -284,12 +285,12 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
 
                               <div className="border-t border-yellow-400 my-3 flex flex-col flex-1">
                                 <p
-                                  className={`text-sm mt-2 line-clamp-2 min-h-14 text-black ${playfairDisplayBold.className}`}
+                                  className={`text-sm mt-2 line-clamp-2 h-10 text-black ${playfairDisplayBold.className}`}
                                 >
                                   {product.title}
                                 </p>
 
-                                <div className="mt-1 flex flex-col min-h-12">
+                                <div className="mt-1 flex flex-col pt-3">
                                   {product.discount > 0 ? (
                                     <>
                                       <p className="text-xs text-gray-400 line-through">

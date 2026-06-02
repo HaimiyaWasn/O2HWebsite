@@ -97,7 +97,7 @@ export default function HomeProductCard({ product }: ProductCardProps) {
 
       <div className="border-t border-yellow-400 my-3 flex flex-col flex-1">
         <p
-          className={`text-sm mt-2 line-clamp-2 min-h-14 text-black ${playfairDisplayBold.className}`}
+          className={`text-sm mt-2 line-clamp-2 h-10 text-black ${playfairDisplayBold.className}`}
         >
           {product.title}
         </p>
