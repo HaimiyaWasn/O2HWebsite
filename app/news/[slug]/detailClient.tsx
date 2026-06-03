@@ -4,9 +4,6 @@ import Link from "next/link";
 import { Playfair_Display } from "next/font/google"; // Font Playfair Display
 import { FaArrowAltCircleRight } from "react-icons/fa"; // Ikon panah
 
-import Navbar from "@/app/components/NavbarO2H";
-import Footer from "@/app/components/Footer";
-import FloatingLogo from "@/app/components/FloatingLogo";
 import RevealOnScroll from "@/app/components/RevealOnScroll";
 
 // Tipe data berita
@@ -31,13 +28,12 @@ const playfairDisplayRegular = Playfair_Display({
 
 type DetailNewsClientProps = {
   news: News;
-}
+};
 
 // Client Component
 export default function DetailClient({ news }: DetailNewsClientProps) {
   return (
     <>
-      <Navbar />
       {/* Konten berita */}
       <section className="py-12 pt-28 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6">
@@ -77,9 +73,6 @@ export default function DetailClient({ news }: DetailNewsClientProps) {
           </Link>
         </RevealOnScroll>
       </div>
-
-      <Footer variant="yellow" />
-      {/* <FloatingLogo /> */}
     </>
   );
 }

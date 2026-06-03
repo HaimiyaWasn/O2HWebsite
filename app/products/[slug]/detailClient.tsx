@@ -4,9 +4,6 @@ import { useState } from "react";
 import { Playfair_Display } from "next/font/google";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 
-import Navbar from "@/app/components/NavbarO2H";
-import Footer from "@/app/components/Footer";
-import FloatingLogo from "@/app/components/FloatingLogo";
 import RevealOnScroll from "@/app/components/RevealOnScroll";
 import ProductDescriptionModal from "../components/productDescriptionModal";
 import ProductImageSlider from "../components/productImageSlider";
@@ -65,8 +62,6 @@ export default function DetailClient({
 
   return (
     <>
-      <Navbar />
-
       <section className="min-h-screen py-12 pt-28 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -149,7 +144,7 @@ export default function DetailClient({
                   >
                     {isFavorite ? (
                       <FaHeart
-                        size={20} 
+                        size={20}
                         className="text-yellow-400 group-hover:text-black group-active:text-black transition-all duration-300"
                       />
                     ) : (
@@ -220,8 +215,6 @@ export default function DetailClient({
         closeDescription={() => setShowFullDescription(false)}
         description={product.deskripsi}
       />
-      {/* <FloatingLogo /> */}
-      <Footer />
     </>
   );
 }

@@ -4,9 +4,6 @@ import Link from "next/link";
 import { Playfair_Display } from "next/font/google"; // Font
 import { FaArrowAltCircleRight } from "react-icons/fa"; // Icon panah
 
-import Navbar from "../components/NavbarO2H";
-import FloatingLogo from "../components/FloatingLogo";
-import Footer from "../components/Footer";
 import RevealOnScroll from "../components/RevealOnScroll";
 
 // Tipe data berita
@@ -66,7 +63,6 @@ export default function NewsClient({
   return (
     <>
       <title>News | O2H Official Site</title>
-      <Navbar />
       <section className="py-20 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 py-10">
           {/* Header */}
@@ -132,9 +128,6 @@ export default function NewsClient({
           </div>
         </RevealOnScroll>
       </section>
-
-      <Footer variant="yellow" />
-      {/* <FloatingLogo /> */}
     </>
   );
 }

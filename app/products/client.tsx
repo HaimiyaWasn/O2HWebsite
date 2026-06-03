@@ -6,13 +6,10 @@ import { useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Playfair_Display } from "next/font/google";
 
-import Navbar from "../components/NavbarO2H";
 import SearchProducts from "./search/searchClient";
 import ProductsFilter from "./components/productsFilter";
 import ProductUrutkan from "./components/productUrutkan";
-import FloatingLogo from "../components/FloatingLogo";
 import RevealOnScroll from "../components/RevealOnScroll";
-import Footer from "../components/Footer";
 
 type Product = {
   id: number;
@@ -202,9 +199,6 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
   return (
     <>
       <title>Products | O2H Official Site</title>
-
-      <Navbar />
-
       <section className="pt-5 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="flex justify-center items-center mb-4">
@@ -419,9 +413,6 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
             </div>
           </div>
         </div>
-
-        {/* <FloatingLogo /> */}
-        <Footer variant="yellow" />
       </section>
     </>
   );

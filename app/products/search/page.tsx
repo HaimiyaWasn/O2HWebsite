@@ -1,14 +1,11 @@
 import { headers } from "next/headers";
 
-import SearchProducts from "./searchClient";
-import Navbar from "@/app/components/NavbarO2H";
-import FloatingLogo from "@/app/components/FloatingLogo";
-
 import Image from "next/image";
-import { Playfair_Display } from "next/font/google";
-import RevealOnScroll from "@/app/components/RevealOnScroll";
 import Link from "next/link";
-import Footer from "@/app/components/Footer";
+import { Playfair_Display } from "next/font/google";
+
+import SearchProducts from "./searchClient";
+import RevealOnScroll from "@/app/components/RevealOnScroll";
 import SearchFilterWrapper from "./client";
 
 const playfairDisplayBold = Playfair_Display({
@@ -50,23 +47,18 @@ async function getProducts(): Promise<Product[]> {
   const availableProducts = allProducts
     .filter((product) => !product.isOutOfStock)
     .sort(
-      (a, b) => 
-        new Date(b.createdAt).getTime() -
-        new Date(a.createdAt).getTime()
-    )
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
 
   const outOfStockProducts = allProducts
     .filter((product) => product.isOutOfStock)
     .sort(
       (a, b) =>
-        new Date(b.createdAt).getTime() -
-        new Date(a.createdAt).getTime()
-    )
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
 
-  return [
-    ...availableProducts,
-    ...outOfStockProducts,
-  ];
+  return [...availableProducts, ...outOfStockProducts];
 }
 
 type SearchPageProps = {
@@ -113,7 +105,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   return (
     <>
       <title>Search | O2H Official Site</title>
-      <Navbar />
       <section className="pt-20 scroll-mt-12 md:scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 py-5">
           <div className="flex justify-center items-center mb-7">
@@ -189,7 +180,11 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                                 </div>
                               )}
                               {isNew && (
-                                <div className={`absolute left-1 z-20 bg-black text-white text-[10px] px-2 py-1 rounded font-bold ${product.isOutOfStock ? "top-8" : "top-1"}`}>
+                                <div
+                                  className={`absolute left-1 z-20 bg-black text-white text-[10px] px-2 py-1 rounded font-bold ${
+                                    product.isOutOfStock ? "top-8" : "top-1"
+                                  }`}
+                                >
                                   NEW
                                 </div>
                               )}
@@ -318,8 +313,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             </div>
           </div>
         </div>
-        {/* <FloatingLogo /> */}
-        <Footer variant="yellow" />
       </section>
     </>
   );
