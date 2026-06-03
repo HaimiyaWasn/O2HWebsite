@@ -9,6 +9,7 @@ import { DisclaimerProvider } from "./components/Disclaimer/DisclaimerContent";
 import Navbar from "./components/NavbarO2H";
 import FloatingLogo from "./components/FloatingLogo";
 import Footer from "./components/Footer";
+import FloatingCart from "./components/FloatingCarts";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,6 +42,7 @@ export default function RootLayout({
           <ScrollToTop />
           {children}
           <Footer variant="yellow" />
+          <FloatingCart />
         </DisclaimerProvider>
         <SpeedInsights />
         <Analytics />
