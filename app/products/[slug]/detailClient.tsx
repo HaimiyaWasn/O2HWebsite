@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Playfair_Display } from "next/font/google";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 import Navbar from "@/app/components/NavbarO2H";
 import Footer from "@/app/components/Footer";
@@ -47,6 +47,7 @@ export default function DetailClient({
   products,
 }: DetailProductsClientProps) {
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const shortDescription =
     product.deskripsi.length > 275
@@ -142,8 +143,21 @@ export default function DetailClient({
                       </>
                     )}
                   </div>
-                  <button className="btn btn-sm rounded-xl bg-transparent border-none hover:bg-yellow-400 active:bg-yellow-400 hover:text-black active:text-black text-yellow-400 transition-all duration-300">
-                    <FaRegHeart size={20} />
+                  <button
+                    onClick={() => setIsFavorite(!isFavorite)}
+                    className="group btn btn-sm rounded-xl bg-transparent border-none hover:bg-yellow-400 active:bg-yellow-400 transition-all duration-300"
+                  >
+                    {isFavorite ? (
+                      <FaHeart
+                        size={20}
+                        className="text-yellow-400 group-hover:text-black transition-all duration-300"
+                      />
+                    ) : (
+                      <FaRegHeart
+                        size={20}
+                        className="text-yellow-400 group-hover:text-black transition-all duration-300"
+                      />
+                    )}
                   </button>
                 </div>
 
@@ -152,14 +166,18 @@ export default function DetailClient({
                 <div className="mb-7">
                   <button
                     disabled={product.isOutOfStock}
-                    className={`btn btn-lg w-full rounded-xl border border-white ${playfairDisplayBold.className}
+                    className={`btn btn-lg w-full rounded-xl border border-white ${
+                      playfairDisplayBold.className
+                    }
                     ${
                       product.isOutOfStock
                         ? "bg-gray-500 text-gray-300 cursor-not-allowed"
                         : "bg-yellow-400 text-black hover:bg-yellow-300 active:bg-yellow-300 transition-all duration-300"
                     }`}
                   >
-                    {product.isOutOfStock ? "Stock Habis" : "Tambah ke Keranjang"}
+                    {product.isOutOfStock
+                      ? "Stock Habis"
+                      : "Tambah ke Keranjang"}
                   </button>
                 </div>
 
