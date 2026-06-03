@@ -16,7 +16,7 @@ export default function Home() {
       <CarouselAlbum />
       <LastestNews />
       <Footer variant="yellow" />
-      <FloatingLogo />
+      {/* <FloatingLogo /> */}
     </>
   );
 }

@@ -318,7 +318,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             </div>
           </div>
         </div>
-        <FloatingLogo />
+        {/* <FloatingLogo /> */}
         <Footer variant="yellow" />
       </section>
     </>

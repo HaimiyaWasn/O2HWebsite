@@ -7,7 +7,7 @@ export default function Photobooks() {
       <title>Photobooks | O2H Official Site</title>
       <Navbar />
 
-      <FloatingLogo />
+      {/* <FloatingLogo /> */}
     </>
   )
 };

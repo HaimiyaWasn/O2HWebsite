@@ -79,7 +79,7 @@ export default function DetailClient({ news }: DetailNewsClientProps) {
       </div>
 
       <Footer variant="yellow" />
-      <FloatingLogo />
+      {/* <FloatingLogo /> */}
     </>
   );
 }

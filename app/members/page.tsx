@@ -7,7 +7,7 @@ export default function Members() {
       <title>Members | O2H Official Site</title>
       <Navbar />
 
-      <FloatingLogo />
+      {/* <FloatingLogo /> */}
     </>
   )
 } 

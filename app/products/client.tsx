@@ -420,7 +420,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
           </div>
         </div>
 
-        <FloatingLogo />
+        {/* <FloatingLogo /> */}
         <Footer variant="yellow" />
       </section>
     </>

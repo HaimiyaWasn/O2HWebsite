@@ -202,7 +202,7 @@ export default function DetailClient({
         closeDescription={() => setShowFullDescription(false)}
         description={product.deskripsi}
       />
-      <FloatingLogo />
+      {/* <FloatingLogo /> */}
       <Footer />
     </>
   );

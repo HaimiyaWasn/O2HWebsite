@@ -134,7 +134,7 @@ export default function NewsClient({
       </section>
 
       <Footer variant="yellow" />
-      <FloatingLogo />
+      {/* <FloatingLogo /> */}
     </>
   );
 }
