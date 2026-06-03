@@ -37,7 +37,7 @@ export default function FloatingCartClient({ carts }: Props) {
         href="/carts"
         className="hidden md:block fixed bottom-4 left-1/2 -translate-x-1/2 z-20 w-[calc(100%-1rem)] max-w-xl p-2 md:p-3"
       >
-        <div className="bg-white rounded-2xl shadow-xl border-4 border-yellow-400 px-2 py-2 md:px-3 md:py-3 flex items-center justify-between gap-2 md:gap-3 hover:shadow-2xl transition-all duration-300">
+        <div className="bg-white rounded-2xl shadow-xl border-4 border-yellow-400 px-2 py-2 md:px-3 md:py-3 flex items-center justify-between gap-2 md:gap-3 hover:shadow-2xl hover:scale-105 transition-all duration-300">
           <div className="flex items-center gap-3 min-w-0">
             <div className="relative shrink-0">
               <Image
