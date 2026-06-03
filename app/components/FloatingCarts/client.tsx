@@ -12,10 +12,14 @@ interface Props {
 export default function FloatingCartClient({ carts }: Props) {
   const totalItem = carts.reduce((total, item) => total + item.totalCart, 0);
 
-  const totalPrice = carts.reduce(
-    (total, item) => total + item.price * item.totalCart,
-    0
-  );
+  const totalPrice = carts.reduce((total, item) => {
+    const finalPrice =
+      item.discount > 0
+        ? item.price - (item.price * item.discount) / 100
+        : item.price;
+
+    return total + finalPrice * item.totalCart;
+  }, 0);
 
   if (!carts.length || totalItem === 0) return null;
 

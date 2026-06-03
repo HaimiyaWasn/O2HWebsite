@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 const baseCart = [
   {
     title: "O2H MILF Vest",
-    price: 205000,
+    price: 465000,
     label: ["Ada Stok", "Sale", "Jacket"],
     image: [
       "/img/products/O2H_MILF_Vest/1.png",
@@ -59,7 +59,7 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
     sold: "5RB+ Terjual",
     totalCart: 1,
     size: ["M", "L", "XL"],
-    discount: 0,
+    discount: 20,
     createdAt: "2025-05-04",
     slug: "o2h-milf-vest",
   },
@@ -123,7 +123,7 @@ Salah kirim produk (termasuk salah size)
     sold: "8RB+ Terjual",
     totalCart: 1,
     size: ["M", "L", "XL"],
-    discount: 40,
+    discount: 10,
     createdAt: "2025-04-17",
     slug: "o2h-nfl-black-jersey",
   },
