@@ -36,7 +36,7 @@ export default function DisclaimerScene({ onClose }: { onClose: () => void }) {
         }`}
       >
         <h2 className="mb-4 text-center text-2xl font-bold text-black">
-          Disclaimer
+          Disclaimer by Developer
         </h2>
 
         <p className="text-center text-sm leading-relaxed text-gray-600">
