@@ -5,6 +5,7 @@ import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import DisclaimerWrapper from "./components/Disclaimer/DisclaimerWrapper";
+import { DisclaimerProvider } from "./components/Disclaimer/DisclaimerContent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,9 +32,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <DisclaimerWrapper />
-        <ScrollToTop />
-        {children}
+        <DisclaimerProvider>
+          <DisclaimerWrapper />
+          <ScrollToTop />
+          {children}
+        </DisclaimerProvider>
         <SpeedInsights />
         <Analytics />
       </body>

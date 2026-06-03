@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react"
 import DisclaimerScene from "./DisclaimerScene"
+import { useDisclaimer } from "./DisclaimerContent";
 
 export default function DisclaimerWrapper() {
   const [showDisclaimer, setShowDisclaimer] = useState(false);
+  const { setAccepted } = useDisclaimer();
 
   useEffect(() => {
     setShowDisclaimer(true);
@@ -23,11 +25,8 @@ export default function DisclaimerWrapper() {
   }, [showDisclaimer]);
 
   const handleClose = () => {
+    setAccepted(true);
     setShowDisclaimer(false);
-
-    window.dispatchEvent(
-      new CustomEvent("disclaimerClosed")
-    );
   };
 
   if(!showDisclaimer) return null;

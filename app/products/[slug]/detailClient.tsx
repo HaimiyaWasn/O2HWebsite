@@ -149,7 +149,7 @@ export default function DetailClient({
                   >
                     {isFavorite ? (
                       <FaHeart
-                        size={20}
+                        size={20} 
                         className="text-yellow-400 group-hover:text-black transition-all duration-300"
                       />
                     ) : (

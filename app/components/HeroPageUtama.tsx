@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Bungee, Playfair_Display } from "next/font/google";
+import { useDisclaimer } from "./Disclaimer/DisclaimerContent";
 
 // Konfigurasi font
 const bungee = Bungee({
@@ -20,6 +21,7 @@ export default function Hero() {
   const [isMounted, setIsMounted] = useState(false);
   const [displayText, setDisplayText] = useState("");
   const [showContentUtama, setShowContentUtama] = useState(false);
+  const { accepted } = useDisclaimer();
 
   // Teks yang akan ditampilkan dengan efek mengetik
   const fullText = "Together in Every Step";
@@ -32,43 +34,29 @@ export default function Hero() {
   };
 
   useEffect(() => {
-    const startHeroAnimation = () => {
-      setIsMounted(true);
+    if (!accepted) return;
 
-      const startTyping = setTimeout(() => {
-        let index = 0;
+    setIsMounted(true);
 
-        const typingInterval = setInterval(() => {
-          setDisplayText(fullText.slice(0, index + 1));
-          index++;
+    const startTyping = setTimeout(() => {
+      let index = 0;
 
-          if(index === fullText.length) {
-            clearInterval(typingInterval);
+      const typingInterval = setInterval(() => {
+        setDisplayText(fullText.slice(0, index + 1));
+        index++;
 
-            setTimeout(() => {
-              setShowContentUtama(true);
-            }, 300);
-          }
-        }, 150);
-      }, 1000);
+        if (index === fullText.length) {
+          clearInterval(typingInterval);
 
-      return () => {
-        clearTimeout(startTyping);
-      };
-    };
+          setTimeout(() => {
+            setShowContentUtama(true);
+          }, 300);
+        }
+      }, 150);
+    }, 1500);
 
-    window.addEventListener(
-      "disclaimerClosed",
-      startHeroAnimation
-    );
-
-    return () => {
-      window.removeEventListener(
-        "disclaimerClosed",
-        startHeroAnimation
-      );
-    };
-  },[]);
+    return () => clearTimeout(startTyping);
+  }, [accepted]);
 
   return (
     <div
