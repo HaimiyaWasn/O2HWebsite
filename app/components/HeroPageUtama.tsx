@@ -17,7 +17,6 @@ const playfairDisplayRegular = Playfair_Display({
 
 // Hero section utama
 export default function Hero() {
-  // State untuk animasi
   const [isMounted, setIsMounted] = useState(false);
   const [displayText, setDisplayText] = useState("");
   const [showContentUtama, setShowContentUtama] = useState(false);
@@ -32,29 +31,44 @@ export default function Hero() {
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Efek mengetik
   useEffect(() => {
-    setIsMounted(true);
+    const startHeroAnimation = () => {
+      setIsMounted(true);
 
-    const startTyping = setTimeout(() => {
-      let index = 0;
+      const startTyping = setTimeout(() => {
+        let index = 0;
 
-      const typingInterval = setInterval(() => {
-        setDisplayText(fullText.slice(0, index + 1));
-        index++;
+        const typingInterval = setInterval(() => {
+          setDisplayText(fullText.slice(0, index + 1));
+          index++;
 
-        if (index === fullText.length) {
-          clearInterval(typingInterval);
+          if(index === fullText.length) {
+            clearInterval(typingInterval);
 
-          setTimeout(() => {
-            setShowContentUtama(true);
-          }, 300);
-        }
-      }, 150);
-    }, 1500);
+            setTimeout(() => {
+              setShowContentUtama(true);
+            }, 300);
+          }
+        }, 150);
+      }, 1000);
 
-    return () => clearTimeout(startTyping);
-  }, []);
+      return () => {
+        clearTimeout(startTyping);
+      };
+    };
+
+    window.addEventListener(
+      "disclaimerClosed",
+      startHeroAnimation
+    );
+
+    return () => {
+      window.removeEventListener(
+        "disclaimerClosed",
+        startHeroAnimation
+      );
+    };
+  },[]);
 
   return (
     <div

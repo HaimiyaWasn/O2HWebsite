@@ -16,10 +16,18 @@ export default function DisclaimerWrapper() {
     } else {
       document.body.style.overflow = "auto";
     };
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [showDisclaimer]);
 
   const handleClose = () => {
     setShowDisclaimer(false);
+
+    window.dispatchEvent(
+      new CustomEvent("disclaimerClosed")
+    );
   };
 
   if(!showDisclaimer) return null;
