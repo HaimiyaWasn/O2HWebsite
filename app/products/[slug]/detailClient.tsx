@@ -150,12 +150,12 @@ export default function DetailClient({
                     {isFavorite ? (
                       <FaHeart
                         size={20} 
-                        className="text-yellow-400 group-hover:text-black transition-all duration-300"
+                        className="text-yellow-400 group-hover:text-black group-active:text-black transition-all duration-300"
                       />
                     ) : (
                       <FaRegHeart
                         size={20}
-                        className="text-yellow-400 group-hover:text-black transition-all duration-300"
+                        className="text-yellow-400 group-hover:text-black group-active:text-black transition-all duration-300"
                       />
                     )}
                   </button>
