@@ -1,19 +1,68 @@
-"use client";
+"use client"
 
 import { useEffect, useState } from "react";
 
-export default function DisclaimerScene({ onClose }: { onClose: () => void }) {
+/**
+ * Props untuk komponen DisclaimerScene
+ */
+type DisclaimerSceneProps = {
+  onClose: () => void; // Function yang dijalankan setelah animasi penutupan disclaimer selesai
+};
+
+/**
+ * Modal Disclaimer
+ * 
+ * Digunakan untuk menampilkan informasi penting sebelum pengguna dapat mengakses halaman utama
+ * 
+ * Cocok digunakan untuk:
+ * - Disclaimer project portfolio
+ * - Terms & Condition
+ * - Cookies Consent
+ * - Privacy Policy
+ * - Age Verification
+ */
+export default function DisclaimerScene({ onClose }: DisclaimerSceneProps) {
+  /**
+   * Mengontrol animasi masuk (fade-in)
+   * 
+   * false = Modal masih tersembunyi
+   * true = Modal ditampilkan
+   */
   const [visible, setVisible] = useState(false);
+
+  /**
+   * Mengontol animasi keluar (fade-out)
+   * 
+   * false = Modal masih aktif
+   * true = Modal sedang ditutup
+   */
   const [closing, setClosing] = useState(false);
 
+
+  /**
+   * Menjalankan animasi masuk saat komponen pertama kali dirender
+   * 
+   * Delay kecil diperlukan agar browser sempat merender state awal sebelum transisi dimulai
+   */
   useEffect(() => {
     const timer = setTimeout(() => {
       setVisible(true);
     }, 10);
 
+    /**
+     * Membersihkan timer ketika komponen unmount untuk mencegah memory leak
+     */
     return () => clearTimeout(timer);
   }, []);
 
+  /**
+   * Menutup modal disclaimer
+   * 
+   * Langkah: 
+   * 1. Aktifkan animasi keluar
+   * 2. Tunggu animasi selesai
+   * 3. Jalankan callback onClose()
+   */
   const handleClose = () => {
     setClosing(true);
 
@@ -32,7 +81,7 @@ export default function DisclaimerScene({ onClose }: { onClose: () => void }) {
         className={`w-[90%] max-w-xl rounded-xl bg-white p-6 shadow-2xl transition-all duration-500 ease-out transform-gpu ${
           visible && !closing
             ? "translate-y-0 scale-100 opacity-100"
-            : "translate-y-8 sclae-90 opacity-0"
+            : "translate-y-8 scale-90 opacity-0"
         }`}
       >
         <h2 className="mb-4 text-center text-2xl font-bold text-black">
