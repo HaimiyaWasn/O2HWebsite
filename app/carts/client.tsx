@@ -288,7 +288,7 @@ export default function CartClient({ carts }: CartClientProps) {
         </div>
 
         {cartItems.length > 0 && (
-          <div className="fixed bottom-0 left-0 right-0 bg-base-100 border-t border-yellow-400/20 backdrop-blur-md z-50">
+          <div className="fixed bottom-0 left-0 right-0 bg-base-100 border-t border-yellow-400/20 backdrop-blur-md z-20">
             <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
               <div>
                 <p className="text-sm opacity-60">{totalItem} barang dipilih</p>

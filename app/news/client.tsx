@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Playfair_Display } from "next/font/google"; // Font
-import { FaArrowAltCircleRight } from "react-icons/fa"; // Icon panah
+import { Playfair_Display } from "next/font/google";
+import { FaArrowAltCircleRight } from "react-icons/fa";
 
 import RevealOnScroll from "../components/RevealOnScroll";
 
-// Tipe data berita
 type News = {
   id: number;
   date: string;
@@ -21,7 +20,6 @@ type NewsClientProps = {
   currentPage: number;
 };
 
-// Konfigurasi font
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
@@ -32,29 +30,23 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
-// Halaman semua berita
 export default function NewsClient({
   allNews,
   totalPages,
   currentPage,
 }: NewsClientProps) {
-  // Pagination
   const MAX_VISIBLE_PAGES = 5;
 
-  // Hitung halaman yang akan ditampilkan
   let startPage = Math.max(1, currentPage - Math.floor(MAX_VISIBLE_PAGES / 2));
 
-  // Pastikan halaman akhir tidak melebihi total halaman
   let endPage = startPage + MAX_VISIBLE_PAGES - 1;
 
-  // Jika halaman akhir melebihi total halaman, geser startPage ke kiri
   if (endPage > totalPages) {
     endPage = totalPages;
 
     startPage = Math.max(1, endPage - MAX_VISIBLE_PAGES + 1);
   }
 
-  // Membuat array halaman yang akan ditampilkan
   const visiblePages = Array.from(
     { length: endPage - startPage + 1 },
     (_, i) => startPage + i
@@ -63,9 +55,8 @@ export default function NewsClient({
   return (
     <>
       <title>News | O2H Official Site</title>
-      <section className="py-20 scroll-mt-12 md:scroll-mt-20">
+      <section className="py-20 min-h-screen">
         <div className="max-w-7xl mx-auto px-6 py-10">
-          {/* Header */}
           <RevealOnScroll delay={300}>
             <div
               className={`inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md ${playfairDisplayBold.className}`}

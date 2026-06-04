@@ -17,12 +17,10 @@ export default function FloatingLogo() {
   const [rotation, setRotation] = useState(0);
   const [mounted, setMounted] = useState(false);
 
-  // Pastikan render hanya di client
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Efek rotasi saat scroll
   useEffect(() => {
     if (!mounted) return;
 
@@ -43,7 +41,6 @@ export default function FloatingLogo() {
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Hindari hydration mismatch
   if (!mounted) return null;
 
   return (

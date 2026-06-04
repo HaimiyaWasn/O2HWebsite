@@ -49,7 +49,7 @@ export default function ProductDescriptionModal({
   return (
     <div
     onClick={handleCloseDescription}
-    className={`fixed inset-0 z-9999 flex items-center justify-center transition-all duration-300 ${
+    className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-300 ${
       openDescription
         ? "bg-black/70 opacity-100 visible"
         : "bg-black/0 opacity-0 invisible"

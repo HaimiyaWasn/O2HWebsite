@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { Bungee, Playfair_Display } from "next/font/google";
 import { useDisclaimer } from "./Disclaimer/DisclaimerContent";
 
-// Konfigurasi font
 const bungee = Bungee({
   weight: "400",
   subsets: ["latin"],
@@ -16,17 +15,14 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
-// Hero section utama
 export default function Hero() {
   const [isMounted, setIsMounted] = useState(false);
   const [displayText, setDisplayText] = useState("");
   const [showContentUtama, setShowContentUtama] = useState(false);
   const { accepted } = useDisclaimer();
 
-  // Teks yang akan ditampilkan dengan efek mengetik
   const fullText = "Together in Every Step";
 
-  // Scroll ke Latest News
   const handleScrollButton = () => {
     document
       .getElementById("card-products")
@@ -63,7 +59,6 @@ export default function Hero() {
       className="hero min-h-screen relative overflow-hidden"
       id="hero-page-utama"
     >
-      {/* Background */}
       <Image
         src="/img/backgrounds/O2H_ImagesHero_2.jpg"
         alt="Hero background"
@@ -74,10 +69,8 @@ export default function Hero() {
         }`}
       />
 
-      {/* Overlay */}
       <div className="hero-overlay bg-black/75 z-0" />
-
-      {/* Konten utama */}
+      
       <div className="hero-content text-neutral-content text-center z-10">
         <div className="max-w-3xl">
           <div
@@ -91,7 +84,6 @@ export default function Hero() {
               O2H Official Site
             </span>
           </div>
-          {/* Judul */}
           <h1
             className={`mb-5 text-4xl md:text-5xl font-bold ${bungee.className}`}
           >
@@ -99,7 +91,6 @@ export default function Hero() {
             <span className="animate-ping text-yellow-400">|</span>
           </h1>
 
-          {/* Deskripsi */}
           <p
             className={`mb-5 md:text-xl transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
               showContentUtama
@@ -114,7 +105,6 @@ export default function Hero() {
             aut explicabo assumenda possimus laborum cum blanditiis vero!
           </p>
 
-          {/* Tombol CTA */}
           <button
             onClick={handleScrollButton}
             disabled={!showContentUtama}

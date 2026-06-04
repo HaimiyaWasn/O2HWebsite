@@ -3,14 +3,13 @@
 import Link from "next/link"; 
 import Image from "next/image";
 import { useState } from "react";
-import { FaHeart } from "react-icons/fa"; // Icon cart
-import { IoIosNotifications } from "react-icons/io"; // Icon notifikasi
-import { Playfair_Display, Yesteryear } from "next/font/google"; // Google Fonts
+import { FaHeart } from "react-icons/fa";
+import { IoIosNotifications } from "react-icons/io";
+import { Playfair_Display, Yesteryear } from "next/font/google";
 
 import ProfileIconDefault from "@/public/img/profileIconDefault.jpg";
 import O2HLogo from "@/public/img/logos/O2H_Logos_1.png";
 
-// Konfigurasi font
 const playfairDisplayRegular = Playfair_Display({
   weight: "400",
   subsets: ["latin"],
@@ -26,18 +25,13 @@ const yesteryear = Yesteryear({
   subsets: ["latin"],
 });
 
-// Navbar utama
 export default function Navbar() {
-  // State sidebar
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      {/* Navbar */}
       <div className="navbar shadow-sm fixed top-0 z-30 bg-yellow-400 text-black">
-        {/* Kiri */}
         <div className="navbar-start gap-0.5">
-          {/* Tombol sidebar */}
           <button
             onClick={() => setOpen(true)}
             aria-label="Open menu"
@@ -59,7 +53,6 @@ export default function Navbar() {
             </svg>
           </button>
 
-          {/* Logo */}
           <Link href="/">
             <Image
               alt="O2H Logo"
@@ -71,24 +64,19 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Tengah */}
         <div className="navbar-center hidden lg:flex">
           <h1 className={`text-2xl ${yesteryear.className}`}>O2H Official Site</h1>
         </div>
 
-        {/* Kanan */}
         <div className="navbar-end gap-0.5">
-          {/* Cart */}
           <button className="p-3 rounded-full hover:bg-yellow-300 active:bg-yellow-500 focus:outline-none transition">
             <FaHeart size={20} />
           </button>
 
-          {/* Notifikasi */}
           <button className="p-2 rounded-full hover:bg-yellow-300 active:bg-yellow-500 focus:outline-none transition">
             <IoIosNotifications size={28} />
           </button>
 
-          {/* Dropdown profile */}
           <div className="dropdown dropdown-end">
             <label
               tabIndex={0}
@@ -118,7 +106,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Overlay */}
       {open && (
         <div
           className="fixed inset-0 bg-black/50 z-40"
@@ -126,13 +113,11 @@ export default function Navbar() {
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={`fixed top-0 left-0 h-full w-64 bg-yellow-50 text-black z-50 transform transition-transform duration-300 ease-out ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* Header sidebar */}
         <div className="flex items-center gap-2 px-4 py-3 border-b border-yellow-400">
           <button
             onClick={() => setOpen(false)}
@@ -147,7 +132,6 @@ export default function Navbar() {
           </span>
         </div>
 
-        {/* Menu */}
         <ul
           className={`menu p-3 space-y-3 w-full text-base ${playfairDisplayRegular.className}`}
         >

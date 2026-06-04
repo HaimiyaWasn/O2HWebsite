@@ -62,7 +62,7 @@ export default function DetailClient({
 
   return (
     <>
-      <section className="min-h-screen py-12 pt-28 scroll-mt-12 md:scroll-mt-20">
+      <section className="min-h-screen py-12 pt-28">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <RevealOnScroll delay={300}>

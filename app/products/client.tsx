@@ -199,7 +199,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
   return (
     <>
       <title>Products | O2H Official Site</title>
-      <section className="pt-5 scroll-mt-12 md:scroll-mt-20">
+      <section className="pt-5 min-h-screen">
         <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="flex justify-center items-center mb-4">
             <SearchProducts />

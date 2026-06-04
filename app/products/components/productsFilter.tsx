@@ -55,7 +55,6 @@ export default function ProductsFilter({
 
   return (
     <section>
-      {/* Dekstop */}
       <div className="flex flex-col lg:flex-row">
         <div className="hidden lg:block w-full lg:w-75 border border-yellow-400 rounded-xl h-fit">
           <div className="p-5 border-b border-yellow-400 flex flex-1 items-center gap-2">

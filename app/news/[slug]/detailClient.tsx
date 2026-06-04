@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Playfair_Display } from "next/font/google"; // Font Playfair Display
-import { FaArrowAltCircleRight } from "react-icons/fa"; // Ikon panah
+import { Playfair_Display } from "next/font/google";
+import { FaArrowAltCircleRight } from "react-icons/fa";
 
 import RevealOnScroll from "@/app/components/RevealOnScroll";
 
-// Tipe data berita
 type News = {
   id: number;
   date: string;
@@ -15,7 +14,6 @@ type News = {
   content: string;
 };
 
-// Konfigurasi font Playfair Display untuk judul dan konten
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
@@ -30,12 +28,10 @@ type DetailNewsClientProps = {
   news: News;
 };
 
-// Client Component
 export default function DetailClient({ news }: DetailNewsClientProps) {
   return (
     <>
-      {/* Konten berita */}
-      <section className="py-12 pt-28 scroll-mt-12 md:scroll-mt-20">
+      <section className="pt-28 min-h-screen">
         <div className="max-w-7xl mx-auto px-6">
           <RevealOnScroll>
             <p
@@ -61,12 +57,11 @@ export default function DetailClient({ news }: DetailNewsClientProps) {
         </div>
       </section>
 
-      {/* Tombol kembali */}
-      <div className="max-w-5xl mx-auto px-6 py-18 flex justify-end">
+      <div className="max-w-7xl mx-auto px-6 py-10 flex justify-end">
         <RevealOnScroll>
           <Link
             href="/news"
-            className={`flex items-center gap-2 text-sm md:text-base leading-none ${playfairDisplayRegular.className}`}
+            className={`flex items-center gap-2 text-sm md:text-base leading-none opacity-50 hover:opacity-100 active:opacity-100 ${playfairDisplayRegular.className}`}
           >
             Back to news
             <FaArrowAltCircleRight size={20} className="translate-y-px" />

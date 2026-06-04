@@ -1,39 +1,33 @@
 import NewsClient from "../../client";
-import { getNews } from "../../data"; // Ambil data berita
-import { notFound } from "next/navigation"; // Halaman 404
+import { getNews } from "../../data";
+import { notFound } from "next/navigation";
 
-// Tipe props
 type Props = {
   params: Promise<{
     pageNumber: string;
   }>;
 };
 
-// Halaman pagination berita
 export default async function PaginationPage({ params }: Props) {
   const { pageNumber } = await params;
 
-  // Konversi nomor halaman
   const currentPage = Number(pageNumber);
 
-  // Validasi halaman
   if (isNaN(currentPage) || currentPage < 1) {
     notFound();
   }
 
-  // Ambil data berita
   const { news, totalPages } = await getNews(currentPage);
 
-  // Jika halaman melebihi total
   if (currentPage > totalPages) {
     notFound();
   }
 
   return (
     <NewsClient
-      allNews={news} // Data berita untuk halaman ini
-      totalPages={totalPages} // Total halaman
-      currentPage={currentPage} // Halaman saat ini
+      allNews={news}
+      totalPages={totalPages}
+      currentPage={currentPage}
     />
   );
 }

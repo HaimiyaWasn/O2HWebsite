@@ -1,20 +1,16 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react"; // Komponen Swiper
-import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules"; // Modul Swiper
-import { FaArrowAltCircleRight } from "react-icons/fa"; // Ikon panah
-import { Playfair_Display } from "next/font/google"; // Font Playfair Display
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
+import { Playfair_Display } from "next/font/google";
 
 import RevealOnScroll from "./RevealOnScroll";
 
-// CSS Swiper
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
-// Konfigurasi font
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
@@ -25,7 +21,6 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
-// Carousel album
 export default function CarouselAlbum() {
   return (
     <section className="py-10 bg-yellow-400">
