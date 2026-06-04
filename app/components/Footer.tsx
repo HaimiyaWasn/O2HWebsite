@@ -6,13 +6,11 @@ import { FaTiktok, FaXTwitter, FaYoutube, FaInstagram } from "react-icons/fa6";
 
 import O2HLogo from "@/public/img/logos/O2H_Logos_1.png";
 
-// Props tema footer
 type FooterProps = {
   variant?: "dark" | "yellow" | "light";
 };
 
 export default function Footer({ variant = "yellow" }: FooterProps) {
-  // Variasi tema footer
   const variants = {
     dark: {
       bg: "bg-[#070b1a]",
@@ -41,7 +39,7 @@ export default function Footer({ variant = "yellow" }: FooterProps) {
   const current = variants[variant];
 
   return (
-    <footer className={`${current.bg} ${current.text} px-6 md:px-10 py-12`}>
+    <footer className={`${current.bg} ${current.text} px-6 md:px-10 py-12 md:pb-40`}>
       <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10 md:gap-12 text-center md:text-left">
         {/* Logo & social media */}
         <div className="flex flex-col gap-5 text-sm items-center justify-center md:max-w-md w-full">

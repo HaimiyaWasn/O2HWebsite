@@ -1,9 +1,8 @@
-import CartClient from "./client"
+import CartClient from "./client";
+import getAllCarts from "./data";
 
-export default function CartPage() {
-  return (
-    <>
-      <CartClient />
-    </>
-  )
+export default async function CartPage() {
+  const carts = await getAllCarts();
+
+  return <CartClient carts={carts} />;
 }
