@@ -3,25 +3,35 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Playfair_Display } from "next/font/google";
+
 import RevealOnScroll from "../components/RevealOnScroll";
 
-type Cart = {
-  id: number;
-  title: string;
-  price: number;
-  label: string[];
-  image: string[];
-  deskripsi: string;
-  sold: string;
-  totalCart: number;
-  size: string[];
-  discount: number;
-  createdAt: string;
-  slug: string;
+/**
+ * Representasi satu produk yang berada di dalam keranjang
+ * 
+ * Dapat digunakan kembali untuk:
+ * - Cart
+ * - Checkout
+ * - Wishlist
+ * - Riwayat Pesanan
+ * - POS System
+ */
+type CartItem = {
+  id: number; // ID unik produk
+  title: string; // Nama produk
+  price: number; // Harga asli sebelum diskon
+  image: string[]; // Daftar gambar produk
+  totalCart: number; // Jumlah produk yang dibeli
+  size: string[]; // Daftar ukuran yang dipilih
+  discount: number; // Persentase diskon (0 - 100)
 };
 
+/**
+ * Props yang diterima oleh komponen CartClient
+ * Berisi seluruh data keranjang dari server/page
+ */
 type CartClientProps = {
-  carts: Cart[];
+  carts: CartItem[];
 };
 
 const playfairDisplayBold = Playfair_Display({
@@ -30,6 +40,10 @@ const playfairDisplayBold = Playfair_Display({
 });
 
 export default function CartClient({ carts }: CartClientProps) {
+  /**
+   * Menyimpan seluruh item yang ada di keranjang 
+   * Setiap item otomatis diberi properti 'checked' untuk menandai apakah produk dipilih saaat checkout
+   */
   const [cartItems, setCartItems] = useState(
     carts.map((item) => ({
       ...item,
@@ -37,6 +51,9 @@ export default function CartClient({ carts }: CartClientProps) {
     }))
   );
 
+  /**
+   * Menambah quantity produk berdasarkan ID
+   */
   const increaseQty = (id: number) => {
     setCartItems((prev) =>
       prev.map((item) =>
@@ -50,6 +67,10 @@ export default function CartClient({ carts }: CartClientProps) {
     );
   };
 
+  /**
+   * Mengubah jumlah produk melalui input angka
+   * Minimal jumlah produk adalah 1
+   */
   const changeQty = (id: number, value: number) => {
     setCartItems((prev) =>
       prev.map((item) =>
@@ -63,6 +84,10 @@ export default function CartClient({ carts }: CartClientProps) {
     );
   };
 
+  /**
+   * Mengurangi jumlah produk
+   * Tidak boleh kurang dari 1
+   */
   const decreaseQty = (id: number) => {
     setCartItems((prev) =>
       prev.map((item) =>
@@ -76,10 +101,16 @@ export default function CartClient({ carts }: CartClientProps) {
     );
   };
 
+  /**
+   * Menghapus produk dari keranjang berdasarkan ID produk
+   */
   const removeItem = (id: number) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
+  /**
+   * Mengubah status centang produk tertentu
+   */
   const toggleItem = (id: number) => {
     setCartItems((prev) =>
       prev.map((item) =>
@@ -93,6 +124,11 @@ export default function CartClient({ carts }: CartClientProps) {
     );
   };
 
+  /**
+   * Jika semua produk sudah dicentang,
+   * maka akan menghilangkan semua centang
+   * Jika belum, maka semua akan dicentang
+   */
   const toggleAll = () => {
     const allChecked = cartItems.every((item) => item.checked);
 
@@ -104,19 +140,31 @@ export default function CartClient({ carts }: CartClientProps) {
     );
   };
 
+  /**
+   * Hanya mengambil produk yang dicentang
+   */
   const selectedItems = cartItems.filter((item) => item.checked);
 
+  /**
+   * Menghitung total jumlah barang yang dipilih
+   */
   const totalItem = selectedItems.reduce(
     (acc, item) => acc + item.totalCart,
     0
   );
 
+  /**
+   * Menghitung total harga setelah diskon
+   */
   const totalPrice = selectedItems.reduce((acc, item) => {
     const finalPrice = item.price - (item.price * item.discount) / 100;
 
     return acc + finalPrice * item.totalCart;
   }, 0);
 
+  /**
+   * Menghitung total uang yang dihemat dari diskon
+   */
   const totalDiscount = selectedItems.reduce((acc, item) => {
     return acc + ((item.price * item.discount) / 100) * item.totalCart;
   }, 0);
@@ -219,14 +267,14 @@ export default function CartClient({ carts }: CartClientProps) {
                             >
                               -
                             </button>
-
+                            
+                            {/* Input jumlah produk secara manual */}
                             <input
                               type="text"
                               inputMode="numeric"
-                              min={1}
                               value={cart.totalCart}
                               onChange={(e) => {
-                                const value = e.target.value.replace(/\D/g, "");
+                                const value = e.target.value.replace(/\D/g, ""); // Hanya mengizinkan angka
 
                                 changeQty(
                                   cart.id,
