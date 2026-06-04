@@ -138,17 +138,15 @@ export default function CartClient({ carts }: CartClientProps) {
           </RevealOnScroll>
 
           {cartItems.length > 0 && (
-            <div className="mt-8">
-              <label className="flex items-center gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-warning"
-                  checked={cartItems.every((item) => item.checked)}
-                  onChange={toggleAll}
-                />
+            <div className="mt-10 flex items-center gap-3">
+              <input
+                type="checkbox"
+                className="checkbox checkbox-warning cursor-pointer"
+                checked={cartItems.every((item) => item.checked)}
+                onChange={toggleAll}
+              />
 
-                <span>Pilih Semua</span>
-              </label>
+              <span>Pilih Semua</span>
             </div>
           )}
 
@@ -215,7 +213,7 @@ export default function CartClient({ carts }: CartClientProps) {
 
                         <div className="mt-4 flex justify-center md:justify-start">
                           <div className="flex items-center gap-2 rounded-full border border-yellow-400/30 bg-base-100 px-2 py-1">
-                            <button 
+                            <button
                               className="btn btn-circle btn-xs bg-yellow-400 text-black font-bold text-lg"
                               onClick={() => decreaseQty(cart.id)}
                             >
@@ -229,7 +227,7 @@ export default function CartClient({ carts }: CartClientProps) {
                               value={cart.totalCart}
                               onChange={(e) => {
                                 const value = e.target.value.replace(/\D/g, "");
-                            
+
                                 changeQty(
                                   cart.id,
                                   value === "" ? 1 : Number(value)
