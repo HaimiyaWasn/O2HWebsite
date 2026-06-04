@@ -15,7 +15,7 @@ import getAllCarts from "./data";
  *    - Penghapusan produk
  * 
  * Alasan memisah file:
- * - CartPage (Server Component)
+ * - Server Component
  *   1. Mengambil data dari server
  *   2. Aman untuk akses database/API
  *   3. Tidak mengirim JavaScript yang tidak perlu ke browser

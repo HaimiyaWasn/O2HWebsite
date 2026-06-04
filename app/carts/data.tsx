@@ -37,14 +37,14 @@ export default async function getAllCarts(): Promise<CartItem[]> {
    * Mengambil host saat ini
    * 
    * Contoh:
-   * localhost:3000, example.com, example.vercel.app, dll
+   * localhost:3000, example.vercel.app, dll
    */
   const host = (await headers()).get("host");
 
   /**
    * Mengambil data keranjang dari API internal
    * 
-   * 'cache: "no-store"' berarti data akan selalu diambil ulang dari server
+   * cache: "no-store" berarti data akan selalu diambil ulang dari server
    * dan tidak menggunakan cache Next.js
    * 
    * Cocok untuk data yang sering berubah seperti:

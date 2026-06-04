@@ -1,17 +1,51 @@
-"use client";
+"use client"
 
 import Image from "next/image";
 import Link from "next/link";
 import { FaShoppingCart } from "react-icons/fa";
+
 import type { CartItem } from "./data";
 
-interface Props {
+/**
+ * Props yang diterima FLoatingCartClient
+ * 
+ * carts:
+ * Seluruh produk yang ada di keranjang pengguna
+ */
+type FloatingCartClientProps = {
   carts: CartItem[];
 }
 
-export default function FloatingCartClient({ carts }: Props) {
+/**
+ * Menampilkan ringkasan keranjang yang selalu terlihat dibagian bawah layar
+ * 
+ * Tujuan:
+ * - Memberi tahu jumlah barang dalam keranjang
+ * - Menampilkan total harga sementara
+ * - Mempermudah pengguna menuju halaman checkout
+ * 
+ * Cocok digunakan pada:
+ * - E-commerce
+ * - Food Delivery
+ * - POS System
+ * - Ticket Booking
+ * - Marketplace
+ */
+export default function FloatingCartClient({ carts }: FloatingCartClientProps) {
+  /**
+   * Menghitung total seluruh produk yang ada di dalam keranjang
+   * 
+   * Contoh:
+   * Produk A = 2 pcs
+   * Poduk B = 1 pcs
+   * 
+   * Hasil = 3 pcs
+   */
   const totalItem = carts.reduce((total, item) => total + item.totalCart, 0);
 
+  /**
+   * Menghitung total harga seluruh keranjang setelah memperhitungkan diskon
+   */
   const totalPrice = carts.reduce((total, item) => {
     const finalPrice =
       item.discount > 0
@@ -21,12 +55,20 @@ export default function FloatingCartClient({ carts }: Props) {
     return total + finalPrice * item.totalCart;
   }, 0);
 
+  /**
+   * Jika tidak ada produk di keranjang, komponen tidak perlu ditampilkan
+   */
   if (!carts.length || totalItem === 0) return null;
 
+  /**
+   * Produk pertama digunakan sebagai preview gambar
+   * dan nama produk pada floating cart
+   */
   const firstItem = carts[0];
 
   return (
     <>
+      {/* MOBILE VERSION (Floating Cart berbentuk tombol dipojok kanan bawah) */}
       <Link href="/carts" className="md:hidden fixed bottom-4 right-4 z-20">
         <div className="relative w-14 h-14 bg-yellow-400 text-black rounded-full shadow-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-300">
           <FaShoppingCart size={24} />
@@ -37,6 +79,8 @@ export default function FloatingCartClient({ carts }: Props) {
           )}
         </div>
       </Link>
+
+      {/* DEKSTOP VERSION (Floating Cart berbentuk card informasi) */}
       <Link
         href="/carts"
         className="hidden md:block fixed bottom-4 left-1/2 -translate-x-1/2 z-20 w-[calc(100%-1rem)] max-w-xl p-2 md:p-3"
