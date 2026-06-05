@@ -5,30 +5,92 @@ import { useState, useEffect } from "react";
 import { Bungee, Playfair_Display } from "next/font/google";
 import { useDisclaimer } from "./Disclaimer/DisclaimerContent";
 
+/**
+ * Font utama untuk heading Hero
+ */
 const bungee = Bungee({
   weight: "400",
   subsets: ["latin"],
 });
 
+/**
+ * Font untuk deskripsi Hero
+ */
 const playfairDisplayRegular = Playfair_Display({
   weight: "400",
   subsets: ["latin"],
 });
 
+/**
+ * Kalimat yang akan dtampilkan menggunakan efek typing animation
+ */
+const HERO_TEXT = "Together in Every Step";
+
+/**
+ * Komponen utama yang pertama kali dilihat pengunjung
+ * ketika membuka website
+ * 
+ * Fitur: 
+ * - Background image fullscreen
+ * - Typing animation
+ * - Fade in content
+ * - Smooth scroll button
+ * - Terintegrasi dengan Disclaimer
+ * 
+ * Cocok digunakan untuk:
+ * - Landing page
+ * - Company Profile
+ * - Portfolio
+ * - E-commerce
+ * - Product Showcase
+ */
 export default function Hero() {
+  /**
+   * Menandai bahwa Hero sudah mulai aktif
+   * 
+   * Digunakan untuk animasi background ketika disclaimer telah diterima
+   */
   const [isMounted, setIsMounted] = useState(false);
+
+  /**
+   * Menyimpan teks yang sedang diketik
+   * 
+   * Contoh:
+   * T, To, Tog, ...
+   */
   const [displayText, setDisplayText] = useState("");
+
+  /**
+   * Mengontrol kapan deskripsi dan tombol mulai ditampilkan
+   */
   const [showContentUtama, setShowContentUtama] = useState(false);
+
+  /**
+   * Status disclaimer dari Context
+   * 
+   * Hero baru akan berjalan setelah disclaimer disetujui pengguna
+   */
   const { accepted } = useDisclaimer();
 
-  const fullText = "Together in Every Step";
-
+  /**
+   * Scroll menuju section produk
+   */
   const handleScrollButton = () => {
     document
       .getElementById("card-products")
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
+  /**
+   * Menjalankan animasi Hero setelah disclaimer diterima
+   * 
+   * Urutan: 
+   * 1. Disclaimer diterima
+   * 2. Background muncul
+   * 3. Menunggu 1.5 detik
+   * 4. Typing animation dimulai
+   * 5. Setelah selesai, tampilkan konten utama
+   */
   useEffect(() => {
     if (!accepted) return;
 
@@ -38,12 +100,18 @@ export default function Hero() {
       let index = 0;
 
       const typingInterval = setInterval(() => {
-        setDisplayText(fullText.slice(0, index + 1));
+        setDisplayText(HERO_TEXT.slice(0, index + 1));
         index++;
 
-        if (index === fullText.length) {
+        /**
+         * Ketika seluruh teks selesai diketik, hentikan interval
+         */
+        if (index === HERO_TEXT.length) {
           clearInterval(typingInterval);
 
+          /**
+           * Tampilkan paragraf dan tombol beberapa saat setelah typing selesai
+           */
           setTimeout(() => {
             setShowContentUtama(true);
           }, 300);
@@ -51,6 +119,9 @@ export default function Hero() {
       }, 150);
     }, 1500);
 
+    /**
+     * Membersihkan timeout saat komponen dilepas dari DOM
+     */
     return () => clearTimeout(startTyping);
   }, [accepted]);
 

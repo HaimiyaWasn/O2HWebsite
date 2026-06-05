@@ -11,17 +11,45 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
+/**
+ * Font untuk judul section
+ */
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
 });
 
-const playfairDisplayRegular = Playfair_Display({
-  weight: "400",
-  subsets: ["latin"],
-});
-
+/**
+ * Menampilkan foto dalam bentuk slider interaktif menggunakan Swiper.js
+ * 
+ * Fitur:
+ * - Autoplay otomatis
+ * - Infinite loop
+ * - Pagination Indicator
+ * - Efek coverflow
+ * - Responsive mobile & desktop
+ * - Animasi muncul saat discroll
+ * 
+ * Cocok digunakan untuk:
+ * - Album Foto
+ * - Gallery Produk
+ * - Portfolio Showcase
+ * - Event Gallery
+ * - Banner Slider
+ */
 export default function CarouselAlbum() {
+  /**
+   * Daftar gambar yang ditampilkan pada carousel
+   * 
+   * Jika jumlah gambar bertambah, 
+   * cukup tambahkan path baru ke array ini
+   */
+  const albumImages = [
+    "/img/albums/O2H_1.jpg",
+    "/img/albums/O2H_2.jpg",
+    "/img/albums/O2H_4.jpg",
+  ]
+
   return (
     <section className="py-10 bg-yellow-400">
       <div className="max-w-7xl mx-auto px-6">
@@ -66,11 +94,7 @@ export default function CarouselAlbum() {
               loop
               className="w-[85%] max-w-4xl aspect-square md:aspect-video"
             >
-              {[
-                "/img/albums/O2H_1.jpg",
-                "/img/albums/O2H_2.jpg",
-                "/img/albums/O2H_4.jpg",
-              ].map((src, i) => (
+              {albumImages.map((src, i) => (
                 <SwiperSlide
                   key={i}
                   className="relative rounded-xl overflow-hidden group"

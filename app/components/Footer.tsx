@@ -6,39 +6,91 @@ import { FaTiktok, FaXTwitter, FaYoutube, FaInstagram } from "react-icons/fa6";
 
 import O2HLogo from "@/public/img/logos/O2H_Logos_1.png";
 
+/**
+ * Variasi tema Footer
+ *
+ * dark = Tema gelap
+ * yellow = Tema utama brand
+ * white = Tema terang
+ */
 type FooterProps = {
   variant?: "dark" | "yellow" | "light";
 };
 
-export default function Footer({ variant = "yellow" }: FooterProps) {
-  const variants = {
-    dark: {
-      bg: "bg-[#070b1a]",
-      text: "text-white",
-      divider: "border-gray-600",
-      subText: "text-gray-300",
-      copyright: "text-gray-400",
-    },
-    yellow: {
-      bg: "bg-yellow-400",
-      text: "text-black",
-      divider: "border-black/30",
-      subText: "text-black/70",
-      copyright: "text-black/60",
-    },
-    light: {
-      bg: "bg-gray-100",
-      text: "text-black",
-      divider: "border-gray-300",
-      subText: "text-gray-600",
-      copyright: "text-gray-500",
-    },
-  };
+/**
+ * Kumpulan style untuk setiap tema Footer
+ *
+ * Dengan memisahkan konfigurasi tema,
+ * komponen menjadi lebih mudah digunakan ulang
+ * pada halaman dengan warna yang berbeda
+ */
+const FOOTER_VARIANTS = {
+  dark: {
+    bg: "bg-[#070b1a]",
+    text: "text-white",
+    divider: "border-gray-600",
+    subText: "text-gray-300",
+    copyright: "text-gray-400",
+  },
+  yellow: {
+    bg: "bg-yellow-400",
+    text: "text-black",
+    divider: "border-black/30",
+    subText: "text-black/70",
+    copyright: "text-black/60",
+  },
+  light: {
+    bg: "bg-gray-100",
+    text: "text-black",
+    divider: "border-gray-300",
+    subText: "text-gray-600",
+    copyright: "text-gray-500",
+  },
+};
 
-  const current = variants[variant];
+/**
+ * Daftar link informasi footer
+ *
+ * Cocok dipisahkan menjadi array agar mudah ditambahkan
+ * atau dikurangi tanpa mengubah struktur JSX
+ */
+const footerLinks = [
+  "About this site",
+  "About accounts",
+  "About payments",
+  "Acceptable use policy",
+  "Privacy Policy",
+  "Request to customers",
+  "About the operating company",
+  "System requiremens",
+  "FAQ",
+];
+
+/**
+ * Menampilkan:
+ * - Logo Website
+ * - Social Media
+ * - Navigation Links
+ * - Copyright
+ * - Informasi Legal
+ *
+ * Cocok digunakan untuk:
+ * - E-commerce
+ * - Portfolio
+ * - Company Profile
+ * - Landing Page
+ * - Blog
+ */
+export default function Footer({ variant = "yellow" }: FooterProps) {
+  /**
+   *Mengambil konfigurasi tema aktif
+   */
+  const current = FOOTER_VARIANTS[variant];
 
   return (
-    <footer className={`${current.bg} ${current.text} px-6 md:px-10 py-12 md:pb-40`}>
+    <footer
+      className={`${current.bg} ${current.text} px-6 md:px-10 py-12 md:pb-40`}
+    >
       <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10 md:gap-12 text-center md:text-left">
         <div className="flex flex-col gap-5 text-sm items-center justify-center md:max-w-md w-full">
           <Link href="/">
@@ -77,17 +129,7 @@ export default function Footer({ variant = "yellow" }: FooterProps) {
         {/* Footer links */}
         <div className="flex flex-col gap-5 text-sm items-center md:items-start">
           <div className="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2 leading-relaxed">
-            {[
-              "About this site",
-              "About accounts",
-              "About payments",
-              "Acceptable use policy",
-              "Privacy Policy",
-              "Request to customers",
-              "About the operating company",
-              "System requiremens",
-              "FAQ",
-            ].map((item) => (
+            {footerLinks.map((item) => (
               <Link
                 key={item}
                 href="#"

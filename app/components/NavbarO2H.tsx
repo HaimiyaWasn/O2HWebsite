@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link"; 
+import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
@@ -10,22 +10,55 @@ import { Playfair_Display, Yesteryear } from "next/font/google";
 import ProfileIconDefault from "@/public/img/profileIconDefault.jpg";
 import O2HLogo from "@/public/img/logos/O2H_Logos_1.png";
 
+/**
+ * Font untuk menu, dropdown, dan teks semua
+ */
 const playfairDisplayRegular = Playfair_Display({
   weight: "400",
   subsets: ["latin"],
 });
 
+
+/**
+ * Font untuk judul menu sidebar
+ */
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
 });
 
+/**
+ * Font dekoratif untuk branding website
+ */
 const yesteryear = Yesteryear({
   weight: "400",
   subsets: ["latin"],
 });
 
+/**
+ * Menampilkan:
+ * - Tombol buka sidebar
+ * - Logo website
+ * - Nama website
+ * - Tombol favorit
+ * - Tombol notifikasi
+ * - Dropdown profile
+ * - Siedbar navigasi
+ * 
+ * Cocok digunakan untuk:
+ * - E-commerce
+ * - Portfolio
+ * - Blog
+ * - Company Profile
+ * - Dashboard sederhana
+ */
 export default function Navbar() {
+  /**
+   * Mengontrol status sidebar
+   * 
+   * true = Sidebar terbuka
+   * false = Sidebar tertutup
+   */
   const [open, setOpen] = useState(false);
 
   return (
@@ -65,7 +98,9 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-center hidden lg:flex">
-          <h1 className={`text-2xl ${yesteryear.className}`}>O2H Official Site</h1>
+          <h1 className={`text-2xl ${yesteryear.className}`}>
+            O2H Official Site
+          </h1>
         </div>
 
         <div className="navbar-end gap-0.5">
