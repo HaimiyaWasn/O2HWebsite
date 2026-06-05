@@ -7,33 +7,67 @@ import { Playfair_Display } from "next/font/google";
 import HomeProductCard from "./cardClient";
 import RevealOnScroll from "../RevealOnScroll";
 
+/**
+ * Representasi satu produk
+ * 
+ * Dapat digunakan kembali untuk:
+ * - Homepage Product Section
+ * - Product List
+ * - Featured Products
+ * - Best Seller Products
+ * - Products Search Result
+ */
 type Product = {
-  id: number;
-  title: string;
-  price: number;
-  image: string[];
-  sold: string;
-  isOutOfStock: boolean;
-  size: string[];
-  discount: number;
-  createdAt: string;
-  slug: string;
+  id: number; // ID unik produk
+  title: string; // Nama produk
+  price: number; // Harga produk sebelum diskon
+  image: string[]; // Daftar gambar produk
+  sold: string; // Jumlah produk yang sudah terjual
+  isOutOfStock: boolean; // Status stok produk
+  discount: number; // Persentase diskon (0 - 100)
+  createdAt: string; // Tanggal produk dibuat
+  slug: string; // Slug URL produk
 };
 
+/**
+ * Font untuk heading section
+ */
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
 });
 
+/**
+ * Font untuk teks biasa dan link
+ */
 const playfairDisplayRegular = Playfair_Display({
   weight: "400",
   subsets: ["latin"],
 });
 
+/**
+ * Propd yang diterima oleh AnimationCardClient
+ */
 type AnimationCardClientProps = {
-  products: Product[];
+  products: Product[]; // Daftar produk yang akan ditampilkan 
 }
 
+/**
+ * Menampilkan daftar produk di halaman utama dengan animasi
+ * 
+ * Fitur:
+ * - Animasi saat muncul di viewport
+ * - Link menuju halaman semua produk
+ * - Responsive grid layout
+ * - Navigasi ke halaman detail produk
+ * 
+ * Cocok digunakan untuk:
+ * - Featured Products
+ * - New Arrivals
+ * - Best Seller
+ * - Product Showcase
+ * - Store Homepage
+ */
 export default function AnimationCardClient({
   products,
 }: AnimationCardClientProps) {

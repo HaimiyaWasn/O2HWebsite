@@ -4,43 +4,103 @@ import Image from "next/image";
 import { useState } from "react";
 import { Playfair_Display } from "next/font/google";
 
+/**
+ * Font untuk judul produk
+ */
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
 });
 
+/**
+ * Representasi satu produk
+ * 
+ * Cocok digunakan untuk:
+ * - Homepage Product Card
+ * - Product Grid
+ * - Product List
+ * - Featured Product
+ */
 type Product = {
-  id: number;
-  title: string;
-  price: number;
-  image: string[];
-  sold: string;
-  isOutOfStock: boolean;
-  size: string[];
-  discount: number;
-  createdAt: string;
-  slug: string;
+  id: number; // ID unik produk
+  title: string; // Nama produk
+  price: number; // Harga produk sebelum diskon
+  image: string[]; // Daftar gambar produk
+  sold: string; // Jumlah produk yang sudah terjual
+  isOutOfStock: boolean; // Status stok produk
+  discount: number; // Persentase diskon (0 - 100)
+  createdAt: string; // Tanggal produk dibuat
+  slug: string; // Slug URL produk
 };
 
+/**
+ * Props untuk ProductCard
+ */
 type ProductCardProps = {
   product: Product;
 };
 
+/**
+ * Product Card untuk homepage
+ * 
+ * Fitur:
+ * - Hover image swap
+ * - Badge NEW
+ * - Badge Discount
+ * - Badge Out of Stock
+ * - Format harga Indonesia
+ * 
+ * Cocok digunakan untuk:
+ * - Homepage Store
+ * - Featured Products
+ * - Product Grid
+ * - Product SHowcase
+ */
 export default function HomeProductCard({ product }: ProductCardProps) {
+  /**
+   * Menyimpan status hover card
+   * 
+   * Digunakan untuk mengganti gambar saat mouse berada di atas card
+   */
   const [isHovered, setIsHovered] = useState(false);
 
+  /**
+   * Daftar gambar produk
+   */
   const images = product.image;
 
+  /**
+   * Menentukan apakah memiliki gambar produk kedua
+   */
   const hasSecondImage = images.length > 1;
 
+  /**
+   * Menghitung harga setelah diskon
+   */
   const finalPrice =
     product.discount > 0
       ? product.price - (product.price * product.discount) / 100
       : product.price;
 
+  /**
+   * Menentukan apakah produk termasuk kategori produk baru
+   * 
+   * Produk dianggap baru jika dibuat dalam 30 hari terakhir
+   */
   const isNew =
     new Date(product.createdAt).getTime() >
     Date.now() - 30 * 24 * 60 * 60 * 1000;
+
+  /**
+   * Formatter mata uang Indonesia
+   * 
+   * Dibuat satu kali agar tidak perlu membuat instance baru setiap render
+   */
+  const currencyFormater = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0,
+  })
 
   return (
     <div
@@ -106,35 +166,19 @@ export default function HomeProductCard({ product }: ProductCardProps) {
           {product.discount > 0 ? (
             <>
               <p className="text-xs text-gray-400 line-through">
-                {new Intl.NumberFormat("id-ID", {
-                  style: "currency",
-                  currency: "IDR",
-                  maximumFractionDigits: 0,
-                }).format(product.price)}
+                {currencyFormater.format(product.price)}
               </p>
               <p className="text-yellow-500 font-semibold">
-                {new Intl.NumberFormat("id-ID", {
-                  style: "currency",
-                  currency: "IDR",
-                  maximumFractionDigits: 0,
-                }).format(finalPrice)}
+                {currencyFormater.format(finalPrice)}
               </p>
             </>
           ) : (
             <>
               <p className="text-xs invisible">
-                {new Intl.NumberFormat("id-ID", {
-                  style: "currency",
-                  currency: "IDR",
-                  maximumFractionDigits: 0,
-                }).format(product.price)}
+                {currencyFormater.format(product.price)}
               </p>
               <p className="text-yellow-500 font-semibold">
-                {new Intl.NumberFormat("id-ID", {
-                  style: "currency",
-                  currency: "IDR",
-                  maximumFractionDigits: 0,
-                }).format(product.price)}
+                {currencyFormater.format(product.price)}
               </p>
             </>
           )}

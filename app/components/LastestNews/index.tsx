@@ -2,43 +2,82 @@ import { headers } from "next/headers";
 
 import LatestNewsClient from "./client";
 
-// Tipe data berita
-type News = {
-  id: number;
-  date: string;
-  title: string;
-  slug: string;
+/**
+ * Representasi satu data berita
+ * 
+ * Digunakan untuk:
+ * - Latest News
+ * - News List
+ * - Related Articles
+ * - News Detail
+ */
+type NewsItem = {
+  id: number; // ID unik berita
+  date: string; // Tanggal publikasi berita
+  title: string; // Judul berita
+  slug: string; // Slug URL detail berita
 };
 
-// Mengambil dan menampilkan berita terbaru
+/**
+ * Server Component yang betugas: 
+ * 1. Mengambil seluruh data berita dari API
+ * 2. Mengurutkan berita berdasarkan tanggal terbaru
+ * 3. Mengambil beberapa berita terbaru
+ * 4. Mengirim data ke Client Component
+ * 
+ * Keuntungan menggunakan Server Component:
+ * - Data diambil di server
+ * - Tidak menambah JavaScript di browser
+ * - Lebih baik untuk performa SEO
+ */
 export default async function LatestNews() {
-  // Ambil host dari header
-  const headersList = await headers();
+  /**
+   * Mengambil host/domain aktif
+   * 
+   * Contoh:
+   * localhost:3000, example.vercel.app, dll
+   * 
+   * Berguna agar API tetap berjalan pada environment development maupun production
+   */
+  const host = (await headers()).get("host")
 
-  // Pastikan host tidak null
-  const host = headersList.get("host");
 
-  // Fetch data berita terbaru
+  /**
+   * Mengambil seluruh data berita dari API internal Next.js
+   * 
+   * cache: "no-store" berarti data selalu diambil ulang
+   * dan tidak menggunakan cache
+   */
   const res = await fetch(`http://${host}/api/news`, {
-    cache: "no-store", // Selalu ambil data terbaru
+    cache: "no-store",
   });
 
-  // Error jika fetch gagal
+  /**
+   * Jika request gagal, hentikan proses dan tampilkan error
+   */
   if (!res.ok) {
     throw new Error("Failed to fetch news");
   }
 
-  // Ambil data JSON
-  const newsData: News[] = await res.json();
+  /**
+   * Mengubah response JSON menjadi array NewsItem
+   */
+  const newsData: NewsItem[] = await res.json();
 
-  // Urutkan berdasarkan tanggal terbaru
-  const sortedNews = newsData.sort(
+  /**
+   * Mengurutkan berita berdasarkan tanggal terbaru
+   */
+  const sortedNews = [...newsData].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
-  // Ambil 6 berita terbaru
+  /**
+   * Mengambil 6 berita terbaru untuk ditampilkan pada homepage
+   */
   const limitLatestNews = sortedNews.slice(0, 6);
 
-  // Kirim data ke komponen client
+  /**
+   * Mengirim data berita terbaru ke Client Component untuk dirender
+   */
   return <LatestNewsClient latestNews={limitLatestNews} />;
 }

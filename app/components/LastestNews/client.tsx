@@ -1,35 +1,76 @@
 "use client";
 
 import Link from "next/link";
-import { FaArrowAltCircleRight } from "react-icons/fa"; // Ikon panah
-import { Playfair_Display } from "next/font/google"; // Font Playfair Display
+import { FaArrowAltCircleRight } from "react-icons/fa";
+import { Playfair_Display } from "next/font/google";
 
 import RevealOnScroll from "../RevealOnScroll";
 
-// Tipe data berita
+/**
+ * Representasi satu data berita
+ * 
+ * Dapat digunakan kembali untuk:
+ * - Latest News Section
+ * - News List
+ * - News Sidebar
+ * - News Carousel
+ * - Related Articles
+ */
 type News = {
-  id: number;
-  date: string;
-  title: string;
-  slug: string;
+  id: number; // ID unik berita
+  date: string; // Tanggal publikasi berita
+  title: string; // Judul berita
+  slug: string; // Slug untuk URl detail berita
 };
 
-// Konfigurasi font
+/**
+ * Font Playfair Display versi Bold
+ * 
+ * Digunakan untuk:
+ * - Judul section
+ * - Heading utama
+ */
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
 });
 
+/**
+ * Font Playfair Display versi Regular
+ * 
+ * Digunakan untuk:
+ * - Isi konten
+ * - Link
+ * - Daftar berita
+ */
 const playfairDisplayRegular = Playfair_Display({
   weight: "400",
   subsets: ["latin"],
 });
 
+/**
+ * Props  yang diterima oleh LatestNewsClient
+ */
 type NewsClientProps = {
-  latestNews: News[];
+  latestNews: News[]; // Daftar berita terbaru yang akan ditampilkan
 }
 
-// Komponen untuk menampilkan berita terbaru
+/**
+ * Menampilkan daftar berita terbaru pada halaman utama
+ * 
+ * FItur:
+ * - Animasi muncul saat scroll
+ * - Link ke halaman semua berita
+ * - Link ke detail setiap berita
+ * - Responsive untuk mobile dan desktop
+ * 
+ * Cocok digunakan pada:
+ * - Blog
+ * - Portal berita
+ * - Website Company Profile
+ * - E-commerce (News/Announcement)
+ * - Portfolio
+ */
 export default function LatestNewsClient({
   latestNews,
 }: NewsClientProps) {
