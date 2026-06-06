@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "motion/react";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { Playfair_Display } from "next/font/google";
 
@@ -9,7 +10,7 @@ import RevealOnScroll from "../RevealOnScroll";
 
 /**
  * Representasi satu produk
- * 
+ *
  * Dapat digunakan kembali untuk:
  * - Homepage Product Section
  * - Product List
@@ -49,18 +50,18 @@ const playfairDisplayRegular = Playfair_Display({
  * Propd yang diterima oleh AnimationCardClient
  */
 type AnimationCardClientProps = {
-  products: Product[]; // Daftar produk yang akan ditampilkan 
-}
+  products: Product[]; // Daftar produk yang akan ditampilkan
+};
 
 /**
  * Menampilkan daftar produk di halaman utama dengan animasi
- * 
+ *
  * Fitur:
  * - Animasi saat muncul di viewport
  * - Link menuju halaman semua produk
  * - Responsive grid layout
  * - Navigasi ke halaman detail produk
- * 
+ *
  * Cocok digunakan untuk:
  * - Featured Products
  * - New Arrivals
@@ -75,7 +76,7 @@ export default function AnimationCardClient({
     <section className="py-10 scroll-mt-12 md:scroll-mt-16" id="card-products">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between mb-10">
-          <RevealOnScroll delay={0.3}>
+          <RevealOnScroll delay={0.05}>
             <div
               className={`inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md`}
             >
@@ -87,7 +88,7 @@ export default function AnimationCardClient({
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={0.5}>
+          <RevealOnScroll delay={0.1}>
             <Link
               href="/products"
               className={`flex items-center gap-2 text-sm md:text-base opacity-50 hover:opacity-100 active:opacity-100 ${playfairDisplayRegular.className}`}
@@ -98,19 +99,32 @@ export default function AnimationCardClient({
           </RevealOnScroll>
         </div>
 
-        <RevealOnScroll delay={0.75}>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {products.map((product) => (
-              <Link
-                key={product.id}
-                href={`/products/${product.slug}`}
-                className="h-full"
-              >
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          {products.map((product, index) => (
+            <motion.div
+              key={product.id}
+              initial={{
+                opacity: 0,
+                y: 30,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.4,
+                delay: 0.15 + index * 0.05,
+              }}
+            >
+              <Link href={`/products/${product.slug}`} className="h-full block">
                 <HomeProductCard product={product} />
               </Link>
-            ))}
-          </div>
-        </RevealOnScroll>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

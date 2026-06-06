@@ -69,7 +69,7 @@ export default function DetailClient({ news }: DetailNewsClientProps) {
     <>
       <section className="pt-28 pb-5 md:pb-16">
         <div className="max-w-7xl mx-auto px-6">
-          <RevealOnScroll delay={0.3}>
+          <RevealOnScroll delay={0.05}>
             <p
               className={`text-sm opacity-60 mb-4 ${playfairDisplayRegular.className}`}
             >
@@ -77,13 +77,13 @@ export default function DetailClient({ news }: DetailNewsClientProps) {
             </p>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={0.5}>
+          <RevealOnScroll delay={0.1}>
             <h1 className={`text-4xl mb-10 ${playfairDisplayBold.className}`}>
               {news.title}
             </h1>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={0.75}>
+          <RevealOnScroll delay={0.15}>
             <article
               className={`leading-relaxed text-lg ${playfairDisplayRegular.className}`}
             >
@@ -94,7 +94,7 @@ export default function DetailClient({ news }: DetailNewsClientProps) {
       </section>
 
       <div className="max-w-7xl mx-auto px-6 py-10 flex justify-end">
-        <RevealOnScroll delay={0.3}>
+        <RevealOnScroll delay={0.05}>
           <Link
             href="/news"
             className={`flex items-center gap-2 text-sm md:text-base leading-none opacity-50 hover:opacity-100 active:opacity-100 ${playfairDisplayRegular.className}`}

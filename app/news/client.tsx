@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "motion/react";
 import { Playfair_Display } from "next/font/google";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 
@@ -8,9 +9,9 @@ import RevealOnScroll from "../components/RevealOnScroll";
 
 /**
  * Representasi data berita
- * 
+ *
  * Dapat digunakan kembali untuk:
- * - BLog 
+ * - BLog
  * - News Portal
  * - Artikel
  * - Dokumentasi
@@ -49,13 +50,13 @@ const playfairDisplayRegular = Playfair_Display({
 
 /**
  * Halaman daftar berita
- * 
+ *
  * Fitur:
  * - Menampilkan seluruh berita
  * - Pagination
  * - Link ke detail berita
  * - Animasi reveal saat scroll
- * 
+ *
  * Cocok digunakan untuk:
  * - Blog Listing
  * - News Listing
@@ -69,7 +70,7 @@ export default function NewsClient({
   /**
    * Jumlah maksimal nomor halaman
    * yang ditampilkan sekaligus
-   * 
+   *
    * Contoh:
    * [3] [4] [5] [6] [7]
    */
@@ -97,7 +98,7 @@ export default function NewsClient({
 
   /**
    * Membuat array nomor halaman yang akan dirender
-   * 
+   *
    * Contoh:
    * [1, 2, 3, 4, 5]
    */
@@ -111,7 +112,7 @@ export default function NewsClient({
       <title>News | O2H Official Site</title>
       <section className="py-20 min-h-screen">
         <div className="max-w-7xl mx-auto px-6 py-10">
-          <RevealOnScroll delay={0.3}>
+          <RevealOnScroll delay={0.05}>
             <div
               className={`inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md ${playfairDisplayBold.className}`}
             >
@@ -123,40 +124,54 @@ export default function NewsClient({
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={0.75}>
-            {/* List berita */}
+          <RevealOnScroll delay={0.15}>
             <div className="divide-y divide-white/30">
-              {/* Menampilkan daftar berita */}
-              {allNews.map((news) => (
-                <Link
+              {allNews.map((news, index) => (
+                <motion.div
                   key={news.id}
-                  href={`/news/${news.slug}`}
-                  className={`group flex flex-col md:flex-row md:items-center gap-2 md:gap-6 py-6 md:py-8 hover:no-underline ${playfairDisplayRegular.className}`}
+                  initial={{
+                    opacity: 0,
+                    y: 30,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    duration: 0.4,
+                    delay: 0.15 + index * 0.05,
+                  }}
                 >
-                  <span className="text-sm md:text-base md:w-28 md:shrink-0 group-hover:opacity-50 group-active:opacity-50">
-                    {news.date}
-                  </span>
+                  <Link
+                    href={`/news/${news.slug}`}
+                    className={`group flex flex-col md:flex-row md:items-center gap-2 md:gap-6 py-6 md:py-8 hover:no-underline ${playfairDisplayRegular.className}`}
+                  >
+                    <span className="text-sm md:text-base md:w-28 md:shrink-0 group-hover:opacity-50 group-active:opacity-50">
+                      {news.date}
+                    </span>
 
-                  <p className="flex-1 text-base md:text-lg leading-relaxed group-hover:opacity-50 group-active:opacity-50">
-                    {news.title}
-                  </p>
+                    <p className="flex-1 text-base md:text-lg leading-relaxed group-hover:opacity-50 group-active:opacity-50">
+                      {news.title}
+                    </p>
 
-                  <div className="self-end md:self-auto mt-2 md:mt-8">
-                    <FaArrowAltCircleRight
-                      size={24}
-                      className="group-hover:opacity-50 group-active:opacity-50 transition"
-                    />
-                  </div>
-                </Link>
+                    <div className="self-end md:self-auto mt-2 md:mt-8">
+                      <FaArrowAltCircleRight
+                        size={24}
+                        className="group-hover:opacity-50 group-active:opacity-50 transition"
+                      />
+                    </div>
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </RevealOnScroll>
         </div>
 
-        <RevealOnScroll delay={0.3}>
-          {/* Pagination */}
+        <RevealOnScroll delay={0.05}>
           <div className="flex items-center justify-center gap-3 my-3">
-            {/* Tombol Previous */}
             {visiblePages.map((page) => (
               <Link
                 key={page}
