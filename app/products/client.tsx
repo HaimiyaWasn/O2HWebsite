@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Playfair_Display } from "next/font/google";
 
+import { formatCurrency } from "@/lib/currencyFormatter";
 import SearchProducts from "./search/searchClient";
 import ProductsFilter from "./components/productsFilter";
 import ProductUrutkan from "./components/productUrutkan";
@@ -468,35 +469,19 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                                   {product.discount > 0 ? (
                                     <>
                                       <p className="text-xs text-gray-400 line-through">
-                                        {new Intl.NumberFormat("id-ID", {
-                                          style: "currency",
-                                          currency: "IDR",
-                                          maximumFractionDigits: 0,
-                                        }).format(product.price)}
+                                        {formatCurrency(product.price)}
                                       </p>
                                       <p className="text-yellow-500 font-semibold">
-                                        {new Intl.NumberFormat("id-ID", {
-                                          style: "currency",
-                                          currency: "IDR",
-                                          maximumFractionDigits: 0,
-                                        }).format(finalPrice)}
+                                        {formatCurrency(finalPrice)}
                                       </p>
                                     </>
                                   ) : (
                                     <>
                                       <p className="text-xs invisible">
-                                        {new Intl.NumberFormat("id-ID", {
-                                          style: "currency",
-                                          currency: "IDR",
-                                          maximumFractionDigits: 0,
-                                        }).format(product.price)}
+                                        {formatCurrency(product.price)}
                                       </p>
                                       <p className="text-yellow-500 font-semibold">
-                                        {new Intl.NumberFormat("id-ID", {
-                                          style: "currency",
-                                          currency: "IDR",
-                                          maximumFractionDigits: 0,
-                                        }).format(product.price)}
+                                        {formatCurrency(product.price)}
                                       </p>
                                     </>
                                   )}

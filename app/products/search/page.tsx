@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Playfair_Display } from "next/font/google";
 
+import { formatCurrency } from "@/lib/currencyFormatter";
 import SearchProducts from "./searchClient";
 import RevealOnScroll from "@/app/components/RevealOnScroll";
 import SearchFilterWrapper from "./client";
@@ -239,18 +240,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     (_, i) => startPage + i
   );
 
-  /**
-   * Formatter mata uang Rupiah.
-   *
-   * Contoh:
-   * 150000 → Rp150.000
-   */
-  const currencyFormatter = new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    maximumFractionDigits: 0,
-  });
-
   return (
     <>
       <title>Search | O2H Official Site</title>
@@ -374,19 +363,19 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                                 {product.discount > 0 ? (
                                   <>
                                     <p className="text-xs text-gray-400 line-through">
-                                      {currencyFormatter.format(product.price)}
+                                      {formatCurrency(product.price)}
                                     </p>
                                     <p className="text-yellow-500 font-semibold">
-                                      {currencyFormatter.format(finalPrice)}
+                                      {formatCurrency(finalPrice)}
                                     </p>
                                   </>
                                 ) : (
                                   <>
                                     <p className="text-xs invisible">
-                                      {currencyFormatter.format(product.price)}
+                                      {formatCurrency(product.price)}
                                     </p>
                                     <p className="text-yellow-500 font-semibold">
-                                      {currencyFormatter.format(product.price)}
+                                      {formatCurrency(product.price)}
                                     </p>
                                   </>
                                 )}

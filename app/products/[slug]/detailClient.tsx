@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Playfair_Display } from "next/font/google";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 
+import { formatCurrency } from "@/lib/currencyFormatter";
 import RevealOnScroll from "@/app/components/RevealOnScroll";
 import ProductDescriptionModal from "../components/productDescriptionModal";
 import ProductImageSlider from "../components/productImageSlider";
@@ -96,18 +97,6 @@ export default function DetailClient({
     new Date(product.createdAt).getTime() >
     Date.now() - 30 * 24 * 60 * 60 * 1000;
 
-  /**
-   * Formatter mata uang Rupiah
-   * 
-   * Bisa digunakan kembali di seluruh project
-   * agar format harga konsisten
-   */
-  const currencyFormater = new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    maximumFractionDigits: 0,
-  });
-
   return (
     <>
       <section className="min-h-screen py-12 pt-28">
@@ -160,16 +149,16 @@ export default function DetailClient({
                     {product.discount > 0 ? (
                       <>
                         <p className="text-xs text-gray-400 line-through">
-                          {currencyFormater.format(product.price)}
+                          {formatCurrency(product.price)}
                         </p>
                         <p className="text-lg md:text-xl text-yellow-500 font-semibold">
-                          {currencyFormater.format(finalPrice)}
+                          {formatCurrency(finalPrice)}
                         </p>
                       </>
                     ) : (
                       <>
                         <p className="text-lg md:text-xl text-yellow-500 font-semibold">
-                          {currencyFormater.format(product.price)}
+                          {formatCurrency(product.price)}
                         </p>
                       </>
                     )}

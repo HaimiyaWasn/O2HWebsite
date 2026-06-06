@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Playfair_Display } from "next/font/google";
 
+import { formatCurrency } from "@/lib/currencyFormatter";
+
 /**
  * Struktur data produk
  *
@@ -148,18 +150,6 @@ function CardItem({ product }: { product: Product }) {
     new Date(product.createdAt).getTime() >
     Date.now() - 30 * 24 * 60 * 60 * 1000;
 
-  /**
-   * Formatter mata uang Rupiah.
-   *
-   * Dibuat sekali agar tidak perlu
-   * membuat objek baru berkali-kali.
-   */
-  const currencyFormatter = new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    maximumFractionDigits: 0,
-  });
-
   return (
     <Link href={`/products/${product.slug}`}>
       <div
@@ -223,19 +213,19 @@ function CardItem({ product }: { product: Product }) {
             {product.discount > 0 ? (
               <>
                 <p className="text-xs text-gray-400 line-through">
-                  {currencyFormatter.format(product.price)}
+                  {formatCurrency(product.price)}
                 </p>
                 <p className="text-yellow-500 font-semibold">
-                  {currencyFormatter.format(finalPrice)}
+                  {formatCurrency(finalPrice)}
                 </p>
               </>
             ) : (
               <>
                 <p className="text-xs invisible">
-                  {currencyFormatter.format(product.price)}
+                  {formatCurrency(product.price)}
                 </p>
                 <p className="text-yellow-500 font-semibold">
-                  {currencyFormatter.format(finalPrice)}
+                  {formatCurrency(finalPrice)}
                 </p>
               </>
             )}

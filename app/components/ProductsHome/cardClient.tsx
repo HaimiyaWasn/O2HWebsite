@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { Playfair_Display } from "next/font/google";
 
+import { formatCurrency } from "@/lib/currencyFormatter";
+
 /**
  * Font untuk judul produk
  */
@@ -91,17 +93,6 @@ export default function HomeProductCard({ product }: ProductCardProps) {
     new Date(product.createdAt).getTime() >
     Date.now() - 30 * 24 * 60 * 60 * 1000;
 
-  /**
-   * Formatter mata uang Indonesia
-   * 
-   * Dibuat satu kali agar tidak perlu membuat instance baru setiap render
-   */
-  const currencyFormater = new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    maximumFractionDigits: 0,
-  })
-
   return (
     <div
       className={`flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 hover:shadow-md transition-all duration-300 p-2 cursor-pointer h-full ${
@@ -166,19 +157,19 @@ export default function HomeProductCard({ product }: ProductCardProps) {
           {product.discount > 0 ? (
             <>
               <p className="text-xs text-gray-400 line-through">
-                {currencyFormater.format(product.price)}
+                {formatCurrency(product.price)}
               </p>
               <p className="text-yellow-500 font-semibold">
-                {currencyFormater.format(finalPrice)}
+                {formatCurrency(finalPrice)}
               </p>
             </>
           ) : (
             <>
               <p className="text-xs invisible">
-                {currencyFormater.format(product.price)}
+                {formatCurrency(product.price)}
               </p>
               <p className="text-yellow-500 font-semibold">
-                {currencyFormater.format(product.price)}
+                {formatCurrency(product.price)}
               </p>
             </>
           )}
