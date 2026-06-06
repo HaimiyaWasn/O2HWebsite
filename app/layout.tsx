@@ -4,14 +4,14 @@ import ScrollToTop from "./components/ScrollToTop";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
-import DisclaimerWrapper from "./components/Disclaimer/DisclaimerWrapper";
-import { DisclaimerProvider } from "./components/Disclaimer/DisclaimerContent";
+import DisclaimerWrapper from "./components/Disclaimer/disclaimerWrapper";
+import { DisclaimerProvider } from "./components/Disclaimer/disclaimerContent";
 import Navbar from "./components/NavbarO2H";
 import FloatingLogo from "./components/FloatingLogo";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/client";
 import FloatingCart from "./components/FloatingCarts";
 import FloatingCartWrapper from "./components/FloatingCarts/wrapper";
-import FooterWrapper from "./components/FooterWrapper";
+import FooterWrapper from "./components/Footer/wrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
