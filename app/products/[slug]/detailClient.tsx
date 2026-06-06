@@ -9,19 +9,28 @@ import ProductDescriptionModal from "../components/productDescriptionModal";
 import ProductImageSlider from "../components/productImageSlider";
 import ProductCardRekomendasi from "../components/productCardRekomendasi";
 
-type Products = {
-  id: number;
-  title: string;
-  price: number;
-  label: string[];
-  image: string[];
-  deskripsi: string;
-  sold: string;
-  isOutOfStock: boolean;
-  size: string[];
-  discount: number;
-  createdAt: string;
-  slug: string;
+/**
+ * Struktur data produk
+ *
+ * Dapat digunakan kembali untuk:
+ * - E-commerce
+ * - Marketplace
+ * - Catalog Product
+ * - Inventory System
+ */
+type Product = {
+  id: number; // ID unik produk
+  title: string; // Nama produk
+  price: number; // Harga asli produk
+  label: string[]; // Label produk (Best seller, Limited, dll)
+  image: string[]; // Daftar gambar produk
+  deskripsi: string; // Deskripsi lengkap produk
+  sold: string; // Informasi jumlah terjual
+  isOutOfStock: boolean; // Status stok
+  size: string[]; // Daftar ukuran produk
+  discount: number; // Discount
+  createdAt: string; // Tanggal produk dibuat
+  slug: string; // URL unik produk
 };
 
 const playfairDisplayBold = Playfair_Display({
@@ -34,31 +43,70 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
+/**
+ * Props yang diterima halaman detail produk
+ *
+ * product  -> produk yang sedang dibuka
+ * products -> seluruh produk untuk rekomendasi
+ */
 type DetailProductsClientProps = {
-  product: Products;
-  products: Products[];
+  product: Product;
+  products: Product[];
 };
 
 export default function DetailClient({
   product,
   products,
 }: DetailProductsClientProps) {
-  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [showFullDescription, setShowFullDescription] = useState(false); // Mengontrol modal deskripsi lengkap
+
+  /**
+   * Menyimpan status favorit produk
+   *
+   * Saat ini hanya state lokal
+   * Jika ingin tersimpan permanen, hubungkan dengan database atau API
+   */
   const [isFavorite, setIsFavorite] = useState(false);
 
+  /**
+   * Membatasi deskripsi agar tidak terlalu panjang
+   *
+   * Jika lebih dari 275 karakter,
+   * tampilkan sebagian lalu tambahkan "..."
+   */
   const shortDescription =
     product.deskripsi.length > 275
       ? product.deskripsi.slice(0, 275) + "..."
       : product.deskripsi;
 
+  /**
+   * Menghitung harga akhir setelah diskon
+   */
   const finalPrice =
     product.discount > 0
       ? product.price - (product.price * product.discount) / 100
       : product.price;
 
+  /**
+   * Menentukan apakah produk masih dianggap baru
+   *
+   * Produk dianggap NEW jika dibuat dalam 30 hari terakhir
+   */
   const isNew =
     new Date(product.createdAt).getTime() >
     Date.now() - 30 * 24 * 60 * 60 * 1000;
+
+  /**
+   * Formatter mata uang Rupiah
+   * 
+   * Bisa digunakan kembali di seluruh project
+   * agar format harga konsisten
+   */
+  const currencyFormater = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0,
+  });
 
   return (
     <>
@@ -112,28 +160,16 @@ export default function DetailClient({
                     {product.discount > 0 ? (
                       <>
                         <p className="text-xs text-gray-400 line-through">
-                          {new Intl.NumberFormat("id-ID", {
-                            style: "currency",
-                            currency: "IDR",
-                            maximumFractionDigits: 0,
-                          }).format(product.price)}
+                          {currencyFormater.format(product.price)}
                         </p>
                         <p className="text-lg md:text-xl text-yellow-500 font-semibold">
-                          {new Intl.NumberFormat("id-ID", {
-                            style: "currency",
-                            currency: "IDR",
-                            maximumFractionDigits: 0,
-                          }).format(finalPrice)}
+                          {currencyFormater.format(finalPrice)}
                         </p>
                       </>
                     ) : (
                       <>
                         <p className="text-lg md:text-xl text-yellow-500 font-semibold">
-                          {new Intl.NumberFormat("id-ID", {
-                            style: "currency",
-                            currency: "IDR",
-                            maximumFractionDigits: 0,
-                          }).format(product.price)}
+                          {currencyFormater.format(product.price)}
                         </p>
                       </>
                     )}

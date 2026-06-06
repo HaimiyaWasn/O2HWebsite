@@ -1,4 +1,4 @@
-import type { Metadata } from "next"; 
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { getNewsBySlug } from "../data";
@@ -6,13 +6,13 @@ import DetailClient from "./detailClient";
 
 /**
  * Tipe data yang diterima halaman
- * 
+ *
  * Next.js App Router mengirim parameter route
  * melalui props params
- * 
+ *
  * Contoh URL:
  * /news/example-news
- * 
+ *
  * Maka:
  * slug = "example-news"
  */
@@ -25,17 +25,15 @@ type Props = {
 /**
  * Membuat metadata (SEO) secara dinamis
  * berdasarkan berita yang sedang dibuka
- * 
- * FUngsi ini dijalankan oleh Next.js
+ *
+ * Fungsi ini dijalankan oleh Next.js
  * sebelum halaman dirender
- * 
+ *
  * Contoh hasil:
  * <title>Judul Berita</title>
  * <meta name="description" />
  */
-export async function generateMetadata({
-  params,
-}: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   /**
    * Mengambil slug dari URL
    */
@@ -67,15 +65,13 @@ export async function generateMetadata({
 
 /**
  * Halaman detail berita
- * 
+ *
  * Bertugas:
  * - Mengambil data berita berdasarkan slug
  * - Menampilkan halaman 404 jika tidak ditemukan
  * - Mengirim data ke komponen client
  */
-export default async function NewsDetailPage({
-  params,
-}: Props) {
+export default async function NewsDetailPage({ params }: Props) {
   /**
    * Mengambil slug dari URL
    */
@@ -88,7 +84,7 @@ export default async function NewsDetailPage({
 
   /**
    * Jika berita tidak ditemukan,
-   * tampilkan halaman 404 bawaan Next.js 
+   * tampilkan halaman 404 bawaan Next.js
    */
   if (!news) {
     notFound();
