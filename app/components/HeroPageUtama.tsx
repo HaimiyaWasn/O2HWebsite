@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Bungee, Playfair_Display } from "next/font/google";
-import { useDisclaimer } from "./Disclaimer/disclaimerContent";
+import { useDisclaimer } from "./Disclaimer/content";
 
 /**
  * Font utama untuk heading Hero

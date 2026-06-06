@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import { useDisclaimer } from "./disclaimerContent";
-import DisclaimerScene from "./disclaimerScene";
+import { useDisclaimer } from "./content";
+import DisclaimerScene from "./scene";
 
 /**
  * Wrapper untuk mengontrol lifecycle Disclaimer
