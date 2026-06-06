@@ -11,6 +11,15 @@ import ProductsFilter from "./components/productsFilter";
 import ProductUrutkan from "./components/productUrutkan";
 import RevealOnScroll from "../components/RevealOnScroll";
 
+/**
+ * Struktur data produk.
+ *
+ * Sebaiknya dipindahkan ke:
+ * /types/product.ts
+ *
+ * agar bisa digunakan ulang
+ * di seluruh project.
+ */
 type Product = {
   id: number;
   title: string;
@@ -25,6 +34,12 @@ type Product = {
   slug: string;
 };
 
+/**
+ * Props yang diterima halaman produk.
+ *
+ * allProducts berasal dari Server Component
+ * atau hasil fetch API/database.
+ */
 type ProductsClientProps = {
   allProducts: Product[];
 };
@@ -35,8 +50,29 @@ const playfairDisplayBold = Playfair_Display({
 });
 
 export default function ProductsClient({ allProducts }: ProductsClientProps) {
+  /**
+   * Router Next.js
+   *
+   * Digunakan untuk mengubah URL
+   * tanpa refresh halaman.
+   */
   const router = useRouter();
+
+  /**
+   * Mengambil semua query parameter
+   * yang ada di URL saat ini.
+   *
+   * Contoh:
+   * /products?category=Shirt&page=2
+   */
   const searchParams = useSearchParams();
+
+  /**
+   * Filter yang aktif saat ini.
+   *
+   * Nilai diambil langsung dari URL
+   * sehingga bisa dibagikan ke pengguna lain.
+   */
   const selectedCategory = searchParams.get("category");
   const productType = searchParams.get("type") || "Semua Produk";
   const stockStatus = searchParams.get("stock") || "Semua";
@@ -45,12 +81,43 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
   const currentPage = Number(searchParams.get("page")) || 1;
   const sortBy = searchParams.get("sort") || "newest";
 
+  /**
+   * Konfigurasi pagination.
+   */
   const PRODUCTS_PER_PAGE = 20;
+
+  /**
+   * Jumlah tombol halaman
+   * yang ditampilkan sekaligus.
+   *
+   * Contoh:
+   * [1] [2] [3] [4] [5]
+   */
   const MAX_VISIBLE_PAGES = 5;
 
+  /**
+   * Mengubah filter dan menyimpannya
+   * ke URL query parameter.
+   *
+   * Contoh:
+   * updateFilter("category", "Shirt")
+   *
+   * Hasil:
+   * /products?category=Shirt
+   */
   const updateFilter = (key: string, value: string | string[] | null) => {
+    /**
+     * Menyalin query yang sedang aktif
+     * agar filter lain tidak hilang.
+     */
     const params = new URLSearchParams(searchParams.toString());
 
+    /**
+     * Jika filter berupa array.
+     *
+     * Contoh:
+     * size=M,L,XL
+     */
     if (Array.isArray(value)) {
       if (value.length > 0) {
         params.set(key, value.join(","));
@@ -58,6 +125,9 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
         params.delete(key);
       }
     } else {
+      /**
+       * Jika filter berupa string biasa.
+       */
       if (value) {
         params.set(key, value);
       } else {
@@ -65,30 +135,55 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
       }
     }
 
+    /**
+     * Kembali ke halaman pertama
+     * setiap kali filter berubah.
+     */
     params.set("page", "1");
 
     router.push(`/products?${params.toString()}`);
   };
 
+  /**
+   * FILTER PRODUK
+   *
+   * useMemo digunakan agar proses filter
+   * tidak dihitung ulang setiap render.
+   */
   const filteredProducts = useMemo(() => {
     return allProducts.filter((product) => {
+      /**
+       * Filter kategori.
+       */
       if (selectedCategory && !product.label.includes(selectedCategory)) {
         return false;
       }
 
+      /**
+       * Hanya produk diskon.
+       */
       if (productType === "Diskon" && product.discount <= 0) {
         return false;
       }
 
+      /**
+       * Hanya produk yang masih tersedia.
+       */
       if (stockStatus === "Ada Stok" && !product.label.includes("Ada Stok")) {
         return false;
       }
 
+      /**
+       * Menghitung harga setelah diskon.
+       */
       const finalPrice =
         product.discount > 0
           ? product.price - (product.price * product.discount) / 100
           : product.price;
 
+      /**
+       * Filter harga.
+       */
       if (priceRange === "under260" && finalPrice >= 260000) {
         return false;
       }
@@ -129,20 +224,36 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
     selectedSize,
   ]);
 
+  /**
+   * SORTING PRODUK
+   *
+   * Selalu menampilkan produk yang tersedia
+   * di bagian atas.
+   */
   const sortedProducts = useMemo(() => {
     const products = [...filteredProducts];
 
     products.sort((a, b) => {
+      /**
+       * Produk stok tersedia
+       * selalu berada di atas.
+       */
       if (a.isOutOfStock !== b.isOutOfStock) {
         return Number(a.isOutOfStock) - Number(b.isOutOfStock);
       }
 
+      /**
+       * Harga setelah diskon.
+       */
       const aFinalPrice =
         a.discount > 0 ? a.price - (a.price * a.discount) / 100 : a.price;
 
       const bFinalPrice =
         b.discount > 0 ? b.price - (b.price * b.discount) / 100 : b.price;
 
+      /**
+       * Jenis sorting yang dipilih user.
+       */
       switch (sortBy) {
         case "oldest":
           return (
@@ -172,25 +283,51 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
     return products;
   }, [filteredProducts, sortBy]);
 
+  /**
+   * Total halaman pagination.
+   */
   const totalPages = Math.ceil(sortedProducts.length / PRODUCTS_PER_PAGE);
 
+  /**
+   * Mengambil produk yang akan
+   * ditampilkan pada halaman saat ini.
+   */
   const paginatedProducts = useMemo(() => {
     const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
     const endIndex = startIndex + PRODUCTS_PER_PAGE;
 
     return sortedProducts.slice(startIndex, endIndex);
-  }, [filteredProducts, currentPage]);
+  }, [sortedProducts, currentPage]);
 
+  /**
+   * Menentukan halaman pertama
+   * yang ditampilkan pada pagination.
+   */
   let startPage = Math.max(1, currentPage - Math.floor(MAX_VISIBLE_PAGES / 2));
 
+  /**
+   * Menentukan halaman terakhir
+   * yang ditampilkan.
+   */
   let endPage = startPage + MAX_VISIBLE_PAGES - 1;
 
+  /**
+   * Mencegah halaman melebihi
+   * jumlah halaman yang tersedia.
+   */
   if (endPage > totalPages) {
     endPage = totalPages;
 
     startPage = Math.max(1, endPage - MAX_VISIBLE_PAGES + 1);
   }
 
+  /**
+   * Array nomor halaman
+   * untuk tombol pagination.
+   *
+   * Contoh:
+   * [1,2,3,4,5]
+   */
   const visiblePages = Array.from(
     { length: Math.max(0, endPage - startPage + 1) },
     (_, i) => startPage + i
