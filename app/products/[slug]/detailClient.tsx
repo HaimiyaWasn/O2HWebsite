@@ -113,7 +113,7 @@ export default function DetailClient({
       <section className="min-h-screen py-12 pt-28">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <RevealOnScroll delay={300}>
+            <RevealOnScroll delay={0.3}>
               <ProductImageSlider
                 imageProduct={
                   Array.isArray(product.image) ? product.image : [product.image]
@@ -122,7 +122,7 @@ export default function DetailClient({
               />
             </RevealOnScroll>
 
-            <RevealOnScroll delay={500}>
+            <RevealOnScroll delay={0.5}>
               <div className="flex flex-col mb-5 md:mb-7">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {isNew && (
@@ -237,7 +237,7 @@ export default function DetailClient({
             </RevealOnScroll>
           </div>
 
-          <RevealOnScroll delay={300}>
+          <RevealOnScroll delay={0.3}>
             <ProductCardRekomendasi
               product={products}
               currentProductId={product.id}

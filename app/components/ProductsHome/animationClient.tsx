@@ -75,7 +75,7 @@ export default function AnimationCardClient({
     <section className="py-10 scroll-mt-12 md:scroll-mt-16" id="card-products">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between mb-10">
-          <RevealOnScroll delay={30}>
+          <RevealOnScroll delay={0.3}>
             <div
               className={`inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md`}
             >
@@ -87,7 +87,7 @@ export default function AnimationCardClient({
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={500}>
+          <RevealOnScroll delay={0.5}>
             <Link
               href="/products"
               className={`flex items-center gap-2 text-sm md:text-base opacity-50 hover:opacity-100 active:opacity-100 ${playfairDisplayRegular.className}`}
@@ -98,7 +98,7 @@ export default function AnimationCardClient({
           </RevealOnScroll>
         </div>
 
-        <RevealOnScroll delay={750}>
+        <RevealOnScroll delay={0.75}>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {products.map((product) => (
               <Link

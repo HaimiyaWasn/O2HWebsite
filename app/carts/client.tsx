@@ -176,7 +176,7 @@ export default function CartClient({ carts }: CartClientProps) {
       <section className="pt-14 min-h-screen">
         <div className="max-w-7xl mx-auto px-6 py-10">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-            <RevealOnScroll delay={300}>
+            <RevealOnScroll delay={0.3}>
               <div className="inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md">
                 <span
                   className={`text-md md:text-2xl tracking-[0.2rem] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
@@ -186,7 +186,7 @@ export default function CartClient({ carts }: CartClientProps) {
               </div>
             </RevealOnScroll>
 
-            <RevealOnScroll delay={500}>
+            <RevealOnScroll delay={0.5}>
             {cartItems.length > 0 && (
               <div className="mt-7 md:mt-0 flex items-center gap-3">
                 <input
@@ -202,7 +202,7 @@ export default function CartClient({ carts }: CartClientProps) {
             </RevealOnScroll>
           </div>
 
-          <RevealOnScroll delay={750}>
+          <RevealOnScroll delay={0.75}>
             <div className="mt-8 space-y-4 pb-32">
               {cartItems.length === 0 && (
                 <div className="text-center py-20">

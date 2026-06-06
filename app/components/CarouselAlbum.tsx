@@ -54,7 +54,7 @@ export default function CarouselAlbum() {
     <section className="py-10 bg-yellow-400">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between mb-10 text-black">
-          <RevealOnScroll delay={300}>
+          <RevealOnScroll delay={0.3}>
             <div
               className={`inline-flex items-center rounded-full shadow-sm shadow-black border-4 border-black/40 bg-black/10 px-4 py-2 backdrop-blur-md ${playfairDisplayBold.className}`}
             >
@@ -77,7 +77,7 @@ export default function CarouselAlbum() {
           </RevealOnScroll> */}
         </div>
 
-        <RevealOnScroll delay={750}>
+        <RevealOnScroll delay={0.75}>
           <div className="w-full flex flex-col items-center py-3">
             <Swiper
               effect="coverflow"

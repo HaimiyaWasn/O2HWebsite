@@ -111,7 +111,7 @@ export default function NewsClient({
       <title>News | O2H Official Site</title>
       <section className="py-20 min-h-screen">
         <div className="max-w-7xl mx-auto px-6 py-10">
-          <RevealOnScroll delay={300}>
+          <RevealOnScroll delay={0.3}>
             <div
               className={`inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md ${playfairDisplayBold.className}`}
             >
@@ -123,7 +123,7 @@ export default function NewsClient({
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={750}>
+          <RevealOnScroll delay={0.75}>
             {/* List berita */}
             <div className="divide-y divide-white/30">
               {/* Menampilkan daftar berita */}
@@ -153,7 +153,7 @@ export default function NewsClient({
           </RevealOnScroll>
         </div>
 
-        <RevealOnScroll delay={300}>
+        <RevealOnScroll delay={0.3}>
           {/* Pagination */}
           <div className="flex items-center justify-center gap-3 my-3">
             {/* Tombol Previous */}

@@ -219,7 +219,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
 
             <div className="flex-1">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-4">
-                <RevealOnScroll delay={300}>
+                <RevealOnScroll delay={0.3}>
                   <div className="flex flex-col gap-4">
                     <div className="flex w-full md:w-fit items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md">
                       <span
@@ -235,7 +235,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                   </div>
                 </RevealOnScroll>
 
-                <RevealOnScroll delay={500}>
+                <RevealOnScroll delay={0.5}>
                   <ProductUrutkan />
                 </RevealOnScroll>
               </div>
@@ -248,7 +248,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                 </div>
               ) : (
                 <>
-                  <RevealOnScroll delay={750}>
+                  <RevealOnScroll delay={0.75}>
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                       {paginatedProducts.map((product) => {
                         const images = Array.isArray(product.image)
@@ -378,7 +378,7 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
 
                   {/* PAGINATION */}
                   {totalPages > 1 && (
-                    <RevealOnScroll delay={300}>
+                    <RevealOnScroll delay={0.3}>
                       <div className="flex items-center justify-center gap-3 my-14 flex-wrap">
                         {visiblePages.map((page) => {
                           const params = new URLSearchParams(

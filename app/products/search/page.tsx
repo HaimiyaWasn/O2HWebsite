@@ -117,7 +117,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
             <div className="flex-1">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-                <RevealOnScroll delay={300}>
+                <RevealOnScroll delay={0.3}>
                   <div
                     className={`flex w-full md:w-fit items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md`}
                   >
@@ -129,7 +129,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                   </div>
                 </RevealOnScroll>
 
-                <RevealOnScroll delay={300}>
+                <RevealOnScroll delay={0.3}>
                   <p
                     className={`text-sm md:text-base text-gray-300 ${playfairDisplayRegular.className}`}
                   >
@@ -143,7 +143,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                 </RevealOnScroll>
               </div>
 
-              <RevealOnScroll delay={700}>
+              <RevealOnScroll delay={0.75}>
                 {filtered.length > 0 ? (
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                     {paginatedProducts.map((product) => {
@@ -278,7 +278,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                 )}
               </RevealOnScroll>
               {totalPages > 1 && (
-                <RevealOnScroll delay={300}>
+                <RevealOnScroll delay={0.3}>
                   <div className="flex items-center justify-center gap-3 my-14 flex-wrap">
                     {visiblePages.map((page) => {
                       const queryParams = new URLSearchParams();
