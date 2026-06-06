@@ -6,47 +6,101 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 
 import RevealOnScroll from "../components/RevealOnScroll";
 
+/**
+ * Representasi data berita
+ * 
+ * Dapat digunakan kembali untuk:
+ * - BLog 
+ * - News Portal
+ * - Artikel
+ * - Dokumentasi
+ */
 type News = {
-  id: number;
-  date: string;
-  title: string;
-  slug: string;
-  content: string;
+  id: number; // ID unik berita
+  date: string; // Tanggal publikasi
+  title: string; // Judul berita
+  slug: string; // URL unik berita
 };
 
+/**
+ * Props yang diterima komponen NewsClient
+ */
 type NewsClientProps = {
-  allNews: News[];
-  totalPages: number;
-  currentPage: number;
+  allNews: News[]; // Daftar berita pada halaman saat ini
+  totalPages: number; // Total jumlah halaman yang tersedia
+  currentPage: number; // Halaman yang sedang aktif
 };
 
+/**
+ * Font untuk heading
+ */
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
 });
 
+/**
+ * Font untuk teks biasa
+ */
 const playfairDisplayRegular = Playfair_Display({
   weight: "400",
   subsets: ["latin"],
 });
 
+/**
+ * Halaman daftar berita
+ * 
+ * Fitur:
+ * - Menampilkan seluruh berita
+ * - Pagination
+ * - Link ke detail berita
+ * - Animasi reveal saat scroll
+ * 
+ * Cocok digunakan untuk:
+ * - Blog Listing
+ * - News Listing
+ * - Artikel Listing
+ */
 export default function NewsClient({
   allNews,
   totalPages,
   currentPage,
 }: NewsClientProps) {
+  /**
+   * Jumlah maksimal nomor halaman
+   * yang ditampilkan sekaligus
+   * 
+   * Contoh:
+   * [3] [4] [5] [6] [7]
+   */
   const MAX_VISIBLE_PAGES = 5;
 
+  /**
+   * Memnentukan halaman awal yang akan ditampilkan
+   */
   let startPage = Math.max(1, currentPage - Math.floor(MAX_VISIBLE_PAGES / 2));
 
+  /**
+   * Menentukan halaman akhir yang akan ditampilkan
+   */
   let endPage = startPage + MAX_VISIBLE_PAGES - 1;
 
+  /**
+   * Jika halaman akhir melebihi jumlah halaman yang tersedia,
+   * sesuaikan kembali
+   */
   if (endPage > totalPages) {
     endPage = totalPages;
 
     startPage = Math.max(1, endPage - MAX_VISIBLE_PAGES + 1);
   }
 
+  /**
+   * Membuat array nomor halaman yang akan dirender
+   * 
+   * Contoh:
+   * [1, 2, 3, 4, 5]
+   */
   const visiblePages = Array.from(
     { length: endPage - startPage + 1 },
     (_, i) => startPage + i
@@ -73,7 +127,7 @@ export default function NewsClient({
             {/* List berita */}
             <div className="divide-y divide-white/30">
               {/* Menampilkan daftar berita */}
-              {allNews.map((news, index) => (
+              {allNews.map((news) => (
                 <Link
                   key={news.id}
                   href={`/news/${news.slug}`}

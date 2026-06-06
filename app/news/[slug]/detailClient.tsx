@@ -6,28 +6,64 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 
 import RevealOnScroll from "@/app/components/RevealOnScroll";
 
+/**
+ * Representasi data berita
+ * 
+ * Struktur ini dapat digunakan kembali untuk:
+ * - BLog
+ * - Portal bertia
+ * -CMS
+ * - Artikel Dokumentasi 
+ * - Press Release
+ */
 type News = {
-  id: number;
-  date: string;
-  title: string;
-  slug: string;
-  content: string;
+  id: number; // ID unik berita
+  date: string; // Tanggal publikasi
+  title: string; // Judul Berita
+  slug: string; // URL unik berita
+  content: string; // Isi berita
 };
 
+/**
+ * Font Playfair Display Bold digunakan untuk heading/judul utama
+ */
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
 });
 
+/**
+ * FOnt PLayfair DIsplay Reuglar digunakan untuk teks biasa
+ */
 const playfairDisplayRegular = Playfair_Display({
   weight: "400",
   subsets: ["latin"],
 });
 
+/**
+ * Props yang diterima oleh DetailClient
+ * 
+ * Berisi data berita yang akan ditampilkan
+ */
 type DetailNewsClientProps = {
   news: News;
 };
 
+/**
+ * Komponen untuk menampilkan halaman detail berita
+ * 
+ * Fitur: 
+ * - Menampilkan tanggal berita
+ * - Menampilkan judul berita
+ * - Menampilkan isi berita
+ * - Animasi reveal saat scroll
+ * - Tombol kembali ke daftar berita
+ * 
+ * Cocok digunakan untuk:
+ * - Blog Detail Page
+ * - News Detail Page
+ * - Artikel Detail
+ */
 export default function DetailClient({ news }: DetailNewsClientProps) {
   return (
     <>

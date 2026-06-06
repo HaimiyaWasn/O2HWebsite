@@ -1,67 +1,88 @@
-import { headers } from "next/headers"; // Data fetching untuk berita
+import { headers } from "next/headers";
 
-// Tipe data berita
+/**
+ * Struktur data satu berita
+ * 
+ * Dapat digunakan kembali untuk:
+ * - Halaman daftar berita
+ * - Detail berita
+ * - Featured berita
+ * - Latest News
+ * -Search Nees
+ */
 export type News = {
-  id: number;
-  date: string;
-  title: string;
-  slug: string;
-  content: string;
+  id: number; // ID unik berita
+  date: string; // Tanggal publikasi
+  title: string; // Judul berita
+  slug: string; // URL unik berita
+  content: string; // Isi lengkap berita
 };
 
-// Ambil semua berita
+/**
+ * Mengambil seluruh data berita dari API
+ * 
+ * Data akan:
+ * - Diambil langsung dari server
+ * - Tidak menggunakan cache (selalu fresh)
+ * - Diurutkan dari berita terbaru ke terlama
+ */
 export default async function getAllNews() {
-  // Ambil host
-  const host = (await headers()).get("host");
+  const host = (await headers()).get("host"); // Mendapatkan domain/host website saat ini
 
-  // Fetch API
+  // Request data berita dari API internal
   const res = await fetch(`http://${host}/api/news`, {
-    cache: "no-store",
+    cache: "no-store", // Selalu mengambil data terbaru
   });
 
-  // Error handling
+  // Menampilkan error jika request gagal
   if (!res.ok) {
     throw new Error("Failed to fetch news");
   }
 
-  // Ambil data JSON
+  // Mengubah response menjadi array berita
   const allNews: News[] = await res.json();
 
-  // Urutkan berita terbaru
+  // Urutkan dari berita terbaru ke terlama
   return allNews.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }
 
-// Ambil berita dengan pagination
+/**
+ * Mengambil data berita berdasarkan halaman (pagination)
+ */
 export async function getNews(page: number = 1) {
-  // Ambil semua berita
-  const allNews = await getAllNews();
+  const allNews = await getAllNews(); // Ambil seluruh berita
 
-  // Jumlah berita per halaman
-  const NEWS_PER_PAGE = 10;
+  const NEWS_PER_PAGE = 10; // Jumlah berita yang ditampilkan pada setiap halaman
 
-  // Hitung indeks untuk pagination
-  const startIndex = (page - 1) * NEWS_PER_PAGE;
-  const endIndex = startIndex + NEWS_PER_PAGE;
+  const startIndex = (page - 1) * NEWS_PER_PAGE; // Menentukan index awal data
+  const endIndex = startIndex + NEWS_PER_PAGE; // Menentukan index akhir data
 
-  // Ambil berita untuk halaman ini
-  const paginatedNews = allNews.slice(startIndex, endIndex);
+  const paginatedNews = allNews.slice(startIndex, endIndex); // Mengambil berita sesuai halaman
 
-  // Hitung total halaman
-  const totalPages = Math.ceil(allNews.length / NEWS_PER_PAGE);
+  const totalPages = Math.ceil(allNews.length / NEWS_PER_PAGE); // Menghitung total halaman
 
   return {
-    news: paginatedNews,
-    totalPages,
-    currentPage: page,
+    news: paginatedNews, // Data berita halaman saat ini
+    totalPages, // Total jumlah halaman
+    currentPage: page, // Halaman aktif
   };
 }
 
+/**
+ * Mengambil satu berita berdasarkan slug
+ * 
+ * Contoh:
+ * slug = "example-news-nextjs"
+ * 
+ * Cocok digunakan untuk:
+ * - Halaman detail berita
+ * - BLog detail
+ * - Artikel detail
+ */
 export async function getNewsBySlug(slug: string) {
-  // Ambil semua berita
-  const allNews = await getAllNews();
+  const allNews = await getAllNews(); // Ambil seluruh berita
 
-  // Cari berita dengan slug yang cocok
-  return allNews.find((news) => news.slug === slug);
+  return allNews.find((news) => news.slug === slug); // Cari berita yang slug-nya sesuai
 }
