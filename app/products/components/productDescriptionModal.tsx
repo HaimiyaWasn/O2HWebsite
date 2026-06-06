@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import {  useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Playfair_Display } from "next/font/google";
 
 const playfairDisplayBold = Playfair_Display({
@@ -13,19 +13,60 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
+/**
+ * Props untuk modal deskripsi produk
+ *
+ * openDescription:
+ * Status apakah modal sedang terbuka
+ *
+ * closeDescription:
+ * Fungsi untuk menutup modal
+ *
+ * description:
+ * Isi deskripsi produk yang akan ditampilkan
+ */
 type ProductDescriptionModalProps = {
   openDescription: boolean;
   closeDescription: () => void;
   description: string;
-}
+};
 
+/**
+ * Modal untuk menampilkan deskripsi produk secara penuh.
+ *
+ * Fitur:
+ * - Overlay background
+ * - Klik area luar untuk menutup modal
+ * - Scroll otomatis terkunci saat modal terbuka
+ * - Posisi scroll deskripsi di-reset saat modal ditutup
+ * - Animasi fade & scale
+ *
+ * Cocok digunakan untuk:
+ * - Detail produk
+ * - Detail artikel
+ * - Terms & Conditions
+ * - Privacy Policy
+ * - Informasi panjang lainnya
+ */
 export default function ProductDescriptionModal({
-  openDescription, 
+  openDescription,
   closeDescription,
-  description
+  description,
 }: ProductDescriptionModalProps) {
+  /**
+   * Referensi ke area konten deskripsi.
+   *
+   * Digunakan untuk mengembalikan posisi scroll
+   * ke bagian atas saat modal ditutup.
+   */
   const descriptionRef = useRef<HTMLDivElement>(null);
-  
+
+  /**
+   * Mengunci scroll halaman saat modal terbuka.
+   *
+   * Tujuannya agar user tidak bisa scroll
+   * halaman utama di belakang modal.
+   */
   useEffect(() => {
     if (openDescription) {
       document.body.style.overflow = "hidden";
@@ -33,60 +74,61 @@ export default function ProductDescriptionModal({
       document.body.style.overflow = "auto";
     }
 
-    return() => {
+    return () => {
       document.body.style.overflow = "auto";
     };
   }, [openDescription]);
 
+  /**
+   * Menutup modal dan mengembalikan
+   * posisi scroll deskripsi ke atas.
+   */
   const handleCloseDescription = () => {
     closeDescription();
 
-    if(descriptionRef.current) {
+    if (descriptionRef.current) {
       descriptionRef.current.scrollTop = 0;
     }
-  }
+  };
 
   return (
     <div
-    onClick={handleCloseDescription}
-    className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-300 ${
-      openDescription
-        ? "bg-black/70 opacity-100 visible"
-        : "bg-black/0 opacity-0 invisible"
-    }`}
-  >
-    <div
-      onClick={(e) => e.stopPropagation()}
-      className={`bg-base-200 border border-yellow-400 rounded-2xl mx-5 w-full max-w-4xl max-h-[85vh] overflow-hidden transform transition-all duration-300 ${
+      onClick={handleCloseDescription}
+      className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-300 ${
         openDescription
-          ? "scale-100 opacity-100 translate-y-0"
-          : "scale-95 opacity-0 translate-y-5"
+          ? "bg-black/70 opacity-100 visible"
+          : "bg-black/0 opacity-0 invisible"
       }`}
     >
-      <div className="flex items-center justify-between p-5 border-b border-yellow-400">
-        <h2
-          className={`text-xl text-yellow-400 ${playfairDisplayBold.className}`}
-        >
-          Product Description
-        </h2>
-        <button
-          onClick={() => closeDescription()}
-          className="btn btn-sm btn-circle text-red-500 text-lg opacity-50 hover:opacity-100 active:opacity-100"
-        >
-          ✕
-        </button>
-      </div>
       <div
-        ref={descriptionRef}
-        className="overflow-y-auto max-h-[70vh] p-5"
+        onClick={(e) => e.stopPropagation()}
+        className={`bg-base-200 border border-yellow-400 rounded-2xl mx-5 w-full max-w-4xl max-h-[85vh] overflow-hidden transform transition-all duration-300 ${
+          openDescription
+            ? "scale-100 opacity-100 translate-y-0"
+            : "scale-95 opacity-0 translate-y-5"
+        }`}
       >
-        <p
-          className={`whitespace-pre-line leading-6 md:leading-7 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
-        >
-          {description}
-        </p>
+        <div className="flex items-center justify-between p-5 border-b border-yellow-400">
+          <h2
+            className={`text-xl text-yellow-400 ${playfairDisplayBold.className}`}
+          >
+            Product Description
+          </h2>
+          <button
+            onClick={() => closeDescription()}
+            className="btn btn-sm btn-circle text-red-500 text-lg opacity-50 hover:opacity-100 active:opacity-100"
+          >
+            ✕
+          </button>
+        </div>
+        <div ref={descriptionRef} className="overflow-y-auto max-h-[70vh] p-5">
+          <p
+            className={`whitespace-pre-line leading-6 md:leading-7 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
+          >
+            {description}
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-  )
+  );
 }

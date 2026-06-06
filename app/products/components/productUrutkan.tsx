@@ -3,28 +3,77 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { Playfair_Display } from "next/font/google";
 
+/**
+ * Font untuk judul / label
+ */
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
 });
+
+/**
+ * Font untuk isi dropdown
+ */
 const playfairDisplayRegular = Playfair_Display({
   weight: "400",
   subsets: ["latin"],
 });
 
+/**
+ * Komponen untuk mengurutkan daftar produk.
+ *
+ * Fitur:
+ * - Mengubah parameter URL (?sort=...)
+ * - Reset halaman ke page 1 saat urutan berubah
+ * - Mempertahankan query parameter lain yang sudah ada
+ *
+ * Contoh:
+ *
+ * Sebelum:
+ * /products?page=3&category=shirt
+ *
+ * Setelah memilih "Harga Tertinggi":
+ * /products?page=1&category=shirt&sort=price-high
+ */
 export default function ProductUrutkan() {
+  /**
+   * Router Next.js untuk berpindah URL
+   * tanpa melakukan refresh halaman penuh.
+   */
   const router = useRouter();
+
+  /**
+   * Mengambil query parameter yang sedang aktif.
+   *
+   * Contoh URL:
+   * /products?sort=price-high&page=2
+   */
   const searchParams = useSearchParams();
 
+  /**
+   * Nilai sorting yang sedang aktif.
+   *
+   * Jika URL belum memiliki parameter sort,
+   * gunakan "newest" sebagai default.
+   */
   const sortBy = searchParams.get("sort") || "newest";
 
+  /**
+   * Dipanggil ketika user memilih opsi sorting baru.
+   *
+   * Langkah:
+   * 1. Salin seluruh query parameter yang ada.
+   * 2. Ubah nilai "sort".
+   * 3. Reset halaman ke page 1.
+   * 4. Update URL.
+   */
   const handleChange = (value: string) => {
     const params = new URLSearchParams(searchParams.toString());
 
-    params.set("sort", value);
-    params.set("page", "1");
+    params.set("sort", value); // Simpan jenis sorting yang dipilih
+    params.set("page", "1"); // Saat sorting berubah, kembali ke halaman pertama
 
-    router.push(`/products?${params.toString()}`);
+    router.push(`/products?${params.toString()}`); // Update URL tanpa reload penuh
   };
 
   return (

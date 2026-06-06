@@ -1,5 +1,4 @@
 import { headers } from "next/headers";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Playfair_Display } from "next/font/google";
@@ -8,15 +7,28 @@ import SearchProducts from "./searchClient";
 import RevealOnScroll from "@/app/components/RevealOnScroll";
 import SearchFilterWrapper from "./client";
 
+/**
+ * Font untuk judul dan heading.
+ */
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
 });
+
+/**
+ * Font untuk teks biasa.
+ */
 const playfairDisplayRegular = Playfair_Display({
   weight: "400",
   subsets: ["latin"],
 });
 
+/**
+ * Struktur data produk.
+ *
+ * Digunakan untuk memastikan seluruh data
+ * yang diterima dari API memiliki format yang konsisten.
+ */
 interface Product {
   id: number;
   title: string;
@@ -31,19 +43,51 @@ interface Product {
   slug: string;
 }
 
+/**
+ * Mengambil seluruh produk dari API.
+ *
+ * Fitur:
+ * - Fetch data dari API internal Next.js
+ * - Produk tersedia ditampilkan lebih dulu
+ * - Produk habis tetap ditampilkan di bagian bawah
+ * - Produk terbaru muncul paling atas
+ */
 async function getProducts(): Promise<Product[]> {
+  /**
+   * Mengambil host aktif.
+   *
+   * Contoh:
+   * localhost:3000
+   * example.com
+   */
   const headersList = await headers();
   const host = headersList.get("host") || "localhost:3000";
 
+  /**
+   * Mengambil data produk dari API.
+   */
   const res = await fetch(`http://${host}/api/products`, {
     cache: "no-store",
   });
 
+  /**
+   * Jika request gagal,
+   * tampilkan error.
+   */
   if (!res.ok) {
     throw new Error("Failed to fetch products");
   }
+
+  /**
+   * Parsing JSON menjadi array produk.
+   */
   const allProducts: Product[] = await res.json();
 
+  /**
+   * Produk yang masih tersedia.
+   *
+   * Diurutkan dari yang paling baru.
+   */
   const availableProducts = allProducts
     .filter((product) => !product.isOutOfStock)
     .sort(
@@ -51,6 +95,11 @@ async function getProducts(): Promise<Product[]> {
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
 
+  /**
+   * Produk yang stoknya habis.
+   *
+   * Tetap diurutkan berdasarkan tanggal terbaru.
+   */
   const outOfStockProducts = allProducts
     .filter((product) => product.isOutOfStock)
     .sort(
@@ -58,49 +107,149 @@ async function getProducts(): Promise<Product[]> {
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
 
+  /**
+   * Menggabungkan:
+   *
+   * Produk tersedia
+   * ↓
+   * Produk habis
+   */
   return [...availableProducts, ...outOfStockProducts];
 }
 
+/**
+ * Search Params dari URL.
+ *
+ * Contoh:
+ *
+ * /products/search?keyword=shirt&page=2
+ */
 type SearchPageProps = {
   searchParams: Promise<{ keyword?: string; page?: string }>;
 };
 
+/**
+ * Halaman pencarian produk.
+ *
+ * Bertugas:
+ * - Membaca keyword pencarian
+ * - Mengambil data produk
+ * - Melakukan filtering
+ * - Membuat pagination
+ * - Mengirim data ke komponen tampilan
+ */
 export default async function SearchPage({ searchParams }: SearchPageProps) {
+  /**
+   * Mengambil query parameter dari URL.
+   */
   const params = await searchParams;
+
+  /**
+   * Keyword pencarian.
+   *
+   * Contoh:
+   * ?keyword=shirt
+   */
   const keyword = params.keyword?.toLowerCase() || "";
+
+  /**
+   * Halaman yang sedang dibuka.
+   *
+   * Jika tidak ada,
+   * gunakan halaman pertama.
+   */
   const currentPage = Number(params.page) || 1;
 
+  /**
+   * Mengambil seluruh produk.
+   */
   const products = await getProducts();
 
+  /**
+   * Filter produk berdasarkan keyword.
+   *
+   * Pencarian dilakukan pada title produk.
+   */
   const filtered = products.filter((p) =>
     p.title.toLowerCase().includes(keyword)
   );
 
+  /**
+   * Jumlah produk per halaman.
+   */
   const PRODUCTS_PER_PAGE = 20;
+
+  /**
+   * Maksimal tombol pagination yang tampil.
+   */
   const MAX_VISIBLE_PAGES = 5;
 
+  /**
+   * Total halaman yang tersedia.
+   */
   const totalPages = Math.ceil(filtered.length / PRODUCTS_PER_PAGE);
 
+  /**
+   * Index awal data pada halaman aktif.
+   */
   const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
 
+  /**
+   * Index akhir data pada halaman aktif.
+   */
   const endIndex = startIndex + PRODUCTS_PER_PAGE;
 
+  /**
+   * Produk yang tampil pada halaman sekarang.
+   */
   const paginatedProducts = filtered.slice(startIndex, endIndex);
 
+  /**
+   * Menentukan halaman pertama yang tampil
+   * pada navigasi pagination.
+   *
+   * Contoh:
+   * [3] [4] [5] [6] [7]
+   */
   let startPage = Math.max(1, currentPage - Math.floor(MAX_VISIBLE_PAGES / 2));
 
+  /**
+   * Menentukan halaman terakhir yang tampil.
+   */
   let endPage = startPage + MAX_VISIBLE_PAGES - 1;
 
+  /**
+   * Jika melebihi total halaman,
+   * sesuaikan ulang pagination.
+   */
   if (endPage > totalPages) {
     endPage = totalPages;
 
     startPage = Math.max(1, endPage - MAX_VISIBLE_PAGES + 1);
   }
 
+  /**
+   * Membuat array nomor halaman.
+   *
+   * Contoh:
+   * [1,2,3,4,5]
+   */
   const visiblePages = Array.from(
     { length: Math.max(0, endPage - startPage + 1) },
     (_, i) => startPage + i
   );
+
+  /**
+   * Formatter mata uang Rupiah.
+   *
+   * Contoh:
+   * 150000 → Rp150.000
+   */
+  const currencyFormatter = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0,
+  });
 
   return (
     <>
@@ -225,35 +374,19 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                                 {product.discount > 0 ? (
                                   <>
                                     <p className="text-xs text-gray-400 line-through">
-                                      {new Intl.NumberFormat("id-ID", {
-                                        style: "currency",
-                                        currency: "IDR",
-                                        maximumFractionDigits: 0,
-                                      }).format(product.price)}
+                                      {currencyFormatter.format(product.price)}
                                     </p>
                                     <p className="text-yellow-500 font-semibold">
-                                      {new Intl.NumberFormat("id-ID", {
-                                        style: "currency",
-                                        currency: "IDR",
-                                        maximumFractionDigits: 0,
-                                      }).format(finalPrice)}
+                                      {currencyFormatter.format(finalPrice)}
                                     </p>
                                   </>
                                 ) : (
                                   <>
                                     <p className="text-xs invisible">
-                                      {new Intl.NumberFormat("id-ID", {
-                                        style: "currency",
-                                        currency: "IDR",
-                                        maximumFractionDigits: 0,
-                                      }).format(product.price)}
+                                      {currencyFormatter.format(product.price)}
                                     </p>
                                     <p className="text-yellow-500 font-semibold">
-                                      {new Intl.NumberFormat("id-ID", {
-                                        style: "currency",
-                                        currency: "IDR",
-                                        maximumFractionDigits: 0,
-                                      }).format(product.price)}
+                                      {currencyFormatter.format(product.price)}
                                     </p>
                                   </>
                                 )}

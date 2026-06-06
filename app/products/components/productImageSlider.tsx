@@ -3,33 +3,84 @@
 import Image from "next/image";
 import { useState, useRef } from "react";
 
+/**
+ * Props untuk komponen slider gambar produk
+ *
+ * imageProduct:
+ * Array berisi URL gambar produk
+ *
+ * titleProduct:
+ * Nama produk untuk atribut alt gambar
+ */
 type ProductImageSliderProps = {
   imageProduct: string[];
   titleProduct: string;
 };
 
+/**
+ * Komponen slider gambar produk
+ *
+ * Fitur:
+ * - Swipe kiri/kanan di mobile
+ * - Drag kiri/kanan menggunakan mouse
+ * - Thumbnail gambar di desktop
+ * - Indicator dot di mobile
+ * - Transisi animasi saat berpindah gambar
+ */
 export default function ProductImageSlider({
   imageProduct,
   titleProduct,
 }: ProductImageSliderProps) {
+  /**
+   * Menyimpan index gambar yang sedang aktif
+   *
+   * Contoh:
+   * 0 = gambar pertama
+   * 1 = gambar kedua
+   * dst.
+   */
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  /**
+   * Menyimpan posisi awal sentuhan atau klik
+   *
+   * Digunakan untuk menghitung arah swipe
+   */
   const startX = useRef(0);
 
+  /**
+   * Pindah ke gambar berikutnya
+   *
+   * Akan berhenti di gambar terakhir
+   */
   const nextImage = () => {
     setCurrentImageIndex((prev) =>
       prev < imageProduct.length - 1 ? prev + 1 : prev
     );
   };
 
+  /**
+   * Pindah ke gambar sebelumnya
+   *
+   * Akan berhenti di gambar pertama
+   */
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
+  /**
+   * Menyimpan posisi awal sentuhan layar
+   */
   const handleTouchStart = (e: React.TouchEvent) => {
     startX.current = e.touches[0].clientX;
   };
 
+  /**
+   * Mengecek arah swipe saat jari dilepas
+   *
+   * > 50px  = geser kiri → gambar berikutnya
+   * < -50px = geser kanan → gambar sebelumnya
+   */
   const handleTouchEnd = (e: React.TouchEvent) => {
     const endX = e.changedTouches[0].clientX;
     const diff = startX.current - endX;
@@ -43,10 +94,18 @@ export default function ProductImageSlider({
     }
   };
 
+  /**
+   * Menyimpan posisi awal klik mouse
+   */
   const handleMouseDown = (e: React.MouseEvent) => {
     startX.current = e.clientX;
   };
 
+  /**
+   * Mengecek arah drag saat mouse dilepas
+   *
+   * Logikanya sama seperti swipe mobile
+   */
   const handleMouseUp = (e: React.MouseEvent) => {
     const endX = e.clientX;
     const diff = startX.current - endX;

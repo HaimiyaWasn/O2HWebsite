@@ -4,16 +4,43 @@ import { useState } from "react";
 import { Playfair_Display } from "next/font/google";
 import { LuSlidersHorizontal } from "react-icons/lu";
 
+/**
+ * Font untuk heading/judul
+ */
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
 });
 
+/**
+ * Font untuk teks biasa
+ */
 const playfairDisplayRegular = Playfair_Display({
   weight: "400",
   subsets: ["latin"],
 });
 
+/**
+ * Props yang diterima komponen filter produk
+ *
+ * selectedCategory
+ * => kategori yang sedang dipilih
+ *
+ * productType
+ * => jenis produk yang sedang aktif
+ *
+ * stockStatus
+ * => status stok yang dipilih
+ *
+ * priceRange
+ * => rentang harga yang dipilih
+ *
+ * selectedSize
+ * => daftar ukuran yang dipilih user
+ *
+ * updateFilter
+ * => fungsi untuk mengubah filter dari parent component
+ */
 type ProductsFilterProps = {
   selectedCategory: string | null;
   productType: string;
@@ -23,6 +50,19 @@ type ProductsFilterProps = {
   updateFilter: (key: string, value: string | string[] | null) => void;
 };
 
+/**
+ * Komponen Sidebar / Modal Filter Produk
+ *
+ * Fitur:
+ * - Filter kategori
+ * - Filter harga
+ * - Filter ukuran
+ * - Dapat digunakan untuk desktop maupun mobile
+ *
+ * Seluruh state filter utama disimpan di parent component,
+ * sedangkan komponen ini hanya mengirim perubahan filter
+ * melalui fungsi updateFilter().
+ */
 export default function ProductsFilter({
   selectedCategory,
   productType,
@@ -31,25 +71,61 @@ export default function ProductsFilter({
   selectedSize,
   updateFilter,
 }: ProductsFilterProps) {
+  /**
+   * Mengontrol buka/tutup panel filter
+   * Biasanya digunakan untuk tampilan mobile
+   */
   const [openFilter, setOpenFilter] = useState(false);
 
+  /**
+   * Mengubah kategori produk
+   *
+   * Jika kategori yang dipilih sama dengan
+   * kategori yang sedang aktif:
+   * -> filter dihapus (null)
+   *
+   * Jika berbeda:
+   * -> kategori baru dipilih
+   */
   const handleCategory = (category: string) => {
     updateFilter("category", selectedCategory === category ? null : category);
   };
 
+  /**
+   * Mengubah filter harga
+   *
+   * Jika user memilih harga yang sama,
+   * maka filter harga dihapus.
+   */
   const handlePrice = (range: string) => {
     updateFilter("priceRange", priceRange === range ? null : range);
   };
 
+  /**
+   * Mengelola filter ukuran (multi select)
+   *
+   * Contoh:
+   * User memilih ukuran:
+   * ["M", "L"]
+   *
+   * Jika klik "L" lagi:
+   * ["M"]
+   *
+   * Jika klik "XL":
+   * ["M", "L", "XL"]
+   */
   const handleSize = (size: string) => {
     let updatedSizes: string[];
-  
+
+    // Jika ukuran sudah dipilih → hapus
     if (selectedSize.includes(size)) {
       updatedSizes = selectedSize.filter((s) => s !== size);
-    } else {
+    } 
+    // Jika belum dipilih → tambahkan
+    else {
       updatedSizes = [...selectedSize, size];
     }
-  
+
     updateFilter("size", updatedSizes);
   };
 

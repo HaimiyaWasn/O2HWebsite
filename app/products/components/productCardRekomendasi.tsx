@@ -5,7 +5,17 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Playfair_Display } from "next/font/google";
 
-type Products = {
+/**
+ * Struktur data produk
+ *
+ * Digunakan untuk:
+ * - Halaman produk
+ * - Detail produk
+ * - Produk rekomendasi
+ * - Wishlist
+ * - Produk terkait (Related Products)
+ */
+type Product = {
   id: number;
   title: string;
   price: number;
@@ -29,18 +39,46 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
+/**
+ * Props komponen rekomendasi produk
+ *
+ * product:
+ * Semua produk yang tersedia
+ *
+ * currentProductId:
+ * ID produk yang sedang dibuka
+ * agar tidak ikut muncul pada daftar rekomendasi
+ */
 type ProductCardRekomendasiProps = {
-  product: Products[];
+  product: Product[];
   currentProductId: number;
 };
 
+/**
+ * Menampilkan daftar produk rekomendasi
+ * pada halaman detail produk.
+ *
+ * Fitur:
+ * - Menghilangkan produk yang sedang dibuka
+ * - Mengacak urutan produk
+ * - Membatasi maksimal 12 produk
+ */
 export default function ProductCardRekomendasi({
   product,
   currentProductId,
 }: ProductCardRekomendasiProps) {
-  const [randomizedProducts, setRandomizedProducts] = useState<Products[]>([]);
+  /**
+   * Menyimpan hasil produk yang sudah diacak
+   * dan siap ditampilkan.
+   */
+  const [randomizedProducts, setRandomizedProducts] = useState<Product[]>([]);
 
   useEffect(() => {
+    /**
+     * 1. Hapus produk yang sedang dibuka
+     * 2. Acak urutan produk
+     * 3. Ambil maksimal 12 produk
+     */
     const shuffled = [...product]
       .filter((item) => item.id !== currentProductId)
       .sort(() => Math.random() - 0.5)
@@ -68,21 +106,59 @@ export default function ProductCardRekomendasi({
   );
 }
 
-function CardItem({ product }: { product: Products }) {
+/**
+ * Card produk individual
+ *
+ * Dipisahkan menjadi komponen terpisah
+ * agar kode lebih mudah dirawat dan dibaca.
+ */
+function CardItem({ product }: { product: Product }) {
+  /**
+   * Mengontrol efek hover gambar.
+   *
+   * Jika produk memiliki lebih dari satu gambar,
+   * gambar kedua akan ditampilkan saat hover.
+   */
   const [isHovered, setIsHovered] = useState(false);
 
+  /**
+   * Memastikan data gambar selalu berupa array.
+   */
   const images = Array.isArray(product.image) ? product.image : [product.image];
 
+  /**
+   * Mengecek apakah produk memiliki
+   * gambar kedua untuk efek hover.
+   */
   const hasSecondImage = images.length > 1;
 
+  /**
+   * Menghitung harga setelah diskon.
+   */
   const finalPrice =
     product.discount > 0
       ? product.price - (product.price * product.discount) / 100
       : product.price;
 
+  /**
+   * Menandai produk sebagai NEW
+   * jika dibuat dalam 30 hari terakhir.
+   */
   const isNew =
     new Date(product.createdAt).getTime() >
     Date.now() - 30 * 24 * 60 * 60 * 1000;
+
+  /**
+   * Formatter mata uang Rupiah.
+   *
+   * Dibuat sekali agar tidak perlu
+   * membuat objek baru berkali-kali.
+   */
+  const currencyFormatter = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0,
+  });
 
   return (
     <Link href={`/products/${product.slug}`}>
@@ -147,35 +223,19 @@ function CardItem({ product }: { product: Products }) {
             {product.discount > 0 ? (
               <>
                 <p className="text-xs text-gray-400 line-through">
-                  {new Intl.NumberFormat("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                    maximumFractionDigits: 0,
-                  }).format(product.price)}
+                  {currencyFormatter.format(product.price)}
                 </p>
                 <p className="text-yellow-500 font-semibold">
-                  {new Intl.NumberFormat("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                    maximumFractionDigits: 0,
-                  }).format(finalPrice)}
+                  {currencyFormatter.format(finalPrice)}
                 </p>
               </>
             ) : (
               <>
                 <p className="text-xs invisible">
-                  {new Intl.NumberFormat("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                    maximumFractionDigits: 0,
-                  }).format(product.price)}
+                  {currencyFormatter.format(product.price)}
                 </p>
                 <p className="text-yellow-500 font-semibold">
-                  {new Intl.NumberFormat("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                    maximumFractionDigits: 0,
-                  }).format(finalPrice)}
+                  {currencyFormatter.format(finalPrice)}
                 </p>
               </>
             )}
