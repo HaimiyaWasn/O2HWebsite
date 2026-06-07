@@ -18,7 +18,6 @@ const playfairDisplayRegular = Playfair_Display({
   subsets: ["latin"],
 });
 
-
 /**
  * Font untuk judul menu sidebar
  */
@@ -44,7 +43,7 @@ const yesteryear = Yesteryear({
  * - Tombol notifikasi
  * - Dropdown profile
  * - Siedbar navigasi
- * 
+ *
  * Cocok digunakan untuk:
  * - E-commerce
  * - Portfolio
@@ -55,7 +54,7 @@ const yesteryear = Yesteryear({
 export default function Navbar() {
   /**
    * Mengontrol status sidebar
-   * 
+   *
    * true = Sidebar terbuka
    * false = Sidebar tertutup
    */
@@ -126,16 +125,25 @@ export default function Navbar() {
               tabIndex={0}
               className={`dropdown-content menu p-2 shadow bg-yellow-50 text-black rounded-tl-lg rounded-bl-lg rounded-br-lg w-40 mt-3 ${playfairDisplayRegular.className}`}
             >
-              {["Profile", "Settings", "Logout"].map((item) => (
-                <li key={item}>
-                  <Link
-                    href="#"
-                    className="hover:bg-yellow-400 hover:text-black transition"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link
+                  href="/profile"
+                  tabIndex={0}
+                  className="hover:bg-yellow-400 hover:text-black transition"
+                >
+                  Profile
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  href="/login"
+                  tabIndex={0}
+                  className="hover:bg-yellow-400 hover:text-black transition"
+                >
+                  Login
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
