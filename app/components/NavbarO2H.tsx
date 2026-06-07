@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaHeart } from "react-icons/fa";
 import { IoIosNotifications } from "react-icons/io";
 import { Playfair_Display, Yesteryear } from "next/font/google";
@@ -60,6 +60,38 @@ export default function Navbar() {
    */
   const [open, setOpen] = useState(false);
 
+  /**
+   * Mengontrol status dropdown profile
+   *
+   * true = Dropdown terbuka
+   * false = Dropdown tertutup
+   */
+  const [profileOpen, setProfileOpen] = useState(false);
+
+  /**
+   * Referensi area dropdown profile
+   *
+   * Digunakan untuk mendeteksi klik di luar dropdown
+   */
+  const profileDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        profileDropdownRef.current &&
+        !profileDropdownRef.current.contains(event.target as Node)
+      ) {
+        setProfileOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <div className="navbar shadow-sm fixed top-0 z-50 bg-yellow-400 text-black">
@@ -111,40 +143,39 @@ export default function Navbar() {
             <IoIosNotifications size={28} />
           </button>
 
-          <div className="dropdown dropdown-end">
-            <label
-              tabIndex={0}
-              className="p-2 rounded-full hover:bg-yellow-300 active:bg-yellow-500 focus:outline-none avatar transition"
+          <div ref={profileDropdownRef} className="relative">
+            <button
+              onClick={() => setProfileOpen((prev) => !prev)}
+              aria-label="Open Profile Menu"
+              className="p-2 rounded-full hover:bg-yellow-300 active:bg-yellow-500 focus:outline-none transition"
             >
-              <div className="w-8 rounded-full">
-                <Image alt="Avatar Player" src={ProfileIconDefault} />
+              <div className="w-8 overflow-hidden rounded-full">
+                <Image src={ProfileIconDefault} alt="Avatar Player" />
               </div>
-            </label>
+            </button>
 
-            <ul
-              tabIndex={0}
-              className={`dropdown-content menu p-2 shadow bg-yellow-50 text-black rounded-tl-lg rounded-bl-lg rounded-br-lg w-40 mt-3 ${playfairDisplayRegular.className}`}
+            <div
+              className={`absolute right-0 mt-3 w-60 overflow-hidden rounded-lg rounded-tr-none bg-yellow-50 text-black shadow-lg transition-all duration-500 ${
+                profileOpen
+                  ? "visible opacity-100 translate-y-0"
+                  : "invisible opacity-0 -translate-y-2"
+              }`}
             >
-              <li>
-                <Link
-                  href="/profile"
-                  tabIndex={0}
-                  className="hover:bg-yellow-400 hover:text-black transition"
-                >
-                  Profile
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href="/login"
-                  tabIndex={0}
-                  className="hover:bg-yellow-400 hover:text-black transition"
-                >
-                  Login
-                </Link>
-              </li>
-            </ul>
+              <Link
+                href="/profile"
+                onClick={() => setProfileOpen(false)}
+                className={`block px-4 py-2 hover:bg-yellow-400 transition ${playfairDisplayRegular.className}`}
+              >
+                Profile
+              </Link>
+              <Link
+                href="/login"
+                onClick={() => setProfileOpen(false)}
+                className={`block px-4 py-2 hover:bg-yellow-400 transition ${playfairDisplayRegular.className}`}
+              >
+                Login
+              </Link>
+            </div>
           </div>
         </div>
       </div>
