@@ -3,10 +3,10 @@
 import { usePathname } from "next/navigation";
 
 /**
- * Props untuk FooterWrapper
+ * Props untuk NavbarWrapper
  * 
  * children:
- * Komponen Footer yang akan ditampilkan
+ * Komponen Navbar yang akan ditampilkan
  * jika memenuhi kondisi yang ditentukan
  */
 type NavbarWrapperProps = {
@@ -14,11 +14,12 @@ type NavbarWrapperProps = {
 }
 
 /**
- * Bertugas mengontrol kapan Footer boleh ditampilkan
+ * Bertugas mengontrol kapan Navbar boleh ditampilkan
  * pada halaman tertentu agar tampilan lebih fokus
  * dan tidak menggangu pengalamn pengguna
  * 
  * Cocok digunakan untuk:
+ * - Navbar
  * - Footer
  * - Header
  * - Floating Cart
@@ -43,6 +44,7 @@ export default function NavbarWrapper({
   const hiddenPaths = [
     "/profile",
     "/login",
+    "/register",
   ]
 
   /**
@@ -55,7 +57,7 @@ export default function NavbarWrapper({
 
   /**
    * Menampilkan komponen yang dibungkus 
-   * oleh FooterWrapper
+   * oleh NavbarWrapper
    */
   return <>{children}</>;
 }

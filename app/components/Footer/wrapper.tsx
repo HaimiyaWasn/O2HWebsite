@@ -44,6 +44,7 @@ export default function FooterWrapper({
     "/carts",
     "/profile",
     "/login",
+    "/register",
   ]
 
   /**

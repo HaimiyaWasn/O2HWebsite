@@ -42,7 +42,8 @@ export default function FloatingCartWrapper({
   const hiddenPaths = [
     "/carts",
     "/profile",
-    "/login"
+    "/login",
+    "/register",
   ];
 
   /**
