@@ -75,6 +75,10 @@ export default function Navbar() {
    */
   const profileDropdownRef = useRef<HTMLDivElement>(null);
 
+  /**
+   * Menutup dropdown profile ketika user mengklik
+   * area diluar dropdown
+   */
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (

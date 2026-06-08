@@ -37,10 +37,20 @@ export default function FooterWrapper({
   const pathname = usePathname();
 
   /**
-   * Jangan tampilkan Footer ketika pengguna
-   * berada di halaman keranjang
+   * Daftar halaman yang tidak boleh
+   * menampilkan Footer
    */
-  if (pathname === "/carts") {
+  const hiddenPaths = [
+    "/carts",
+    "/profile",
+    "/login",
+  ]
+
+  /**
+   * Jika pathname saat ini ada di dalam hiddenPaths,
+   * komponen tidak akan dirender
+   */
+  if (hiddenPaths.includes(pathname)) {
     return null;
   }
 

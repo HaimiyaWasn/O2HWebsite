@@ -39,7 +39,11 @@ export default function FloatingCartWrapper({
   /**
    * Daftar halaman yang tidak boleh menampilkan Floating Cart
    */
-  const hiddenPaths = ["/carts"];
+  const hiddenPaths = [
+    "/carts",
+    "/profile",
+    "/login"
+  ];
 
   /**
    * Jika pathname saat ini ada di dalam hiddenPaths,
