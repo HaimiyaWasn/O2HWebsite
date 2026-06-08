@@ -6,7 +6,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import DisclaimerWrapper from "./components/Disclaimer/wrapper";
 import { DisclaimerProvider } from "./components/Disclaimer/content";
-import Navbar from "./components/NavbarO2H";
+import Navbar from "./components/Navbar/NavbarO2H";
+import NavbarWrapper from "./components/Navbar/wrapper";
 import FloatingLogo from "./components/FloatingLogo";
 import Footer from "./components/Footer/client";
 import FloatingCart from "./components/FloatingCarts";
@@ -39,7 +40,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <DisclaimerProvider>
-          <Navbar />
+          <NavbarWrapper>
+            <Navbar />
+          </NavbarWrapper>
           <DisclaimerWrapper />
           <ScrollToTop />
           {children}
