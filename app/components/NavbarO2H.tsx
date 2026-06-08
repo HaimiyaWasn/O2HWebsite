@@ -155,7 +155,7 @@ export default function Navbar() {
             </button>
 
             <div
-              className={`absolute right-0 mt-3 w-60 overflow-hidden rounded-lg rounded-tr-none bg-yellow-50 text-black shadow-lg transition-all duration-500 ${
+              className={`absolute -right-2 mt-3 w-40 md:w-60 overflow-hidden rounded-lg rounded-tr-none bg-yellow-50 text-black shadow-lg transition-all duration-500 ${
                 profileOpen
                   ? "visible opacity-100 translate-y-0"
                   : "invisible opacity-0 -translate-y-2"
