@@ -55,7 +55,7 @@ export default function LoginContent() {
                 variants={item}
                 className="text-2xl md:text-4xl font-bold"
               >
-                Create an Account
+                Login an Account
               </motion.h1>
 
               <motion.p
