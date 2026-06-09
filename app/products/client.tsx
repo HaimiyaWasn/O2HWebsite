@@ -387,135 +387,133 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
                 </div>
               ) : (
                 <>
-                  <RevealOnScroll delay={0.15}>
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                      {paginatedProducts.map((product, index) => {
-                        const images = Array.isArray(product.image)
-                          ? product.image
-                          : [product.image];
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    {paginatedProducts.map((product, index) => {
+                      const images = Array.isArray(product.image)
+                        ? product.image
+                        : [product.image];
 
-                        const hasSecondImage = images.length > 1;
+                      const hasSecondImage = images.length > 1;
 
-                        const finalPrice =
-                          product.discount > 0
-                            ? product.price -
-                              (product.price * product.discount) / 100
-                            : product.price;
+                      const finalPrice =
+                        product.discount > 0
+                          ? product.price -
+                            (product.price * product.discount) / 100
+                          : product.price;
 
-                        const isNew =
-                          new Date(product.createdAt).getTime() >
-                          Date.now() - 30 * 24 * 60 * 60 * 1000;
+                      const isNew =
+                        new Date(product.createdAt).getTime() >
+                        Date.now() - 30 * 24 * 60 * 60 * 1000;
 
-                        return (
-                          <motion.div
-                            key={product.id}
-                            initial={{
-                              opacity: 0,
-                              y: 30,
-                            }}
-                            whileInView={{
-                              opacity: 1,
-                              y: 0,
-                            }}
-                            viewport={{
-                              once: true,
-                            }}
-                            transition={{
-                              duration: 0.4,
-                              delay: 0.15 + index * 0.05,
-                            }}
+                      return (
+                        <motion.div
+                          key={product.id}
+                          initial={{
+                            opacity: 0,
+                            y: 30,
+                          }}
+                          whileInView={{
+                            opacity: 1,
+                            y: 0,
+                          }}
+                          viewport={{
+                            once: true,
+                          }}
+                          transition={{
+                            duration: 0.4,
+                            delay: 0.15 + index * 0.05,
+                          }}
+                        >
+                          <Link
+                            href={`/products/${product.slug}`}
+                            className="h-full"
                           >
-                            <Link
-                              href={`/products/${product.slug}`}
-                              className="h-full"
+                            <div
+                              className={`group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 overflow-hidden hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer ${
+                                product.isOutOfStock ? "opacity-75" : ""
+                              }`}
                             >
-                              <div
-                                className={`group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 overflow-hidden hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer ${
-                                  product.isOutOfStock ? "opacity-75" : ""
-                                }`}
-                              >
-                                <div className="relative aspect-square overflow-hidden rounded">
-                                  {product.isOutOfStock && (
-                                    <div className="absolute top-1 left-1 z-30 bg-black text-white text-[10px] px-2 py-1 rounded font-bold">
-                                      Stok Habis
-                                    </div>
-                                  )}
-                                  {isNew && (
-                                    <div
-                                      className={`absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-1.5 py-0.5 rounded font-bold ${
-                                        product.isOutOfStock ? "top-8" : "top-1"
-                                      }`}
-                                    >
-                                      NEW
-                                    </div>
-                                  )}
+                              <div className="relative aspect-square overflow-hidden rounded">
+                                {product.isOutOfStock && (
+                                  <div className="absolute top-1 left-1 z-30 bg-black text-white text-[10px] px-2 py-1 rounded font-bold">
+                                    Stok Habis
+                                  </div>
+                                )}
+                                {isNew && (
+                                  <div
+                                    className={`absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-1.5 py-0.5 rounded font-bold ${
+                                      product.isOutOfStock ? "top-8" : "top-1"
+                                    }`}
+                                  >
+                                    NEW
+                                  </div>
+                                )}
 
-                                  {product.discount > 0 && (
-                                    <div className="absolute top-1 right-1 z-20 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">
-                                      -{product.discount}%
-                                    </div>
-                                  )}
+                                {product.discount > 0 && (
+                                  <div className="absolute top-1 right-1 z-20 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">
+                                    -{product.discount}%
+                                  </div>
+                                )}
+                                <Image
+                                  src={images[0]}
+                                  alt={product.title}
+                                  fill
+                                  className={`object-cover transition-all duration-500 ${
+                                    hasSecondImage
+                                      ? "group-hover:opacity-0 group-hover:scale-105"
+                                      : "group-hover:scale-105"
+                                  }`}
+                                />
+
+                                {hasSecondImage && (
                                   <Image
-                                    src={images[0]}
+                                    src={images[1]}
                                     alt={product.title}
                                     fill
-                                    className={`object-cover transition-all duration-500 ${
-                                      hasSecondImage
-                                        ? "group-hover:opacity-0 group-hover:scale-105"
-                                        : "group-hover:scale-105"
-                                    }`}
+                                    className="object-cover opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                                   />
+                                )}
+                              </div>
 
-                                  {hasSecondImage && (
-                                    <Image
-                                      src={images[1]}
-                                      alt={product.title}
-                                      fill
-                                      className="object-cover opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                                    />
+                              <div className="border-t border-yellow-400 my-3 flex flex-col flex-1">
+                                <p
+                                  className={`text-sm mt-2 line-clamp-2 h-10 text-black ${playfairDisplayBold.className}`}
+                                >
+                                  {product.title}
+                                </p>
+
+                                <div className="mt-1 flex flex-col pt-3">
+                                  {product.discount > 0 ? (
+                                    <>
+                                      <p className="text-xs text-gray-400 line-through">
+                                        {formatCurrency(product.price)}
+                                      </p>
+                                      <p className="text-yellow-500 font-semibold">
+                                        {formatCurrency(finalPrice)}
+                                      </p>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <p className="text-xs invisible">
+                                        {formatCurrency(product.price)}
+                                      </p>
+                                      <p className="text-yellow-500 font-semibold">
+                                        {formatCurrency(product.price)}
+                                      </p>
+                                    </>
                                   )}
                                 </div>
 
-                                <div className="border-t border-yellow-400 my-3 flex flex-col flex-1">
-                                  <p
-                                    className={`text-sm mt-2 line-clamp-2 h-10 text-black ${playfairDisplayBold.className}`}
-                                  >
-                                    {product.title}
-                                  </p>
-
-                                  <div className="mt-1 flex flex-col pt-3">
-                                    {product.discount > 0 ? (
-                                      <>
-                                        <p className="text-xs text-gray-400 line-through">
-                                          {formatCurrency(product.price)}
-                                        </p>
-                                        <p className="text-yellow-500 font-semibold">
-                                          {formatCurrency(finalPrice)}
-                                        </p>
-                                      </>
-                                    ) : (
-                                      <>
-                                        <p className="text-xs invisible">
-                                          {formatCurrency(product.price)}
-                                        </p>
-                                        <p className="text-yellow-500 font-semibold">
-                                          {formatCurrency(product.price)}
-                                        </p>
-                                      </>
-                                    )}
-                                  </div>
-
-                                  <p className="text-xs text-gray-500">
-                                    {product.sold}
-                                  </p>
-                                </div>
+                                <p className="text-xs text-gray-500">
+                                  {product.sold}
+                                </p>
                               </div>
-                            </Link>
-                          </motion.div>
-                        );
-                      })}
-                    </div>
-                  </RevealOnScroll>
+                            </div>
+                          </Link>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
 
                   {totalPages > 1 && (
                     <RevealOnScroll delay={0.05}>

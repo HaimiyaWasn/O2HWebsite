@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { Playfair_Display } from "next/font/google";
 
@@ -99,8 +100,27 @@ export default function ProductCardRekomendasi({
         </span>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 mt-5">
-          {randomizedProducts.map((item) => (
-            <CardItem key={item.id} product={item} />
+          {randomizedProducts.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{
+                opacity: 0,
+                y: 30,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.4,
+                delay: 0.15 + index * 0.05,
+              }}
+            >
+              <CardItem product={item} />
+            </motion.div>
           ))}
         </div>
       </div>
