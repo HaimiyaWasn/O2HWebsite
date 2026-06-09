@@ -18,7 +18,7 @@ const item = {
 
 export default function LoginContent() {
   return (
-    <section className="min-h-screen bg-yellow-400">
+    <section className="min-h-screen bg-yellow-400 max-md:bg-linear-to-br max-md:from-yellow-300 max-md:via-yellow-400 max-md:to-yellow-500">
       <div className="mx-auto flex min-h-screen max-w-7xl items-center justify-center px-6">
         <motion.div
           initial={{
@@ -37,7 +37,7 @@ export default function LoginContent() {
           }}
           className="grid w-full overflow-hidden rounded-3xl bg-yellow-50 shadow-2xl md:grid-cols-2"
         >
-          <div className="flex items-center justify-center p-8 md:p-12">
+          <div className="flex items-center justify-center p-6 md:p-12">
             <motion.div
               variants={{
                 hidden: {},
@@ -51,22 +51,32 @@ export default function LoginContent() {
               animate="show"
               className="w-full max-w-md text-black"
             >
-              <motion.h1 variants={item} className="text-4xl font-bold">
+              <motion.h1
+                variants={item}
+                className="text-2xl md:text-4xl font-bold"
+              >
                 Create an Account
               </motion.h1>
 
-              <motion.p variants={item} className="mt-2 opacity-75">
+              <motion.p
+                variants={item}
+                className="mt-1 md:mt-2 text-sm md:text-base opacity-75"
+              >
                 Silahkan login untuk melanjutkan
               </motion.p>
 
-              <motion.form variants={item} className="mt-8 space-y-8">
+              <motion.form
+                variants={item}
+                className="mt-6 md:mt-8 space-y-4 md:space-y-8"
+              >
                 <div className="flex flex-col gap-2">
                   <label className="font-semibold">Email</label>
 
                   <input
+                    maxLength={100}
                     type="email"
                     placeholder="Masukkan email anda"
-                    className="rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500"
+                    className="rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
                   />
                 </div>
 
@@ -74,21 +84,13 @@ export default function LoginContent() {
                   <label className="font-semibold">Password</label>
 
                   <input
+                    maxLength={16}
                     type="password"
                     placeholder="Masukkan password anda"
-                    className="rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500"
+                    className="rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
                   />
                 </div>
               </motion.form>
-
-              <motion.div variants={item} className="mt-8 text-center">
-                <p className="opacity-75">
-                  Belum punya akun?
-                  <Link href="/register">
-                    <span className="font-bold text-yellow-500"> Register</span>
-                  </Link>
-                </p>
-              </motion.div>
 
               <motion.button
                 variants={item}
@@ -99,13 +101,23 @@ export default function LoginContent() {
                   scale: 0.97,
                 }}
                 type="submit"
-                className="mt-4 w-full rounded-lg bg-yellow-400 py-3 font-bold"
+                className="mt-8 w-full rounded-lg bg-yellow-400 py-3 font-bold"
               >
                 Login
               </motion.button>
+
+              <motion.div variants={item} className="mt-2 text-center">
+                <p className="opacity-75">
+                  Belum punya akun?
+                  <Link href="/register">
+                    <span className="font-bold text-yellow-500"> Register</span>
+                  </Link>
+                </p>
+              </motion.div>
+
               <motion.div
                 variants={item}
-                className="mt-4 text-center md:hidden"
+                className="mt-6 text-center md:hidden"
               >
                 <Link
                   href="/"
