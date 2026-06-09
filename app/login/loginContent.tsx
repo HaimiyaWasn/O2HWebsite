@@ -36,8 +36,10 @@ const item = {
 export default function LoginContent({ users }: LoginContentProps) {
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const demoUser = users.find((user) => user.id === 3);
+
+  const [email, setEmail] = useState(demoUser?.email ?? "");
+  const [password, setPassword] = useState(demoUser?.password ?? "");
   const [error, setError] = useState("");
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {

@@ -25,7 +25,7 @@ const baseUsers = [
     id: 3,
     username: "davidmar123",
     name: "David Martinez",
-    email: "david@gmail.com",
+    email: "davidmartinez123@gmail.com",
     password: "david123",
     role: "user",
     avatar: "/img/profileIconDefault.jpg",
