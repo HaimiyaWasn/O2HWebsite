@@ -2,11 +2,17 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import LogoAnimation from "./logoAnimation";
 
+/**
+ * Struktur data user
+ *
+ * Data ini berasal dari API atau dummy database
+ * yang dikirim dari Server Component ke Client Component.
+ */
 type User = {
   id: number;
   username: string;
@@ -18,10 +24,17 @@ type User = {
   createdAt: string;
 };
 
+/**
+ * Props yang diterima komponen LoginContent
+ */
 type LoginContentProps = {
   users: User[];
 };
 
+/**
+ * Variasi animasi untuk setiap elemen
+ * agar muncul satu per satu saat halaman dimuat.
+ */
 const item = {
   hidden: {
     opacity: 0,
@@ -33,34 +46,85 @@ const item = {
   },
 };
 
+/**
+ * Halaman Login
+ *
+ * Fitur:
+ * - Login menggunakan data user
+ * - Validasi email dan password
+ * - Menyimpan user login ke localStorage
+ * - Redirect ke halaman utama setelah login berhasil
+ * - Animasi menggunakan Motion
+ *
+ * Cocok digunakan sebagai:
+ * - Login dummy
+ * - Prototype authentication
+ * - Simulasi login sebelum memakai backend asli
+ */
 export default function LoginContent({ users }: LoginContentProps) {
   const router = useRouter();
 
+  /**
+   * User demo yang otomatis mengisi form login.
+   *
+   * Misalnya:
+   * ID 3 = akun demo untuk testing.
+   */
   const demoUser = users.find((user) => user.id === 3);
 
+  /**
+   * State email dan password.
+   *
+   * Secara default akan terisi data user demo
+   * jika user tersebut ditemukan.
+   */
   const [email, setEmail] = useState(demoUser?.email ?? "");
   const [password, setPassword] = useState(demoUser?.password ?? "");
+
+  /**
+   * Menyimpan pesan error login.
+   */
   const [error, setError] = useState("");
 
+  /**
+   * Menangani proses login.
+   */
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Hapus error sebelumnya
     setError("");
 
+    /**
+     * Validasi field kosong
+     */
     if (!email.trim() || !password.trim()) {
       setError("Email dan password wajib diisi!");
       return;
     }
 
+    /**
+     * Cari user yang sesuai
+     * berdasarkan email dan password.
+     */
     const user = users.find(
       (user) => user.email === email && user.password === password
     );
 
+    /**
+     * Jika user tidak ditemukan
+     */
     if (!user) {
       setError("Email atau password salah!");
       return;
     }
 
+    /**
+     * Simpan data user yang berhasil login
+     * ke localStorage.
+     *
+     * Password sengaja tidak disimpan.
+     */
     localStorage.setItem(
       "currentUser",
       JSON.stringify({
@@ -73,6 +137,9 @@ export default function LoginContent({ users }: LoginContentProps) {
       })
     );
 
+    /**
+     * Redirect ke halaman utama.
+     */
     router.push("/");
   };
 
