@@ -2,8 +2,25 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import LogoAnimation from "./logoAnimation";
+
+type User = {
+  id: number;
+  username: string;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  avatar: string;
+  createdAt: string;
+};
+
+type LoginContentProps = {
+  users: User[];
+};
 
 const item = {
   hidden: {
@@ -16,7 +33,47 @@ const item = {
   },
 };
 
-export default function LoginContent() {
+export default function LoginContent({ users }: LoginContentProps) {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setError("");
+
+    if (!email.trim() || !password.trim()) {
+      setError("Email dan password wajib diisi!");
+      return;
+    }
+
+    const user = users.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (!user) {
+      setError("Email atau password salah!");
+      return;
+    }
+
+    localStorage.setItem(
+      "currentUser",
+      JSON.stringify({
+        id: user.id,
+        username: user.username,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        avatar: user.avatar,
+      })
+    );
+
+    router.push("/");
+  };
+
   return (
     <section className="min-h-screen bg-yellow-400 max-md:bg-linear-to-br max-md:from-yellow-300 max-md:via-yellow-400 max-md:to-yellow-500">
       <div className="mx-auto flex min-h-screen max-w-7xl items-center justify-center px-6">
@@ -67,6 +124,7 @@ export default function LoginContent() {
 
               <motion.form
                 variants={item}
+                onSubmit={handleLogin}
                 className="mt-6 md:mt-8 space-y-4 md:space-y-8"
               >
                 <div className="flex flex-col gap-2">
@@ -75,6 +133,8 @@ export default function LoginContent() {
                   <input
                     maxLength={100}
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Masukkan email anda"
                     className="rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
                   />
@@ -86,25 +146,28 @@ export default function LoginContent() {
                   <input
                     maxLength={16}
                     type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Masukkan password anda"
                     className="rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
                   />
-                </div>
-              </motion.form>
 
-              <motion.button
-                variants={item}
-                whileHover={{
-                  scale: 1.03,
-                }}
-                whileTap={{
-                  scale: 0.97,
-                }}
-                type="submit"
-                className="mt-8 w-full rounded-lg bg-yellow-400 py-3 font-bold"
-              >
-                Login
-              </motion.button>
+                  {error && <p className="text-sm text-red-500">{error}</p>}
+                </div>
+                <motion.button
+                  variants={item}
+                  whileHover={{
+                    scale: 1.03,
+                  }}
+                  whileTap={{
+                    scale: 0.97,
+                  }}
+                  type="submit"
+                  className="mt-4 w-full rounded-lg bg-yellow-400 py-3 font-bold"
+                >
+                  Login
+                </motion.button>
+              </motion.form>
 
               <motion.div variants={item} className="mt-2 text-center">
                 <p className="opacity-75">

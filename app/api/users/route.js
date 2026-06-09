@@ -3,8 +3,8 @@ import { NextResponse } from "next/server";
 const baseUsers = [
   {
     id: 1,
-    username: "admin",
-    name: "Administrator",
+    username: "adminw123",
+    name: "Admin Wasn",
     email: "admin@o2h.com",
     password: "admin123",
     role: "admin",
@@ -13,7 +13,7 @@ const baseUsers = [
   },
   {
     id: 2,
-    username: "lucy",
+    username: "lucmywaif143y",
     name: "Lucy",
     email: "lucy@gmail.com",
     password: "lucy123",
@@ -23,7 +23,7 @@ const baseUsers = [
   },
   {
     id: 3,
-    username: "david",
+    username: "davidmar123",
     name: "David Martinez",
     email: "david@gmail.com",
     password: "david123",
