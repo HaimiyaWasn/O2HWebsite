@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import LogoAnimation from "@/lib/logoAnimation";
 
@@ -85,6 +86,14 @@ export default function LoginContent({ users }: LoginContentProps) {
    * Menyimpan pesan error login.
    */
   const [error, setError] = useState("");
+
+  /**
+   * Mengontrol apakah password ditampilkan
+   * 
+   * false = password disembunyikan
+   * true = password ditampilkan
+   */
+  const [showPassword, setShowPassword] = useState(false);
 
   /**
    * Menangani proses login.
@@ -210,14 +219,31 @@ export default function LoginContent({ users }: LoginContentProps) {
 
                 <div className="flex flex-col gap-2">
                   <label className="font-semibold">Password</label>
-                  <input
-                    maxLength={16}
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Masukkan password anda"
-                    className="rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
-                  />
+                  <div className="relative">
+                    <input
+                      maxLength={16}
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Masukkan password anda"
+                      className="w-full rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
+                    />
+
+                    <button 
+                      type="button"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      aria-label={
+                        showPassword ? "Sembunyikan password" : "Tampilkan password"
+                      }
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition-all"
+                    >
+                      {showPassword ? (
+                        <FaEyeSlash size={18} />
+                      ) : (
+                        <FaEye size={18} />
+                      )}
+                    </button>
+                  </div>
 
                   {error && <p className="text-sm text-red-500">{error}</p>}
                 </div>

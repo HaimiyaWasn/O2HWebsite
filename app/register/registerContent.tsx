@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useState } from "react";
 
 import LogoAnimation from "@/lib/logoAnimation";
 
@@ -17,6 +19,8 @@ const item = {
 };
 
 export default function RegisterContent() {
+  const [showPassword, setShowPassword] = useState(false)
+
   return (
     <>
       <section className="min-h-screen bg-yellow-400 max-md:bg-linear-to-br max-md:from-yellow-300 max-md:via-yellow-400 max-md:to-yellow-500">
@@ -116,20 +120,55 @@ export default function RegisterContent() {
 
                   <div className="flex flex-col gap-2">
                     <label className="font-semibold">Password</label>
-                    <input
-                      type="password"
-                      placeholder="Masukkan password anda"
-                      className="rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
-                    />
+                    <div className="relative">
+                      <input
+                        maxLength={16}
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Masukkan password anda"
+                        className="w-full rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        aria-label={
+                          showPassword ? "Sembunyikan password" : "Tampilkan password"
+                        }
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition-all"
+                      >
+                        {showPassword ? (
+                          <FaEyeSlash size={18} />
+                        ) : (
+                          <FaEye size={18} />
+                        )}
+                      </button>
+                    </div>
                   </div>
 
                   <div className="flex flex-col gap-2">
                     <label className="font-semibold">Konfirmasi Password</label>
-                    <input
-                      type="password"
-                      placeholder="Masukkan konfirmasi password anda"
-                      className="rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
-                    />
+                    <div className="relative">
+                      <input
+                        maxLength={16}
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Masukkan konfirmasi password anda"
+                        className="w-full rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
+                      />
+                      
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        aria-label={
+                          showPassword ? "Sembunyikan password" : "Tampilkan password"
+                        }
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition-all"
+                      >
+                        {showPassword ? (
+                          <FaEyeSlash size={18} />
+                        ) : (
+                          <FaEye size={18} />
+                        )}
+                      </button>
+                    </div>
                   </div>
                   <motion.button
                     variants={item}
