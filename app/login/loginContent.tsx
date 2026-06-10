@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
 import Link from "next/link";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import LogoAnimation from "./logoAnimation";
+import LogoAnimation from "@/lib/logoAnimation";
 
 /**
  * Struktur data user
@@ -194,7 +194,7 @@ export default function LoginContent({ users }: LoginContentProps) {
               <motion.form
                 variants={item}
                 onSubmit={handleLogin}
-                className="mt-6 md:mt-8 space-y-4 md:space-y-8"
+                className="mt-6 md:mt-8 space-y-4 md:space-y-6"
               >
                 <div className="flex flex-col gap-2">
                   <label className="font-semibold">Email</label>
@@ -261,9 +261,9 @@ export default function LoginContent({ users }: LoginContentProps) {
             </motion.div>
           </div>
 
-          <div className="hidden flex-col bg-linear-to-br from-yellow-300 via-yellow-400 to-yellow-500 p-8 text-black md:flex">
+          <div className="hidden flex-col bg-linear-to-br from-yellow-300 via-yellow-400 to-yellow-500 p-8 md:flex">
             <div className="flex items-center justify-between">
-              <div>
+              <div className="text-black">
                 <h2 className="text-3xl font-bold">O2H Official Site</h2>
 
                 <p className="mt-1 opacity-80">
@@ -273,7 +273,7 @@ export default function LoginContent({ users }: LoginContentProps) {
 
               <Link
                 href="/"
-                className="opacity-50 transition-all duration-500 hover:opacity-100"
+                className="opacity-50 transition-all duration-500 hover:opacity-100 text-black"
               >
                 Back to home
               </Link>
@@ -283,7 +283,7 @@ export default function LoginContent({ users }: LoginContentProps) {
               <LogoAnimation />
             </div>
 
-            <p className="text-right text-sm opacity-75">
+            <p className="text-right text-sm opacity-75 text-black">
               © 2026 O2H Official Site
             </p>
           </div>
