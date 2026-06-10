@@ -88,7 +88,7 @@ export default function RegisterContent({ users }: RegisterContentProps) {
       createdAt: new Date().toISOString(),
     };
 
-    localStorage.setItem("registerdUser", JSON.stringify(newUser));
+    localStorage.setItem("registeredUser", JSON.stringify(newUser));
 
     setSuccess("Register berhasil! Redirect ke halaman login...");
 
