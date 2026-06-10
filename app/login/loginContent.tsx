@@ -198,7 +198,6 @@ export default function LoginContent({ users }: LoginContentProps) {
               >
                 <div className="flex flex-col gap-2">
                   <label className="font-semibold">Email</label>
-
                   <input
                     maxLength={100}
                     type="email"
@@ -211,7 +210,6 @@ export default function LoginContent({ users }: LoginContentProps) {
 
                 <div className="flex flex-col gap-2">
                   <label className="font-semibold">Password</label>
-
                   <input
                     maxLength={16}
                     type="password"
