@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import { motion } from "motion/react";
@@ -89,7 +89,7 @@ export default function LoginContent({ users }: LoginContentProps) {
 
   /**
    * Mengontrol apakah password ditampilkan
-   * 
+   *
    * false = password disembunyikan
    * true = password ditampilkan
    */
@@ -112,11 +112,14 @@ export default function LoginContent({ users }: LoginContentProps) {
       return;
     }
 
-    /**
-     * Cari user yang sesuai
-     * berdasarkan email dan password.
-     */
-    const user = users.find(
+    const registeredUser =
+      typeof window !== "undefined"
+        ? JSON.parse(localStorage.getItem("registeredUser") || "null")
+        : null;
+
+    const allUsers = registeredUser ? [...users, registeredUser] : users;
+
+    const user = allUsers.find(
       (user) => user.email === email && user.password === password
     );
 
@@ -208,10 +211,11 @@ export default function LoginContent({ users }: LoginContentProps) {
                 <div className="flex flex-col gap-2">
                   <label className="font-semibold">Email</label>
                   <input
+                    minLength={5}
                     maxLength={100}
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value.toLowerCase())}
                     placeholder="Masukkan email anda"
                     className="rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
                   />
@@ -221,19 +225,22 @@ export default function LoginContent({ users }: LoginContentProps) {
                   <label className="font-semibold">Password</label>
                   <div className="relative">
                     <input
-                      maxLength={16}
+                      minLength={8}
+                      maxLength={32}
                       type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Masukkan password anda"
-                      className="w-full rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
+                      className="w-full rounded-lg border border-yellow-400 bg-white px-4 py-3 pr-14 outline-none transition focus:border-yellow-500 focus:border-2"
                     />
 
-                    <button 
+                    <button
                       type="button"
                       onClick={() => setShowPassword((prev) => !prev)}
                       aria-label={
-                        showPassword ? "Sembunyikan password" : "Tampilkan password"
+                        showPassword
+                          ? "Sembunyikan password"
+                          : "Tampilkan password"
                       }
                       className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition-all"
                     >

@@ -1,9 +1,12 @@
 import RegisterContent from "./registerContent";
+import getUsers from "./data";
 
 export const metadata = {
   title: "Register | O2H Official Site",
 }
 
-export default function RegisterPage() {
-  return <RegisterContent />
+export default async function RegisterPage() {
+  const users = await getUsers();
+
+  return <RegisterContent users={users} />
 }

@@ -3,9 +3,24 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import LogoAnimation from "@/lib/logoAnimation";
+
+type User = {
+  id: number;
+  username: string;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  createdAt: string;
+};
+
+type RegisterContentProps = {
+  users: User[];
+};
 
 const item = {
   hidden: {
@@ -18,8 +33,69 @@ const item = {
   },
 };
 
-export default function RegisterContent() {
-  const [showPassword, setShowPassword] = useState(false)
+export default function RegisterContent({ users }: RegisterContentProps) {
+  const router = useRouter();
+
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [confirmShowPassword, setConfirmShowPassword] = useState(false);
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setError("");
+    setSuccess("");
+
+    if (
+      !username.trim() ||
+      !email.trim() ||
+      !password.trim() ||
+      !confirmPassword.trim()
+    ) {
+      setError("Semua field wajib diisi!");
+      return;
+    }
+
+    if (password != confirmPassword) {
+      setError("Konfirmasi password tidak cocok!");
+      return;
+    }
+
+    const existingUser = users.find(
+      (user) => user.email.toLowerCase() === email.toLowerCase()
+    );
+
+    if (existingUser) {
+      setError("Email sudah digunakan!");
+      return;
+    }
+
+    const newUser = {
+      id: users.length + 1,
+      username,
+      name: username,
+      email,
+      password,
+      role: "member",
+      avatar: "/img/profileIconDefault.jpg",
+      createdAt: new Date().toISOString(),
+    };
+
+    localStorage.setItem("registerdUser", JSON.stringify(newUser));
+
+    setSuccess("Register berhasil! Redirect ke halaman login...");
+
+    setTimeout(() => {
+      router.push("/login");
+    }, 1500);
+  };
 
   return (
     <>
@@ -98,12 +174,17 @@ export default function RegisterContent() {
 
                 <motion.form
                   variants={item}
+                  onSubmit={handleRegister}
                   className="mt-6 md:mt-8 space-y-4 md:space-y-6"
                 >
                   <div className="flex flex-col gap-2">
                     <label className="font-semibold">Username</label>
                     <input
+                      minLength={3}
+                      maxLength={20}
                       type="text"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value.toLowerCase())}
                       placeholder="Masukkan username anda"
                       className="rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
                     />
@@ -112,7 +193,11 @@ export default function RegisterContent() {
                   <div className="flex flex-col gap-2">
                     <label className="font-semibold">Email</label>
                     <input
+                      minLength={5}
+                      maxLength={100}
                       type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value.toLowerCase())}
                       placeholder="Masukkan email anda"
                       className="rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
                     />
@@ -122,16 +207,21 @@ export default function RegisterContent() {
                     <label className="font-semibold">Password</label>
                     <div className="relative">
                       <input
-                        maxLength={16}
+                        minLength={8}
+                        maxLength={32}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         type={showPassword ? "text" : "password"}
                         placeholder="Masukkan password anda"
-                        className="w-full rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
+                        className="w-full rounded-lg border border-yellow-400 bg-white px-4 py-3 pr-14 outline-none transition focus:border-yellow-500 focus:border-2"
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword((prev) => !prev)}
                         aria-label={
-                          showPassword ? "Sembunyikan password" : "Tampilkan password"
+                          showPassword
+                            ? "Sembunyikan password"
+                            : "Tampilkan password"
                         }
                         className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition-all"
                       >
@@ -148,27 +238,37 @@ export default function RegisterContent() {
                     <label className="font-semibold">Konfirmasi Password</label>
                     <div className="relative">
                       <input
-                        maxLength={16}
-                        type={showPassword ? "text" : "password"}
+                        minLength={8}
+                        maxLength={32}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        type={confirmShowPassword ? "text" : "password"}
                         placeholder="Masukkan konfirmasi password anda"
-                        className="w-full rounded-lg border border-yellow-400 bg-white px-4 py-3 outline-none transition focus:border-yellow-500 focus:border-2"
+                        className="w-full rounded-lg border border-yellow-400 bg-white px-4 py-3 pr-14 outline-none transition focus:border-yellow-500 focus:border-2"
                       />
-                      
+
                       <button
                         type="button"
-                        onClick={() => setShowPassword((prev) => !prev)}
+                        onClick={() => setConfirmShowPassword((prev) => !prev)}
                         aria-label={
-                          showPassword ? "Sembunyikan password" : "Tampilkan password"
+                          confirmShowPassword
+                            ? "Sembunyikan password"
+                            : "Tampilkan password"
                         }
                         className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition-all"
                       >
-                        {showPassword ? (
+                        {confirmShowPassword ? (
                           <FaEyeSlash size={18} />
                         ) : (
                           <FaEye size={18} />
                         )}
                       </button>
                     </div>
+                    {error && <p className="text-sm text-red-500">{error}</p>}
+
+                    {success && (
+                      <p className="text-sm text-green-600">{success}</p>
+                    )}
                   </div>
                   <motion.button
                     variants={item}
