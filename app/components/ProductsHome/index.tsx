@@ -4,7 +4,7 @@ import AnimationClient from "./animationClient";
 
 /**
  * Representasi satu produk
- * 
+ *
  * Cocok digunakan untuk:
  * - Homepage Product Card
  * - Product List
@@ -31,7 +31,7 @@ type Product = {
  * 2. Memprioritaskan produk yang masih tersedia
  * 4. Mengmbil sebagian produk untuk homepage
  * 5. Mengirim data ke Client Component
- * 
+ *
  * Keuntungan menggunakan Server Component:
  * - Data diproses di server
  * - Tidak menambah JavScript ke browser
@@ -40,16 +40,27 @@ type Product = {
 export default async function HomeProductsSection() {
   /**
    * Mengambil host/domain aktif
-   * 
+   *
    * Contoh:
    * localhost:3000, example.vercel.app
    */
   const host = (await headers()).get("host");
 
   /**
+   * Menentukan protocol berdasarkan environment.
+   *
+   * Development:
+   * http://localhost:3000
+   *
+   * Production:
+   * https://example.com
+   */
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+
+  /**
    * Mengambil seluruh data produk dari API interal Next.js
    */
-  const res = await fetch(`http://${host}/api/products`, {
+  const res = await fetch(`${protocol}://${host}/api/products`, {
     cache: "no-store",
   });
 
@@ -72,12 +83,12 @@ export default async function HomeProductsSection() {
 
   /**
    * Fisher-Yates Shuffle
-   * 
+   *
    * Mengecek urutan produk secara acak dengan distribusi yang merata
-   * 
+   *
    * Contoh:
    * [A, B, C, D]
-   * 
+   *
    * Menjadi:
    * [C, D, B, A]
    */
@@ -92,11 +103,11 @@ export default async function HomeProductsSection() {
 
   /**
    * Mengurutkan produk berdasarkan stok
-   * 
+   *
    * Tujuan:
    * - Produk tersedia muncul lebih dulu
    * - Produk stok habis berapa di bawah
-   * 
+   *
    * Setelah itu hanya mengambil 18 produk untuk homepage
    */
   const selectedProducts = shuffledProducts
@@ -104,10 +115,11 @@ export default async function HomeProductsSection() {
       if (a.isOutOfStock === b.isOutOfStock) return 0;
 
       return a.isOutOfStock ? 1 : -1;
-    }).slice(0, 18);
+    })
+    .slice(0, 18);
 
-    /**
-     * Mengirim data produk ke Client Component untuk ditampilkan pada halaman
-     */
+  /**
+   * Mengirim data produk ke Client Component untuk ditampilkan pada halaman
+   */
   return <AnimationClient products={selectedProducts} />;
 }

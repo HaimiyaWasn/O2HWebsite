@@ -61,13 +61,23 @@ async function getProducts(): Promise<Product[]> {
    * localhost:3000
    * example.com
    */
-  const headersList = await headers();
-  const host = headersList.get("host") || "localhost:3000";
+  const host = (await headers()).get("host");
+
+  /**
+   * Menentukan protocol berdasarkan environment.
+   *
+   * Development:
+   * http://localhost:3000
+   *
+   * Production:
+   * https://example.com
+   */
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https"
 
   /**
    * Mengambil data produk dari API.
    */
-  const res = await fetch(`http://${host}/api/products`, {
+  const res = await fetch(`${protocol}://${host}/api/products`, {
     cache: "no-store",
   });
 

@@ -41,6 +41,7 @@ export default async function LatestNews() {
    */
   const host = (await headers()).get("host")
 
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
 
   /**
    * Mengambil seluruh data berita dari API internal Next.js
@@ -48,7 +49,7 @@ export default async function LatestNews() {
    * cache: "no-store" berarti data selalu diambil ulang
    * dan tidak menggunakan cache
    */
-  const res = await fetch(`http://${host}/api/news`, {
+  const res = await fetch(`${protocol}://${host}/api/news`, {
     cache: "no-store",
   });
 

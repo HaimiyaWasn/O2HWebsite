@@ -29,8 +29,19 @@ export type News = {
 export default async function getAllNews() {
   const host = (await headers()).get("host"); // Mendapatkan domain/host website saat ini
 
+  /**
+   * Menentukan protocol berdasarkan environment.
+   *
+   * Development:
+   * http://localhost:3000
+   *
+   * Production:
+   * https://example.com
+   */
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+
   // Request data berita dari API internal
-  const res = await fetch(`http://${host}/api/news`, {
+  const res = await fetch(`${protocol}://${host}/api/news`, {
     cache: "no-store", // Selalu mengambil data terbaru
   });
 

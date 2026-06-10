@@ -45,6 +45,8 @@ export default async function getAllProducts() {
    */
   const host = (await headers()).get("host");
 
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+
   /**
    * Mengambil data produk dari API internal.
    *
@@ -52,7 +54,7 @@ export default async function getAllProducts() {
    * memastikan data selalu terbaru
    * dan tidak menggunakan cache Next.js.
    */
-  const res = await fetch(`http://${host}/api/products`, {
+  const res = await fetch(`${protocol}://${host}/api/products`, {
     cache: "no-store",
   });
 
