@@ -8,6 +8,12 @@ import { useRouter } from "next/navigation";
 
 import LogoAnimation from "@/lib/logoAnimation";
 
+/**
+ * Struktur data User.
+ *
+ * Digunakan untuk data user yang berasal dari API
+ * maupun user baru yang dibuat saat registrasi.
+ */
 type User = {
   id: number;
   username: string;
@@ -18,10 +24,23 @@ type User = {
   createdAt: string;
 };
 
+/**
+ * Props yang diterima komponen RegisterContent.
+ *
+ * users digunakan untuk:
+ * - Mengecek email yang sudah terdaftar
+ * - Menentukan ID user baru
+ */
 type RegisterContentProps = {
   users: User[];
 };
 
+/**
+ * Variasi animasi Motion.
+ *
+ * Digunakan agar setiap elemen muncul
+ * secara bertahap saat halaman dimuat.
+ */
 const item = {
   hidden: {
     opacity: 0,
@@ -33,26 +52,65 @@ const item = {
   },
 };
 
+/**
+ * Halaman Register
+ *
+ * Fitur:
+ * - Validasi field kosong
+ * - Validasi konfirmasi password
+ * - Cek email yang sudah digunakan
+ * - Menyimpan user baru ke localStorage
+ * - Redirect ke halaman login
+ * - Toggle tampil/sembunyikan password
+ *
+ * Cocok digunakan untuk:
+ * - Prototype authentication
+ * - Dummy login/register
+ * - Simulasi sebelum memakai backend asli
+ */
 export default function RegisterContent({ users }: RegisterContentProps) {
   const router = useRouter();
 
+  /**
+   * State form registrasi.
+   */
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  /**
+   * State untuk menampilkan / menyembunyikan password.
+   */
   const [showPassword, setShowPassword] = useState(false);
+  /**
+   * State untuk menampilkan / menyembunyikan
+   * password konfirmasi.
+   */
   const [confirmShowPassword, setConfirmShowPassword] = useState(false);
 
+  /**
+   * Menyimpan pesan error validasi.
+   */
   const [error, setError] = useState("");
+  /**
+   * Menyimpan pesan sukses registrasi.
+   */
   const [success, setSuccess] = useState("");
 
+  /**
+   * Menangani proses registrasi user.
+   */
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Reset pesan sebelumnya
     setError("");
     setSuccess("");
 
+    /**
+     * Validasi field kosong.
+     */
     if (
       !username.trim() ||
       !email.trim() ||
@@ -63,11 +121,19 @@ export default function RegisterContent({ users }: RegisterContentProps) {
       return;
     }
 
+    /**
+     * Validasi password dan konfirmasi password.
+     */
     if (password != confirmPassword) {
       setError("Konfirmasi password tidak cocok!");
       return;
     }
 
+    /**
+     * Mengecek apakah email sudah digunakan.
+     *
+     * Pencarian dibuat case-insensitive.
+     */
     const existingUser = users.find(
       (user) => user.email.toLowerCase() === email.toLowerCase()
     );
@@ -77,6 +143,12 @@ export default function RegisterContent({ users }: RegisterContentProps) {
       return;
     }
 
+    /**
+     * Membuat data user baru.
+     *
+     * Pada aplikasi production,
+     * proses ini biasanya dikirim ke API/backend.
+     */
     const newUser = {
       id: users.length + 1,
       username,
@@ -88,10 +160,23 @@ export default function RegisterContent({ users }: RegisterContentProps) {
       createdAt: new Date().toISOString(),
     };
 
+    /**
+     * Menyimpan user baru ke localStorage.
+     *
+     * Hanya untuk simulasi register.
+     * Tidak direkomendasikan untuk production.
+     */
     localStorage.setItem("registeredUser", JSON.stringify(newUser));
 
+    /**
+     * Menampilkan pesan sukses.
+     */
     setSuccess("Register berhasil! Redirect ke halaman login...");
 
+    /**
+     * Redirect ke halaman login
+     * setelah 1.5 detik.
+     */
     setTimeout(() => {
       router.push("/login");
     }, 1500);
