@@ -1,4 +1,4 @@
-import LoginContent from "./loginContent";
+import LoginContent from "./client";
 import getUsers from "./data";
 
 /**

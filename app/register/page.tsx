@@ -1,4 +1,4 @@
-import RegisterContent from "./registerContent";
+import RegisterContent from "./client";
 import getUsers from "./data";
 
 export const metadata = {
