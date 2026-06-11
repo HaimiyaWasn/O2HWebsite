@@ -42,7 +42,6 @@ export default function NavbarWrapper({
    * menampilkan Footer
    */
   const hiddenPaths = [
-    "/profile",
     "/login",
     "/register",
   ]
