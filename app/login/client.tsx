@@ -8,6 +8,14 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import LogoAnimation from "@/lib/logoAnimation";
 
+/**
+ * Struktur data User
+ *
+ * Digunakan sebagai tipe data untuk:
+ * - Data user dari API
+ * - Data user hasil register
+ * - Data user yang akan login
+ */
 type User = {
   id: number;
   username: string;
@@ -19,10 +27,27 @@ type User = {
   createdAt: string;
 };
 
+/**
+ * Props yang diterima komponen LoginContent
+ *
+ * users berasal dari Server Component
+ * yang sebelumnya mengambil data dari API.
+ */
 type LoginContentProps = {
   users: User[];
 };
 
+/**
+ * Variasi animasi untuk setiap elemen.
+ *
+ * Digunakan agar:
+ * - Judul
+ * - Deskripsi
+ * - Form
+ * - Tombol
+ *
+ * muncul secara bertahap.
+ */
 const item = {
   hidden: {
     opacity: 0,
@@ -34,46 +59,118 @@ const item = {
   },
 };
 
+/**
+ * Halaman Login
+ *
+ * Fitur:
+ * - Login menggunakan data user dari API
+ * - Mendukung user hasil register (localStorage)
+ * - Validasi email dan password
+ * - Menampilkan pesan error dan success
+ * - Show / Hide password
+ * - Menyimpan session user ke localStorage
+ * - Redirect ke halaman home
+ *
+ * Cocok digunakan untuk:
+ * - Prototype login
+ * - Authentication dummy
+ * - Belajar React & Next.js
+ */
 export default function LoginContent({ users }: LoginContentProps) {
   const router = useRouter();
 
+  /**
+   * User demo.
+   *
+   * Jika terdapat user dengan id = 3,
+   * email dan password akan otomatis
+   * terisi saat halaman dibuka.
+   *
+   * Berguna untuk testing.
+   */
   const demoUser = users.find((user) => user.id === 3);
 
+  /**
+   * State form login
+   */
   const [email, setEmail] = useState(demoUser?.email ?? "");
   const [password, setPassword] = useState(demoUser?.password ?? "");
 
+  /**
+   * State pesan error
+   */
   const [error, setError] = useState("");
+  /**
+   * State pesan sukses
+   */
   const [success, setSuccess] = useState("");
 
+  /**
+   * Mengontrol tampilan password
+   *
+   * false = password disembunyikan
+   * true  = password ditampilkan
+   */
   const [showPassword, setShowPassword] = useState(false);
 
+  /**
+   * Menangani proses login
+   */
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Reset pesan sebelumnya
     setError("");
     setSuccess("");
 
+    /**
+     * Validasi field kosong
+     */
     if (!email.trim() || !password.trim()) {
       setError("Email dan password wajib diisi!");
       return;
     }
 
+    /**
+     * Mengambil user hasil register
+     * dari localStorage.
+     *
+     * Karena register masih bersifat dummy,
+     * data user disimpan di browser.
+     */
     const registeredUser =
       typeof window !== "undefined"
         ? JSON.parse(localStorage.getItem("registeredUser") || "null")
         : null;
 
+    /**
+     * Menggabungkan user API
+     * dengan user hasil register.
+     */
     const allUsers = registeredUser ? [...users, registeredUser] : users;
 
+    /**
+     * Mencari user berdasarkan
+     * email dan password.
+     */
     const user = allUsers.find(
       (user) => user.email === email && user.password === password
     );
 
+    /**
+     * Jika user tidak ditemukan
+     */
     if (!user) {
       setError("Email atau password salah!");
       return;
     }
 
+    /**
+     * Simpan data user yang berhasil login.
+     *
+     * Password sengaja tidak disimpan
+     * demi alasan keamanan.
+     */
     localStorage.setItem(
       "currentUser",
       JSON.stringify({
@@ -86,8 +183,15 @@ export default function LoginContent({ users }: LoginContentProps) {
       })
     );
 
+    /**
+     * Tampilkan pesan berhasil login
+     */
     setSuccess("Login berhasil! Redirect ke halaman home...");
 
+    /**
+     * Redirect ke halaman utama
+     * setelah 1.5 detik.
+     */
     setTimeout(() => {
       router.push("/");
     }, 1500);
