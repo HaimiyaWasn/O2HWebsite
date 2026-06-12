@@ -55,7 +55,7 @@ export default async function getUsers() {
    */
   if (!response.ok) {
     throw new Error("Gagal mengambil data users");
-  }
+  };
 
   /**
    * Mengubah response menjadi JSON
