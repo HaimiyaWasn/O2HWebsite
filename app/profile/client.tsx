@@ -50,41 +50,44 @@ export default function ProfileContent() {
   };
 
   return (
-    <section className="pt-20 px-6">
-      <div className="max-w-5xl mx-auto bg-base-100 shadow-lg rounded-2xl p-8 flex flex-col md:flex-row gap-8 items-center md:items-start">
-        <div className="shrink-0">
+    <section className="min-h-screen pt-24 px-6 pb-10">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
+        <div className="w-full lg:w-80 border-4 border-yellow-400 rounded-2xl shadow-lg p-6 flex flex-col items-center">
           <Image
             src={user.avatar}
             alt={user.name}
             width={180}
             height={180}
-            className="rounded-full object-cover border"
+            className="rounded-full object-cover border-2 border-yellow-400"
           />
-        </div>
 
-        {/* Detail User */}
-        <div className="flex-1 space-y-4">
-          <div>
-            <p className="text-sm text-gray-500">Nama</p>
-            <h2 className="text-2xl font-bold">{user.name}</h2>
-          </div>
-
-          <div>
-            <p className="text-sm text-gray-500">Username</p>
-            <p>{user.username}</p>
-          </div>
-
-          <div>
-            <p className="text-sm text-gray-500">Email</p>
-            <p>{user.email}</p>
-          </div>
+          <h2 className="mt-5 text-3xl font-bold text-center">{user.name}</h2>
+          <p className="text-gray-500 text-center">{user.username}</p>
 
           <button
             onClick={handleLogout}
-            className="mt-6 w-full md:w-fit rounded-xl bg-red-600 px-6 py-3 font-semibold text-white transition-colors duration-300 hover:bg-red-700"
+            className="mt-6 w-full bg-red-500 py-3 text-white font-semibold rounded-xl hover:bg-red-700 transition-all duration-500"
           >
             Logout
           </button>
+        </div>
+        <div className="flex-1 border-4 border-yellow-400 p-8 rounded-2xl">
+          <h2 className="text-3xl font-bold mb-8">Profile</h2>
+
+          <div className="space-y-6">
+            <div className="space-y-1">
+              <p className="text-sm text-gray-500">Name</p>
+              <p className="text-lg font-semibold">{user.name}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-sm text-gray-500">Username</p>
+              <p className="text-lg font-semibold">{user.username}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-sm text-gray-500">Email</p>
+              <p className="text-lg font-semibold">{user.email}</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
