@@ -41,6 +41,14 @@ export default function ProfileContent() {
     return null;
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem("currentUser");
+
+    setUser(null);
+
+    router.replace("/");
+  };
+
   return (
     <section className="pt-20 px-6">
       <div className="max-w-5xl mx-auto bg-base-100 shadow-lg rounded-2xl p-8 flex flex-col md:flex-row gap-8 items-center md:items-start">
@@ -70,6 +78,13 @@ export default function ProfileContent() {
             <p className="text-sm text-gray-500">Email</p>
             <p>{user.email}</p>
           </div>
+
+          <button
+            onClick={handleLogout}
+            className="mt-6 w-full md:w-fit rounded-xl bg-red-600 px-6 py-3 font-semibold text-white transition-colors duration-300 hover:bg-red-700"
+          >
+            Logout
+          </button>
         </div>
       </div>
     </section>
