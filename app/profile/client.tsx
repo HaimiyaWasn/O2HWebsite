@@ -50,8 +50,8 @@ export default function ProfileContent() {
   };
 
   return (
-    <section className="min-h-screen pt-24 px-6 pb-10">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
+    <section className="min-h-screen pt-24 px-6 pb-10 justify-center items-center flex">
+      <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
         <div className="w-full lg:w-80 border-4 border-yellow-400 rounded-2xl shadow-lg p-6 flex flex-col items-center">
           <Image
             src={user.avatar}
@@ -72,9 +72,11 @@ export default function ProfileContent() {
           </button>
         </div>
         <div className="flex-1 border-4 border-yellow-400 p-8 rounded-2xl">
-          <h2 className="text-3xl font-bold mb-8">Profile</h2>
+          <div className="border-b border-yellow-400">
+            <h2 className="text-3xl font-bold mb-3">Profile</h2>
+          </div>
 
-          <div className="space-y-6">
+          <div className="space-y-6 mt-6">
             <div className="space-y-1">
               <p className="text-sm text-gray-500">Name</p>
               <p className="text-lg font-semibold">{user.name}</p>
