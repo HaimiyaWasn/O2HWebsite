@@ -53,7 +53,7 @@ export default function ProfileContent() {
   };
 
   return (
-    <section className="min-h-screen pt-24 px-6 pb-10 justify-center items-center flex overflow-x-hidden">
+    <section className="min-h-screen pt-24 px-6 pb-10 justify-center items-center flex overflow-x-hidden bg-white">
       <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
         <motion.div
           initial={{
@@ -80,9 +80,9 @@ export default function ProfileContent() {
             className="rounded-full object-cover border-4 border-yellow-400 shadow-[0_0_35px_rgba(250,204,21,0.35)]"
           />
 
-          <h2 className="mt-5 text-3xl font-bold text-center">{user.name}</h2>
+          <h2 className="mt-5 text-xl md:text-3xl font-bold text-center">{user.name}</h2>
 
-          <p className="text-gray-400 text-center mt-1">{user.username}</p>
+          <p className="text-gray-400 text-sm md:text-base text-center mt-1">{user.username}</p>
 
           <span className="mt-4 rounded-full bg-yellow-400 text-black py-1 px-4 font-semibold text-sm">
             {user.role.toUpperCase()}
@@ -112,24 +112,35 @@ export default function ProfileContent() {
           whileHover={{
             y: -4,
           }}
-          className="flex-1 border-4 border-yellow-400 p-8 rounded-2xl"
+          className="flex-1 rounded-3xl border border-black/50 bg-linear-to-br from-yellow-300/80 via-yellow-400/80 to-yellow-500/80 backdrop-blur-md shadow-xl shadow-black/10 p-8"
         >
-          <div className="border-b border-yellow-400">
-            <h2 className="text-3xl font-bold mb-3">Profile</h2>
-          </div>
+          <div className="border-b border-black/30 pb-5 text-black">
+            <h2 className="text-xl md:text-3xl font-bold">
+              Welcome Back, {user.name}
+            </h2>
 
-          <div className="space-y-6 mt-6">
-            <div className="space-y-1">
-              <p className="text-sm text-gray-500">Name</p>
-              <p className="text-lg font-semibold">{user.name}</p>
+            <p className="mt-2 text-sm md:text-base opacity-50">
+              Manage your personal information below
+            </p>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-2 text-black">
+            <div className="rounded-2xl border border-black bg-yellow-500/60 p-5">
+              <p className="text-sm opacity-50">Full Name</p>
+              <h3 className="mt-2 text-xl font-semibold">
+                {user.name}
+              </h3>
             </div>
-            <div className="space-y-1">
-              <p className="text-sm text-gray-500">Username</p>
-              <p className="text-lg font-semibold">{user.username}</p>
+            <div className="rounded-2xl border border-black bg-yellow-500/60 p-5">
+              <p className="text-sm opacity-50">Username</p>
+              <h3 className="mt-2 text-xl font-semibold">
+                @{user.username}
+              </h3>
             </div>
-            <div className="space-y-1">
-              <p className="text-sm text-gray-500">Email</p>
-              <p className="text-lg font-semibold">{user.email}</p>
+            <div className="rounded-2xl border border-black bg-yellow-500/60 p-5 md:col-span-2">
+              <p className="text-sm opacity-50">Email Address</p>
+              <h3 className="mt-2 text-xl font-semibold break-all">
+                {user.email}
+              </h3>
             </div>
           </div>
         </motion.div>
