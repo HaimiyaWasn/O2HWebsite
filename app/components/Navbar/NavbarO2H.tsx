@@ -139,9 +139,11 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-end gap-0.5">
-          <button className="p-3 rounded-full hover:bg-yellow-300 active:bg-yellow-500 focus:outline-none transition">
-            <FaHeart size={20} />
-          </button>
+          <Link href="/favorites">          
+            <button className="p-3 rounded-full hover:bg-yellow-300 active:bg-yellow-500 focus:outline-none transition">
+              <FaHeart size={20} />
+            </button>
+          </Link>
 
           <button className="p-2 rounded-full hover:bg-yellow-300 active:bg-yellow-500 focus:outline-none transition">
             <IoIosNotifications size={28} />
