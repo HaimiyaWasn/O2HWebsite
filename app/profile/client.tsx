@@ -80,9 +80,13 @@ export default function ProfileContent() {
             className="rounded-full object-cover border-4 border-yellow-400 shadow-[0_0_35px_rgba(250,204,21,0.35)]"
           />
 
-          <h2 className="mt-5 text-xl md:text-3xl font-bold text-center">{user.name}</h2>
+          <h2 className="mt-5 text-xl md:text-3xl font-bold text-center">
+            {user.name}
+          </h2>
 
-          <p className="text-gray-400 text-sm md:text-base text-center mt-1">{user.username}</p>
+          <p className="text-gray-400 text-sm md:text-base text-center mt-1">
+            {user.username}
+          </p>
 
           <span className="mt-4 rounded-full bg-yellow-400 text-black py-1 px-4 font-semibold text-sm">
             {user.role.toUpperCase()}
@@ -124,21 +128,22 @@ export default function ProfileContent() {
             </p>
           </div>
           <div className="mt-8 grid gap-5 md:grid-cols-2 text-black">
-            <div className="rounded-2xl border border-black bg-yellow-500/60 p-5">
-              <p className="text-sm opacity-50">Full Name</p>
-              <h3 className="mt-2 text-xl font-semibold">
+            <div className="rounded-2xl border border-black bg-yellow-500/60 p-5 min-w-0">
+              <p className="text-xs md:text-sm opacity-50">Full Name</p>
+              <h3 className="mt-2 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-base md:text-xl font-semibold">
                 {user.name}
               </h3>
             </div>
-            <div className="rounded-2xl border border-black bg-yellow-500/60 p-5">
-              <p className="text-sm opacity-50">Username</p>
-              <h3 className="mt-2 text-xl font-semibold">
+            <div className="rounded-2xl border border-black bg-yellow-500/60 p-5 min-w-0">
+              <p className="text-xs md:text-sm opacity-50">Username</p>
+              <h3 className="mt-2 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-base md:text-xl font-semibold">
                 @{user.username}
               </h3>
             </div>
-            <div className="rounded-2xl border border-black bg-yellow-500/60 p-5 md:col-span-2">
-              <p className="text-sm opacity-50">Email Address</p>
-              <h3 className="mt-2 text-xl font-semibold break-all">
+            <div className="rounded-2xl border border-black bg-yellow-500/60 p-5 md:col-span-2 min-w-0">
+              <p className="text-xs md:text-sm opacity-50">Email Address</p>
+
+              <h3 className="mt-2 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-base md:text-xl font-semibold">
                 {user.email}
               </h3>
             </div>
