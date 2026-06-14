@@ -2,6 +2,19 @@ import CartClient from "./client";
 import getAllCarts from "./data";
 
 /**
+ * Metadata halaman
+ *
+ * Digunakan oleh Next.js App Router untuk
+ * menghasilkan tag <title> secara otomatis.
+ *
+ * Hasil:
+ * <title>Carts | O2H Official Site</title>
+ */
+export const metadata = {
+  title: 'Carts | O2H Official Site',
+}
+
+/**
  * Halaman utama Cart (Keranjang Belanja)
  * 
  * Alur Kerja:

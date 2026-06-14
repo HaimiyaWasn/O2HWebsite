@@ -2,6 +2,19 @@ import NewsClient from "./client";
 import { getNews } from "./data";
 
 /**
+ * Metadata halaman
+ *
+ * Digunakan oleh Next.js App Router untuk
+ * menghasilkan tag <title> secara otomatis.
+ *
+ * Hasil:
+ * <title>News | O2H Official Site</title>
+ */
+export const metadata = {
+  title: 'News | O2H Official Site'
+}
+
+/**
  * Halaman utama daftar berita
  * 
  * Fungsi:
