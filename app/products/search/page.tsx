@@ -8,6 +8,15 @@ import SearchProducts from "./searchClient";
 import RevealOnScroll from "@/app/components/RevealOnScroll";
 import SearchFilterWrapper from "./client";
 
+/**
+ * Metadata halaman
+ *
+ * Digunakan oleh Next.js App Router untuk
+ * menghasilkan tag <title> secara otomatis.
+ *
+ * Hasil:
+ * <title>Search | O2H Official Site</title>
+ */
 export const metadata = {
   title: 'Search | O2H Official Site'
 }
