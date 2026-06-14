@@ -120,7 +120,7 @@ export default function ProfileContent() {
         >
           <div className="border-b border-black/30 pb-5 text-black">
             <h2 className="text-xl md:text-3xl font-bold">
-              Welcome Back, {user.name}
+              Welcome, {user.name}
             </h2>
 
             <p className="mt-2 text-sm md:text-base opacity-50">
