@@ -4,6 +4,7 @@ const baseProducts = [
   {
     title: "O2H Hostle Navy Half-Zip Jacket",
     price: 550000,
+    isFavorite: true,
     label: ["Sale", "Jacket"],
     image: [
       "/img/products/O2H_Hostel_Navy_Half-Zip_Jacket/1.png"
@@ -61,6 +62,7 @@ Salah kirim produk (termasuk salah size)bisa ditanyakan terlebih dahulu via pers
   {
     title: "O2H NFL Black Jersey",
     price: 465000,
+    isFavorite: false,
     label: ["Sale", "Jersey"],
     image: [
       "/img/products/O2H_NFL_Black_Jersey/1.png",
@@ -125,6 +127,7 @@ Salah kirim produk (termasuk salah size)
   {
     title: "O2H Hostel Embroidery Baseball Jersey Black",
     price: 550000,
+    isFavorite: false,
     label: ["Sale", "Jersey"],
     image: [
       "/img/products/O2H_Hostel_Embroidery_Baseball_Jersey_Black/1.png",
@@ -189,6 +192,7 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
   {
     title: "O2H MILF Bucket Hat",
     price: 165000,
+    isFavorite: false,
     label: ["Sale", "Hats"],
     image: [
       "/img/products/O2H_MILF_Bucket_Hat/1.png"
@@ -246,6 +250,7 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
   {
     title: "O2H MILF Vest",
     price: 465000,
+    isFavorite: false,
     label: ["Ada Stok", "Sale", "Jacket"],
     image: [
       "/img/products/O2H_MILF_Vest/1.png",
@@ -308,6 +313,7 @@ Bisa ditanyakan terlebih dahulu via personal chat toko dan juga SERTAKAN bukti v
   {
     title: "O2H NFL Jersey Vol.2 Black",
     price: 499000,
+    isFavorite: true,
     label: ["Ada Stok", "Jersey"],
     image: [
       "/img/products/O2H_NFL_Jersey_Vol.2_Black/1.png",
@@ -383,6 +389,7 @@ Silakan hubungi via chat dengan melampirkan video unboxing dan foto saat barang 
   {
     title: "O2H Climb Box Windbreaker",
     price: 465000,
+    isFavorite: false,
     label: ["Ada Stok", "Jacket", "Sale"],
     image: [
       "/img/products/O2H_Climb_Box_Windbreaker/1.png",
@@ -444,6 +451,7 @@ Salah kirim produk (termasuk salah size) bisa ditanyakan terlebih dahulu via per
   {
     title: "O2H Roblox Collection 'Climb Blox' Tshirt White",
     price: 250000,
+    isFavorite: true,
     label: ["Tshirt", "Sale"],
     image: [
       "/img/products/O2H_Roblox_Collection_Climb_Blox_Tshirt_White/1.jpg",
@@ -506,6 +514,7 @@ Salah kirim produk (termasuk salah size) bisa ditanyakan terlebih dahulu via per
   {
     title: "O2H Lockdown Protocol Collection 'Select Your Player' Tshirt True Whitev",
     price: 250000,
+    isFavorite: true,
     label: ["Tshirt", "Sale"],
     image: [
       "/img/products/O2H_Lockdown_Protocol_Collection_Select_Your_Player_Tshirt_True_White/1.jpg",
