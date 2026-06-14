@@ -336,222 +336,219 @@ export default function ProductsClient({ allProducts }: ProductsClientProps) {
   );
 
   return (
-    <>
-      <title>Products | O2H Official Site</title>
-      <section className="pt-5 min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 py-20">
-          <div className="flex justify-center items-center mb-4">
-            <SearchProducts />
+    <section className="pt-5 min-h-screen">
+      <div className="max-w-7xl mx-auto px-6 py-20">
+        <div className="flex justify-center items-center mb-4">
+          <SearchProducts />
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-0 md:gap-6">
+          <div className="w-full lg:w-60">
+            <ProductsFilter
+              selectedCategory={selectedCategory}
+              productType={productType}
+              stockStatus={stockStatus}
+              priceRange={priceRange}
+              selectedSize={selectedSize}
+              updateFilter={updateFilter}
+            />
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-0 md:gap-6">
-            <div className="w-full lg:w-60">
-              <ProductsFilter
-                selectedCategory={selectedCategory}
-                productType={productType}
-                stockStatus={stockStatus}
-                priceRange={priceRange}
-                selectedSize={selectedSize}
-                updateFilter={updateFilter}
-              />
+          <div className="flex-1">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-4">
+              <RevealOnScroll delay={0.05}>
+                <div className="flex flex-col gap-4">
+                  <div className="flex w-full md:w-fit items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md">
+                    <span
+                      className={`text-md md:text-2xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
+                    >
+                      All Products
+                    </span>
+                  </div>
+
+                  <p className="text-sm text-gray-400">
+                    {filteredProducts.length} produk ditemukan
+                  </p>
+                </div>
+              </RevealOnScroll>
+
+              <RevealOnScroll delay={0.1}>
+                <ProductUrutkan />
+              </RevealOnScroll>
             </div>
 
-            <div className="flex-1">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-4">
-                <RevealOnScroll delay={0.05}>
-                  <div className="flex flex-col gap-4">
-                    <div className="flex w-full md:w-fit items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md">
-                      <span
-                        className={`text-md md:text-2xl tracking-[0.2em] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
-                      >
-                        All Products
-                      </span>
-                    </div>
-
-                    <p className="text-sm text-gray-400">
-                      {filteredProducts.length} produk ditemukan
-                    </p>
-                  </div>
-                </RevealOnScroll>
-
-                <RevealOnScroll delay={0.1}>
-                  <ProductUrutkan />
-                </RevealOnScroll>
+            {filteredProducts.length === 0 ? (
+              <div className="flex items-center justify-center py-40">
+                <h1 className="text-2xl text-gray-400 font-semibold">
+                  Produk tidak ditemukan
+                </h1>
               </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                  {paginatedProducts.map((product, index) => {
+                    const images = Array.isArray(product.image)
+                      ? product.image
+                      : [product.image];
 
-              {filteredProducts.length === 0 ? (
-                <div className="flex items-center justify-center py-40">
-                  <h1 className="text-2xl text-gray-400 font-semibold">
-                    Produk tidak ditemukan
-                  </h1>
-                </div>
-              ) : (
-                <>
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                    {paginatedProducts.map((product, index) => {
-                      const images = Array.isArray(product.image)
-                        ? product.image
-                        : [product.image];
+                    const hasSecondImage = images.length > 1;
 
-                      const hasSecondImage = images.length > 1;
+                    const finalPrice =
+                      product.discount > 0
+                        ? product.price -
+                          (product.price * product.discount) / 100
+                        : product.price;
 
-                      const finalPrice =
-                        product.discount > 0
-                          ? product.price -
-                            (product.price * product.discount) / 100
-                          : product.price;
+                    const isNew =
+                      new Date(product.createdAt).getTime() >
+                      Date.now() - 30 * 24 * 60 * 60 * 1000;
 
-                      const isNew =
-                        new Date(product.createdAt).getTime() >
-                        Date.now() - 30 * 24 * 60 * 60 * 1000;
-
-                      return (
-                        <motion.div
-                          key={product.id}
-                          initial={{
-                            opacity: 0,
-                            y: 30,
-                          }}
-                          whileInView={{
-                            opacity: 1,
-                            y: 0,
-                          }}
-                          viewport={{
-                            once: true,
-                          }}
-                          transition={{
-                            duration: 0.4,
-                            delay: 0.15 + index * 0.05,
-                          }}
+                    return (
+                      <motion.div
+                        key={product.id}
+                        initial={{
+                          opacity: 0,
+                          y: 30,
+                        }}
+                        whileInView={{
+                          opacity: 1,
+                          y: 0,
+                        }}
+                        viewport={{
+                          once: true,
+                        }}
+                        transition={{
+                          duration: 0.4,
+                          delay: 0.15 + index * 0.05,
+                        }}
+                      >
+                        <Link
+                          href={`/products/${product.slug}`}
+                          className="h-full"
                         >
-                          <Link
-                            href={`/products/${product.slug}`}
-                            className="h-full"
+                          <div
+                            className={`group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 overflow-hidden hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer ${
+                              product.isOutOfStock ? "opacity-75" : ""
+                            }`}
                           >
-                            <div
-                              className={`group flex flex-col bg-white rounded-md shadow-black border-2 border-yellow-400 overflow-hidden hover:shadow-md active:scale-95 transition-all duration-300 p-2 cursor-pointer ${
-                                product.isOutOfStock ? "opacity-75" : ""
-                              }`}
-                            >
-                              <div className="relative aspect-square overflow-hidden rounded">
-                                {product.isOutOfStock && (
-                                  <div className="absolute top-1 left-1 z-30 bg-black text-white text-[10px] px-2 py-1 rounded font-bold">
-                                    Stok Habis
-                                  </div>
-                                )}
-                                {isNew && (
-                                  <div
-                                    className={`absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-1.5 py-0.5 rounded font-bold ${
-                                      product.isOutOfStock ? "top-8" : "top-1"
-                                    }`}
-                                  >
-                                    NEW
-                                  </div>
-                                )}
+                            <div className="relative aspect-square overflow-hidden rounded">
+                              {product.isOutOfStock && (
+                                <div className="absolute top-1 left-1 z-30 bg-black text-white text-[10px] px-2 py-1 rounded font-bold">
+                                  Stok Habis
+                                </div>
+                              )}
+                              {isNew && (
+                                <div
+                                  className={`absolute top-1 left-1 z-20 bg-black text-white text-[10px] px-1.5 py-0.5 rounded font-bold ${
+                                    product.isOutOfStock ? "top-8" : "top-1"
+                                  }`}
+                                >
+                                  NEW
+                                </div>
+                              )}
 
-                                {product.discount > 0 && (
-                                  <div className="absolute top-1 right-1 z-20 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">
-                                    -{product.discount}%
-                                  </div>
-                                )}
+                              {product.discount > 0 && (
+                                <div className="absolute top-1 right-1 z-20 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">
+                                  -{product.discount}%
+                                </div>
+                              )}
+                              <Image
+                                src={images[0]}
+                                alt={product.title}
+                                fill
+                                className={`object-cover transition-all duration-500 ${
+                                  hasSecondImage
+                                    ? "group-hover:opacity-0 group-hover:scale-105"
+                                    : "group-hover:scale-105"
+                                }`}
+                              />
+
+                              {hasSecondImage && (
                                 <Image
-                                  src={images[0]}
+                                  src={images[1]}
                                   alt={product.title}
                                   fill
-                                  className={`object-cover transition-all duration-500 ${
-                                    hasSecondImage
-                                      ? "group-hover:opacity-0 group-hover:scale-105"
-                                      : "group-hover:scale-105"
-                                  }`}
+                                  className="object-cover opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                                 />
+                              )}
+                            </div>
 
-                                {hasSecondImage && (
-                                  <Image
-                                    src={images[1]}
-                                    alt={product.title}
-                                    fill
-                                    className="object-cover opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                                  />
+                            <div className="border-t border-yellow-400 my-3 flex flex-col flex-1">
+                              <p
+                                className={`text-sm mt-2 line-clamp-2 h-10 text-black ${playfairDisplayBold.className}`}
+                              >
+                                {product.title}
+                              </p>
+
+                              <div className="mt-1 flex flex-col pt-3">
+                                {product.discount > 0 ? (
+                                  <>
+                                    <p className="text-xs text-gray-400 line-through">
+                                      {formatCurrency(product.price)}
+                                    </p>
+                                    <p className="text-yellow-500 font-semibold">
+                                      {formatCurrency(finalPrice)}
+                                    </p>
+                                  </>
+                                ) : (
+                                  <>
+                                    <p className="text-xs invisible">
+                                      {formatCurrency(product.price)}
+                                    </p>
+                                    <p className="text-yellow-500 font-semibold">
+                                      {formatCurrency(product.price)}
+                                    </p>
+                                  </>
                                 )}
                               </div>
 
-                              <div className="border-t border-yellow-400 my-3 flex flex-col flex-1">
-                                <p
-                                  className={`text-sm mt-2 line-clamp-2 h-10 text-black ${playfairDisplayBold.className}`}
-                                >
-                                  {product.title}
-                                </p>
-
-                                <div className="mt-1 flex flex-col pt-3">
-                                  {product.discount > 0 ? (
-                                    <>
-                                      <p className="text-xs text-gray-400 line-through">
-                                        {formatCurrency(product.price)}
-                                      </p>
-                                      <p className="text-yellow-500 font-semibold">
-                                        {formatCurrency(finalPrice)}
-                                      </p>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <p className="text-xs invisible">
-                                        {formatCurrency(product.price)}
-                                      </p>
-                                      <p className="text-yellow-500 font-semibold">
-                                        {formatCurrency(product.price)}
-                                      </p>
-                                    </>
-                                  )}
-                                </div>
-
-                                <p className="text-xs text-gray-500">
-                                  {product.sold}
-                                </p>
-                              </div>
+                              <p className="text-xs text-gray-500">
+                                {product.sold}
+                              </p>
                             </div>
+                          </div>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                {totalPages > 1 && (
+                  <RevealOnScroll delay={0.05}>
+                    <div className="flex items-center justify-center gap-3 my-14 flex-wrap">
+                      {visiblePages.map((page) => {
+                        const params = new URLSearchParams(
+                          searchParams.toString()
+                        );
+
+                        if (page === 1) {
+                          params.delete("page");
+                        } else {
+                          params.set("page", String(page));
+                        }
+
+                        return (
+                          <Link
+                            key={page}
+                            href={`/products?${params.toString()}`}
+                            className={`px-4 py-2 border transition cursor-pointer ${
+                              currentPage === page
+                                ? "bg-white text-black"
+                                : "bg-transparent text-white hover:bg-white hover:text-black"
+                            }`}
+                          >
+                            {page}
                           </Link>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-
-                  {totalPages > 1 && (
-                    <RevealOnScroll delay={0.05}>
-                      <div className="flex items-center justify-center gap-3 my-14 flex-wrap">
-                        {visiblePages.map((page) => {
-                          const params = new URLSearchParams(
-                            searchParams.toString()
-                          );
-
-                          if (page === 1) {
-                            params.delete("page");
-                          } else {
-                            params.set("page", String(page));
-                          }
-
-                          return (
-                            <Link
-                              key={page}
-                              href={`/products?${params.toString()}`}
-                              className={`px-4 py-2 border transition cursor-pointer ${
-                                currentPage === page
-                                  ? "bg-white text-black"
-                                  : "bg-transparent text-white hover:bg-white hover:text-black"
-                              }`}
-                            >
-                              {page}
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    </RevealOnScroll>
-                  )}
-                </>
-              )}
-            </div>
+                        );
+                      })}
+                    </div>
+                  </RevealOnScroll>
+                )}
+              </>
+            )}
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

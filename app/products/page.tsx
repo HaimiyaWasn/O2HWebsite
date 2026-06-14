@@ -2,6 +2,19 @@ import ProductsClient from "./client";
 import getAllProducts from "./data";
 
 /**
+ * Metadata halaman
+ *
+ * Digunakan oleh Next.js App Router untuk
+ * menghasilkan tag <title> secara otomatis.
+ *
+ * Hasil:
+ * <title>Products | O2H Official Site</title>
+ */
+export const metadata = {
+  title: 'Products | O2H Official Site'
+}
+
+/**
  * Halaman utama produk
  *
  * Server Component yang bertugas:
