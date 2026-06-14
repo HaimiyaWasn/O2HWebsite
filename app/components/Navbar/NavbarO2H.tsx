@@ -170,14 +170,14 @@ export default function Navbar() {
               <Link
                 href="/profile"
                 onClick={() => setProfileOpen(false)}
-                className={`block px-4 py-2 hover:bg-yellow-400 transition ${playfairDisplayRegular.className}`}
+                className={`block px-4 py-2 hover:bg-yellow-400 active:bg-yellow-400 transition-all duration-300 ${playfairDisplayRegular.className}`}
               >
                 Profile
               </Link>
               <Link
                 href="/login"
                 onClick={() => setProfileOpen(false)}
-                className={`block px-4 py-2 hover:bg-yellow-400 transition ${playfairDisplayRegular.className}`}
+                className={`block px-4 py-2 hover:bg-yellow-400 active:bg-yellow-400 transition-all duration-300 ${playfairDisplayRegular.className}`}
               >
                 Login
               </Link>

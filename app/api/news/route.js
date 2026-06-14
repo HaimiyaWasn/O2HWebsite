@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const newsData = [
+const baseNews = [
   {
     id: 1,
     date: "2026.01.22",
@@ -174,5 +174,5 @@ const newsData = [
 ];
 
 export async function GET() {
-  return NextResponse.json(newsData);
+  return NextResponse.json(baseNews);
 }

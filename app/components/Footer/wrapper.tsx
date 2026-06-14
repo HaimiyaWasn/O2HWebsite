@@ -45,6 +45,7 @@ export default function FooterWrapper({
     "/profile",
     "/login",
     "/register",
+    "/favorites",
   ]
 
   /**
