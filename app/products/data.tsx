@@ -13,6 +13,7 @@ export type Products = {
   id: number;
   title: string;
   price: number;
+  isFavorite: boolean;
   label: string[];
   image: string[];
   deskripsi: string;
