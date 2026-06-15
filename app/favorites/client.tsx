@@ -1,6 +1,9 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
+import { Playfair_Display } from "next/font/google";
+
+import RevealOnScroll from "../components/RevealOnScroll";
 
 type ProductFavorite = {
   id: number;
@@ -9,7 +12,12 @@ type ProductFavorite = {
   image: string[];
   isFavorite: boolean;
   slug: string;
-}
+};
+
+const playfairDisplayBold = Playfair_Display({
+  weight: "700",
+  subsets: ["latin"],
+});
 
 export default function FavoriteContent() {
   const [favorites, setFavorites] = useState<ProductFavorite[]>([]);
@@ -26,17 +34,36 @@ export default function FavoriteContent() {
   }, []);
 
   return (
-    <div className="grid gap-4">
-      {favorites.map((product) => (
-        <div key={product.id} className="border p-4 rounded">
-          <h2>{product.title}</h2>
-          <p>Rp {product.price.toLocaleString("id-ID")}</p>
-        </div>
-      ))}
+    <section className="pt-14 min-h-screen">
+      <div className="max-w-7xl mx-auto px-6 py-10">
+        <RevealOnScroll delay={0.05}>
+          <div className="inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md">
+            <span
+              className={`text-base md:text-2xl tracking-[0.2rem] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
+            >
+              Favorite Product
+            </span>
+          </div>
+        </RevealOnScroll>
 
-      {favorites.length === 0 && (
-        <p>Belum ada produk favorit.</p>
-      )}
-    </div>
-  )
+        <RevealOnScroll delay={0.1}>
+          <div>
+            {favorites.length === 0 && (
+              <div className="text-center py-20">
+                <h2
+                  className={`text-2xl text-yellow-400 ${playfairDisplayBold.className}`}
+                >
+                  Favorite Kosong
+                </h2>
+
+                <p className="opacity-60 mt-3">
+                  Belum ada produk favorite
+                </p>
+              </div>
+            )}
+          </div>
+        </RevealOnScroll>
+      </div>
+    </section>
+  );
 }

@@ -176,7 +176,7 @@ export default function CartClient({ carts }: CartClientProps) {
           <RevealOnScroll delay={0.05}>
             <div className="inline-flex items-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md">
               <span
-                className={`text-md md:text-2xl tracking-[0.2rem] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
+                className={`text-base md:text-2xl tracking-[0.2rem] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
               >
                 Keranjang Saya
               </span>
@@ -296,7 +296,7 @@ export default function CartClient({ carts }: CartClientProps) {
 
                       <div className="mt-5 flex justify-center md:justify-start gap-5 text-sm flex-wrap">
                         <button className="hover:text-yellow-400 transition">
-                          Pindahkan ke Wishlist
+                          Pindahkan ke Favorite
                         </button>
 
                         <button
