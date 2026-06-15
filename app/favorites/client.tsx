@@ -6,6 +6,13 @@ import { Playfair_Display } from "next/font/google";
 
 import RevealOnScroll from "../components/RevealOnScroll";
 
+/**
+ * Struktur data produk favorit.
+ *
+ * Data ini berasal dari API products,
+ * kemudian hanya produk yang memiliki
+ * isFavorite = true yang akan ditampilkan.
+ */
 type ProductFavorite = {
   id: number;
   title: string;
@@ -17,25 +24,60 @@ type ProductFavorite = {
   slug: string;
 };
 
+/**
+ * Font untuk judul halaman dan nama produk.
+ */
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
   subsets: ["latin"],
 });
 
+/**
+ * Halaman daftar produk favorit.
+ *
+ * Fitur:
+ * - Mengambil data produk dari API
+ * - Menampilkan hanya produk favorit
+ * - Menampilkan harga setelah diskon
+ * - Menghapus produk dari daftar favorit (hanya state lokal)
+ * - Animasi saat elemen muncul di layar
+ *
+ * Cocok digunakan untuk:
+ * - Wishlist
+ * - Favorite Products
+ * - Saved Items
+ * - Bookmark Products
+ */
 export default function FavoriteContent() {
+  /**
+   * Menyimpan daftar produk favorit.
+   */
   const [favorites, setFavorites] = useState<ProductFavorite[]>([]);
 
+  /**
+   * Mengambil data produk saat halaman pertama kali dibuka.
+   */
   useEffect(() => {
     async function fetchProduct() {
       const res = await fetch("/api/products");
       const data: ProductFavorite[] = await res.json();
 
+      /**
+       * Ambil hanya produk yang ditandai sebagai favorit.
+       */
       setFavorites(data.filter((item) => item.isFavorite));
     }
 
     fetchProduct();
   }, []);
 
+  /**
+   * Menghapus produk dari daftar favorit.
+   *
+   * Saat ini hanya menghapus dari state React.
+   * Jika menggunakan database/API,
+   * sebaiknya kirim request DELETE atau PATCH.
+   */
   const removeFavorite = (id: number) => {
     setFavorites((prev) => prev.filter((item) => item.id !== id));
   };

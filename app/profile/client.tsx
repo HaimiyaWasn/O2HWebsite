@@ -3,9 +3,15 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
 import { motion } from "motion/react";
 
+/**
+ * Struktur data user yang disimpan
+ * pada localStorage setelah login berhasil.
+ *
+ * Data ini digunakan untuk menampilkan
+ * informasi profile pengguna.
+ */
 type User = {
   id: number;
   username: string;
@@ -15,24 +21,65 @@ type User = {
   avatar: string;
 };
 
+/**
+ * Halaman Profile User
+ *
+ * Fitur:
+ * - Membaca data user dari localStorage
+ * - Redirect ke halaman login jika belum login
+ * - Menampilkan informasi profile
+ * - Logout
+ * - Animasi menggunakan Motion
+ *
+ * Cocok digunakan untuk:
+ * - Dashboard sederhana
+ * - Halaman akun pengguna
+ * - Sistem login berbasis localStorage
+ */
 export default function ProfileContent() {
   const router = useRouter();
 
+  /**
+   * Menyimpan data user yang sedang login.
+   *
+   * null = belum ada data user
+   * User = user berhasil ditemukan
+   */
   const [user, setUser] = useState<User | null>(null);
 
+  /**
+   * Mengecek status login saat halaman dibuka.
+   *
+   * Alur:
+   * 1. Ambil currentUser dari localStorage
+   * 2. Jika tidak ada → redirect ke login
+   * 3. Jika ada → tampilkan data profile
+   * 4. Jika data rusak → hapus dan redirect
+   */
   useEffect(() => {
     try {
       const storedUser = localStorage.getItem("currentUser");
 
+      /**
+       * Jika user belum login
+       */
       if (!storedUser) {
         router.replace("/login");
         return;
       }
 
+      /**
+       * Konversi string JSON
+       * menjadi object User
+       */
       const parsedUser: User = JSON.parse(storedUser);
 
       setUser(parsedUser);
     } catch (error) {
+      /**
+       * Menangani data localStorage yang rusak
+       * atau gagal diparsing.
+       */
       console.error("Gagal membaca data currentUser:", error);
 
       localStorage.removeItem("currentUser");
@@ -40,10 +87,25 @@ export default function ProfileContent() {
     }
   }, [router]);
 
+  /**
+   * Saat data user masih dimuat,
+   * jangan tampilkan halaman.
+   *
+   * Bisa diganti dengan Skeleton
+   * atau Loading Spinner jika diperlukan.
+   */
   if (!user) {
     return null;
   }
 
+  /**
+   * Menangani proses logout.
+   *
+   * Langkah:
+   * 1. Hapus session login
+   * 2. Kosongkan state user
+   * 3. Redirect ke homepage
+   */
   const handleLogout = () => {
     localStorage.removeItem("currentUser");
 
