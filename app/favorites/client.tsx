@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Playfair_Display } from "next/font/google";
 
 import RevealOnScroll from "../components/RevealOnScroll";
@@ -11,6 +12,8 @@ type ProductFavorite = {
   price: number;
   image: string[];
   isFavorite: boolean;
+  size: string[];
+  discount: number;
   slug: string;
 };
 
@@ -33,6 +36,10 @@ export default function FavoriteContent() {
     fetchProduct();
   }, []);
 
+  const removeFavorite = (id: number) => {
+    setFavorites((prev) => prev.filter((item) => item.id !== id));
+  };
+
   return (
     <section className="pt-14 min-h-screen">
       <div className="max-w-7xl mx-auto px-6 py-10">
@@ -41,13 +48,13 @@ export default function FavoriteContent() {
             <span
               className={`text-base md:text-2xl tracking-[0.2rem] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
             >
-              Favorite Product
+              Favorite Saya
             </span>
           </div>
         </RevealOnScroll>
 
         <RevealOnScroll delay={0.1}>
-          <div>
+          <div className="space-y-4 mt-8">
             {favorites.length === 0 && (
               <div className="text-center py-20">
                 <h2
@@ -55,12 +62,22 @@ export default function FavoriteContent() {
                 >
                   Favorite Kosong
                 </h2>
-
                 <p className="opacity-60 mt-3">
-                  Belum ada produk favorite
+                  Belum ada produk yang ditambahkan ke favorite.
                 </p>
               </div>
             )}
+
+            {favorites.map((product) => {
+              const finalPrice =
+                product.price - (product.price * product.discount) / 100;
+
+              return (
+                <div>
+                  <div></div>
+                </div>
+              );
+            })}
           </div>
         </RevealOnScroll>
       </div>
