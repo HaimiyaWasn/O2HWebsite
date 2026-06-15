@@ -23,6 +23,7 @@ type Product = {
   id: number; // ID unik produk
   title: string; // Nama produk
   price: number; // Harga asli produk
+  isFavorite: boolean; // Produk favorite
   label: string[]; // Label produk (Best seller, Limited, dll)
   image: string[]; // Daftar gambar produk
   deskripsi: string; // Deskripsi lengkap produk
@@ -67,7 +68,7 @@ export default function DetailClient({
    * Saat ini hanya state lokal
    * Jika ingin tersimpan permanen, hubungkan dengan database atau API
    */
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(product.isFavorite);
 
   /**
    * Membatasi deskripsi agar tidak terlalu panjang
