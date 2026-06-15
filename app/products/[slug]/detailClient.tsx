@@ -7,6 +7,7 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { formatCurrency } from "@/lib/currencyFormatter";
 import RevealOnScroll from "@/app/components/RevealOnScroll";
 import ProductDescriptionModal from "../components/productDescriptionModal";
+import ProductTambahKeranjangModal from "../components/productTambahKeranjangModal";
 import ProductImageSlider from "../components/productImageSlider";
 import ProductCardRekomendasi from "../components/productCardRekomendasi";
 
@@ -69,6 +70,8 @@ export default function DetailClient({
    * Jika ingin tersimpan permanen, hubungkan dengan database atau API
    */
   const [isFavorite, setIsFavorite] = useState(product.isFavorite);
+
+  const [openModalTambahKeranjang, setOpenModalTambahKeranjang] = useState(false);
 
   /**
    * Membatasi deskripsi agar tidak terlalu panjang
@@ -187,6 +190,7 @@ export default function DetailClient({
                 <div className="mb-7">
                   <button
                     disabled={product.isOutOfStock}
+                    onClick={() => setOpenModalTambahKeranjang(true)}
                     className={`btn btn-lg w-full rounded-xl border border-white ${
                       playfairDisplayBold.className
                     }
@@ -241,6 +245,12 @@ export default function DetailClient({
         closeDescription={() => setShowFullDescription(false)}
         description={product.deskripsi}
       />
+
+      <ProductTambahKeranjangModal 
+        openModal={openModalTambahKeranjang}
+        closeModal={() => setOpenModalTambahKeranjang(false)}
+        product={product}
+      /> 
     </>
   );
 }

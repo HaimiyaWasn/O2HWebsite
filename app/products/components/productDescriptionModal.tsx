@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { Playfair_Display } from "next/font/google";
+import { FaTimes } from "react-icons/fa";
 
 const playfairDisplayBold = Playfair_Display({
   weight: "700",
@@ -102,7 +103,7 @@ export default function ProductDescriptionModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`bg-base-200 border border-yellow-400 rounded-2xl mx-5 w-full max-w-4xl max-h-[85vh] overflow-hidden transform transition-all duration-300 ${
+        className={`bg-base-200 border border-yellow-400 rounded-2xl mx-5 w-full max-w-4xl max-h-[85vh] overflow-hidden transform transition-all duration-300 p-5 ${
           openDescription
             ? "scale-100 opacity-100 translate-y-0"
             : "scale-95 opacity-0 translate-y-5"
@@ -110,15 +111,15 @@ export default function ProductDescriptionModal({
       >
         <div className="flex items-center justify-between p-5 border-b border-yellow-400">
           <h2
-            className={`text-xl text-yellow-400 ${playfairDisplayBold.className}`}
+            className={`text-lg md:text-2xl text-yellow-400 ${playfairDisplayBold.className}`}
           >
             Product Description
           </h2>
           <button
             onClick={() => closeDescription()}
-            className="btn btn-sm btn-circle text-red-500 text-lg opacity-50 hover:opacity-100 active:opacity-100"
+            className="btn btn-circle hover:bg-red-500 active:bg-red-500 text-red-500 hover:text-black active:text-black text-lg opacity-50 hover:opacity-100 active:opacity-100 transition-all duration-300"
           >
-            ✕
+            <FaTimes size={20} />
           </button>
         </div>
         <div ref={descriptionRef} className="overflow-y-auto max-h-[70vh] p-5">
