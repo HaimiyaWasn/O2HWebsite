@@ -87,6 +87,46 @@ export default function FavoriteContent() {
                         className="w-full h-full object-contain"
                       />
                     </div>
+
+                    <div className="flex-1 text-center md:text-left">
+                      <h2
+                        className={`text-lg mb-2 ${playfairDisplayBold.className}`}
+                      >
+                        {product.title}
+                      </h2>
+                      <p className="text-sm opacity-70">
+                        Size: {product.size.join(", ")}
+                      </p>
+                      {product.discount > 0 && (
+                        <div className="badge badge-outline badge-warning mt-3">
+                          Diskon Rp{" "}
+                          {(
+                            (product.price * product.discount) /
+                            100
+                          ).toLocaleString("id-ID")}
+                        </div>
+                      )}
+
+                      <div className="mt-5 flex justify-center md:justify-start gap-5 text-sm flex-wrap">
+                        <button className="hover:text-yellow-400 active:text-yellow-400 transition-all duration-300">
+                          Tambahkan ke Keranjang
+                        </button>
+                        <button onClick={() => removeFavorite(product.id)} className="text-red-500">
+                          Hapus Favorite
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="text-center md:text-right border-t md:border-0 pt-4 md:pt-0 border-yellow-400/20">
+                      {product.discount > 0 && (
+                        <p className="text-sm line-through opacity-40">
+                          Rp {product.price.toLocaleString("id-ID")}
+                        </p>
+                      )}
+                      <p className="text-xl font-bold text-yellow-400">
+                        Rp {finalPrice.toLocaleString("id-ID")}
+                      </p>
+                    </div>
                   </div>
                 </div>
               );
