@@ -73,8 +73,21 @@ export default function FavoriteContent() {
                 product.price - (product.price * product.discount) / 100;
 
               return (
-                <div>
-                  <div></div>
+                <div
+                  key={product.id}
+                  className="bg-base-200 rounded-2xl p-5 border border-yellow-400/30"
+                >
+                  <div className="flex flex-col md:flex-row gap-5">
+                    <div className="w-32 h-40 bg-white rounded-xl overflow-hidden shrink-0 mx-auto md:mx-0">
+                      <Image
+                        src={product.image[0]}
+                        alt={product.title}
+                        width={120}
+                        height={160}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  </div>
                 </div>
               );
             })}
