@@ -122,7 +122,7 @@ export default function ProductDescriptionModal({
             <FaTimes size={20} />
           </button>
         </div>
-        <div ref={descriptionRef} className="overflow-y-auto max-h-[70vh] p-5">
+        <div ref={descriptionRef} className="overflow-y-auto max-h-[70vh] p-5 hide-scrollbar">
           <p
             className={`whitespace-pre-line leading-6 md:leading-7 text-sm md:text-base opacity-90 ${playfairDisplayRegular.className}`}
           >
