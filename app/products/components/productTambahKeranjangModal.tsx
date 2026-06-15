@@ -40,9 +40,14 @@ export default function ProductTambahKeranjangModal({
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
 
+  const isSizeSelected = selectedSize !== "";
+
   useEffect(() => {
     if (openModal) {
       document.body.style.overflow = "hidden";
+
+      setSelectedSize("");
+      setQuantity(1);
     } else {
       document.body.style.overflow = "auto";
     }
@@ -69,13 +74,13 @@ export default function ProductTambahKeranjangModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`bg-base-100 border border-yellow-400 rounded-2xl mx-5 w-full max-w-2xl max-h-[85vh] overflow-hidden transform transition-all duration-300 p-5 ${
+        className={`bg-base-100 border border-yellow-400 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform transition-all duration-300 p-5 mx-5 ${
           openModal
             ? "scale-100 opacity-100 translate-y-0"
             : "scale-95 opacity-0 translate-y-5"
         }`}
       >
-        <div className="flex items-center justify-between p-5 border-b border-yellow-400 mb-6">
+        <div className="flex items-center justify-between p-3 md:p-5 border-b border-yellow-400 mb-6">
           <h2
             className={`text-lg md:text-2xl text-yellow-400 ${playfairDisplayBold.className}`}
           >
@@ -89,7 +94,7 @@ export default function ProductTambahKeranjangModal({
           </button>
         </div>
 
-        <div className="bg-base-300 rounded-2xl p-4 flex items-center gap-4 mb-6 mx-5">
+        <div className="bg-base-300 rounded-2xl p-4 flex items-center gap-4 mb-6">
           <div className="relative w-20 h-20">
             <Image
               src={product.image[0]}
@@ -100,47 +105,83 @@ export default function ProductTambahKeranjangModal({
           </div>
 
           <div className="flex-1">
-            <h3 className="font-semibold text-base md:text-lg">
+            <h3 className="font-semibold text-base md:text-lg line-clamp-2">
               {product.title}
             </h3>
           </div>
         </div>
 
-        <div className="mb-6 mx-5">
+        <div className="mb-6">
           <span className="block font-bold mb-3">SIZE</span>
 
           <div className="flex flex-wrap gap-3">
             {product.size.map((size) => (
-              <button key={size} onClick={() => setSelectedSize(size)} className={`btn min-w-20 ${
-                selectedSize === size
-                  ? "border-yellow-400 bg-yellow-400/20"
-                  : "bg-yellow-400 text-black"
-              }`}>
+              <button
+                key={size}
+                onClick={() => setSelectedSize(size)}
+                className={`btn min-w-15 md:min-w-20 ${
+                  selectedSize === size
+                    ? "border-yellow-400 bg-yellow-400/20"
+                    : "bg-yellow-400 text-black"
+                }`}
+              >
                 {size}
               </button>
             ))}
           </div>
+          {!selectedSize && (
+            <p className="text-red-500/70 text-sm mt-3">
+              Pilih ukuran terlebih dahulu
+            </p>
+          )}
         </div>
 
         <div className="border-t border-base-300 pt-5 mb-6">
           <div className="flex justify-center">
             <div className="join">
-              <button onClick={() => setQuantity((prev) => Math.max(1, prev - 1))} className="btn join-item">
+              <button
+                disabled={!isSizeSelected || quantity === 1}
+                onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+                className={`btn join-item transition-all duration-300 ${
+                  !isSizeSelected || quantity === 1
+                    ? "opacity-50 cursor-not-allowed"
+                    : ""
+                }`}
+              >
                 -
               </button>
-              
-              <button className="btn join-item pointer-events-none">
+
+              <button
+                className={`btn join-item pointer-events-none ${
+                  !isSizeSelected ? "opacity-50" : ""
+                }`}
+              >
                 {quantity}
               </button>
 
-              <button onClick={() => setQuantity((prev) => prev + 1)} className="btn join-item">
+              <button
+                disabled={!isSizeSelected}
+                onClick={() => setQuantity((prev) => prev + 1)}
+                className={`btn join-item transition-all duration-300 ${
+                  !isSizeSelected ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
                 +
               </button>
             </div>
           </div>
         </div>
 
-        <button className={`btn w-full rounded-xl ${playfairDisplayBold.className} bg-yellow-400 text-black font-semibold border-none hover:bg-yellow-300`}>
+        <button
+          disabled={!isSizeSelected}
+          className={`btn w-full rounded-xl ${
+            playfairDisplayBold.className
+          } font-semibold border-none transition-all duration-300 ${
+            isSizeSelected
+              ? "bg-yellow-400 text-black hover:bg-yellow-300"
+              : "bg-base-300 text-yellow-300 opacity-50 cursor-not-allowed"
+          }`}
+        >
           Tambah ke Keranjang
         </button>
       </div>
