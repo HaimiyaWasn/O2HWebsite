@@ -66,7 +66,19 @@ const footerLinks = [
   {
     label: "About payments",
     href: "/about/payment",
-  }
+  },
+  {
+    label: "Acceptable use policy",
+    href: "/about/terms",
+  },
+  {
+    label: "Privacy Policy",
+    href: "/about/privacy"
+  },
+  {
+    label: "Request to customers",
+    href: "/about/customer-harassment",
+  },
 ];
 
 /**
