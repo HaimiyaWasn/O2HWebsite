@@ -79,6 +79,18 @@ const footerLinks = [
     label: "Request to customers",
     href: "/about/customer-harassment",
   },
+  {
+    label: "About the operating company",
+    href: "/about/law",
+  },
+  {
+    label: "System requiremens",
+    href: "/about/environment",
+  },
+  {
+    label: "FAQ",
+    href: "/about/help",
+  },
 ];
 
 /**
