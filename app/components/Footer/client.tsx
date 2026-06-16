@@ -55,15 +55,18 @@ const FOOTER_VARIANTS = {
  * atau dikurangi tanpa mengubah struktur JSX
  */
 const footerLinks = [
-  "About this site",
-  "About accounts",
-  "About payments",
-  "Acceptable use policy",
-  "Privacy Policy",
-  "Request to customers",
-  "About the operating company",
-  "System requiremens",
-  "FAQ",
+  {
+    label: "About this site",
+    href: "/about/site-info",
+  },
+  {
+    label: "About accounts",
+    href: "/about/account",
+  },
+  {
+    label: "About payments",
+    href: "/about/payment",
+  }
 ];
 
 /**
@@ -131,11 +134,11 @@ export default function Footer({ variant = "yellow" }: FooterProps) {
           <div className="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2 leading-relaxed">
             {footerLinks.map((item) => (
               <Link
-                key={item}
-                href="#"
+                key={item.href}
+                href={item.href}
                 className="opacity-50 hover:opacity-100 cursor-pointer"
               >
-                <p>{item}</p>
+                <p>{item.label}</p>
               </Link>
             ))}
           </div>
