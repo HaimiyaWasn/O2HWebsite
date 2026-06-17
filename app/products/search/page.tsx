@@ -281,7 +281,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                   className={`flex w-full md:w-fit items-center justify-center rounded-full shadow-sm shadow-yellow-400 border-4 border-yellow-400/40 bg-yellow-400/10 px-4 py-2 backdrop-blur-md`}
                 >
                   <span
-                    className={`text-md md:text-2xl tracking-[0.2rem] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
+                    className={`text-base md:text-2xl tracking-[0.2rem] uppercase text-yellow-400 ${playfairDisplayBold.className}`}
                   >
                     Search Product
                   </span>

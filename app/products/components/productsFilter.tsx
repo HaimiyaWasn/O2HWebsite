@@ -436,7 +436,7 @@ export default function ProductsFilter({
           </h1>
           <button
             onClick={() => setOpenFilter(false)}
-            className="btn rounded-xl text-md leading-none"
+            className="btn rounded-xl text-base leading-none"
           >
             Close
           </button>
