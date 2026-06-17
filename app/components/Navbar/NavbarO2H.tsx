@@ -8,7 +8,7 @@ import { IoIosNotifications } from "react-icons/io";
 import { Playfair_Display, Yesteryear } from "next/font/google";
 
 import ProfileIconDefault from "@/public/img/profileIconDefault.jpg";
-import O2HLogo from "@/public/img/logos/O2H_Logos_1.png";
+import O2HLogo from "@/public/img/logoO2HNoBG.png";
 
 /**
  * Font untuk menu, dropdown, dan teks semua

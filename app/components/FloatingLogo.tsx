@@ -6,7 +6,7 @@ import Image from "next/image";
 import { FaHome } from "react-icons/fa";
 import { Playfair_Display } from "next/font/google";
 
-import O2HLogo from "@/public/img/logos/O2H_Logos_2.png";
+import O2HLogo from "@/public/img/logoO2HNoBG.png";
 
 /**
  * Font untuk label menu pada Floating Action Button (FAB)

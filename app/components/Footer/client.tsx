@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaTiktok, FaXTwitter, FaYoutube, FaInstagram } from "react-icons/fa6";
 
-import O2HLogo from "@/public/img/logos/O2H_Logos_1.png";
+import O2HLogo from "@/public/img/logoO2HNoBG.png";
 
 /**
  * Variasi tema Footer
@@ -132,13 +132,13 @@ export default function Footer({ variant = "yellow" }: FooterProps) {
           </Link>
 
           <div className="flex gap-4 text-lg items-center justify-center md:justify-start">
-            <Link href="#" target="_blank">
+            {/* <Link href="#" target="_blank">
               <FaTiktok className="hover:text-gray-400 cursor-pointer" />
             </Link>
 
             <Link href="#" target="_blank">
               <FaXTwitter className="hover:text-gray-400 cursor-pointer" />
-            </Link>
+            </Link> */}
 
             <Link href="https://www.youtube.com/@o2halimawan" target="_blank">
               <FaYoutube className="hover:text-gray-400 cursor-pointer" />
