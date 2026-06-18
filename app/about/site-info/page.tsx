@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Bungee } from "next/font/google";
 
 import O2HLogo from "@/public/img/logoO2HBG.jpg";
-import RevealOnScroll from "@/app/components/RevealOnScroll";
 
 const bungee = Bungee({
   weight: "400",
