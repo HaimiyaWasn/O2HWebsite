@@ -13,6 +13,7 @@ import Footer from "./components/Footer/client";
 import FloatingCart from "./components/FloatingCarts";
 import FloatingCartWrapper from "./components/FloatingCarts/wrapper";
 import FooterWrapper from "./components/Footer/wrapper";
+import AOSProvider from "./components/AOSProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,6 +46,7 @@ export default function RootLayout({
           </NavbarWrapper>
           <DisclaimerWrapper />
           <ScrollToTop />
+          <AOSProvider />
           {children}
           <FooterWrapper>
             <Footer variant="yellow" />
