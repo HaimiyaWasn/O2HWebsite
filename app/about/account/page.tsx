@@ -13,9 +13,11 @@ export default function AccountPage() {
   return (
     <section className="pt-5 min-h-screen">
       <div className="mx-auto max-w-4xl px-6 py-20">
-        <h1 className={`text-4xl ${playfairDisplayBold.className}`}>
-          About Accounts
-        </h1>
+        <div data-aos="fade-down" data-aos-duration="500">
+          <h1 className={`text-4xl ${playfairDisplayBold.className}`}>
+            About Accounts
+          </h1>
+        </div>
         <div className="mt-10 space-y-10">
           <div className="space-y-3" data-aos="fade-up" data-aos-duration="750">
             <h2 className="font-bold text-lg">Why Create Account?</h2>
