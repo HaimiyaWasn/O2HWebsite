@@ -98,7 +98,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar shadow-sm fixed top-0 z-50 bg-yellow-400 text-black">
+      <div className="navbar shadow-sm fixed top-0 z-40 bg-yellow-400 text-black">
         <div className="navbar-start gap-0.5">
           <button
             onClick={() => setOpen(true)}
