@@ -136,39 +136,37 @@ export default function ProductTambahKeranjangModal({
           )}
         </div>
 
-        <div className="border-t border-base-300 pt-5 mb-6">
-          <div className="flex justify-center">
-            <div className="join">
-              <button
-                disabled={!isSizeSelected || quantity === 1}
-                onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
-                className={`btn join-item transition-all duration-300 ${
-                  !isSizeSelected || quantity === 1
-                    ? "opacity-50 cursor-not-allowed"
-                    : ""
-                }`}
-              >
-                -
-              </button>
+        <div className="mt-4 mb-6 flex justify-center">
+          <div className="flex items-center gap-2 rounded-full border border-yellow-400/30 bg-base-100 px-2 py-1">
+            <button
+              disabled={!isSizeSelected || quantity === 1}
+              onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+              className={`btn btn-circle btn-sm bg-yellow-400 hover:bg-yellow-300 transition-all duration-300 text-black font-bold text-lg ${
+                !isSizeSelected || quantity === 1
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+              }`}
+            >
+              -
+            </button>
 
-              <button
-                className={`btn join-item pointer-events-none ${
-                  !isSizeSelected ? "opacity-50" : ""
-                }`}
-              >
-                {quantity}
-              </button>
+            <span
+              className={`w-12 text-center pointer-events-none ${
+                !isSizeSelected ? "opacity-50" : ""
+              }`}
+            >
+              {quantity}
+            </span>
 
-              <button
-                disabled={!isSizeSelected}
-                onClick={() => setQuantity((prev) => prev + 1)}
-                className={`btn join-item transition-all duration-300 ${
-                  !isSizeSelected ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                +
-              </button>
-            </div>
+            <button
+              disabled={!isSizeSelected}
+              onClick={() => setQuantity((prev) => prev + 1)}
+              className={`btn btn-circle btn-sm btn-error bg-yellow-400 hover:bg-yellow-300 transition-all duration-300 text-black font-bold text-lg ${
+                !isSizeSelected ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
+              +
+            </button>
           </div>
         </div>
 
