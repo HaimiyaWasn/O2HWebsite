@@ -35,14 +35,14 @@ export default function MembershipPage() {
 
         <div data-aos="zoom-in-up" data-aos-duration="500">
           <div className="my-8 flex items-center justify-center">
-            <div className="h-px w-96 bg-black" />
+            <div className="h-px w-48 bg-black" />
             <div className="mx-3 h-2 w-2 rounded-full bg-black" />
-            <div className="h-px w-96 bg-black" />
+            <div className="h-px w-48 bg-black" />
           </div>
         </div>
 
         <div className="mt-10 text-black text-center space-y-10">
-          <div className="space-y-3" data-aos="fade-up" data-aos-duration="750">
+          <div className="space-y-3 bg-yellow-400 p-7 rounded-xl border-2 border-black shadow-2xl" data-aos="fade-up" data-aos-duration="750">
             <h2 className="text-2xl font-bold">What is O2H?</h2>
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos
@@ -58,7 +58,7 @@ export default function MembershipPage() {
               fuga enim eveniet iure at laboriosam beatae!
             </p>
           </div>
-          <div className="space-y-3" data-aos="fade-up" data-aos-duration="750">
+          <div className="space-y-3 bg-yellow-400 p-7 rounded-xl border-2 border-black shadow-2xl" data-aos="fade-up" data-aos-duration="750">
             <h2 className="text-2xl font-bold">What You Can Find Here</h2>
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore
@@ -71,7 +71,7 @@ export default function MembershipPage() {
               similique.
             </p>
           </div>
-          <div className="space-y-3" data-aos="fade-up" data-aos-duration="750">
+          <div className="space-y-3 bg-yellow-400 p-7 rounded-xl border-2 border-black shadow-2xl" data-aos="fade-up" data-aos-duration="750">
             <h2 className="text-2xl font-bold">Our Goal</h2>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque
@@ -84,7 +84,7 @@ export default function MembershipPage() {
               Magnam, ipsam debitis!
             </p>
           </div>
-          <div className="space-y-3" data-aos="fade-up" data-aos-duration="750">
+          <div className="space-y-3 bg-yellow-400 p-7 rounded-xl border-2 border-black shadow-2xl" data-aos="fade-up" data-aos-duration="750">
             <h2 className="text-2xl font-bold">Thank You</h2>
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos
