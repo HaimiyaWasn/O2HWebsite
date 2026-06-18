@@ -153,8 +153,8 @@ export default function ProfileContent() {
               {user.username}
             </p>
 
-            <span className="mt-4 rounded-full bg-yellow-400 text-black py-1 px-4 font-semibold text-sm">
-              {user.role.toUpperCase()}
+            <span className="mt-4 rounded-full bg-yellow-400 text-black py-1 px-4 font-semibold text-sm uppercase">
+              {user.role}
             </span>
 
             <div className="mt-8 w-full border-t border-zinc-700 pt-5">
